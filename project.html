@@ -1,0 +1,5663 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>CHENNN Studio® – Project</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="./chen-fx/06-gsap-motion-engine/motion-engine.css" />
+    <script>document.documentElement.classList.add("gsap-demo-boot");</script>
+    <style>
+      @font-face {
+        font-display: swap;
+        font-family: "Smiley Sans";
+        font-style: oblique;
+        font-weight: 100 900;
+        src: url("./assets/fonts/SmileySans-Oblique-2.ttf") format("truetype");
+      }
+
+      /* :root tokens consolidated below — single source of truth (Node 017 cleanup). */
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        min-height: 100%;
+      }
+
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--font-main);
+        margin: 0;
+        overflow-x: hidden;
+        text-rendering: geometricPrecision;
+      }
+
+      body::before {
+        background:
+          linear-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+          radial-gradient(circle at 12% 20%, rgba(255, 255, 255, 0.36) 0 0.2rem, transparent 0.24rem),
+          radial-gradient(circle at 84% 64%, rgba(23, 23, 23, 0.08) 0 0.25rem, transparent 0.3rem);
+        background-size: 100% 4px, 17rem 17rem, 13rem 13rem;
+        content: "";
+        inset: 0;
+        opacity: 0.5;
+        pointer-events: none;
+        position: fixed;
+        z-index: 80;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        font: inherit;
+      }
+
+      .site-header {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        left: 0;
+        padding: clamp(1.25rem, 3vw, 2rem);
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 60;
+      }
+
+      .brand {
+        font-size: clamp(1.75rem, 5vw, 2.65rem);
+        font-weight: 400;
+        letter-spacing: 0;
+        line-height: 0.9;
+        transition:
+          box-shadow 0.24s ease,
+          transform 0.24s var(--ease-out);
+        text-transform: lowercase;
+      }
+
+      .brand:hover,
+      .brand:focus-visible {
+        box-shadow: 0 0 28px rgb(var(--accent-rgb) / 0.34);
+        transform: translateY(-0.12rem) rotate(-1.5deg);
+      }
+
+      .brand:active {
+        transform: translateY(0) scale(0.97);
+        transition-duration: 0.08s;
+      }
+
+      .nav {
+        align-items: center;
+        display: flex;
+        gap: clamp(1rem, 2vw, 1.75rem);
+      }
+
+      .nav a {
+        font-size: 1.05rem;
+        font-weight: 700;
+      }
+
+      .menu-btn,
+      .sound-btn {
+        align-items: center;
+        appearance: none;
+        background: var(--white);
+        border: 0;
+        border-radius: 50%;
+        cursor: pointer;
+        display: inline-flex;
+        height: 3.5rem;
+        justify-content: center;
+        padding: 0;
+        transition: transform 0.32s var(--ease-out);
+        width: 3.5rem;
+      }
+
+      .menu-btn:hover,
+      .sound-btn:hover {
+        transform: rotate(-8deg) scale(1.06);
+      }
+
+      .menu-btn span {
+        background: var(--ink);
+        border-radius: 50%;
+        display: block;
+        height: 0.34rem;
+        margin: 0 0.18rem;
+        width: 0.34rem;
+      }
+
+      .sound-btn {
+        bottom: 1.25rem;
+        left: 1.25rem;
+        position: fixed;
+        z-index: 58;
+      }
+
+      .sound-btn i {
+        background:
+          linear-gradient(90deg, var(--ink) 0 0.14rem, transparent 0.14rem 0.3rem, var(--ink) 0.3rem 0.44rem, transparent 0.44rem 0.62rem, var(--ink) 0.62rem 0.76rem);
+        display: block;
+        height: 1rem;
+        width: 0.82rem;
+      }
+
+      .project-page {
+        padding: 7.8rem clamp(1.25rem, 5vw, 4rem) 5rem;
+      }
+
+      /* Node 034: Refactored Project Page Header inspired by unseen.co */
+      .project-header {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        position: relative;
+        text-align: center;
+        padding-top: 4rem;
+        perspective: 1000px;
+        overflow: hidden;
+      }
+
+      .project-title-top {
+        font-family: var(--font-main);
+        font-size: clamp(4rem, 12vw, 9rem);
+        font-weight: 200;
+        font-style: italic;
+        line-height: 0.85;
+        margin: 0;
+        text-transform: uppercase;
+        position: absolute;
+        top: 25%;
+        left: clamp(1rem, 5vw, 6rem);
+        text-align: left;
+        z-index: 2;
+        pointer-events: none;
+      }
+
+      .project-title-bottom {
+        font-family: var(--font-main);
+        font-size: clamp(3rem, 9vw, 8rem);
+        font-weight: 400;
+        line-height: 0.9;
+        margin: 0;
+        text-transform: uppercase;
+        position: absolute;
+        bottom: 20%;
+        right: clamp(1rem, 5vw, 6rem);
+        text-align: left;
+        z-index: 2;
+        pointer-events: none;
+      }
+
+      .project-title-bottom em {
+        font-style: italic;
+        font-weight: 200;
+      }
+
+      .hero-object {
+        /* Central floating object matching the unseen.co style */
+        aspect-ratio: 1;
+        background: var(--media);
+        border-radius: 1rem;
+        box-shadow:
+          0 2rem 5rem rgba(0, 0, 0, 0.4),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+        width: clamp(18rem, 45vw, 40rem);
+        position: relative;
+        transform: rotate(15deg) rotateY(15deg) rotateX(10deg);
+        transform-style: preserve-3d;
+        z-index: 1;
+        transition: transform 0.6s var(--ease-out);
+        animation: float 6s ease-in-out infinite;
+      }
+      
+      @keyframes float {
+        0% { transform: translateY(0px) rotate(15deg) rotateY(15deg) rotateX(10deg); }
+        50% { transform: translateY(-20px) rotate(18deg) rotateY(10deg) rotateX(15deg); }
+        100% { transform: translateY(0px) rotate(15deg) rotateY(15deg) rotateX(10deg); }
+      }
+
+      .hero-secondary-objects {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+      }
+      
+      .hero-obj-1, .hero-obj-2, .hero-obj-3 {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(4px);
+        animation: float 8s ease-in-out infinite reverse;
+      }
+
+      .hero-obj-1 {
+        width: 8rem; height: 8rem; border-radius: 50%;
+        top: 15%; left: 40%;
+      }
+      .hero-obj-2 {
+        width: 12rem; height: 12rem; border-radius: 2rem;
+        bottom: 15%; left: 20%;
+        transform: rotate(-15deg);
+        animation-duration: 10s;
+      }
+      .hero-obj-3 {
+        width: 6rem; height: 6rem; border-radius: 1rem;
+        top: 30%; right: 25%;
+        transform: rotate(45deg);
+        animation-duration: 7s;
+      }
+
+      .project-overview {
+        border-top: 1px solid var(--line);
+        display: grid;
+        gap: 3rem;
+        grid-template-columns: 1fr;
+        margin: 0 auto;
+        max-width: 88rem;
+        padding: clamp(4rem, 8vw, 6rem) 0;
+      }
+      
+      @media (min-width: 768px) {
+        .project-overview {
+          grid-template-columns: 1.2fr 0.8fr;
+          gap: 6rem;
+        }
+      }
+
+      .section-label {
+        font-size: 0.84rem;
+        font-weight: 850;
+        margin: 0 0 1rem;
+        text-transform: uppercase;
+        color: var(--soft-text);
+      }
+
+      .overview-main {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .overview-copy {
+        font-size: clamp(1.8rem, 3.5vw, 3rem);
+        font-weight: 400;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+        margin: 0;
+        color: var(--ink);
+      }
+
+      .overview-meta {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      
+      @media (min-width: 768px) {
+        .overview-meta {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .meta-column-1, .meta-column-2 {
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+      }
+
+      .meta-block {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+
+      .meta-block p:not(.section-label) {
+        margin: 0;
+        font-size: 1.1rem;
+        line-height: 1.5;
+        font-weight: 400;
+        color: var(--ink);
+      }
+
+      .project-cta {
+        background: var(--ink);
+        border-radius: 999px;
+        color: var(--white);
+        display: inline-flex;
+        font-size: 0.9rem;
+        font-weight: 800;
+        margin-top: 1.5rem;
+        padding: 0.85rem 1.2rem;
+        text-transform: uppercase;
+      }
+
+      .media-grid {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin: 0 auto;
+        max-width: 88rem;
+      }
+
+      .media-tile {
+        aspect-ratio: 16 / 10;
+        background: var(--tile);
+        border: 0;
+        cursor: zoom-in;
+        display: block;
+        overflow: hidden;
+        padding: 0;
+        position: relative;
+        transition:
+          box-shadow 0.24s var(--ease-out),
+          transform 0.24s var(--ease-out);
+        width: 100%;
+      }
+
+      .media-tile:hover,
+      .media-tile:focus-visible {
+        box-shadow: 0 1.5rem 3rem rgba(23, 23, 23, 0.16);
+        outline: 0;
+        transform: translateY(-0.18rem);
+      }
+
+      .media-tile--wide {
+        grid-column: 1 / -1;
+      }
+
+      .media-tile::before,
+      .media-tile::after {
+        content: "";
+        inset: 0;
+        pointer-events: none;
+        position: absolute;
+      }
+
+      .media-tile::before {
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px),
+          radial-gradient(circle at 55% 34%, rgba(255, 255, 255, 0.35), transparent 28%);
+        background-size: 100% 5px, 100% 100%;
+        mix-blend-mode: soft-light;
+      }
+
+      .media-tile::after {
+        border: 1px solid rgba(23, 23, 23, 0.24);
+        box-shadow:
+          0.22rem 0 0 rgba(255, 78, 27, 0.2),
+          -0.22rem 0 0 rgba(38, 102, 255, 0.18);
+      }
+
+      .credits-next {
+        border-top: 1px solid var(--line);
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        margin: clamp(2rem, 6vw, 5rem) auto 0;
+        max-width: 88rem;
+        padding-top: clamp(2rem, 5vw, 4rem);
+      }
+
+      .credit-list {
+        display: grid;
+        gap: 0.8rem;
+        margin: 1rem 0 0;
+      }
+
+      .credit-list p {
+        border-top: 1px solid var(--line);
+        display: flex;
+        justify-content: space-between;
+        margin: 0;
+        padding-top: 0.8rem;
+      }
+
+      .next-project {
+        background: var(--ink);
+        color: var(--white);
+        min-height: 19rem;
+        padding: 1.4rem;
+        position: relative;
+      }
+
+      .next-project strong {
+        bottom: 1.4rem;
+        font-size: clamp(2.4rem, 6vw, 5rem);
+        font-weight: 500;
+        left: 1.4rem;
+        line-height: 0.9;
+        position: absolute;
+        text-transform: uppercase;
+      }
+
+      .split-char {
+        display: inline-block;
+        transform: translateY(0);
+        transition:
+          color 0.18s ease,
+          transform 0.24s var(--ease-out);
+        transition-delay: calc(var(--i) * 12ms);
+      }
+
+      .menu-nav a:hover .split-char,
+      .project-title-top:hover .split-char,
+      .project-title-bottom:hover .split-char {
+        color: var(--accent);
+        transform: translateY(-0.12em);
+      }
+
+      .case-lightbox {
+        align-items: center;
+        background: rgba(10, 8, 7, 0.88);
+        color: var(--white);
+        cursor: grab;
+        display: grid;
+        inset: 0;
+        opacity: 0;
+        overflow: hidden;
+        padding: clamp(1rem, 3vw, 2rem);
+        pointer-events: none;
+        position: fixed;
+        transition: opacity 0.24s var(--ease-out);
+        z-index: 140;
+      }
+
+      .case-lightbox.is-open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .case-lightbox.is-dragging {
+        cursor: grabbing;
+      }
+
+      .case-lightbox__media {
+        aspect-ratio: 16 / 10;
+        background: var(--lightbox-media);
+        justify-self: center;
+        max-height: 76vh;
+        max-width: min(92vw, 78rem);
+        min-height: 20rem;
+        transform: translate3d(var(--lightbox-x, 0px), var(--lightbox-y, 0px), 0) scale(var(--lightbox-scale, 1));
+        transition: transform 0.2s var(--ease-out);
+        width: 100%;
+      }
+
+      .case-lightbox.is-dragging .case-lightbox__media {
+        transition: none;
+      }
+
+      .case-lightbox__top,
+      .case-lightbox__controls {
+        align-items: center;
+        display: flex;
+        gap: 0.65rem;
+        left: clamp(1rem, 3vw, 2rem);
+        position: fixed;
+        right: clamp(1rem, 3vw, 2rem);
+        z-index: 2;
+      }
+
+      .case-lightbox__top {
+        justify-content: space-between;
+        top: clamp(1rem, 3vw, 2rem);
+      }
+
+      .case-lightbox__controls {
+        bottom: clamp(1rem, 3vw, 2rem);
+        justify-content: center;
+      }
+
+      .case-lightbox button {
+        appearance: none;
+        background: var(--white);
+        border: 0;
+        border-radius: 999px;
+        color: var(--ink);
+        cursor: pointer;
+        font-size: 0.78rem;
+        font-weight: 850;
+        min-height: 2.55rem;
+        padding: 0.7rem 0.92rem;
+        text-transform: uppercase;
+      }
+
+      .case-lightbox button:disabled {
+        cursor: not-allowed;
+        opacity: 0.38;
+      }
+
+      /* .menu base block defined once below in the dark-glass token set (Node 017 cleanup). */
+
+      .menu-inner {
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+        padding: 6.5rem clamp(1.6rem, 7vw, 5rem) 2.2rem;
+      }
+
+      .menu-close {
+        align-items: center;
+        appearance: none;
+        background: var(--ink);
+        border: 0;
+        border-radius: 50%;
+        color: var(--white);
+        cursor: pointer;
+        display: flex;
+        font-size: 2.15rem;
+        height: 3.5rem;
+        justify-content: center;
+        line-height: 1;
+        position: absolute;
+        right: clamp(1.25rem, 3vw, 2rem);
+        top: clamp(1.25rem, 3vw, 2rem);
+        width: 3.5rem;
+      }
+
+      .menu-nav {
+        display: grid;
+        gap: 0.7rem;
+      }
+
+      .menu-nav a {
+        align-items: flex-start;
+        display: flex;
+        gap: 0.75rem;
+      }
+
+      .menu-nav small {
+        font-size: 1.1rem;
+        font-weight: 500;
+      }
+
+      .menu-nav span {
+        font-family: var(--font-main);
+        font-size: clamp(4.6rem, 15vw, 8.3rem);
+        line-height: 0.82;
+      }
+
+      .menu-footer {
+        display: grid;
+        gap: 1.7rem;
+        grid-template-columns: 1fr 1fr;
+        margin-top: auto;
+      }
+
+      .menu-footer a {
+        display: block;
+        font-size: 0.82rem;
+        font-weight: 700;
+        line-height: 1.15;
+        text-transform: uppercase;
+      }
+
+      /* Node 017: consolidated single :root (dark-glass tone). */
+      :root {
+        --font-main: "Smiley Sans", sans-serif;
+        --ink: #f6f6f1;
+        --paper: #050505;
+        --paper-soft: #f4f0ee;
+        --white: #ffffff;
+        --accent: #9cff52;
+        --accent-rgb: 156 255 82;
+        --line: rgba(255, 255, 255, 0.14);
+        --soft-text: rgba(255, 255, 255, 0.66);
+        --glass: rgba(255, 255, 255, 0.08);
+        --dark-ink: #101010;
+        --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .menu {
+        background:
+          radial-gradient(circle at 82% 18%, rgb(var(--accent-rgb) / 0.14), transparent 17rem),
+          linear-gradient(145deg, rgb(248, 245, 241), rgb(230, 225, 221));
+        color: var(--dark-ink);
+        inset: 0;
+        left: auto;
+        max-width: min(42rem, 100vw);
+        opacity: 0;
+        pointer-events: none;
+        position: fixed;
+        right: 0;
+        transform: translateX(105%);
+        transition:
+          opacity 0.34s var(--ease-out),
+          transform 0.42s var(--ease-out);
+        width: 100%;
+        z-index: 90;
+      }
+
+      .is-menu-open .menu {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateX(0);
+      }
+
+      body {
+        background:
+          radial-gradient(circle at 16% 18%, rgb(var(--accent-rgb) / 0.12), transparent 18rem),
+          radial-gradient(circle at 84% 12%, rgba(255, 255, 255, 0.08), transparent 22rem),
+          var(--paper);
+        color: var(--ink);
+      }
+
+      body::before {
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+        background-size: 8rem 8rem;
+        opacity: 0.18;
+        z-index: 0;
+      }
+
+      .site-header,
+      .project-page {
+        position: relative;
+        z-index: 10;
+      }
+
+      .site-header {
+        color: var(--ink);
+        position: fixed;
+        z-index: 50;
+      }
+
+      .brand {
+        align-items: center;
+        background: var(--accent);
+        border-radius: 1rem;
+        color: var(--dark-ink);
+        display: inline-flex;
+        font-size: 0.78rem;
+        font-weight: 900;
+        height: 3.05rem;
+        justify-content: center;
+        line-height: 1;
+        padding: 0 0.82rem;
+        text-transform: uppercase;
+      }
+
+      .nav a {
+        color: var(--soft-text);
+        transition:
+          color 0.2s ease,
+          transform 0.2s var(--ease-out);
+      }
+
+      .nav a:hover,
+      .nav a:focus-visible {
+        color: var(--ink);
+        transform: translateY(-0.1rem);
+      }
+
+      .menu-btn,
+      .sound-btn {
+        background: var(--white);
+        color: var(--dark-ink);
+      }
+
+      .menu-btn span {
+        background: var(--dark-ink);
+      }
+
+      .site-header--world {
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        color: var(--ink);
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: auto 1fr auto;
+      }
+
+      .site-header--world .brand {
+        background: var(--accent);
+        color: var(--dark-ink);
+      }
+
+      .site-header--world .nav {
+        justify-self: end;
+        margin-left: auto;
+      }
+
+      .site-header--world .nav a {
+        color: #fff;
+        font-size: clamp(0.95rem, 1.15vw, 1.18rem);
+        font-style: italic;
+        font-weight: 650;
+        mix-blend-mode: difference;
+      }
+
+      .site-header--world .nav a:hover,
+      .site-header--world .nav a:focus-visible {
+        color: #fff;
+      }
+
+      .site-header--world .nav a.is-active,
+      .site-header--world .nav a.world-ip-entry {
+        color: var(--accent);
+        mix-blend-mode: normal;
+        text-shadow: 0 0 18px rgb(var(--accent-rgb) / 0.34);
+      }
+
+      .site-header--world .nav a.world-ip-entry {
+        align-items: center;
+        display: inline-flex;
+        gap: 0.45rem;
+      }
+
+      .site-header--world .nav a.world-ip-entry::before {
+        background: currentColor;
+        border-radius: 999px;
+        content: "";
+        height: 0.42rem;
+        width: 0.42rem;
+      }
+
+      .explore-pill {
+        align-items: center;
+        appearance: none;
+        background: rgba(255, 255, 255, 0.78);
+        border: 1px solid rgba(5, 5, 5, 0.1);
+        border-radius: 999px;
+        color: #050505;
+        cursor: pointer;
+        display: inline-flex;
+        font-family: var(--font-main);
+        font-size: 0.95rem;
+        font-weight: 700;
+        justify-self: end;
+        line-height: 1;
+        padding: 0.85rem 1.85rem;
+        text-decoration: none;
+        transition: transform 0.22s ease, box-shadow 0.22s ease;
+      }
+
+      .explore-pill:hover {
+        transform: translateY(-0.12rem);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+      }
+
+      .explore-pill:active {
+        transform: translateY(0) scale(0.97);
+        transition-duration: 0.08s;
+      }
+
+      .menu-btn--hidden {
+        display: none;
+      }
+
+      .sound-btn i {
+        background:
+          linear-gradient(90deg, var(--dark-ink) 0 0.14rem, transparent 0.14rem 0.3rem, var(--dark-ink) 0.3rem 0.44rem, transparent 0.44rem 0.62rem, var(--dark-ink) 0.62rem 0.76rem);
+      }
+
+      /* Unused */
+      .section-label {
+        color: var(--accent);
+      }
+
+      /* Remove unused shadow class */
+
+      /* Unused */
+      .overview-copy,
+      .credit-list p {
+        color: var(--soft-text);
+      }
+
+      .hero-object,
+      .media-tile {
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 0.5rem;
+        box-shadow:
+          0 1.3rem 3.2rem rgba(0, 0, 0, 0.42),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+      }
+
+      .project-overview,
+      .credits-next,
+      .credit-list p {
+        border-color: var(--line);
+      }
+
+      .project-cta {
+        background: var(--accent);
+        color: var(--dark-ink);
+      }
+
+      .next-project {
+        background:
+          radial-gradient(circle at 80% 22%, rgb(var(--accent-rgb) / 0.32), transparent 12rem),
+          rgba(255, 255, 255, 0.07);
+        border: 1px solid var(--line);
+        border-radius: 0.5rem;
+        color: var(--ink);
+      }
+
+      .case-lightbox {
+        background:
+          radial-gradient(circle at 70% 20%, rgb(var(--accent-rgb) / 0.12), transparent 22rem),
+          rgba(2, 2, 2, 0.94);
+      }
+
+      .case-lightbox button {
+        background: var(--white);
+        color: var(--dark-ink);
+      }
+
+      .case-lightbox button:not(:disabled):hover {
+        background: var(--accent);
+      }
+
+      /* .menu now defined once above with consolidated transition (Node 017). */
+
+      .menu-close {
+        background: var(--dark-ink);
+        color: var(--white);
+      }
+
+      .menu-nav a:hover {
+        color: var(--accent);
+      }
+
+      .menu-nav span {
+        font-size: clamp(3.7rem, 12vw, 6.65rem);
+      }
+
+      .menu-nav a {
+        transition:
+          color 0.28s ease,
+          opacity 0.28s ease,
+          transform 0.34s var(--ease-out);
+      }
+
+      .menu-nav a:hover,
+      .menu-nav a:focus-visible {
+        transform: translate3d(0.35rem, -0.08rem, 0);
+      }
+
+      .menu-nav:has(a:hover) a:not(:hover),
+      .menu-nav:has(a:focus-visible) a:not(:focus-visible) {
+        opacity: 0.22;
+      }
+
+      /* Klook single-case refresh: Letter-like editorial system. */
+      body.is-klook-case {
+        --ink: #111111;
+        --paper: #efeeeb;
+        --line: rgba(17, 17, 17, 0.13);
+        --soft-text: rgba(17, 17, 17, 0.58);
+        --accent: #9cff52;
+        background:
+          radial-gradient(circle at 22% 12%, rgba(255, 255, 255, 0.92), transparent 24rem),
+          linear-gradient(180deg, #f4f3f0, #ebe9e4);
+        color: var(--ink);
+      }
+
+      body.is-klook-case::before {
+        background:
+          linear-gradient(rgba(17, 17, 17, 0.032) 1px, transparent 1px),
+          radial-gradient(circle at 13% 22%, rgba(255, 255, 255, 0.72) 0 0.18rem, transparent 0.22rem);
+        background-size: 100% 4px, 17rem 17rem;
+        opacity: 0.58;
+      }
+
+      body.is-klook-case .site-header {
+        color: var(--ink);
+        mix-blend-mode: normal;
+      }
+
+      body.is-klook-case .brand {
+        background: transparent;
+        color: var(--ink);
+        font-size: clamp(1.7rem, 3vw, 2.5rem);
+        height: auto;
+        padding: 0;
+        text-transform: lowercase;
+      }
+
+      body.is-klook-case .nav a {
+        color: var(--ink);
+      }
+
+      body.is-klook-case .site-header--world {
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        color: var(--ink);
+      }
+
+      body.is-klook-case .site-header--world .brand {
+        background: var(--accent);
+        color: var(--dark-ink);
+        font-size: 0.78rem;
+        height: 3.05rem;
+        padding: 0 0.82rem;
+        text-transform: uppercase;
+      }
+
+      body.is-klook-case .site-header--world .nav a {
+        color: #fff;
+        mix-blend-mode: difference;
+      }
+
+      body.is-klook-case .site-header--world .nav a.is-active,
+      body.is-klook-case .site-header--world .nav a.world-ip-entry {
+        color: var(--accent);
+        mix-blend-mode: normal;
+      }
+
+      body.is-klook-case.is-klook-next-dark .brand,
+      body.is-klook-case.is-klook-next-dark .nav a {
+        color: #f6f6f1;
+      }
+
+      body.is-klook-case.is-klook-next-dark .menu-btn {
+        background: #f6f6f1;
+      }
+
+      body.is-klook-case.is-klook-next-dark .menu-btn span {
+        background: #050505;
+      }
+
+      body.is-klook-case .project-page {
+        padding: 0 clamp(1rem, 3vw, 2.5rem) 0;
+      }
+
+      .project-page.is-klook-template > .project-header,
+      .project-page.is-klook-template > .project-overview,
+      .project-page.is-klook-template > .media-grid,
+      .project-page.is-klook-template > .credits-next {
+        display: none;
+      }
+
+      .klook-case {
+        color: var(--ink);
+        display: none;
+        position: relative;
+        z-index: 10;
+      }
+
+      body.is-klook-case .klook-case {
+        display: block;
+      }
+
+      .klook-hero {
+        min-height: 118vh;
+        padding: clamp(8rem, 12vw, 13rem) clamp(0.5rem, 8vw, 13rem) 6rem;
+        position: relative;
+      }
+
+      .klook-kicker {
+        font-size: 0.92rem;
+        font-weight: 900;
+        left: 50%;
+        margin: 0;
+        position: absolute;
+        text-transform: uppercase;
+        top: clamp(4.8rem, 7vw, 6.5rem);
+        transform: translateX(-50%);
+      }
+
+      .klook-title {
+        display: grid;
+        gap: clamp(2rem, 5vw, 4rem);
+        margin: 0;
+        position: relative;
+        text-transform: uppercase;
+        z-index: 2;
+      }
+
+      .klook-title span {
+        display: block;
+        font-size: clamp(4.2rem, 10.5vw, 10.6rem);
+        font-weight: 500;
+        letter-spacing: 0;
+        line-height: 0.82;
+      }
+
+      .klook-title em {
+        display: block;
+        font-size: clamp(3.8rem, 9.8vw, 9.7rem);
+        font-style: oblique;
+        font-weight: 250;
+        letter-spacing: 0;
+        line-height: 0.84;
+      }
+
+      .klook-title__top {
+        justify-self: start;
+      }
+
+      .klook-title__bottom {
+        justify-self: end;
+        margin-top: clamp(7rem, 12vw, 12rem);
+      }
+
+      .klook-hero-media {
+        aspect-ratio: 1.1;
+        background:
+          linear-gradient(135deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.2)),
+          url("./assets/projects/klook/letter-unseen-01.png") center / cover;
+        border: 1px solid rgba(17, 17, 17, 0.08);
+        border-radius: 2rem;
+        box-shadow: 0 2rem 7rem rgba(17, 17, 17, 0.1);
+        left: 50%;
+        max-width: 36rem;
+        opacity: 0.58;
+        position: absolute;
+        top: 22%;
+        transform: translateX(-50%) rotate(10deg) skewX(-10deg);
+        width: min(38vw, 36rem);
+        z-index: 1;
+      }
+
+      .klook-hero-video {
+        display: none;
+      }
+
+      .klook-overview {
+        display: grid;
+        gap: clamp(3rem, 7vw, 8rem);
+        grid-template-columns: 1.2fr 0.9fr;
+        margin: -15vh auto 12rem;
+        max-width: 82rem;
+        position: relative;
+        z-index: 3;
+      }
+
+      .klook-overview h2,
+      .klook-meta h3,
+      .klook-section-copy h2,
+      .klook-awards h2 {
+        font-size: 0.82rem;
+        font-weight: 900;
+        margin: 0 0 1.25rem;
+        text-transform: uppercase;
+      }
+
+      .klook-overview p {
+        font-size: clamp(1.7rem, 3.1vw, 3.05rem);
+        letter-spacing: 0;
+        line-height: 1.08;
+        margin: 0;
+      }
+
+      .klook-meta {
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .klook-meta p,
+      .klook-section-copy p {
+        color: var(--ink);
+        font-size: clamp(1rem, 1.35vw, 1.3rem);
+        line-height: 1.28;
+        margin: 0;
+      }
+
+      .klook-cta {
+        align-items: center;
+        background: var(--ink);
+        border-radius: 999px;
+        color: #fff;
+        display: inline-flex;
+        font-size: 1rem;
+        font-weight: 850;
+        gap: 0.55rem;
+        margin-top: 1.4rem;
+        padding: 0.9rem 1.3rem;
+      }
+
+      .klook-slider {
+        margin: 0 -2.5rem 13rem 0;
+        overflow: hidden;
+        padding: 4rem 0 4rem clamp(1rem, 14vw, 17rem);
+      }
+
+      .klook-slider__track {
+        align-items: center;
+        cursor: grab;
+        display: flex;
+        gap: 3.2rem;
+        touch-action: pan-y;
+        transform: translate3d(var(--klook-slider-x, 0px), 0, 0);
+        transition: transform 0.18s ease-out;
+        user-select: none;
+        width: max-content;
+      }
+
+      .klook-slider.is-dragging .klook-slider__track {
+        cursor: grabbing;
+        transition: none;
+      }
+
+      .klook-slider__copy {
+        flex: 0 0 min(19rem, 42vw);
+        margin-right: 2rem;
+      }
+
+      .klook-shot {
+        aspect-ratio: 16 / 10;
+        background:
+          linear-gradient(135deg, rgba(255, 255, 255, 0.26), rgba(255, 255, 255, 0)),
+          var(--shot);
+        background-position: center;
+        background-size: cover;
+        border: 0;
+        box-shadow: 0 1.4rem 4rem rgba(17, 17, 17, 0.1);
+        cursor: zoom-in;
+        flex: 0 0 clamp(18rem, 28vw, 32rem);
+        padding: 0;
+        transform:
+          translate3d(var(--tx, 0), var(--ty, 0), 0)
+          perspective(1200px)
+          translateZ(var(--tz, 0px))
+          rotateY(var(--ry, 0deg))
+          rotateZ(var(--rz, 0deg));
+        transition:
+          box-shadow 0.28s var(--ease-out),
+          transform 0.28s var(--ease-out);
+      }
+
+      .klook-shot:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 0.45rem;
+      }
+
+      .klook-scroll-card {
+        margin: 0 auto 11rem;
+        max-width: min(86rem, 92vw);
+        perspective: 1400px;
+      }
+
+      .klook-scroll-card__media {
+        aspect-ratio: 16 / 9;
+        background: var(--shot) center / cover;
+        box-shadow: 0 2rem 6rem rgba(17, 17, 17, 0.12);
+        opacity: var(--media-opacity, 0.28);
+        transform:
+          translate3d(var(--media-x, 0px), var(--scroll-y, 76px), 0)
+          rotateX(var(--scroll-rx, 10deg))
+          rotateY(var(--scroll-ry, 0deg))
+          scale(var(--scroll-scale, 0.92));
+        transform-origin: 50% 100%;
+        will-change: transform;
+      }
+
+      .klook-scroll-card--split {
+        align-items: start;
+        display: grid;
+        gap: clamp(2rem, 6vw, 7rem);
+        grid-template-columns: 0.82fr 1.18fr;
+      }
+
+      .klook-section-copy {
+        opacity: var(--copy-opacity, 0);
+        padding-top: clamp(1rem, 4vw, 4rem);
+        transform: translate3d(var(--copy-x, -64px), var(--copy-y, 36px), 0);
+        will-change: opacity, transform;
+      }
+
+      .klook-duo {
+        display: grid;
+        gap: 1.4rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin: 0 auto 12rem;
+        max-width: min(88rem, 92vw);
+      }
+
+      .klook-duo .klook-scroll-card {
+        margin: 0;
+      }
+
+      .klook-awards {
+        display: grid;
+        gap: clamp(3rem, 7vw, 8rem);
+        grid-template-columns: 0.75fr 1.25fr;
+        margin: 0 auto clamp(2rem, 4vw, 4rem);
+        max-width: 82rem;
+      }
+
+      .klook-awards__title {
+        font-size: clamp(3rem, 6vw, 6rem);
+        letter-spacing: 0;
+        line-height: 0.95;
+        margin: 0;
+        opacity: var(--awards-opacity, 0);
+        transform: translate3d(var(--awards-title-x, -54px), var(--awards-title-y, 42px), 0);
+      }
+
+      .klook-awards__title em {
+        display: block;
+        font-style: oblique;
+        font-weight: 250;
+      }
+
+      .klook-award-row {
+        border-top: 1px solid var(--line);
+        display: grid;
+        font-size: clamp(1rem, 1.3vw, 1.25rem);
+        font-weight: 800;
+        grid-template-columns: 1fr 1fr;
+        opacity: var(--row-opacity, 0);
+        padding: 1.15rem 0;
+        transform: translate3d(var(--row-x, 44px), var(--row-y, 24px), 0);
+        text-transform: uppercase;
+      }
+
+      .klook-next {
+        color: var(--ink);
+        cursor: grab;
+        margin: 0 calc(50% - 50vw);
+        min-height: 200vh;
+        overflow: visible;
+        position: relative;
+        touch-action: pan-y;
+        user-select: none;
+        width: 100vw;
+        --route-preview-y: 0px;
+        --route-preview-opacity: 1;
+        --route-curtain-y: 100%;
+        --route-curtain-radius: 42vh;
+        --route-curtain-copy-opacity: 0;
+        --route-curtain-copy-y: 36px;
+        --route-curtain-media-y: 140px;
+      }
+
+      .klook-route-pin {
+        height: 100vh;
+        overflow: hidden;
+        position: sticky;
+        top: 0;
+        width: 100%;
+      }
+
+      .klook-next.is-dragging {
+        cursor: grabbing;
+      }
+
+      .klook-route-preview {
+        align-items: center;
+        display: grid;
+        height: 100%;
+        inset: 0;
+        justify-items: center;
+        padding: clamp(4rem, 6vw, 6rem) clamp(1.2rem, 6vw, 7rem);
+        position: absolute;
+        pointer-events: none;
+        z-index: 4;
+      }
+
+      .klook-route-preview__mark {
+        aspect-ratio: 1;
+        background:
+          conic-gradient(from 0deg, rgba(17, 17, 17, 0.12) 0 25%, transparent 25% 50%, rgba(17, 17, 17, 0.1) 50% 75%, transparent 75% 100%);
+        border-radius: 50%;
+        filter: blur(0.2px);
+        height: min(39vh, 28rem);
+        opacity: 0.62;
+        position: absolute;
+        transform: translate3d(3vw, 1vh, 0);
+      }
+
+      .klook-route-preview__mark::before,
+      .klook-route-preview__mark::after {
+        background: rgba(17, 17, 17, 0.1);
+        content: "";
+        position: absolute;
+      }
+
+      .klook-route-preview__mark::before {
+        height: 30%;
+        left: -22%;
+        top: 44%;
+        width: 62%;
+      }
+
+      .klook-route-preview__mark::after {
+        clip-path: polygon(0 0, 100% 50%, 0 100%);
+        height: 24%;
+        right: -7%;
+        top: 58%;
+        width: 28%;
+      }
+
+      .klook-route-preview__copy {
+        opacity: var(--route-preview-opacity);
+        transform: translate3d(0, var(--route-preview-y), 0);
+        will-change: opacity, transform;
+        z-index: 3;
+      }
+
+      .klook-route-preview__copy {
+        color: #fff;
+        display: grid;
+        justify-items: center;
+        max-width: min(46rem, 88vw);
+        mix-blend-mode: difference;
+        position: relative;
+        text-align: center;
+        z-index: 5;
+      }
+
+      .klook-route-preview__eyebrow {
+        display: block;
+        font-size: clamp(2.3rem, 5vw, 5.7rem);
+        font-style: oblique;
+        font-weight: 260;
+        line-height: 0.82;
+        margin-bottom: 0.35rem;
+        text-transform: uppercase;
+      }
+
+      .klook-route-preview__title {
+        display: block;
+        font-size: clamp(3rem, 7.2vw, 8.1rem);
+        font-weight: 500;
+        letter-spacing: 0;
+        line-height: 0.88;
+        text-transform: uppercase;
+      }
+
+      .klook-route-preview__copy small,
+      .klook-curtain__copy small {
+        display: block;
+        font-size: 0.86rem;
+        font-weight: 900;
+        margin-top: 1.35rem;
+        text-transform: uppercase;
+      }
+
+      .klook-route-preview__copy p {
+        font-size: clamp(0.85rem, 1.1vw, 1rem);
+        font-weight: 900;
+        letter-spacing: 0;
+        line-height: 1;
+        margin: 0.45rem 0 0;
+        text-transform: uppercase;
+      }
+
+      .klook-curtain {
+        align-items: center;
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.032) 1px, transparent 1px),
+          #050505;
+        background-size: 7.5rem 7.5rem, 7.5rem 7.5rem, 100% 100%;
+        border-radius: 50% 50% 0 0 / var(--route-curtain-radius) var(--route-curtain-radius) 0 0;
+        color: #f6f6f1;
+        display: grid;
+        height: 122vh;
+        left: -18vw;
+        padding: 0;
+        position: absolute;
+        bottom: -22vh;
+        transform: translate3d(0, var(--route-curtain-y), 0);
+        width: 136vw;
+        will-change: transform, border-radius;
+        z-index: 2;
+      }
+
+      .klook-curtain::before {
+        background:
+          radial-gradient(circle at 74% 22%, rgba(255, 255, 255, 0.12), transparent 20rem),
+          radial-gradient(circle at 20% 72%, rgba(184, 216, 208, 0.12), transparent 24rem);
+        content: "";
+        inset: 0;
+        pointer-events: none;
+        position: absolute;
+      }
+
+      .klook-curtain__copy,
+      .klook-curtain__media {
+        opacity: 0;
+        position: relative;
+        will-change: opacity, transform;
+        z-index: 1;
+      }
+
+      .klook-curtain__copy {
+        justify-self: center;
+        max-width: min(46rem, 88vw);
+        text-align: center;
+        transform: translate3d(0, var(--route-curtain-copy-y), 0);
+      }
+
+      .klook-curtain__copy h2 {
+        font-size: clamp(3rem, 7.2vw, 8.1rem);
+        font-weight: 500;
+        letter-spacing: 0;
+        line-height: 0.88;
+        margin: 0;
+        text-transform: uppercase;
+      }
+
+      .klook-curtain__copy h2 em {
+        display: block;
+        font-style: oblique;
+        font-weight: 260;
+        font-size: 0.7em;
+        line-height: 0.82;
+      }
+
+      .klook-curtain__copy p {
+        color: rgba(246, 246, 241, 0.7);
+        font-size: clamp(0.85rem, 1.1vw, 1rem);
+        font-weight: 900;
+        line-height: 1;
+        margin: 0.45rem 0 0;
+        text-transform: uppercase;
+      }
+
+      .klook-curtain__media {
+        align-self: center;
+        aspect-ratio: 16 / 10;
+        background:
+          radial-gradient(circle at 49% 48%, #f4f2e8 0 13%, transparent 13.5%),
+          radial-gradient(circle at 58% 52%, #b8d8d0 0 28%, transparent 28.6%),
+          linear-gradient(145deg, #d8e8e5 0 42%, #6e9fa6 42.5% 66%, #1d2426 66.5% 100%);
+        border: 1px solid rgba(246, 246, 241, 0.18);
+        border-radius: clamp(1rem, 2vw, 1.8rem);
+        box-shadow: 0 3rem 8rem rgba(0, 0, 0, 0.52);
+        transform:
+          translate3d(0, var(--route-curtain-media-y), 0)
+          perspective(1400px)
+          rotateY(-4deg)
+          rotateZ(1.5deg);
+        display: none;
+      }
+
+      .klook-curtain__media::after {
+        border: 1px solid rgba(246, 246, 241, 0.22);
+        border-radius: 999px;
+        color: #050505;
+        content: "RSPCA";
+        display: grid;
+        font-size: clamp(2rem, 5vw, 5.2rem);
+        font-weight: 900;
+        inset: 22% 18%;
+        place-items: center;
+        position: absolute;
+      }
+
+      body.is-cny-case {
+        --ink: #f7f3ee;
+        --paper: #050505;
+        --line: rgba(255, 255, 255, 0.14);
+        --soft-text: rgba(247, 243, 238, 0.64);
+        --cny-red: #f13b2d;
+        --cny-red-rgb: 241 59 45;
+        --cny-gold: #ffd37a;
+        --cny-rose: #ff8f83;
+        background:
+          radial-gradient(circle at 50% 9%, rgb(var(--cny-red-rgb) / 0.22), transparent 31rem),
+          radial-gradient(circle at 88% 28%, rgba(255, 211, 122, 0.11), transparent 22rem),
+          linear-gradient(180deg, #070606 0%, #050505 48%, #090706 100%);
+        color: var(--ink);
+      }
+
+      body.is-cny-case::before {
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+        background-size: 7rem 7rem;
+        opacity: 0.22;
+      }
+
+      body.is-cny-case .site-header,
+      body.is-cny-case .site-header--world {
+        color: var(--ink);
+      }
+
+      body.is-cny-case .site-header--world .nav a {
+        color: rgba(247, 243, 238, 0.72);
+        mix-blend-mode: normal;
+      }
+
+      body.is-cny-case .site-header--world .nav a:hover,
+      body.is-cny-case .site-header--world .nav a:focus-visible {
+        color: #fff;
+      }
+
+      body.is-cny-case .site-header--world .nav a.is-active,
+      body.is-cny-case .site-header--world .nav a.world-ip-entry {
+        color: var(--accent);
+      }
+
+      body.is-cny-case .project-page {
+        padding: 0 clamp(1rem, 3vw, 2.5rem);
+      }
+
+      body.is-cny-case .klook-case {
+        color: var(--ink);
+        display: block;
+      }
+
+      body.is-cny-case .cny-case {
+        display: none;
+      }
+
+      .cny-only {
+        display: none;
+      }
+
+      body.is-cny-case .cny-only {
+        display: block;
+      }
+
+      body.is-cny-case .cny-proof-grid.cny-only,
+      body.is-cny-case .cny-principle-grid.cny-only {
+        display: grid;
+      }
+
+      body.is-cny-case .klook-hero {
+        display: grid;
+        margin: 0 calc(50% - 50vw) clamp(5rem, 8vw, 8rem);
+        min-height: 100svh;
+        overflow: hidden;
+        padding: 0;
+        place-items: end start;
+        width: 100vw;
+      }
+
+      body.is-cny-case .klook-kicker {
+        color: var(--cny-gold);
+        left: auto;
+        right: clamp(2rem, 7vw, 8rem);
+        top: clamp(6.3rem, 8vw, 8rem);
+        transform: none;
+        z-index: 4;
+      }
+
+      body.is-cny-case .klook-title {
+        border-left: 1px solid rgb(var(--cny-red-rgb) / 0.46);
+        bottom: clamp(3.9rem, 5.6vw, 6.2rem);
+        gap: clamp(0.42rem, 0.72vw, 0.78rem);
+        left: clamp(3rem, 6.6vw, 7.6rem);
+        max-width: min(25rem, 34vw);
+        padding-left: clamp(0.82rem, 1.05vw, 1.18rem);
+        position: absolute;
+        z-index: 3;
+      }
+
+      body.is-cny-case .klook-title span {
+        display: grid;
+        gap: 0.34rem;
+        color: rgba(247, 243, 238, 0.9);
+        font-size: clamp(2rem, 3.4vw, 4rem);
+        font-weight: 650;
+        line-height: 0.94;
+        text-shadow: 0 1.1rem 3.2rem rgba(0, 0, 0, 0.42);
+      }
+
+      body.is-cny-case .klook-title span small {
+        color: rgba(247, 243, 238, 0.54);
+        display: block;
+        font-size: clamp(0.68rem, 0.72vw, 0.82rem);
+        font-weight: 850;
+        line-height: 1;
+      }
+
+      body.is-cny-case .klook-title span strong {
+        color: rgba(247, 243, 238, 0.92);
+        display: block;
+        font-size: clamp(2.1rem, 3.55vw, 4.25rem);
+        font-weight: 700;
+        letter-spacing: 0;
+        line-height: 0.92;
+      }
+
+      body.is-cny-case .klook-title em {
+        color: rgba(255, 211, 122, 0.78);
+        display: grid;
+        font-size: clamp(0.92rem, 1.16vw, 1.3rem);
+        font-style: normal;
+        gap: 0.22rem;
+        font-weight: 750;
+        justify-self: start;
+        line-height: 1;
+        margin-top: 0;
+        max-width: 18ch;
+        opacity: 1;
+        text-shadow: 0 0.85rem 2.4rem rgba(0, 0, 0, 0.42);
+      }
+
+      body.is-cny-case .klook-title em small {
+        color: rgba(255, 211, 122, 0.58);
+        display: block;
+        font-size: clamp(0.62rem, 0.66vw, 0.74rem);
+        font-weight: 850;
+        line-height: 1;
+      }
+
+      body.is-cny-case .klook-title em strong {
+        color: rgba(255, 221, 162, 0.9);
+        display: block;
+        font-size: clamp(0.98rem, 1.28vw, 1.46rem);
+        font-weight: 850;
+        letter-spacing: 0;
+        line-height: 0.98;
+      }
+
+      body.is-cny-case .klook-hero-media {
+        aspect-ratio: auto;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+        inset: 0;
+        max-width: none;
+        opacity: 1;
+        overflow: hidden;
+        position: absolute;
+        transform: none;
+        width: 100%;
+        z-index: 1;
+      }
+
+      body.is-cny-case .klook-hero-video {
+        display: block;
+        height: 100%;
+        inset: 0;
+        object-fit: cover;
+        object-position: center;
+        position: absolute;
+        width: 100%;
+      }
+
+      body.is-cny-case .klook-hero-media::after {
+        background:
+          linear-gradient(90deg, rgba(5, 5, 5, 0.5), rgba(5, 5, 5, 0.04) 43%, rgba(5, 5, 5, 0.18)),
+          linear-gradient(180deg, rgba(5, 5, 5, 0.08), rgba(5, 5, 5, 0.01) 48%, rgba(5, 5, 5, 0.56));
+        content: "";
+        inset: 0;
+        pointer-events: none;
+        position: absolute;
+      }
+
+      body.is-cny-case .klook-hero-media::before {
+        background: #050505;
+        content: "";
+        inset: 0;
+        opacity: var(--gsap-hero-dim, 0);
+        pointer-events: none;
+        position: absolute;
+        z-index: 1;
+      }
+
+      body.is-cny-case .klook-hero-media::after {
+        z-index: 2;
+      }
+
+      body.is-cny-case .klook-overview {
+        gap: clamp(2.5rem, 6vw, 7rem);
+        grid-template-columns: 0.95fr 1.05fr;
+        margin: 0 auto clamp(7rem, 11vw, 12rem);
+        max-width: min(88rem, 94vw);
+      }
+
+      body.is-cny-case .klook-overview p {
+        color: rgba(247, 243, 238, 0.72);
+        font-size: clamp(1.25rem, 2vw, 2.05rem);
+        line-height: 1.18;
+      }
+
+      body.is-cny-case .klook-overview h2,
+      body.is-cny-case .klook-meta h3,
+      body.is-cny-case .klook-section-copy h2,
+      body.is-cny-case .klook-awards h2 {
+        color: var(--cny-gold);
+      }
+
+      body.is-cny-case .klook-meta {
+        gap: 0.9rem;
+      }
+
+      body.is-cny-case .klook-meta > div,
+      .cny-proof-card,
+      .cny-principle-card {
+        background:
+          linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.026)),
+          rgba(255, 255, 255, 0.026);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 0.9rem;
+        min-height: 11rem;
+        padding: clamp(1rem, 2vw, 1.35rem);
+      }
+
+      body.is-cny-case .klook-meta p,
+      body.is-cny-case .klook-section-copy p {
+        color: rgba(247, 243, 238, 0.76);
+        font-size: clamp(0.98rem, 1.16vw, 1.15rem);
+        line-height: 1.32;
+      }
+
+      .cny-logic-board {
+        margin: clamp(1rem, 2.5vw, 2.4rem) auto clamp(7rem, 11vw, 12rem);
+        max-width: min(88rem, 94vw);
+      }
+
+      .cny-logic-top {
+        align-items: stretch;
+        display: grid;
+        gap: clamp(1rem, 2.5vw, 2rem);
+        grid-template-columns: minmax(12rem, 0.72fr) minmax(18rem, 1.18fr) minmax(12rem, 0.72fr);
+        min-height: clamp(16rem, 24vw, 22rem);
+      }
+
+      .cny-logic-node {
+        align-items: center;
+        aspect-ratio: 1.04;
+        background:
+          radial-gradient(circle at 50% 112%, rgba(255, 211, 122, 0.46), transparent 54%),
+          linear-gradient(180deg, rgb(var(--cny-red-rgb) / 0.88), rgb(var(--cny-red-rgb) / 0.44) 58%, rgba(78, 7, 5, 0.9));
+        border: 1px solid rgb(var(--cny-red-rgb) / 0.34);
+        border-radius: 34% 34% 28% 28%;
+        box-shadow:
+          0 1.8rem 5rem rgb(var(--cny-red-rgb) / 0.18),
+          0 0 0 1px rgba(255, 211, 122, 0.12) inset;
+        color: #fff;
+        display: grid;
+        font-size: clamp(2rem, 3.6vw, 4.2rem);
+        font-weight: 600;
+        height: 100%;
+        justify-items: center;
+        line-height: 1;
+        min-height: clamp(13rem, 23vw, 20rem);
+        padding: 1rem;
+        text-align: center;
+      }
+
+      .cny-logic-middle {
+        align-content: center;
+        color: var(--cny-gold);
+        display: grid;
+        gap: clamp(1.1rem, 2vw, 2rem);
+        justify-items: center;
+        text-align: center;
+      }
+
+      .cny-logic-middle small,
+      .cny-logic-middle p {
+        color: rgba(247, 243, 238, 0.72);
+        font-size: clamp(0.95rem, 1.15vw, 1.08rem);
+        font-weight: 800;
+        margin: 0;
+      }
+
+      .cny-logic-core {
+        border-bottom: 1px solid rgba(247, 243, 238, 0.34);
+        border-top: 1px solid rgba(247, 243, 238, 0.34);
+        font-size: clamp(2rem, 4.2vw, 4.5rem);
+        font-weight: 600;
+        line-height: 1;
+        padding: 0.7rem 0;
+        width: 100%;
+      }
+
+      .cny-proof-grid {
+        display: grid;
+        gap: 0.9rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin: clamp(1.5rem, 3vw, 2.4rem) auto clamp(7rem, 11vw, 12rem);
+        max-width: min(88rem, 94vw);
+      }
+
+      .cny-proof-card h3,
+      .cny-principle-card h3 {
+        color: var(--cny-gold);
+        font-size: clamp(1.4rem, 2.1vw, 2.4rem);
+        font-weight: 560;
+        line-height: 0.95;
+        margin: 0 0 1rem;
+        text-transform: uppercase;
+      }
+
+      .cny-proof-card p,
+      .cny-principle-card p {
+        color: rgba(247, 243, 238, 0.66);
+        font-size: clamp(0.96rem, 1.1vw, 1.08rem);
+        line-height: 1.35;
+        margin: 0;
+      }
+
+      .cny-placeholder {
+        background:
+          linear-gradient(135deg, rgba(255, 211, 122, 0.1), rgba(255, 255, 255, 0.022)),
+          repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.055) 0 1px, transparent 1px 0.65rem);
+        border-style: dashed;
+      }
+
+      .cny-placeholder small {
+        color: rgba(255, 211, 122, 0.9);
+        display: block;
+        font-size: 0.78rem;
+        font-weight: 900;
+        margin-bottom: 0.85rem;
+        text-transform: uppercase;
+      }
+
+      body.is-cny-case .klook-slider {
+        margin-bottom: clamp(6rem, 10vw, 11rem);
+        padding-left: clamp(1rem, 10vw, 10rem);
+      }
+
+      body.is-cny-case .klook-shot {
+        background-color: rgba(255, 255, 255, 0.045);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 0.8rem;
+        box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.38);
+        background-position: center, var(--shot-position, center);
+        background-repeat: no-repeat;
+        background-size: cover, var(--shot-size, cover);
+        flex-basis: clamp(22rem, 35vw, 42rem);
+        overflow: hidden;
+        position: relative;
+      }
+
+      body.is-cny-case .klook-shot::after {
+        background: rgba(5, 5, 5, 0.62);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
+        bottom: 1rem;
+        color: rgba(255, 211, 122, 0.92);
+        content: attr(data-shot-label);
+        font-size: 0.76rem;
+        font-weight: 900;
+        left: 1rem;
+        padding: 0.46rem 0.72rem;
+        position: absolute;
+        text-transform: uppercase;
+      }
+
+      body.is-cny-case .klook-scroll-card {
+        margin-bottom: clamp(7rem, 11vw, 12rem);
+      }
+
+      body.is-cny-case .klook-scroll-card[data-case-media="hero"] {
+        display: none;
+      }
+
+      body.is-cny-case .klook-scroll-card__media {
+        background-color: rgba(255, 255, 255, 0.04);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 0.9rem;
+        box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.42);
+      }
+
+      body.is-cny-case .klook-scroll-card[data-case-media="process"] .klook-scroll-card__media,
+      body.is-cny-case .klook-scroll-card[data-case-media="extension"] .klook-scroll-card__media {
+        aspect-ratio: 4 / 5;
+        background-size: contain;
+      }
+
+      body.is-cny-case .klook-scroll-card[data-case-media="process"] {
+        align-items: start;
+        gap: clamp(2rem, 4.6vw, 5.6rem);
+        grid-template-columns: minmax(18rem, 0.5fr) minmax(0, 1.5fr);
+        max-width: min(98rem, 94vw);
+      }
+
+      body.is-cny-case .klook-scroll-card[data-case-media="process"] .klook-section-copy {
+        border-left: 1px solid rgba(255, 211, 122, 0.36);
+        padding-left: clamp(1rem, 1.8vw, 1.8rem);
+        padding-top: clamp(1.2rem, 3vw, 3rem);
+      }
+
+      body.is-cny-case .klook-scroll-card[data-case-media="process"] .klook-section-copy h2 {
+        font-size: clamp(1.75rem, 3.1vw, 3.35rem);
+        line-height: 0.94;
+        margin-bottom: 1.1rem;
+      }
+
+      body.is-cny-case .klook-scroll-card[data-case-media="process"] .klook-section-copy p {
+        max-width: 31rem;
+      }
+
+      body.is-cny-case .klook-scroll-card[data-case-media="process"] > .klook-scroll-card__media {
+        display: none;
+      }
+
+      body.is-cny-case .klook-scroll-card--split {
+        grid-template-columns: 0.72fr 1.28fr;
+        max-width: min(92rem, 94vw);
+      }
+
+      .cny-process-steps,
+      .cny-process-collage {
+        display: none;
+      }
+
+      body.is-cny-case .cny-process-steps.cny-only {
+        display: grid;
+        gap: 0.62rem;
+        list-style: none;
+        margin: clamp(1.4rem, 2.3vw, 2.2rem) 0 0;
+        padding: 0;
+      }
+
+      body.is-cny-case .cny-process-steps li {
+        align-items: baseline;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        color: rgba(247, 243, 238, 0.66);
+        display: grid;
+        gap: 0.72rem;
+        grid-template-columns: 2.8rem minmax(0, 1fr);
+        padding-top: 0.72rem;
+      }
+
+      body.is-cny-case .cny-process-steps strong {
+        color: rgba(255, 211, 122, 0.82);
+        font-size: 0.76rem;
+        font-weight: 900;
+      }
+
+      body.is-cny-case .cny-process-steps span {
+        font-size: clamp(0.88rem, 1vw, 1rem);
+        font-weight: 760;
+        line-height: 1.12;
+      }
+
+      body.is-cny-case .cny-process-steps .cny-step-copy {
+        display: grid;
+        gap: 0.42rem;
+      }
+
+      body.is-cny-case .cny-process-steps .cny-step-copy del {
+        color: rgba(247, 243, 238, 0.34);
+        font-size: clamp(0.74rem, 0.82vw, 0.82rem);
+        font-weight: 650;
+        line-height: 1.08;
+        text-decoration-color: rgba(255, 211, 122, 0.55);
+        text-decoration-thickness: 1px;
+      }
+
+      body.is-cny-case .cny-process-steps .cny-step-new {
+        color: rgba(255, 211, 122, 0.9);
+        font-size: clamp(0.86rem, 0.95vw, 0.95rem);
+        font-weight: 800;
+        line-height: 1.18;
+      }
+
+      body.is-cny-case .cny-process-collage.cny-only {
+        display: grid;
+        gap: clamp(0.72rem, 1vw, 1rem);
+        grid-template-columns: 1.18fr 0.82fr;
+        grid-template-rows: repeat(2, minmax(14rem, 1fr));
+        min-height: clamp(33rem, 48vw, 45rem);
+      }
+
+      body.is-cny-case .cny-process-collage.cny-map-logic-board {
+        align-items: stretch;
+        display: grid;
+        gap: clamp(0.8rem, 1.2vw, 1.2rem);
+        grid-template-columns: 0.74fr 0.72fr 1fr;
+        grid-template-rows: none;
+        min-height: 0;
+      }
+
+      .cny-process-slice {
+        background-color: rgba(255, 255, 255, 0.045);
+        background-image:
+          linear-gradient(180deg, rgba(5, 5, 5, 0), rgba(5, 5, 5, 0.18)),
+          var(--shot);
+        background-position:
+          center,
+          center var(--slice-y, center);
+        background-repeat: no-repeat;
+        background-size:
+          100% 100%,
+          var(--slice-size, cover);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 0.9rem;
+        box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.34);
+        cursor: default;
+        margin: 0;
+        min-height: 0;
+        overflow: hidden;
+        padding: 0;
+        position: relative;
+      }
+
+      .cny-process-slice::after {
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+          radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.08), transparent 34%);
+        background-size: 100% 7px, 100% 100%;
+        content: "";
+        inset: 0;
+        mix-blend-mode: screen;
+        opacity: 0.42;
+        pointer-events: none;
+        position: absolute;
+      }
+
+      .cny-process-slice--hero {
+        grid-row: span 2;
+      }
+
+      .cny-process-slice span {
+        background: rgba(5, 5, 5, 0.62);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
+        bottom: 1rem;
+        color: rgba(255, 211, 122, 0.92);
+        font-size: 0.78rem;
+        font-weight: 900;
+        left: 1rem;
+        padding: 0.46rem 0.72rem;
+        position: absolute;
+        text-transform: uppercase;
+        z-index: 2;
+      }
+
+      .cny-map-logic-card {
+        background:
+          linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.024)),
+          rgba(255, 255, 255, 0.028);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 1.15rem;
+        box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.34);
+        display: grid;
+        grid-template-rows: minmax(0, 1fr) auto;
+        margin: 0;
+        min-height: clamp(32rem, 45vw, 43rem);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .cny-map-logic-card img {
+        display: block;
+        height: 100%;
+        min-height: 0;
+        object-fit: cover;
+        object-position: top center;
+        width: 100%;
+      }
+
+      .cny-map-logic-card figcaption {
+        align-content: end;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        display: grid;
+        gap: 0.5rem;
+        min-height: 7.2rem;
+        padding: clamp(0.9rem, 1.3vw, 1.2rem);
+      }
+
+      .cny-map-logic-card strong {
+        color: rgba(255, 211, 122, 0.94);
+        font-size: clamp(1.12rem, 1.32vw, 1.34rem);
+        font-weight: 860;
+        line-height: 1.02;
+      }
+
+      .cny-map-logic-card span {
+        color: rgba(247, 243, 238, 0.58);
+        font-size: clamp(0.86rem, 0.96vw, 0.95rem);
+        font-weight: 650;
+        line-height: 1.22;
+      }
+
+      .cny-map-setting-section {
+        margin: 0 auto clamp(7rem, 11vw, 12rem);
+        max-width: min(96rem, 94vw);
+      }
+
+      body.is-cny-case .cny-map-setting-section.cny-only {
+        display: block;
+      }
+
+      .cny-chapter-head {
+        display: grid;
+        gap: clamp(1rem, 3vw, 3rem);
+        grid-template-columns: minmax(0, 0.76fr) minmax(20rem, 0.5fr);
+        margin-bottom: clamp(1.4rem, 3vw, 2.4rem);
+        padding-left: clamp(1.2rem, 4vw, 4rem);
+        position: relative;
+      }
+
+      .cny-chapter-head::before {
+        background: linear-gradient(180deg, rgba(255, 211, 122, 0.8), rgba(255, 211, 122, 0.18));
+        bottom: 0.1rem;
+        content: "";
+        left: 0;
+        position: absolute;
+        top: 0.15rem;
+        width: 1px;
+      }
+
+      .cny-chapter-head h2 {
+        color: var(--cny-gold);
+        font-size: clamp(3rem, 5.6vw, 6.2rem);
+        font-style: oblique;
+        font-weight: 650;
+        letter-spacing: 0;
+        line-height: 0.84;
+        margin: 0;
+        text-transform: uppercase;
+      }
+
+      .cny-chapter-head h2 em {
+        color: rgba(255, 211, 122, 0.68);
+        display: block;
+        font-style: oblique;
+        font-weight: 520;
+      }
+
+      .cny-chapter-head p {
+        align-self: end;
+        color: rgba(247, 243, 238, 0.66);
+        font-size: clamp(1.02rem, 1.22vw, 1.16rem);
+        line-height: 1.28;
+        margin: 0;
+      }
+
+      .cny-map-setting-grid {
+        display: grid;
+        gap: 0.9rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .cny-setting-card {
+        background:
+          linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.024)),
+          rgba(255, 255, 255, 0.028);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 1.15rem;
+        box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.32);
+        margin: 0;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .cny-setting-card--wide {
+        grid-column: span 2;
+      }
+
+      .cny-setting-card img {
+        display: block;
+        width: 100%;
+      }
+
+      .cny-setting-card figcaption {
+        background: rgba(5, 5, 5, 0.64);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
+        color: var(--cny-gold);
+        font-size: 0.76rem;
+        font-weight: 900;
+        left: 1rem;
+        padding: 0.45rem 0.72rem;
+        position: absolute;
+        text-transform: uppercase;
+        top: 1rem;
+        z-index: 2;
+      }
+
+      body.is-cny-case .klook-duo {
+        display: none;
+      }
+
+      .cny-map-showcase {
+        margin: 0 auto clamp(7rem, 11vw, 12rem);
+        max-width: min(96rem, 94vw);
+      }
+
+      .cny-map-showcase__head {
+        align-items: end;
+        display: grid;
+        gap: clamp(1.4rem, 4vw, 4rem);
+        grid-template-columns: minmax(0, 0.82fr) minmax(20rem, 0.52fr);
+        margin-bottom: clamp(2rem, 4vw, 3.4rem);
+        padding-left: clamp(1.2rem, 4vw, 4rem);
+        position: relative;
+      }
+
+      .cny-map-showcase__head::before,
+      .cny-gate-gradient-copy::before {
+        background: linear-gradient(180deg, rgba(255, 211, 122, 0.8), rgba(255, 211, 122, 0.18));
+        content: "";
+        left: 0;
+        position: absolute;
+        top: 0.15rem;
+        width: 1px;
+      }
+
+      .cny-map-showcase__head::before {
+        bottom: 0.2rem;
+      }
+
+      .cny-map-showcase__head h2 {
+        color: var(--cny-gold);
+        font-size: clamp(3.4rem, 6.6vw, 7.2rem);
+        font-style: oblique;
+        font-weight: 650;
+        letter-spacing: 0;
+        line-height: 0.82;
+        margin: 0;
+        text-transform: uppercase;
+      }
+
+      .cny-map-showcase__head h2 em {
+        color: rgba(255, 211, 122, 0.76);
+        display: block;
+        font-style: oblique;
+        font-weight: 520;
+        padding-bottom: 0.1em;
+      }
+
+      .cny-map-showcase__head p {
+        color: rgba(247, 243, 238, 0.62);
+        font-size: clamp(1rem, 1.2vw, 1.18rem);
+        line-height: 1.22;
+        margin: 0 0 0.3rem;
+      }
+
+      .cny-principle-grid {
+        display: grid;
+        gap: 0.9rem;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        margin: 0 auto clamp(7rem, 11vw, 12rem);
+        max-width: min(88rem, 94vw);
+      }
+
+      body:not(.is-cny-case) .cny-only {
+        display: none !important;
+      }
+
+      body.is-cny-case .klook-awards {
+        margin-bottom: clamp(5rem, 8vw, 8rem);
+      }
+
+      body.is-cny-case .klook-award-row {
+        color: rgba(247, 243, 238, 0.86);
+        grid-template-columns: 0.72fr 1.28fr;
+      }
+
+      body.is-cny-case .klook-next {
+        color: var(--ink);
+      }
+
+      body.is-cny-case .klook-route-preview__mark {
+        background:
+          radial-gradient(circle, rgba(255, 211, 122, 0.28), transparent 58%),
+          conic-gradient(from 0deg, rgba(255, 211, 122, 0.18) 0 25%, transparent 25% 50%, rgba(241, 59, 45, 0.2) 50% 75%, transparent 75% 100%);
+      }
+
+      body.is-cny-case .klook-curtain {
+        background:
+          radial-gradient(circle at 74% 22%, rgb(var(--cny-red-rgb) / 0.2), transparent 24rem),
+          linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+          #050505;
+        background-size: 100% 100%, 7.5rem 7.5rem, 100% 100%;
+      }
+
+      body.is-cny-case .klook-curtain__media {
+        display: block;
+      }
+
+      body.is-cny-case .klook-curtain__media::after {
+        content: "KLOOK";
+      }
+
+      body.is-cny-case .cny-case {
+        display: none !important;
+      }
+
+      .cny-case {
+        color: var(--ink);
+        display: none;
+        position: relative;
+        z-index: 10;
+      }
+
+      body.is-cny-case .cny-case {
+        display: block;
+      }
+
+      .cny-case button {
+        font: inherit;
+      }
+
+      .cny-reveal {
+        opacity: 0;
+        transform: translate3d(0, 52px, 0);
+        transition:
+          opacity 0.72s var(--ease-out),
+          transform 0.72s var(--ease-out);
+      }
+
+      .cny-reveal.is-visible,
+      body.is-cny-case.is-ready .cny-reveal {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+
+      .cny-hero {
+        display: grid;
+        min-height: 118vh;
+        padding: clamp(8rem, 12vw, 12rem) clamp(0.4rem, 6vw, 8rem) 7rem;
+        position: relative;
+      }
+
+      .cny-kicker {
+        color: var(--cny-gold);
+        font-size: 0.92rem;
+        font-weight: 900;
+        margin: 0;
+        position: absolute;
+        right: clamp(0.4rem, 6vw, 8rem);
+        text-transform: uppercase;
+        top: clamp(6.6rem, 9vw, 9rem);
+      }
+
+      .cny-title {
+        align-self: start;
+        display: grid;
+        gap: clamp(0.35rem, 1vw, 0.8rem);
+        margin: 0;
+        max-width: 72rem;
+        pointer-events: none;
+        position: relative;
+        text-transform: uppercase;
+        z-index: 3;
+      }
+
+      .cny-title span,
+      .cny-title em {
+        display: block;
+        font-size: clamp(4.2rem, 11vw, 11.8rem);
+        letter-spacing: 0;
+        line-height: 0.82;
+      }
+
+      .cny-title span {
+        font-weight: 520;
+      }
+
+      .cny-title em {
+        color: rgba(247, 243, 238, 0.74);
+        font-style: oblique;
+        font-weight: 250;
+        justify-self: end;
+        padding-bottom: 0.14em;
+      }
+
+      .cny-hero-media {
+        appearance: none;
+        background: var(--shot) center / cover no-repeat;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 1.2rem;
+        box-shadow:
+          0 3rem 8rem rgba(0, 0, 0, 0.56),
+          0 0 0 1px rgba(255, 211, 122, 0.08) inset;
+        cursor: zoom-in;
+        height: min(52vw, 38rem);
+        left: 50%;
+        opacity: 0.76;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        top: clamp(12rem, 23vw, 20rem);
+        transform: translateX(-38%) rotate(6deg) skewX(-4deg);
+        width: min(56vw, 48rem);
+        z-index: 1;
+      }
+
+      .cny-hero-media::after,
+      .cny-image-button::after,
+      .cny-map-card::after {
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px),
+          radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.2), transparent 32%);
+        background-size: 100% 6px, 100% 100%;
+        content: "";
+        inset: 0;
+        mix-blend-mode: soft-light;
+        pointer-events: none;
+        position: absolute;
+      }
+
+      .cny-hero-panel {
+        align-self: end;
+        display: grid;
+        gap: 1.15rem;
+        grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.64fr);
+        margin-top: clamp(22rem, 40vw, 34rem);
+        max-width: 78rem;
+        position: relative;
+        z-index: 4;
+      }
+
+      .cny-hero-panel p {
+        color: rgba(247, 243, 238, 0.72);
+        font-size: clamp(1.65rem, 3vw, 3rem);
+        line-height: 1.05;
+        margin: 0;
+      }
+
+      .cny-role-list,
+      .cny-stat-list {
+        display: grid;
+        gap: 0;
+      }
+
+      .cny-role-list span,
+      .cny-stat-list span,
+      .cny-process-list span {
+        border-top: 1px solid var(--line);
+        color: rgba(247, 243, 238, 0.7);
+        display: flex;
+        font-size: clamp(0.95rem, 1.1vw, 1.08rem);
+        justify-content: space-between;
+        line-height: 1.15;
+        padding: 0.88rem 0;
+      }
+
+      .cny-section {
+        margin: 0 auto clamp(8rem, 12vw, 13rem);
+        max-width: min(88rem, 94vw);
+        position: relative;
+      }
+
+      .cny-section--wide {
+        max-width: min(104rem, 96vw);
+      }
+
+      .cny-section-label {
+        color: var(--cny-gold);
+        font-size: 0.82rem;
+        font-weight: 900;
+        margin: 0 0 1.2rem;
+        text-transform: uppercase;
+      }
+
+      .cny-section-title {
+        font-size: clamp(2.5rem, 5.6vw, 6.1rem);
+        font-weight: 520;
+        letter-spacing: 0;
+        line-height: 0.88;
+        margin: 0;
+        max-width: 62rem;
+        text-transform: uppercase;
+      }
+
+      .cny-section-title em {
+        color: rgba(247, 243, 238, 0.58);
+        display: block;
+        font-style: oblique;
+        font-weight: 240;
+        padding-bottom: 0.12em;
+      }
+
+      .cny-overview {
+        display: grid;
+        gap: clamp(2rem, 6vw, 7rem);
+        grid-template-columns: 1.05fr 0.95fr;
+      }
+
+      .cny-overview-copy {
+        color: rgba(247, 243, 238, 0.72);
+        font-size: clamp(1.55rem, 2.7vw, 2.55rem);
+        line-height: 1.1;
+        margin: 1.8rem 0 0;
+      }
+
+      .cny-meta-grid,
+      .cny-strategy-grid {
+        display: grid;
+        gap: 0.9rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .cny-meta-card,
+      .cny-strategy-card,
+      .cny-system-card,
+      .cny-result-card {
+        background:
+          linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.028)),
+          rgba(255, 255, 255, 0.028);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 0.8rem;
+        padding: clamp(1rem, 2vw, 1.45rem);
+      }
+
+      .cny-meta-card h3,
+      .cny-strategy-card h3,
+      .cny-system-card h3,
+      .cny-result-card h3 {
+        color: rgba(247, 243, 238, 0.42);
+        font-size: 0.78rem;
+        font-weight: 900;
+        margin: 0 0 0.85rem;
+        text-transform: uppercase;
+      }
+
+      .cny-meta-card p,
+      .cny-strategy-card p,
+      .cny-system-card p,
+      .cny-result-card p {
+        color: rgba(247, 243, 238, 0.74);
+        font-size: clamp(1rem, 1.22vw, 1.2rem);
+        line-height: 1.22;
+        margin: 0;
+      }
+
+      .cny-decision {
+        border-left: 1px solid rgba(255, 211, 122, 0.42);
+        margin-top: clamp(2rem, 5vw, 4rem);
+        padding-left: clamp(1.2rem, 3vw, 2rem);
+      }
+
+      .cny-decision p {
+        color: rgba(247, 243, 238, 0.72);
+        font-size: clamp(1.45rem, 2.35vw, 2.28rem);
+        line-height: 1.1;
+        margin: 0;
+        max-width: 70rem;
+      }
+
+      .cny-media-pair {
+        align-items: end;
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: 1.1fr 0.9fr;
+        margin-top: clamp(2.5rem, 6vw, 5.5rem);
+      }
+
+      .cny-image-button {
+        appearance: none;
+        background: var(--shot) center / cover no-repeat;
+        border: 1px solid rgba(255, 255, 255, 0.13);
+        border-radius: 0.9rem;
+        box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.38);
+        cursor: zoom-in;
+        display: block;
+        min-height: 20rem;
+        overflow: hidden;
+        padding: 0;
+        position: relative;
+        width: 100%;
+      }
+
+      .cny-image-button--system {
+        aspect-ratio: 16 / 10;
+      }
+
+      .cny-image-button--phones {
+        aspect-ratio: 11 / 14;
+        background-size: contain;
+        background-color: rgba(255, 255, 255, 0.045);
+      }
+
+      .cny-map-drag-shell {
+        margin: clamp(2.5rem, 5vw, 4rem) calc(50% - 50vw) 0;
+        overflow: hidden;
+        padding: 0 clamp(1.2rem, 5vw, 5rem) 1.4rem;
+      }
+
+      .cny-map-showcase .cny-map-drag-shell {
+        margin-top: 0;
+        padding-bottom: 1.6rem;
+      }
+
+      .cny-map-rail {
+        align-items: stretch;
+        cursor: grab;
+        direction: ltr;
+        display: flex;
+        flex-direction: row;
+        gap: clamp(0.9rem, 1.6vw, 1.4rem);
+        touch-action: pan-y;
+        transform: translate3d(var(--cny-map-x, 0px), 0, 0);
+        transition: transform 0.18s ease-out;
+        user-select: none;
+        width: max-content;
+      }
+
+      .cny-map-drag-shell.is-dragging .cny-map-rail {
+        cursor: grabbing;
+        transition: none;
+      }
+
+      .cny-map-drag-shell::-webkit-scrollbar,
+      .cny-extension-rail::-webkit-scrollbar {
+        display: none;
+      }
+
+      .cny-map-drag-shell,
+      .cny-extension-rail {
+        scrollbar-width: none;
+      }
+
+      .cny-map-card {
+        appearance: none;
+        background: rgba(255, 255, 255, 0.045);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 1.35rem;
+        box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.42);
+        contain: paint;
+        cursor: zoom-in;
+        flex: 0 0 clamp(16rem, 22vw, 24rem);
+        height: clamp(30rem, 58vw, 45rem);
+        overflow: hidden;
+        padding: 0;
+        position: relative;
+        scroll-snap-align: center;
+        transform: translateZ(0);
+        -webkit-mask-image: -webkit-radial-gradient(white, black);
+      }
+
+      .cny-map-showcase .cny-map-card {
+        flex-basis: clamp(18rem, 25vw, 28rem);
+        height: clamp(31rem, 56vw, 44rem);
+      }
+
+      .cny-map-card img {
+        -webkit-user-drag: none;
+        border-radius: inherit;
+        display: block;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+        pointer-events: none;
+        width: 100%;
+      }
+
+      .cny-map-card__title {
+        align-items: start;
+        background:
+          linear-gradient(180deg, rgba(5, 5, 5, 0.58), rgba(5, 5, 5, 0.22) 58%, transparent);
+        color: var(--cny-gold);
+        display: flex;
+        gap: 1rem;
+        justify-content: space-between;
+        left: 0;
+        padding: clamp(1rem, 1.6vw, 1.35rem);
+        pointer-events: none;
+        position: absolute;
+        right: 0;
+        text-shadow: 0 0.6rem 1.6rem rgba(0, 0, 0, 0.42);
+        top: 0;
+        z-index: 3;
+      }
+
+      .cny-map-card__title small {
+        color: rgba(255, 211, 122, 0.82);
+        font-size: 0.76rem;
+        font-style: oblique;
+        font-weight: 950;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      .cny-map-card__title strong {
+        color: rgba(255, 230, 170, 0.96);
+        font-size: clamp(1.05rem, 1.38vw, 1.42rem);
+        font-style: oblique;
+        font-weight: 850;
+        letter-spacing: 0;
+        line-height: 0.98;
+        text-align: right;
+      }
+
+      .cny-map-card span {
+        background: rgba(5, 5, 5, 0.58);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
+        bottom: 1rem;
+        color: var(--cny-gold);
+        font-size: 0.8rem;
+        font-weight: 900;
+        left: 1rem;
+        padding: 0.45rem 0.72rem;
+        position: absolute;
+        text-transform: uppercase;
+        z-index: 2;
+      }
+
+      .cny-live-effect {
+        background:
+          radial-gradient(circle at 82% 0%, rgb(var(--cny-red-rgb) / 0.16), transparent 22rem),
+          linear-gradient(145deg, rgba(255, 255, 255, 0.072), rgba(255, 255, 255, 0.024)),
+          rgba(255, 255, 255, 0.028);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 1.2rem;
+        margin: clamp(1.2rem, 2.5vw, 2rem) 0 0;
+        overflow: hidden;
+      }
+
+      .cny-live-effect__copy {
+        align-items: end;
+        display: grid;
+        gap: clamp(1rem, 2vw, 1.6rem);
+        grid-template-columns: minmax(0, 0.65fr) minmax(20rem, 0.35fr);
+        padding: clamp(1rem, 2vw, 1.5rem);
+      }
+
+      .cny-live-effect__copy span {
+        color: rgba(255, 211, 122, 0.84);
+        display: block;
+        font-size: 0.76rem;
+        font-weight: 900;
+        margin-bottom: 0.75rem;
+        text-transform: uppercase;
+      }
+
+      .cny-live-effect__copy h3 {
+        color: rgba(247, 243, 238, 0.94);
+        font-size: clamp(1.65rem, 3.2vw, 3.6rem);
+        font-weight: 560;
+        letter-spacing: 0;
+        line-height: 0.92;
+        margin: 0;
+        text-transform: uppercase;
+      }
+
+      .cny-live-effect__copy p {
+        color: rgba(247, 243, 238, 0.64);
+        font-size: clamp(0.98rem, 1.12vw, 1.1rem);
+        line-height: 1.26;
+        margin: 0;
+      }
+
+      .cny-live-effect img {
+        border-radius: 0 0 1.2rem 1.2rem;
+        display: block;
+        width: 100%;
+      }
+
+      .cny-gate-gradient {
+        align-items: start;
+        display: grid;
+        gap: clamp(2rem, 5vw, 5rem);
+        grid-template-columns: minmax(22rem, 0.58fr) minmax(0, 1.18fr);
+        margin: 0 auto clamp(7rem, 11vw, 12rem);
+        max-width: min(96rem, 94vw);
+      }
+
+      body.is-cny-case .cny-gate-gradient.cny-only {
+        display: grid;
+      }
+
+      .cny-gate-gradient-copy {
+        padding-left: clamp(1.2rem, 3vw, 2rem);
+        position: sticky;
+        top: 7rem;
+      }
+
+      .cny-gate-gradient-copy::before {
+        bottom: 0;
+      }
+
+      .cny-gate-gradient-copy h2 {
+        color: var(--cny-gold);
+        font-size: clamp(3rem, 5.6vw, 6.3rem);
+        font-style: oblique;
+        font-weight: 650;
+        letter-spacing: 0;
+        line-height: 0.84;
+        margin: 0;
+        text-transform: uppercase;
+      }
+
+      .cny-gate-gradient-copy h2 em {
+        color: rgba(255, 211, 122, 0.72);
+        display: block;
+        font-style: oblique;
+        font-weight: 520;
+      }
+
+      .cny-gate-gradient-copy p {
+        color: rgba(247, 243, 238, 0.68);
+        font-size: clamp(1.05rem, 1.45vw, 1.38rem);
+        line-height: 1.22;
+        margin: 1.4rem 0 2rem;
+        max-width: 31rem;
+      }
+
+      .cny-gate-timeline {
+        display: grid;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .cny-gate-timeline li {
+        border-top: 1px solid rgba(255, 255, 255, 0.13);
+        display: grid;
+        gap: 0.9rem;
+        grid-template-columns: 2.9rem minmax(0, 1fr);
+        padding: 0.95rem 0;
+      }
+
+      .cny-gate-timeline strong {
+        color: rgba(255, 211, 122, 0.88);
+        font-size: 0.82rem;
+        font-weight: 950;
+      }
+
+      .cny-gate-timeline b {
+        color: rgba(247, 243, 238, 0.9);
+        display: block;
+        font-size: clamp(1rem, 1.14vw, 1.12rem);
+        font-weight: 860;
+        line-height: 1.1;
+        margin-bottom: 0.22rem;
+      }
+
+      .cny-gate-timeline span {
+        color: rgba(247, 243, 238, 0.58);
+        display: block;
+        font-size: clamp(0.88rem, 1vw, 0.98rem);
+        line-height: 1.22;
+      }
+
+      .cny-gate-visual {
+        min-width: 0;
+      }
+
+      .cny-gate-hero-board {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 1.2rem;
+        box-shadow: 0 2rem 5.5rem rgba(0, 0, 0, 0.34);
+        margin: 0;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .cny-gate-hero-board img {
+        display: block;
+        width: 100%;
+      }
+
+      .cny-gate-hero-board figcaption,
+      .cny-gate-level figcaption,
+      .cny-gate-detail figcaption {
+        background: rgba(5, 5, 5, 0.62);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
+        color: var(--cny-gold);
+        font-size: 0.76rem;
+        font-weight: 900;
+        padding: 0.44rem 0.68rem;
+        position: absolute;
+        text-transform: uppercase;
+        z-index: 2;
+      }
+
+      .cny-gate-hero-board figcaption {
+        bottom: 1rem;
+        left: 1rem;
+      }
+
+      .cny-gate-levels {
+        display: grid;
+        gap: 0.72rem;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        margin-top: 0.9rem;
+      }
+
+      .cny-gate-levels--finished .cny-gate-level {
+        aspect-ratio: 16 / 10;
+        border-radius: 1rem;
+      }
+
+      .cny-gate-level {
+        aspect-ratio: 1;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 0.8rem;
+        margin: 0;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .cny-gate-level img,
+      .cny-gate-detail img {
+        display: block;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        width: 100%;
+      }
+
+      .cny-gate-level figcaption {
+        bottom: 0.52rem;
+        left: 0.52rem;
+      }
+
+      .cny-gate-detail-grid {
+        display: grid;
+        gap: 0.9rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin-top: 0.9rem;
+      }
+
+      .cny-gate-detail {
+        background:
+          linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.024)),
+          rgba(255, 255, 255, 0.028);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 0.9rem;
+        margin: 0;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .cny-gate-detail img {
+        aspect-ratio: 1.18;
+      }
+
+      .cny-gate-detail figcaption {
+        left: 0.72rem;
+        top: 0.72rem;
+      }
+
+      .cny-gate-detail p {
+        color: rgba(247, 243, 238, 0.66);
+        font-size: clamp(0.92rem, 1.02vw, 1rem);
+        line-height: 1.22;
+        margin: 0;
+        padding: 0.86rem 0.9rem 1rem;
+      }
+
+      .cny-gate-note-strip {
+        display: grid;
+        gap: 0.72rem;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        margin-top: 0.9rem;
+      }
+
+      .cny-gate-note-strip span {
+        background:
+          linear-gradient(145deg, rgba(255, 255, 255, 0.072), rgba(255, 255, 255, 0.024)),
+          rgba(255, 255, 255, 0.028);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 0.95rem;
+        color: rgba(247, 243, 238, 0.74);
+        font-size: clamp(0.82rem, 0.94vw, 0.95rem);
+        font-weight: 800;
+        line-height: 1.14;
+        min-height: 5.3rem;
+        padding: 0.82rem 0.76rem;
+      }
+
+      .cny-gate-note-strip b {
+        color: rgba(255, 211, 122, 0.92);
+        display: block;
+        font-size: 0.76rem;
+        font-weight: 950;
+        margin-bottom: 0.3rem;
+      }
+
+      .cny-making-section,
+      .cny-final-output {
+        margin: 0 auto clamp(7rem, 11vw, 12rem);
+        max-width: min(96rem, 94vw);
+      }
+
+      .cny-making-section {
+        align-items: start;
+        display: grid;
+        gap: clamp(2rem, 4.5vw, 5rem);
+        grid-template-columns: minmax(22rem, 0.54fr) minmax(0, 1.2fr);
+      }
+
+      body.is-cny-case .cny-making-section.cny-only {
+        display: grid;
+      }
+
+      .cny-making-copy {
+        padding-left: clamp(1.2rem, 3vw, 2rem);
+        position: sticky;
+        top: 7rem;
+      }
+
+      .cny-making-copy::before {
+        background: linear-gradient(180deg, rgba(255, 211, 122, 0.8), rgba(255, 211, 122, 0.18));
+        bottom: 0;
+        content: "";
+        left: 0;
+        position: absolute;
+        top: 0.15rem;
+        width: 1px;
+      }
+
+      .cny-making-copy > span,
+      .cny-final-output__copy > span {
+        color: rgba(255, 211, 122, 0.84);
+        display: block;
+        font-size: 0.78rem;
+        font-weight: 950;
+        margin-bottom: 0.85rem;
+        text-transform: uppercase;
+      }
+
+      .cny-making-copy h2,
+      .cny-final-output__copy h2 {
+        color: var(--cny-gold);
+        font-size: clamp(3rem, 5.6vw, 6.3rem);
+        font-style: oblique;
+        font-weight: 650;
+        letter-spacing: 0;
+        line-height: 0.84;
+        margin: 0;
+        text-transform: uppercase;
+      }
+
+      .cny-making-copy h2 em,
+      .cny-final-output__copy h2 em {
+        color: rgba(255, 211, 122, 0.72);
+        display: block;
+        font-style: oblique;
+        font-weight: 520;
+      }
+
+      .cny-making-title--ip {
+        display: grid;
+        gap: clamp(0.1rem, 0.42vw, 0.42rem);
+        line-height: 0.82;
+        max-width: 29rem;
+      }
+
+      .cny-making-title--ip .cny-title-line {
+        display: block;
+      }
+
+      .cny-making-title--ip .cny-title-line--hero {
+        color: #ffe28a;
+        font-size: clamp(3.8rem, 5vw, 6rem);
+        font-weight: 760;
+      }
+
+      .cny-making-title--ip .cny-title-line--connector {
+        color: rgba(255, 211, 122, 0.64);
+        font-size: clamp(1.05rem, 1.35vw, 1.42rem);
+        font-weight: 950;
+        line-height: 0.9;
+        margin: 0.08rem 0 -0.02rem 0.12rem;
+      }
+
+      .cny-making-title--ip .cny-title-line--subject {
+        color: rgba(255, 211, 122, 0.82);
+        font-size: clamp(2.82rem, 4.15vw, 4.95rem);
+        font-weight: 650;
+      }
+
+      .cny-making-title--ip .cny-title-line--outcome {
+        color: var(--cny-gold);
+        font-size: clamp(3.3rem, 4.62vw, 5.52rem);
+        font-weight: 820;
+        margin-top: 0.1rem;
+      }
+
+      .cny-making-copy p,
+      .cny-final-output__copy p {
+        color: rgba(247, 243, 238, 0.68);
+        font-size: clamp(1.05rem, 1.38vw, 1.32rem);
+        line-height: 1.23;
+        margin: 1.4rem 0 0;
+        max-width: 33rem;
+      }
+
+      .cny-making-visual {
+        display: grid;
+        gap: 0.9rem;
+        min-width: 0;
+      }
+
+      .cny-role-setting-grid {
+        display: grid;
+        gap: 0.9rem;
+        grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.08fr);
+      }
+
+      .cny-role-stack {
+        display: grid;
+        gap: 0.9rem;
+      }
+
+      .cny-role-card {
+        background:
+          linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.024)),
+          rgba(255, 255, 255, 0.028);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 1.15rem;
+        box-shadow: 0 1.8rem 4.5rem rgba(0, 0, 0, 0.28);
+        margin: 0;
+        min-height: 0;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .cny-role-card img {
+        display: block;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        width: 100%;
+      }
+
+      .cny-role-card--hero img {
+        object-position: 45% center;
+      }
+
+      .cny-role-card--full img {
+        height: auto;
+        object-fit: contain;
+        object-position: center;
+        width: 100%;
+      }
+
+      .cny-role-stack .cny-role-card {
+        min-height: clamp(17rem, 22vw, 23rem);
+      }
+
+      .cny-role-card figcaption {
+        background: rgba(5, 5, 5, 0.64);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
+        color: var(--cny-gold);
+        font-size: 0.76rem;
+        font-weight: 900;
+        left: 1rem;
+        padding: 0.45rem 0.72rem;
+        position: absolute;
+        text-transform: uppercase;
+        top: 1rem;
+        z-index: 2;
+      }
+
+      .cny-stage-strip {
+        display: grid;
+        gap: 0.9rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .cny-stage-strip--quad {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .cny-stage-strip--quad .cny-stage-card {
+        aspect-ratio: 0.58;
+        min-height: 0;
+      }
+
+      .cny-stage-strip--quad .cny-stage-card img {
+        height: 100%;
+        padding: clamp(0.45rem, 0.8vw, 0.72rem);
+      }
+
+      .cny-stage-strip--poster {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .cny-stage-strip--poster .cny-stage-card {
+        min-height: 0;
+      }
+
+      .cny-stage-strip--poster .cny-stage-card img {
+        aspect-ratio: 16 / 9;
+        height: auto;
+        object-fit: cover;
+        padding: 0;
+      }
+
+      .cny-stage-card,
+      .cny-showcase-card,
+      .cny-output-wall {
+        background:
+          linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.024)),
+          rgba(255, 255, 255, 0.028);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 0.95rem;
+        box-shadow: 0 1.8rem 4.5rem rgba(0, 0, 0, 0.28);
+        margin: 0;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .cny-stage-card {
+        min-height: clamp(18rem, 27vw, 28rem);
+      }
+
+      .cny-stage-card img,
+      .cny-showcase-card img,
+      .cny-output-wall img {
+        display: block;
+        width: 100%;
+      }
+
+      .cny-stage-card img {
+        height: clamp(16rem, 24vw, 25rem);
+        object-fit: contain;
+        padding: clamp(0.7rem, 1.3vw, 1rem);
+      }
+
+      .cny-stage-card--dark img {
+        background: #050505;
+      }
+
+      .cny-stage-card--wide {
+        grid-column: span 2;
+      }
+
+      .cny-stage-card--wide img {
+        object-fit: cover;
+        padding: 0;
+      }
+
+      .cny-stage-card figcaption,
+      .cny-showcase-card figcaption,
+      .cny-output-wall figcaption {
+        background: rgba(5, 5, 5, 0.64);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
+        color: var(--cny-gold);
+        font-size: 0.76rem;
+        font-weight: 900;
+        left: 1rem;
+        padding: 0.45rem 0.72rem;
+        position: absolute;
+        text-transform: uppercase;
+        top: 1rem;
+        z-index: 2;
+      }
+
+      .cny-showcase-card {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+      }
+
+      .cny-showcase-card--figure {
+        grid-template-columns: minmax(0, 1.34fr) minmax(18rem, 0.72fr);
+        min-height: clamp(28rem, 38vw, 42rem);
+      }
+
+      .cny-showcase-card img {
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .cny-showcase-card__copy {
+        align-content: end;
+        display: grid;
+        padding: clamp(1.1rem, 2vw, 1.6rem);
+      }
+
+      .cny-showcase-card__copy h3 {
+        color: rgba(247, 243, 238, 0.92);
+        font-size: clamp(1.5rem, 2.5vw, 2.8rem);
+        font-style: oblique;
+        font-weight: 650;
+        line-height: 0.96;
+        margin: 0;
+        text-transform: uppercase;
+      }
+
+      .cny-showcase-card__copy p {
+        color: rgba(247, 243, 238, 0.62);
+        font-size: clamp(0.98rem, 1.08vw, 1.08rem);
+        line-height: 1.24;
+        margin: 1rem 0 0;
+      }
+
+      .cny-poster-display-grid {
+        display: grid;
+        gap: 0.9rem;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .cny-poster-display-grid .cny-showcase-card {
+        grid-template-columns: 1fr;
+      }
+
+      .cny-poster-display-grid .cny-showcase-card img {
+        aspect-ratio: 16 / 9;
+        height: auto;
+        object-fit: cover;
+      }
+
+      .cny-final-output {
+        display: grid;
+        gap: clamp(1.5rem, 4vw, 4rem);
+        grid-template-columns: minmax(22rem, 0.55fr) minmax(0, 0.82fr);
+      }
+
+      body.is-cny-case .cny-final-output.cny-only {
+        display: grid;
+      }
+
+      .cny-final-output__copy {
+        align-content: end;
+        display: grid;
+        padding-left: clamp(1.2rem, 3vw, 2rem);
+        position: sticky;
+        top: 7rem;
+      }
+
+      .cny-final-output__copy::before {
+        background: linear-gradient(180deg, rgba(255, 211, 122, 0.8), rgba(255, 211, 122, 0.18));
+        bottom: 0;
+        content: "";
+        left: 0;
+        position: absolute;
+        top: 0.15rem;
+        width: 1px;
+      }
+
+      .cny-output-wall {
+        justify-self: center;
+        max-width: min(34rem, 100%);
+      }
+
+      .cny-output-wall img {
+        height: min(138vh, 76rem);
+        object-fit: cover;
+        object-position: top center;
+      }
+
+      .cny-process {
+        display: grid;
+        gap: clamp(2rem, 5vw, 5rem);
+        grid-template-columns: 0.78fr 1.22fr;
+      }
+
+      .cny-process-copy {
+        position: sticky;
+        top: 8rem;
+      }
+
+      .cny-process-copy p {
+        color: rgba(247, 243, 238, 0.66);
+        font-size: clamp(1.05rem, 1.45vw, 1.38rem);
+        line-height: 1.24;
+        margin: 1.4rem 0 2.2rem;
+      }
+
+      .cny-process-board {
+        appearance: none;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 0.9rem;
+        cursor: zoom-in;
+        max-height: 170vh;
+        overflow: hidden;
+        padding: 0;
+      }
+
+      .cny-process-board img,
+      .cny-extension-board img {
+        display: block;
+        height: auto;
+        width: 100%;
+      }
+
+      .cny-system-grid {
+        display: grid;
+        gap: 0.9rem;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        margin-top: clamp(2rem, 4vw, 3.6rem);
+      }
+
+      .cny-extension {
+        align-items: start;
+        display: grid;
+        gap: clamp(1rem, 2vw, 1.6rem);
+        grid-template-columns: minmax(25rem, 0.78fr) minmax(0, 1.22fr);
+        margin-top: clamp(2.3rem, 5vw, 4.5rem);
+      }
+
+      .cny-extension-board {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 0.9rem;
+        overflow: hidden;
+      }
+
+      .cny-extension-side {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .cny-gate-module,
+      .cny-extension-gallery {
+        background:
+          radial-gradient(circle at 22% 0%, rgb(var(--cny-red-rgb) / 0.18), transparent 18rem),
+          linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.024)),
+          rgba(255, 255, 255, 0.028);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 0.95rem;
+        overflow: hidden;
+      }
+
+      .cny-gate-module {
+        position: sticky;
+        top: 7rem;
+      }
+
+      .cny-gate-head,
+      .cny-extension-copy {
+        padding: clamp(1rem, 2vw, 1.5rem);
+      }
+
+      .cny-gate-head span,
+      .cny-extension-copy span {
+        color: rgba(255, 211, 122, 0.82);
+        display: block;
+        font-size: 0.76rem;
+        font-weight: 900;
+        margin-bottom: 0.8rem;
+        text-transform: uppercase;
+      }
+
+      .cny-gate-head h3,
+      .cny-extension-copy h3 {
+        color: rgba(247, 243, 238, 0.94);
+        font-size: clamp(1.65rem, 2.65vw, 3rem);
+        font-weight: 560;
+        letter-spacing: 0;
+        line-height: 0.96;
+        margin: 0;
+      }
+
+      .cny-gate-head p,
+      .cny-extension-copy p {
+        color: rgba(247, 243, 238, 0.66);
+        font-size: clamp(0.98rem, 1.1vw, 1.08rem);
+        line-height: 1.28;
+        margin: 1rem 0 0;
+      }
+
+      .cny-gate-stage-grid {
+        display: grid;
+        gap: 0.52rem;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        padding: 0 clamp(1rem, 2vw, 1.5rem) clamp(1rem, 2vw, 1.5rem);
+      }
+
+      .cny-gate-wide {
+        aspect-ratio: 16 / 9.2;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.11);
+        border-radius: 0.82rem;
+        margin: 0 clamp(1rem, 2vw, 1.5rem) 0.7rem;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .cny-gate-wide img {
+        display: block;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        width: 100%;
+      }
+
+      .cny-gate-wide figcaption {
+        background: rgba(5, 5, 5, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
+        bottom: 0.72rem;
+        color: rgba(255, 211, 122, 0.94);
+        font-size: 0.72rem;
+        font-weight: 900;
+        left: 0.72rem;
+        padding: 0.38rem 0.62rem;
+        position: absolute;
+        text-transform: uppercase;
+      }
+
+      .cny-gate-stage {
+        aspect-ratio: 1;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.11);
+        border-radius: 0.72rem;
+        box-shadow: 0 1rem 2.8rem rgba(0, 0, 0, 0.28);
+        margin: 0;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .cny-gate-stage img,
+      .cny-extension-card img {
+        display: block;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        width: 100%;
+      }
+
+      .cny-gate-stage figcaption {
+        background: rgba(5, 5, 5, 0.56);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
+        bottom: 0.5rem;
+        color: rgba(255, 211, 122, 0.94);
+        font-size: 0.66rem;
+        font-weight: 900;
+        left: 0.5rem;
+        padding: 0.28rem 0.44rem;
+        position: absolute;
+        text-transform: uppercase;
+      }
+
+      .cny-gradient-steps {
+        display: grid;
+        list-style: none;
+        margin: 0;
+        padding: 0 clamp(1rem, 2vw, 1.5rem) clamp(1rem, 2vw, 1.5rem);
+      }
+
+      .cny-gradient-steps li {
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        display: grid;
+        gap: 0.85rem;
+        grid-template-columns: 3rem minmax(0, 1fr);
+        padding: 0.92rem 0;
+      }
+
+      .cny-gradient-steps strong {
+        color: rgb(var(--cny-red-rgb) / 0.92);
+        font-size: 0.78rem;
+        font-weight: 950;
+      }
+
+      .cny-gradient-steps span {
+        color: rgba(247, 243, 238, 0.78);
+        font-size: clamp(0.98rem, 1.1vw, 1.08rem);
+        font-weight: 760;
+        line-height: 1.16;
+      }
+
+      .cny-extension-gallery {
+        min-width: 0;
+      }
+
+      .cny-extension-rail {
+        display: flex;
+        gap: clamp(0.85rem, 1.4vw, 1.2rem);
+        overflow-x: auto;
+        padding: 0 clamp(1rem, 2vw, 1.5rem) clamp(1.1rem, 2vw, 1.6rem);
+        scroll-snap-type: x proximity;
+      }
+
+      .cny-extension-card {
+        background: rgba(255, 255, 255, 0.052);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 0.82rem;
+        box-shadow: 0 1.8rem 4.5rem rgba(0, 0, 0, 0.32);
+        flex: 0 0 clamp(14rem, 20vw, 22rem);
+        height: clamp(24rem, 38vw, 34rem);
+        margin: 0;
+        overflow: hidden;
+        position: relative;
+        scroll-snap-align: center;
+      }
+
+      .cny-extension-card--wide {
+        flex-basis: clamp(22rem, 32vw, 36rem);
+      }
+
+      .cny-extension-card figcaption {
+        background: rgba(5, 5, 5, 0.62);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
+        bottom: 1rem;
+        color: var(--cny-gold);
+        font-size: 0.78rem;
+        font-weight: 900;
+        left: 1rem;
+        padding: 0.45rem 0.72rem;
+        position: absolute;
+        text-transform: uppercase;
+      }
+
+      .cny-result-grid {
+        display: grid;
+        gap: 0.9rem;
+        grid-template-columns: 0.95fr 0.95fr 1.1fr;
+        margin-top: clamp(2rem, 4vw, 3.5rem);
+      }
+
+      .cny-result-card strong {
+        color: var(--cny-gold);
+        display: block;
+        font-size: clamp(3rem, 6vw, 6.4rem);
+        font-weight: 500;
+        letter-spacing: 0;
+        line-height: 0.86;
+        margin-bottom: 0.75rem;
+      }
+
+      .cny-next {
+        align-items: end;
+        background:
+          radial-gradient(circle at 82% 24%, rgb(var(--cny-red-rgb) / 0.22), transparent 18rem),
+          rgba(255, 255, 255, 0.045);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 1rem;
+        display: grid;
+        margin: 0 auto clamp(3rem, 6vw, 5rem);
+        max-width: min(88rem, 94vw);
+        min-height: 24rem;
+        padding: clamp(1.4rem, 3vw, 2.4rem);
+      }
+
+      .cny-next span {
+        color: rgba(247, 243, 238, 0.55);
+        font-size: 0.9rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .cny-next strong {
+        color: var(--ink);
+        display: block;
+        font-size: clamp(3.4rem, 8vw, 8.8rem);
+        font-weight: 500;
+        line-height: 0.84;
+        margin-top: 0.6rem;
+        text-transform: uppercase;
+      }
+
+      body.is-cny-case .case-lightbox__media {
+        background-color: #050505;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
+
+      body.is-klook-route-locked {
+        overflow: hidden;
+      }
+
+      .klook-route-cover {
+        background: #050505;
+        inset: 0;
+        opacity: 0;
+        pointer-events: none;
+        position: fixed;
+        transition: opacity 0.12s ease;
+        z-index: 999;
+      }
+
+      body.is-klook-route-locked .klook-route-cover {
+        opacity: 1;
+      }
+
+      .klook-reveal-copy,
+      .klook-overview > *,
+      .klook-slider__copy {
+        opacity: var(--copy-opacity, 0);
+        transform: translate3d(var(--copy-x, -54px), var(--copy-y, 44px), 0);
+        will-change: opacity, transform;
+      }
+
+      .klook-slider .klook-shot {
+        opacity: var(--shot-opacity, 0.22);
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        .klook-shot:hover {
+          box-shadow: 0 2rem 5rem rgba(17, 17, 17, 0.15);
+          transform:
+            translate3d(var(--tx, 0), calc(var(--ty, 0) - 0.45rem), 0)
+            perspective(1200px)
+            translateZ(calc(var(--tz, 0px) + 22px))
+            rotateY(var(--ry, 0deg))
+            rotateZ(var(--rz, 0deg));
+        }
+      }
+
+      @media (hover: none) {
+        .media-tile:hover,
+        .media-tile:focus-visible,
+        .menu-nav a:hover .split-char,
+        .project-title-top:hover .split-char,
+        .project-title-bottom:hover .split-char {
+          color: inherit;
+          box-shadow: none;
+          transform: none;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .site-header {
+          grid-template-columns: auto auto;
+          justify-content: space-between;
+          max-width: 100dvw;
+          padding: 1rem 1.25rem;
+          right: auto;
+          width: 100dvw;
+        }
+
+        .site-header .nav {
+          display: none;
+        }
+
+        .site-header--world .nav a,
+        .site-header--world .nav a.world-ip-entry {
+          display: none;
+        }
+
+        .explore-pill {
+          display: inline-flex;
+        }
+
+        .menu-btn,
+        .sound-btn {
+          height: 3rem;
+          width: 3rem;
+        }
+
+        .sound-btn {
+          bottom: max(1.25rem, env(safe-area-inset-bottom) + 0.75rem);
+          left: 1rem;
+        }
+
+        .project-page {
+          padding-top: 6.3rem;
+        }
+
+        .project-header {
+          perspective: none;
+          min-height: 75vh;
+        }
+
+        .project-title-top {
+          font-size: clamp(2.4rem, 10vw, 4.5rem);
+          left: 1.25rem;
+          top: 18%;
+        }
+
+        .project-title-bottom {
+          bottom: 14%;
+          font-size: clamp(2rem, 8vw, 4rem);
+          right: 1.25rem;
+        }
+
+        .hero-object {
+          bottom: 9vh;
+          width: 62vw;
+        }
+
+        .project-overview,
+        .credits-next,
+        .media-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .credits-next {
+          gap: 2rem;
+        }
+
+        .media-grid {
+          gap: 0.75rem;
+        }
+
+        .media-tile--wide {
+          grid-column: auto;
+        }
+
+        body.is-klook-case .project-page {
+          max-width: 100dvw;
+          overflow-x: clip;
+          padding-inline: 1rem;
+        }
+
+        .klook-hero {
+          min-height: 102vh;
+          padding: 7rem 0 4rem;
+        }
+
+        .klook-kicker {
+          display: none;
+        }
+
+        .klook-title__bottom {
+          justify-self: start;
+          margin-top: 16rem;
+        }
+
+        .klook-hero-media {
+          top: 30%;
+          width: 72vw;
+        }
+
+        .klook-overview,
+        .klook-meta,
+        .klook-scroll-card--split,
+        .klook-duo,
+        .klook-awards {
+          grid-template-columns: 1fr;
+        }
+
+        .klook-overview {
+          margin-top: -8vh;
+        }
+
+        .klook-slider {
+          margin-right: -1rem;
+          max-width: 100%;
+          overflow-x: auto;
+          overflow-y: visible;
+          padding-left: 0;
+          scroll-snap-type: x mandatory;
+        }
+
+        .klook-slider__track {
+          cursor: auto;
+          gap: 1.5rem;
+          transform: none !important;
+        }
+
+        .klook-slider__copy {
+          flex: 0 0 70vw;
+        }
+
+        .klook-shot {
+          flex: 0 0 80vw;
+          max-width: 80vw;
+          scroll-snap-align: center;
+        }
+
+        .klook-scroll-card {
+          max-width: 90vw;
+          width: 90vw;
+        }
+
+        body.is-cny-case .klook-scroll-card[data-case-media="process"] {
+          grid-template-columns: 1fr;
+        }
+
+        body.is-cny-case .cny-process-collage.cny-only {
+          grid-template-columns: 1fr;
+          grid-template-rows: none;
+          min-height: 0;
+        }
+
+        .cny-extension {
+          grid-template-columns: 1fr;
+        }
+
+        .cny-gate-module {
+          position: relative;
+          top: auto;
+        }
+
+        .cny-gate-stage-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .cny-making-section,
+        .cny-final-output,
+        body.is-cny-case .cny-making-section.cny-only,
+        body.is-cny-case .cny-final-output.cny-only {
+          grid-template-columns: 1fr;
+        }
+
+        .cny-making-copy,
+        .cny-final-output__copy {
+          position: relative;
+          top: auto;
+        }
+
+        .cny-stage-strip,
+        .cny-poster-display-grid,
+        .cny-showcase-card {
+          grid-template-columns: 1fr;
+        }
+
+        .cny-stage-card--wide {
+          grid-column: auto;
+        }
+
+        .cny-extension-card {
+          flex-basis: 72vw;
+          height: 30rem;
+        }
+
+        .cny-process-slice,
+        .cny-process-slice--hero {
+          grid-row: auto;
+          min-height: 18rem;
+        }
+
+        .klook-next {
+          height: 160vh;
+          min-height: 160vh;
+        }
+
+        .klook-route-preview,
+        .klook-curtain {
+          grid-template-columns: 1fr;
+        }
+
+        .klook-curtain__media {
+          transform: translate3d(0, var(--route-curtain-copy-y), 0);
+        }
+
+        .menu {
+          max-width: 100dvw;
+          transform: none;
+          visibility: hidden;
+        }
+
+        .is-menu-open .menu {
+          transform: none;
+          visibility: visible;
+        }
+
+        .menu-inner {
+          padding: 5rem 1.5rem 2rem;
+        }
+
+        .menu-footer {
+          gap: 1rem;
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="./chen-fx/03-page-transition/style.css" />
+    <style>:root { --chen-page-bg: #efded9; }</style>
+    <style>
+      /* GSAP demo shell: keep experimental rails clipped inside the standalone preview page. */
+      html,
+      body {
+        overflow-x: hidden !important;
+      }
+
+      html.gsap-demo-boot:not(.gsap-demo-ready) .klook-kicker,
+      html.gsap-demo-boot:not(.gsap-demo-ready) .klook-title__top,
+      html.gsap-demo-boot:not(.gsap-demo-ready) .klook-title__bottom,
+      html.gsap-demo-boot:not(.gsap-demo-ready) .klook-hero-media {
+        opacity: 0;
+      }
+
+      /* Marathon black-field sync for dark project routes. */
+      body:not(.is-klook-case):not(.is-cny-case) {
+        background:
+          radial-gradient(circle at 9% 13%, rgb(var(--accent-rgb) / 0.14), transparent 16rem),
+          radial-gradient(circle at 91% 44%, rgb(var(--accent-rgb) / 0.09), transparent 18rem),
+          #050505 !important;
+      }
+
+      body:not(.is-klook-case):not(.is-cny-case)::before {
+        background:
+          radial-gradient(circle, rgba(244, 243, 237, 0.16) 0 0.07rem, transparent 0.08rem),
+          linear-gradient(90deg, rgba(244, 243, 237, 0.06) 1px, transparent 1px) !important;
+        background-size: 0.92rem 0.92rem, 6.5rem 100% !important;
+        mix-blend-mode: normal !important;
+        opacity: 0.34 !important;
+      }
+
+      .site-header--world {
+        background: transparent !important;
+        border-bottom: 0 !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        padding: clamp(1rem, 1.75vw, 1.55rem) clamp(1rem, 2.5vw, 2.4rem) !important;
+        pointer-events: none;
+      }
+
+      .site-header--world .brand,
+      .site-header--world .nav,
+      .site-header--world .menu-btn {
+        pointer-events: auto;
+      }
+
+      .site-header--world .nav a {
+        color: rgba(244, 243, 237, 0.76) !important;
+        mix-blend-mode: normal !important;
+        text-shadow: 0 1px 12px rgba(5, 5, 5, 0.42) !important;
+      }
+
+      .site-header--world .nav a:hover,
+      .site-header--world .nav a:focus-visible {
+        color: #f4f3ed !important;
+      }
+
+      .site-header--world .nav a.is-active,
+      .site-header--world .nav a.world-ip-entry {
+        color: var(--accent) !important;
+        text-shadow: 0 0 18px rgb(var(--accent-rgb) / 0.34) !important;
+      }
+    </style>
+    <link rel="stylesheet" href="./assets/main-site-fixes.css?v=world-only-audio-187" />
+    <script src="./chen-fx/03-page-transition/script.js"></script>
+  </head>
+  <body class="chen-page chen-page--lite">
+    <header class="site-header site-header--world">
+      <a class="brand" href="./index.html" data-fx-link>chennn studio®</a>
+      <nav class="nav" aria-label="Primary">
+        <a href="./home.html?skipIntro=1" data-fx-link>Index</a>
+        <a class="is-active" href="./projects.html?skipIntro=1" data-fx-link>Projects</a>
+        <a href="./about.html" data-fx-link>About</a>
+        <a href="./services.html" data-fx-link>Services</a>
+        <a href="./contact.html?skipIntro=1" data-fx-link>Contact</a>
+        <a class="world-ip-entry" href="./ip-mask-demo.html?v=skin-ui-088" data-fx-link>IP Doorway</a>
+      </nav>
+      <button class="explore-pill" data-fx-magnetic="16" type="button" data-menu-trigger aria-controls="siteMenu" aria-expanded="false">Explore</button>
+      <button class="menu-btn menu-btn--hidden" type="button" aria-label="Toggle Menu" tabindex="-1" aria-hidden="true">
+        <span></span>
+        <span></span>
+      </button>
+    </header>
+
+    <button class="sound-btn" type="button" aria-label="Toggle Sound"><i></i></button>
+
+    <main class="project-page">
+      <section class="project-header">
+        <div class="hero-secondary-objects">
+          <div class="hero-obj-1"></div>
+          <div class="hero-obj-2"></div>
+          <div class="hero-obj-3"></div>
+        </div>
+        <h1 class="project-title-top">PROJECTS/<br/>SUPERLIST</h1>
+        <div class="hero-object" data-project-media style="background: linear-gradient(135deg, #111, #303030 48%, #f0d36b); background-size: cover;"></div>
+        <h2 class="project-title-bottom">MARKETING<br/><em>WEBSITE</em></h2>
+      </section>
+
+      <section class="project-overview">
+        <div class="overview-main">
+          <p class="section-label">PROJECT OVERVIEW</p>
+          <p class="overview-copy" data-project-summary>
+            A striking pre-launch marketing site for productivity tool of the future; Superlist
+          </p>
+        </div>
+        <div class="overview-meta">
+          <div class="meta-column-1">
+            <div class="meta-block">
+              <p class="section-label">SERVICES</p>
+              <p>UX/UI DESIGN<br/>FRONT-END<br/>WEBGL<br/>3D MODELLING</p>
+            </div>
+          </div>
+          <div class="meta-column-2">
+            <div class="meta-block">
+              <p class="section-label">DATE</p>
+              <p>Spring, 2021</p>
+            </div>
+            <div class="meta-block">
+              <p class="section-label">CLIENT</p>
+              <p>Superlist</p>
+            </div>
+            <div class="meta-block">
+              <p class="section-label">LOCATION</p>
+              <p>Berlin, Germany</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="media-grid" aria-label="Project media">
+        <button class="media-tile media-tile--wide" type="button" data-tile="0"></button>
+        <button class="media-tile" type="button" data-tile="1"></button>
+        <button class="media-tile" type="button" data-tile="2"></button>
+        <button class="media-tile media-tile--wide" type="button" data-tile="3"></button>
+      </section>
+
+      <section class="credits-next">
+        <div>
+          <p class="section-label">Credits</p>
+          <div class="credit-list">
+            <p><span>Direction</span><strong>CHENNN Studio</strong></p>
+            <p><span>Design</span><strong>CHENNN Lab</strong></p>
+            <p><span>Motion</span><strong>Motion Unit</strong></p>
+          </div>
+        </div>
+        <a class="next-project" data-fx-magnetic="12" href="./project.html?project=klook" data-fx-link>
+          <span>Next project</span>
+          <strong>Klook</strong>
+        </a>
+      </section>
+
+      <article class="klook-case" aria-label="Project case study">
+        <section class="klook-hero" aria-label="Klook hero">
+          <p class="klook-kicker" data-case-kicker>KLOOK &amp; US</p>
+          <h1 class="klook-title">
+            <span class="klook-title__top" data-case-title-top>PROJECTS/<br />KLOOK</span>
+            <em class="klook-title__bottom" data-case-title-bottom>INTERACTIVE<br />EXPERIENCE</em>
+          </h1>
+          <div class="klook-hero-media" aria-hidden="true" data-case-hero-media>
+            <video class="klook-hero-video" autoplay muted loop playsinline preload="metadata" poster="./assets/projects/the-symphony-of-vines/Group 2090057975.png">
+              <source src="./assets/projects/the-symphony-of-vines/18f602113140cfe95ac518a4.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </section>
+
+        <section class="klook-overview">
+          <div>
+            <h2>Project Overview</h2>
+            <p data-case-summary>A campaign case page built around travel energy, soft perspective, and scroll-held media moments.</p>
+            <a class="klook-cta" data-fx-magnetic="16" href="./projects.html?skipIntro=1" data-fx-link>All projects -></a>
+          </div>
+          <div class="klook-meta" aria-label="Project metadata">
+            <div>
+              <h3>Services</h3>
+              <p data-case-services>Experience design<br />Interactive storytelling<br />Motion direction<br />Art direction</p>
+            </div>
+            <div>
+              <h3>Date</h3>
+              <p data-case-date>Spring, 2026</p>
+            </div>
+            <div>
+              <h3>Client</h3>
+              <p data-case-client>Klook</p>
+            </div>
+            <div>
+              <h3>Location</h3>
+              <p data-case-location>Hong Kong / Shanghai</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="cny-logic-board cny-only" aria-label="CNY design logic">
+          <div class="cny-logic-top">
+            <div class="cny-logic-node">活动<br />策略</div>
+            <div class="cny-logic-middle">
+              <small>对 CNY 预热数据、业务目标和节日情绪做一次重新聚焦</small>
+              <div class="cny-logic-core">差异 / 创意 / 价值找寻</div>
+              <p>把“春节视觉好看”推进为“用户愿意探索、愿意分享、后续可复用”的活动系统。</p>
+            </div>
+            <div class="cny-logic-node">视觉<br />系统</div>
+          </div>
+        </section>
+
+        <section class="cny-proof-grid cny-only" aria-label="CNY strategy proof">
+          <div class="cny-proof-card">
+            <h3>01 / 差异</h3>
+            <p>春节活动容易落成红金氛围图。这个项目先把五个地域关卡拆开，让每个会场有自己的建筑、路径和色彩记忆。</p>
+          </div>
+          <div class="cny-proof-card">
+            <h3>02 / 创意</h3>
+            <p>不是平铺入口，而是把用户带进“地图会场”。IP、路径和奖励节点共同承担探索感。</p>
+          </div>
+          <div class="cny-proof-card cny-placeholder">
+            <small>Need Asset</small>
+            <h3>03 / 证据</h3>
+            <p>这里适合补一张数据/业务目标/用户路径推导图，能把“为什么这样做”讲得更有份量。</p>
+          </div>
+        </section>
+
+        <section class="klook-slider" aria-label="Initial ideation media rail">
+          <div class="klook-slider__track">
+            <div class="klook-slider__copy">
+              <h2>Initial Ideation</h2>
+              <p>Loose routes, ticket moments, UI fragments, and visual tests sit on one tactile rail so the case study feels explored instead of simply listed.</p>
+            </div>
+            <button class="klook-shot" type="button" data-klook-tile="0" aria-label="Open Klook media 1" style="--shot: url('./assets/projects/klook/letter-unseen-01.png'); --tx: 0; --ty: -1.4rem; --tz: 20px; --ry: -8deg; --rz: -2deg;"></button>
+            <button class="klook-shot" type="button" data-klook-tile="1" aria-label="Open Klook media 2" style="--shot: url('./assets/projects/klook/letter-unseen-02.png'); --tx: 0; --ty: 2.4rem; --tz: 0px; --ry: 7deg; --rz: 1.5deg;"></button>
+            <button class="klook-shot" type="button" data-klook-tile="2" aria-label="Open Klook media 3" style="--shot: url('./assets/projects/klook/letter-unseen-03.png'); --tx: 0; --ty: -0.4rem; --tz: 34px; --ry: -5deg; --rz: 2deg;"></button>
+            <button class="klook-shot" type="button" data-klook-tile="3" aria-label="Open Klook media 4" style="--shot: url('./assets/projects/klook/letter-unseen-04.png'); --tx: 0; --ty: 2rem; --tz: -12px; --ry: 9deg; --rz: -1deg;"></button>
+            <button class="klook-shot" type="button" data-klook-tile="4" aria-label="Open Klook media 5" style="--shot: url('./assets/projects/klook/letter-unseen-05.png'); --tx: 0; --ty: -1rem; --tz: 18px; --ry: -6deg; --rz: 1deg;"></button>
+          </div>
+        </section>
+
+        <section class="klook-scroll-card" aria-label="Klook media chapter 1" data-case-media="hero">
+          <div class="klook-scroll-card__media" style="--shot: url('./assets/projects/klook/letter-unseen-02.png');"></div>
+        </section>
+
+        <section class="cny-making-section cny-only" aria-label="CNY IP setting and figurine production">
+          <div class="cny-making-copy">
+            <span>IP Setting</span>
+            <h2 class="cny-making-title--ip" aria-label="Loong IP from character to reward.">
+              <span class="cny-title-line cny-title-line--hero">Loong IP</span>
+              <span class="cny-title-line cny-title-line--connector">from</span>
+              <span class="cny-title-line cny-title-line--subject">character</span>
+              <span class="cny-title-line cny-title-line--outcome">to reward.</span>
+            </h2>
+            <p>角色先作为整套活动的情绪锚点出现，再被拆到线稿、色稿、成品和卡片里，最后落到手办包装和奖励物件上。</p>
+          </div>
+          <div class="cny-making-visual">
+            <figure class="cny-role-card cny-role-card--full">
+              <img src="./assets/projects/the-symphony-of-vines/cny-role-setting-full.webp" alt="龙年 CNY 角色设定整图" loading="lazy" />
+              <figcaption>01 / Character Sheet</figcaption>
+            </figure>
+            <div class="cny-stage-strip" aria-label="Figurine line color final comparison">
+              <figure class="cny-stage-card cny-stage-card--dark">
+                <img src="./assets/projects/the-symphony-of-vines/cny-ip-line-stage.webp" alt="手办线稿" loading="lazy" />
+                <figcaption>02 / Line</figcaption>
+              </figure>
+              <figure class="cny-stage-card cny-stage-card--dark">
+                <img src="./assets/projects/the-symphony-of-vines/cny-ip-color-stage.webp" alt="手办色稿" loading="lazy" />
+                <figcaption>03 / Color</figcaption>
+              </figure>
+              <figure class="cny-stage-card">
+                <img src="./assets/projects/the-symphony-of-vines/cny-ip-final-stage.webp" alt="手办成品" loading="lazy" />
+                <figcaption>04 / Final</figcaption>
+              </figure>
+            </div>
+            <figure class="cny-showcase-card cny-showcase-card--figure">
+              <img src="./assets/projects/the-symphony-of-vines/cny-ip-package-new.webp" alt="手办包装效果展示" loading="lazy" />
+              <div class="cny-showcase-card__copy">
+                <h3>Reward object, not decoration.</h3>
+                <p>手办和卡片负责把 IP 从屏幕里的活动角色，转成用户能理解、能领取、能传播的实体记忆点。</p>
+              </div>
+              <figcaption>Figure Output</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="klook-scroll-card klook-scroll-card--split" data-case-media="process">
+          <div class="klook-section-copy">
+            <h2>Map Logic <em>from route to world.</em></h2>
+            <p>把旧式棋盘路径升级成全景会场：用户仍然能快速理解路线，但页面可以容纳品牌露出、奖励节点、NPC 和更复杂的互动层级。</p>
+            <ol class="cny-process-steps cny-only" aria-label="Map production stages">
+              <li>
+                <strong>01</strong>
+                <span class="cny-step-copy">
+                  <del>旧方案只解决“走格子”，沉浸感和节日价值感不足。</del>
+                  <span class="cny-step-new">旧问题：棋盘路径只能说明任务怎么走，却承载不了品牌会场、奖励关系和节日氛围，用户缺少继续探索的理由。</span>
+                </span>
+              </li>
+              <li>
+                <strong>02</strong>
+                <span class="cny-step-copy">
+                  <del>新方案把路径、奖励、品牌商铺和角色引导放进同一张地图。</del>
+                  <span class="cny-step-new">新方案：把路径节点、商铺露出、角色引导和奖励反馈合进全景地图，让用户仍按路线推进，但感知从“走格子”变成“逛会场”。</span>
+                </span>
+              </li>
+              <li>
+                <strong>03</strong>
+                <span class="cny-step-copy">
+                  <del>线稿阶段先做信息分层，保证复杂场景压到手机后仍然能读。</del>
+                  <span class="cny-step-new">结果：地图成为活动信息总控，既能引导任务和转化，也能放大品牌露出；复杂场景压到手机视窗后仍然保持可读。</span>
+                </span>
+              </li>
+            </ol>
+          </div>
+          <div class="klook-scroll-card__media" style="--shot: url('./assets/projects/klook/letter-unseen-03.png');"></div>
+          <div class="cny-process-collage cny-map-logic-board cny-only" aria-label="CNY map logic comparison">
+            <figure class="cny-map-logic-card">
+              <img src="./assets/projects/the-symphony-of-vines/cny-map-logic-old-fill.webp" alt="旧式棋盘路径活动界面" loading="lazy" />
+              <figcaption>
+                <strong>旧式棋盘路径</strong>
+                <span>局限在单一前进机制，活动价值、品牌信息和场景情绪都很难充分展开。</span>
+              </figcaption>
+            </figure>
+            <figure class="cny-map-logic-card">
+              <img src="./assets/projects/the-symphony-of-vines/cny-map-logic-live-fill.webp" alt="升级后的沉浸式地图活动界面" loading="lazy" />
+              <figcaption>
+                <strong>全景会场地图</strong>
+                <span>把路径、奖励和商业节点组织成可探索场景，增强沉浸感、层次感和扩展性。</span>
+              </figcaption>
+            </figure>
+            <figure class="cny-map-logic-card">
+              <img src="./assets/projects/the-symphony-of-vines/cny-map-logic-wire.webp" alt="地图线稿中的信息分层设计" loading="lazy" />
+              <figcaption>
+                <strong>信息分层验证</strong>
+                <span>在线稿阶段预留 NPC、奖励、路径和手机视窗，先解决复杂场景的可读性。</span>
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="cny-map-setting-section cny-only" aria-label="CNY map setting evidence">
+          <div class="cny-chapter-head">
+            <h2>Map Setting <em>scene proof.</em></h2>
+            <p>第二章补地图设定本身：先看完整预览，再把道路、龙门和场景细节拆到线稿层，说明这张地图不是单张氛围图，而是可被手机视窗、任务节点和奖励路径反复验证的系统。</p>
+          </div>
+          <div class="cny-map-setting-grid">
+            <figure class="cny-setting-card cny-setting-card--wide">
+              <img src="./assets/projects/the-symphony-of-vines/cny-map-preview.webp" alt="全景式地图预览" loading="lazy" />
+              <figcaption>01 / Preview Map</figcaption>
+            </figure>
+            <figure class="cny-setting-card">
+              <img src="./assets/projects/the-symphony-of-vines/cny-scene-line-01.webp" alt="道路与龙门线稿设定" loading="lazy" />
+              <figcaption>02 / Route & Gate Sketch</figcaption>
+            </figure>
+            <figure class="cny-setting-card">
+              <img src="./assets/projects/the-symphony-of-vines/cny-scene-line-02.webp" alt="场景细节线稿设定" loading="lazy" />
+              <figcaption>03 / Scene Detail Sketch</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="klook-duo" aria-label="Klook media pair">
+          <div class="klook-scroll-card" data-case-media="venue">
+            <div class="klook-scroll-card__media" style="--shot: url('./assets/projects/klook/letter-unseen-04.png');"></div>
+          </div>
+          <div class="klook-scroll-card" data-case-media="extension">
+            <div class="klook-scroll-card__media" style="--shot: url('./assets/projects/klook/letter-unseen-05.png');"></div>
+          </div>
+        </section>
+
+        <section class="cny-gate-gradient cny-only" aria-label="Dragon gate gradient system">
+          <div class="cny-gate-gradient-copy">
+            <h2>Dragon Gate <em>Gradient.</em></h2>
+            <p>五张地图需要一眼属于同一个玩法，又不能只是换背景。龙门被拆成可复用的入口母题，再通过结构复杂度、色彩强度和奖励感逐级升级。</p>
+            <ol class="cny-gate-timeline" aria-label="Dragon gate level progression">
+              <li><strong>WHY</strong><span><b>避免五张散图</b>同一套龙门结构保证用户每进一关都知道“这里是任务入口”。</span></li>
+              <li><strong>GOAL</strong><span><b>制造进度感</b>从轻量门型到完整建筑，让用户感觉难度、奖励和主会场价值在升级。</span></li>
+              <li><strong>METHOD</strong><span><b>结构不变，表现递进</b>门型、台阶和圆形动线保持一致，材质、装饰和光效逐层加码。</span></li>
+              <li><strong>RESULT</strong><span><b>可复用的关卡资产</b>龙门同时承担地图识别、奖励引导和最终分享画面的视觉锚点。</span></li>
+            </ol>
+          </div>
+          <div class="cny-gate-visual">
+            <figure class="cny-gate-hero-board">
+              <img src="./assets/projects/the-symphony-of-vines/cny-gate-gradient-visual.webp" alt="五级龙门设定从线稿到上色的递进对比" loading="lazy" />
+              <figcaption>Same Structure / 5 Escalations</figcaption>
+            </figure>
+            <div class="cny-gate-levels cny-gate-levels--finished" aria-label="Dragon gate five finished levels">
+              <figure class="cny-gate-level">
+                <img src="./assets/projects/the-symphony-of-vines/cny-gate-stage-01.webp" alt="第一关基础入口龙门成品" loading="lazy" />
+                <figcaption>01</figcaption>
+              </figure>
+              <figure class="cny-gate-level">
+                <img src="./assets/projects/the-symphony-of-vines/cny-gate-stage-02.webp" alt="第二关地域嫁接龙门成品" loading="lazy" />
+                <figcaption>02</figcaption>
+              </figure>
+              <figure class="cny-gate-level">
+                <img src="./assets/projects/the-symphony-of-vines/cny-gate-stage-03.webp" alt="第三关氛围升级龙门成品" loading="lazy" />
+                <figcaption>03</figcaption>
+              </figure>
+              <figure class="cny-gate-level">
+                <img src="./assets/projects/the-symphony-of-vines/cny-gate-stage-04.webp" alt="第四关庆典强化龙门成品" loading="lazy" />
+                <figcaption>04</figcaption>
+              </figure>
+              <figure class="cny-gate-level">
+                <img src="./assets/projects/the-symphony-of-vines/cny-gate-stage-05.webp" alt="第五关奖励高光龙门成品" loading="lazy" />
+                <figcaption>05</figcaption>
+              </figure>
+            </div>
+          </div>
+        </section>
+
+        <section class="cny-map-showcase cny-only" aria-label="CNY five map venue rail">
+          <div class="cny-map-showcase__head">
+            <h2>Five Map Venues <em>one festival route.</em></h2>
+            <p>五张地图单独释放出来横向浏览：地域建筑、路径长度、奖励节点和节日情绪都各自成立，同时保持同一套龙年会场规则。</p>
+          </div>
+          <div class="cny-map-drag-shell" data-cny-map-slider>
+            <div class="cny-map-rail" aria-label="CNY map region gallery">
+              <button class="cny-map-card" type="button" data-cny-tile="map-1" aria-label="Open Zhongyuan town map" style="--shot: url('./assets/projects/the-symphony-of-vines/Frame 2090059723.png');">
+                <img src="./assets/projects/the-symphony-of-vines/Frame 2090059723.png" alt="中原古镇地图设计" loading="lazy" />
+                <b class="cny-map-card__title"><small>Level 01</small><strong>第一关 / 中原古镇</strong></b>
+                <span>01 / 中原古镇</span>
+              </button>
+              <button class="cny-map-card" type="button" data-cny-tile="map-2" aria-label="Open Jiangnan map" style="--shot: url('./assets/projects/the-symphony-of-vines/Frame 2090059722.png');">
+                <img src="./assets/projects/the-symphony-of-vines/Frame 2090059722.png" alt="江南水乡地图设计" loading="lazy" />
+                <b class="cny-map-card__title"><small>Level 02</small><strong>第二关 / 江南水乡</strong></b>
+                <span>02 / 江南水乡</span>
+              </button>
+              <button class="cny-map-card" type="button" data-cny-tile="map-3" aria-label="Open ancient island map" style="--shot: url('./assets/projects/the-symphony-of-vines/Frame 2090059721.png');">
+                <img src="./assets/projects/the-symphony-of-vines/Frame 2090059721.png" alt="古侠仙岛地图设计" loading="lazy" />
+                <b class="cny-map-card__title"><small>Level 03</small><strong>第三关 / 古侠仙岛</strong></b>
+                <span>03 / 古侠仙岛</span>
+              </button>
+              <button class="cny-map-card" type="button" data-cny-tile="map-4" aria-label="Open Western scenery map" style="--shot: url('./assets/projects/the-symphony-of-vines/Frame 2090059720.png');">
+                <img src="./assets/projects/the-symphony-of-vines/Frame 2090059720.png" alt="西部风光地图设计" loading="lazy" />
+                <b class="cny-map-card__title"><small>Level 04</small><strong>第四关 / 西部风光</strong></b>
+                <span>04 / 西部风光</span>
+              </button>
+              <button class="cny-map-card" type="button" data-cny-tile="map-5" aria-label="Open spring lantern map" style="--shot: url('./assets/projects/the-symphony-of-vines/Frame 2090059719.png');">
+                <img src="./assets/projects/the-symphony-of-vines/Frame 2090059719.png" alt="新春灯会地图设计" loading="lazy" />
+                <b class="cny-map-card__title"><small>Level 05</small><strong>第五关 / 新春灯会</strong></b>
+                <span>05 / 新春灯会</span>
+              </button>
+            </div>
+          </div>
+          <figure class="cny-live-effect" aria-label="CNY online effect screens">
+            <div class="cny-live-effect__copy">
+              <div>
+                <span>线上效果</span>
+                <h3>五张地图最终进入同一个活动界面</h3>
+              </div>
+              <p>线上效果图放在地图模块下方，作为从“地图设定”到“真实活动页面”的落地证据。</p>
+            </div>
+            <img src="./assets/projects/the-symphony-of-vines/cny-live-effect-hq.webp" alt="2024 CNY 线上活动页面效果" loading="lazy" />
+          </figure>
+        </section>
+
+        <section class="cny-making-section cny-only" aria-label="CNY poster production">
+          <div class="cny-making-copy">
+            <span>Poster Module</span>
+            <h2>Poster System <em>line to final.</em></h2>
+            <p>海报单独拿出来讲：先看线稿和旧方案为什么不够强，再看色彩、主体和信息层级如何收敛到最终分享海报，最后展示完整海报组。</p>
+          </div>
+          <div class="cny-making-visual">
+            <div class="cny-stage-strip cny-stage-strip--poster" aria-label="Poster line and final comparison">
+              <figure class="cny-stage-card">
+                <img src="./assets/projects/the-symphony-of-vines/cny-poster-before-after.webp" alt="海报新旧对比" loading="lazy" />
+                <figcaption>01 / Line vs Final</figcaption>
+              </figure>
+              <figure class="cny-stage-card">
+                <img src="./assets/projects/the-symphony-of-vines/cny-poster-process-compare.webp" alt="海报过程对比" loading="lazy" />
+                <figcaption>02 / Process Compare</figcaption>
+              </figure>
+            </div>
+            <div class="cny-poster-display-grid" aria-label="Poster display and remaining outputs">
+              <figure class="cny-showcase-card">
+                <img src="./assets/projects/the-symphony-of-vines/cny-poster-display.webp" alt="海报展示合集" loading="lazy" />
+                <div class="cny-showcase-card__copy">
+                  <h3>分享出口也要成体系</h3>
+                  <p>把右侧剩余海报集中展示，说明它们不是单张图，而是一组可延展的领奖和分享出口。</p>
+                </div>
+                <figcaption>海报展示</figcaption>
+              </figure>
+              <figure class="cny-showcase-card">
+                <img src="./assets/projects/the-symphony-of-vines/cny-extension-ending.webp" alt="龙年顺遂收尾视觉" loading="lazy" />
+                <div class="cny-showcase-card__copy">
+                  <h3>收尾画面负责留下记忆</h3>
+                  <p>收尾页把活动奖励、品牌符号和龙年祝福收束到一个可截图传播的结束画面。</p>
+                </div>
+                <figcaption>收尾视觉</figcaption>
+              </figure>
+            </div>
+          </div>
+        </section>
+
+        <section class="cny-principle-grid cny-only" aria-label="CNY system principles">
+          <div class="cny-principle-card">
+            <h3>IP</h3>
+            <p>主 IP 承担春节亲和力，表情、动作、配饰负责把不同物料拉回同一世界观。</p>
+          </div>
+          <div class="cny-principle-card">
+            <h3>Map</h3>
+            <p>五张长地图不是五张插画，而是五条路径：建筑、节点、奖励和地域氛围同步推进。</p>
+          </div>
+          <div class="cny-principle-card">
+            <h3>Mobile</h3>
+            <p>移动端页面要把地图探索压缩到更短路径里，所以保留强主视觉和明确入口层级。</p>
+          </div>
+          <div class="cny-principle-card cny-placeholder">
+            <small>Need Asset</small>
+            <h3>Data</h3>
+            <p>这里可以补最终数据、AB 对比或上线截图，让结果区从“展示”变成“闭环”。</p>
+          </div>
+        </section>
+
+        <section class="klook-awards" aria-label="Klook process table">
+          <h2 class="klook-awards__title">Project<br /><em>System</em></h2>
+          <div>
+            <div class="klook-award-row"><span>01 / Scroll</span><span>Perspective media reveal</span></div>
+            <div class="klook-award-row"><span>02 / Gallery</span><span>Drag rail + zoom viewer</span></div>
+            <div class="klook-award-row"><span>03 / UI</span><span>Light paper contrast</span></div>
+            <div class="klook-award-row"><span>04 / Next</span><span>Forward project route</span></div>
+          </div>
+        </section>
+
+        <section class="klook-next" aria-label="Next project transition" data-route-transition data-next-project="rspca-animal-futures">
+          <div class="klook-route-pin">
+            <div class="klook-route-preview">
+              <div class="klook-route-preview__mark" aria-hidden="true"></div>
+              <div class="klook-route-preview__copy">
+                <span class="klook-route-preview__eyebrow">Next</span>
+                <span class="klook-route-preview__title" data-case-next-title>Animal Futures</span>
+                <small>(Keep scrolling)</small>
+                <p>Entering next project</p>
+              </div>
+            </div>
+            <div class="klook-curtain" aria-hidden="true">
+              <div class="klook-curtain__copy">
+                <h2 data-case-curtain-title><em>Next</em>Animal Futures</h2>
+                <small>(Loading)</small>
+                <p>Entering next project</p>
+              </div>
+              <div class="klook-curtain__media"></div>
+            </div>
+          </div>
+        </section>
+      </article>
+
+      <article class="cny-case" aria-label="龙年 CNY case study">
+        <section class="cny-hero" aria-label="龙年 CNY hero">
+          <p class="cny-kicker">2024 / 龙年 CNY</p>
+          <h1 class="cny-title">
+            <span>PROJECTS/<br />CNY</span>
+            <em>IP &amp; MAP<br />SYSTEM</em>
+          </h1>
+          <button class="cny-hero-media cny-reveal" type="button" data-cny-tile="0" aria-label="Open 2024 CNY hero visual" style="--shot: url('./assets/projects/the-symphony-of-vines/Group 2090057975.png');"></button>
+          <div class="cny-hero-panel cny-reveal">
+            <p>把龙年预热活动从分散物料整理成一套可延展的 IP、地图会场和移动端视觉系统。</p>
+            <div class="cny-role-list" aria-label="Role summary">
+              <span><strong>Role</strong><em>创意主 R / 视觉定调</em></span>
+              <span><strong>Scope</strong><em>IP / Map / Posters / Mobile</em></span>
+              <span><strong>Year</strong><em>2024 龙年</em></span>
+            </div>
+          </div>
+        </section>
+
+        <section class="cny-section cny-overview cny-reveal" aria-label="Project overview">
+          <div>
+            <p class="cny-section-label">Project Overview</p>
+            <h2 class="cny-section-title">From campaign assets <em>to a reusable festival system.</em></h2>
+            <p class="cny-overview-copy">项目目标不是只完成一组春节视觉，而是在有限时间里统一“龙年 IP、五个主题会场、分享海报、挂件与移动端落地”。我负责从创意方向、视觉风格到最终输出质量的整体把控。</p>
+          </div>
+          <div class="cny-meta-grid">
+            <div class="cny-meta-card">
+              <h3>When I joined</h3>
+              <p>CNY 预热期，视觉方向需要快速从概念发散进入可落地系统。</p>
+            </div>
+            <div class="cny-meta-card">
+              <h3>Business goal</h3>
+              <p>让预热会场不只是入口集合，而是有探索感、记忆点和分享动机。</p>
+            </div>
+            <div class="cny-meta-card">
+              <h3>Core tension</h3>
+              <p>五个地域主题要明显不同，但整套活动又必须一眼属于同一个龙年世界。</p>
+            </div>
+            <div class="cny-meta-card">
+              <h3>My role</h3>
+              <p>对接创意需求、定调 IP 与地图风格、整合输出、视觉后期兜底。</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="cny-section cny-reveal" aria-label="Strategy pivot">
+          <p class="cny-section-label">Strategy Pivot</p>
+          <h2 class="cny-section-title">The hard choice was not style. <em>It was structure.</em></h2>
+          <div class="cny-decision">
+            <p>普通活动页会把信息平铺给用户看；这次我把会场做成“可以走进去的地图”：五个地域关卡对应五种建筑、色彩和路径节奏，用户不是扫入口，而是在春节世界里移动。</p>
+          </div>
+          <div class="cny-strategy-grid cny-media-pair">
+            <div class="cny-strategy-card">
+              <h3>V1 / Asset thinking</h3>
+              <p>每张海报、每个会场各自成立，但上线后容易变成散装物料，后续加内容也需要重复重做。</p>
+            </div>
+            <div class="cny-strategy-card">
+              <h3>V2 / System thinking</h3>
+              <p>先定义 IP 规则、地图规则、颜色和地域关卡，再把物料作为系统的不同出口。</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="cny-section cny-reveal" aria-label="IP system">
+          <p class="cny-section-label">IP System</p>
+          <h2 class="cny-section-title">Series consistency first, <em>then character variation.</em></h2>
+          <div class="cny-media-pair">
+            <button class="cny-image-button cny-image-button--system" type="button" data-cny-tile="1" aria-label="Open IP design sheet" style="--shot: url('./assets/projects/the-symphony-of-vines/角色设定.png');"></button>
+            <button class="cny-image-button cny-image-button--phones" type="button" data-cny-tile="2" aria-label="Open character process" style="--shot: url('./assets/projects/the-symphony-of-vines/cny-ip-line-stage.webp');"></button>
+          </div>
+          <div class="cny-system-grid">
+            <div class="cny-system-card">
+              <h3>Color</h3>
+              <p>用春节红、金色、粉色和地域色建立统一但不单调的节日情绪。</p>
+            </div>
+            <div class="cny-system-card">
+              <h3>Pattern</h3>
+              <p>纹样、符号和配饰负责把角色、地图、海报拉回同一个世界观。</p>
+            </div>
+            <div class="cny-system-card">
+              <h3>Expression</h3>
+              <p>通过五官、动作和表情差异，让 IP 在不同场景里有可爱的叙事弹性。</p>
+            </div>
+            <div class="cny-system-card">
+              <h3>Output</h3>
+              <p>从主 IP 到挂件、分享海报、移动端页面，规则先行，输出才不会散。</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="cny-section cny-section--wide cny-reveal" aria-label="Map system">
+          <p class="cny-section-label">Map System</p>
+          <h2 class="cny-section-title">Five regions, five moods, <em>one panoramic route.</em></h2>
+          <div class="cny-map-rail" aria-label="CNY map region gallery">
+            <button class="cny-map-card" type="button" data-cny-tile="3" aria-label="Open Zhongyuan town map" style="--shot: url('./assets/projects/the-symphony-of-vines/Frame 2090059719.png');">
+              <img src="./assets/projects/the-symphony-of-vines/Frame 2090059719.png" alt="中原古镇地图设计" loading="lazy" />
+              <span>01 / 中原古镇</span>
+            </button>
+            <button class="cny-map-card" type="button" data-cny-tile="4" aria-label="Open Jiangnan map" style="--shot: url('./assets/projects/the-symphony-of-vines/Frame 2090059720.png');">
+              <img src="./assets/projects/the-symphony-of-vines/Frame 2090059720.png" alt="江南水乡地图设计" loading="lazy" />
+              <span>02 / 江南水乡</span>
+            </button>
+            <button class="cny-map-card" type="button" data-cny-tile="5" aria-label="Open Penglai island map" style="--shot: url('./assets/projects/the-symphony-of-vines/Frame 2090059721.png');">
+              <img src="./assets/projects/the-symphony-of-vines/Frame 2090059721.png" alt="蓬莱岛景地图设计" loading="lazy" />
+              <span>03 / 蓬莱岛景</span>
+            </button>
+            <button class="cny-map-card" type="button" data-cny-tile="6" aria-label="Open Western scenery map" style="--shot: url('./assets/projects/the-symphony-of-vines/Frame 2090059722.png');">
+              <img src="./assets/projects/the-symphony-of-vines/Frame 2090059722.png" alt="西部风光地图设计" loading="lazy" />
+              <span>04 / 西部风光</span>
+            </button>
+            <button class="cny-map-card" type="button" data-cny-tile="7" aria-label="Open lantern carnival map" style="--shot: url('./assets/projects/the-symphony-of-vines/Frame 2090059723.png');">
+              <img src="./assets/projects/the-symphony-of-vines/Frame 2090059723.png" alt="灯会嘉年华地图设计" loading="lazy" />
+              <span>05 / 灯会嘉年华</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="cny-section cny-process cny-reveal" aria-label="Design process">
+          <div class="cny-process-copy">
+            <p class="cny-section-label">Design Process</p>
+            <h2 class="cny-section-title">Path, scale, color, <em>then final scene.</em></h2>
+            <p>全景式地图的难点是步数由低到高，路径变长，画幅变大，人力和时间成本同步放大。所以我把设计拆成路径标准、建筑结构、场景元素、配色体系四个层级，再进入线稿和成稿。</p>
+            <div class="cny-process-list">
+              <span><strong>01</strong><em>路径与步数规划</em></span>
+              <span><strong>02</strong><em>地域建筑风格研究</em></span>
+              <span><strong>03</strong><em>线稿、上色、最终合成</em></span>
+            </div>
+          </div>
+          <button class="cny-process-board" type="button" data-cny-tile="8" aria-label="Open full process board" style="--shot: url('./assets/projects/the-symphony-of-vines/Frame 2090059726.png');">
+            <img src="./assets/projects/the-symphony-of-vines/Frame 2090059726.png" alt="2024 CNY 地图设计过程长图" loading="lazy" />
+          </button>
+        </section>
+
+        <section class="cny-section cny-reveal" aria-label="Project results">
+          <p class="cny-section-label">Result</p>
+          <h2 class="cny-section-title">The system shipped as <em>campaign memory.</em></h2>
+          <div class="cny-result-grid">
+            <div class="cny-result-card">
+              <strong>50+</strong>
+              <h3>Creative outputs</h3>
+              <p>覆盖 IP 形象、预热地图、分享海报、挂件与移动端效果展示。</p>
+            </div>
+            <div class="cny-result-card">
+              <strong>4.3+</strong>
+              <h3>User feedback</h3>
+              <p>IP 喜爱度和地图设计评价均保持高分反馈。</p>
+            </div>
+            <div class="cny-result-card">
+              <strong>神笔马良奖</strong>
+              <h3>Internal recognition</h3>
+              <p>作为优秀项目沉淀，证明这套系统不只是好看，而是能被复用和传播。</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="cny-final-output cny-only" aria-label="CNY final output wall">
+          <div class="cny-final-output__copy">
+            <span>Final Output Wall</span>
+            <h2>Many exits, <em>one campaign.</em></h2>
+            <p>把活动主页、地图节点、领奖海报和结束页放到最后收尾：前面讲规则和制作过程，这里集中证明整套系统能落到真实活动链路里。</p>
+          </div>
+          <figure class="cny-output-wall">
+            <img src="./assets/projects/the-symphony-of-vines/cny-output-final-wall.webp" alt="CNY 活动主页与海报输出墙" loading="lazy" />
+            <figcaption>Campaign Output Wall</figcaption>
+          </figure>
+        </section>
+
+        <a class="cny-next cny-reveal" data-fx-magnetic="12" href="./project.html?project=klook" aria-label="Open next project Klook" data-fx-link>
+          <span>Next project</span>
+          <strong>Klook</strong>
+        </a>
+      </article>
+    </main>
+
+    <div class="klook-route-cover" aria-hidden="true"></div>
+
+    <section class="case-lightbox" aria-hidden="true" aria-label="Project media viewer">
+      <div class="case-lightbox__top">
+        <p class="section-label" data-lightbox-label>Media 01</p>
+        <button class="case-lightbox__close" type="button">Close</button>
+      </div>
+      <div class="case-lightbox__media" aria-hidden="true"></div>
+      <div class="case-lightbox__controls">
+        <button class="case-lightbox__prev" type="button">Prev</button>
+        <button class="case-lightbox__zoom-out" type="button">-</button>
+        <button class="case-lightbox__zoom-in" type="button">+</button>
+        <button class="case-lightbox__next" type="button">Next</button>
+      </div>
+    </section>
+
+    <aside class="menu" id="siteMenu" aria-hidden="true">
+      <button class="menu-close" type="button" aria-label="Close Menu">×</button>
+      <div class="menu-inner">
+        <nav class="menu-nav" aria-label="Menu">
+          <a href="./home.html?skipIntro=1" data-fx-link><small>01</small><span>Index</span></a>
+          <a href="./projects.html?skipIntro=1" data-fx-link><small>02</small><span>Projects</span></a>
+          <a href="./about.html" data-fx-link><small>03</small><span>About</span></a>
+          <a href="./services.html" data-fx-link><small>04</small><span>Services</span></a>
+          <a href="./contact.html?skipIntro=1" data-fx-link><small>05</small><span>Contact</span></a>
+          <a href="./works.html" data-fx-link><small>06</small><span>World</span></a>
+          <a href="./ip-mask-demo.html?v=skin-ui-088" data-fx-link><small>07</small><span>IP Doorway</span></a>
+          <a href="./pet-demo.html" data-fx-link><small>08</small><span>Pet</span></a>
+        </nav>
+        <footer class="menu-footer">
+          <div>
+            <a href="mailto:1285293434@qq.com">1285293434@qq.com</a>
+            <a href="mailto:zedd18225055550@gmail.com">zedd18225055550@gmail.com</a>
+          </div>
+          <div>
+            <a href="https://www.xiaohongshu.com/user/profile/608ce124000000000100805f?mini=1&amp;tab=note" target="_blank" rel="noreferrer">Xiaohongshu</a>
+            <a href="./about.html" data-fx-link>About</a>
+            <a href="./ip-mask-demo.html?v=skin-ui-088" data-fx-link>IP Doorway</a>
+          </div>
+        </footer>
+      </div>
+    </aside>
+
+    <script>
+      const projects = {
+        "the-symphony-of-vines": {
+          title: "龙年 CNY",
+          kind: "IP / 地图 / 活动视觉",
+          summary: "2024 龙年 CNY 预热会场项目，把龙年 IP、五个主题地图、分享海报、挂件和移动端页面整理成一套可延展的节日视觉系统。",
+          media: "url('./assets/projects/the-symphony-of-vines/Group 2090057975.png')",
+          case: {
+            kicker: "2024 / 龙年 CNY",
+            titleTop: "<small>PROJECTS/</small><strong>龙年 CNY</strong>",
+            titleBottom: "<small>IP / 地图</small><strong>活动视觉系统</strong>",
+            hero: "url('./assets/projects/the-symphony-of-vines/Group 2090057975.png')",
+            services: "创意方向<br />IP 角色设定<br />地图会场系统<br />活动延展",
+            date: "2024 龙年",
+            client: "快手 CNY 预热会场",
+            location: "Shanghai / Online",
+            sliderTitle: "设计方向",
+            sliderCopy: "先定活动策略，再把 IP、地图、移动端和分享物料放进同一套视觉规则里。这样页面不是散素材，而是一个能被复用、能继续扩展的春节世界。",
+            shots: [
+              "url('./assets/projects/the-symphony-of-vines/cny-role-setting-full.webp')",
+              "url('./assets/projects/the-symphony-of-vines/cny-map-logic-board.webp')",
+              "url('./assets/projects/the-symphony-of-vines/cny-map-preview.webp')",
+              "url('./assets/projects/the-symphony-of-vines/cny-gate-gradient-board.webp')",
+              "url('./assets/projects/the-symphony-of-vines/Group 2090057975.png')",
+            ],
+            shotPositions: ["left center", "center", "center", "center", "center"],
+            shotSizes: ["contain", "cover", "cover", "cover", "cover"],
+            shotLabels: ["01 / IP Setting", "02 / Map Logic", "03 / Scene Setting", "04 / Dragon Gate", "05 / Main Venue"],
+            scroll: [
+              "url('./assets/projects/the-symphony-of-vines/cny-ip-package-new.webp')",
+              "url('./assets/projects/the-symphony-of-vines/Frame 2090059726.png')",
+              "url('./assets/projects/the-symphony-of-vines/Frame 2090059727.png')",
+              "url('./assets/projects/the-symphony-of-vines/Frame 2090059728.png')",
+            ],
+            splitTitle: "地图逻辑",
+            splitCopy: "从旧式棋盘路径升级到全景式会场地图：同样是走任务，但新方案能同时承载沉浸感、层次感、品牌露出和复杂互动元素。",
+            awardsTitle: "项目<br /><em>价值系统</em>",
+            awards: [
+              ["01 / 角色", "建立龙年角色、纹样和配饰规则，支撑主视觉与多端延展。"],
+              ["02 / 地图", "五个地域主题各有差异，但路径节奏、节点结构和节日情绪保持统一。"],
+              ["03 / 产出", "覆盖预热会场、分享海报、挂件、移动端与衍生物料。"],
+              ["04 / 结果", "50+ 创意输出、4.3+ 用户反馈、神笔马良奖沉淀。"],
+            ],
+          },
+        },
+        klook: {
+          title: "Klook",
+          kind: "Interactive Quiz",
+          summary: "A bright interactive quiz framework with campaign energy, large product moments, and playful conversion-oriented feedback.",
+          media: "linear-gradient(100deg, #2a61ff, #4be1d1 28%, #f6d83f 48%, #ff7d18 72%, #ee4a18)",
+        },
+        "rspca-animal-futures": {
+          title: "RSPCA Animal Futures",
+          kind: "Interactive Learning Experience",
+          summary: "A friendly learning experience frame for playful education, rich visual modules, and shareable animal-future scenarios.",
+          media: "radial-gradient(circle at 58% 52%, #97d331 0 9%, transparent 10%), radial-gradient(circle at 50% 52%, #95c6cd 0 34%, transparent 35%), linear-gradient(160deg, #bce8e7, #73bcc4 58%, #d6e9e7)",
+        },
+        blueyard: {
+          title: "BlueYard",
+          kind: "Portfolio Website",
+          summary: "A restrained portfolio site frame with editorial structure, quiet interaction, and room for long-form venture storytelling.",
+          media: "linear-gradient(135deg, #e6eef1 0 42%, #0f1b24 42% 100%), radial-gradient(circle at 67% 55%, #70c6ff 0 8%, transparent 9%)",
+        },
+        cosmos: {
+          title: "Cosmos",
+          kind: "Marketing Website",
+          summary: "A saturated marketing site frame built around bold color, social discovery, and spatial product storytelling.",
+          media: "radial-gradient(circle at 20% 42%, #e7ff53 0 13%, transparent 14%), radial-gradient(circle at 70% 55%, #9cff52 0 16%, transparent 17%), linear-gradient(135deg, #141414, #3341c8)",
+        },
+        "25-residences": {
+          title: "25 Residences",
+          kind: "Portfolio Website",
+          summary: "A residential portfolio frame for quiet luxury, architectural rhythm, and image-led property storytelling.",
+          media: "linear-gradient(110deg, #f7e7d4, #f0b679 42%, #253040 43% 100%)",
+        },
+        organimo: {
+          title: "Organimo",
+          kind: "Immersive Digital, Ecommerce",
+          summary: "An ecommerce world frame with warm product storytelling, layered rituals, and immersive shopping cues.",
+          media: "radial-gradient(circle at 48% 48%, #1f1914 0 18%, transparent 19%), repeating-linear-gradient(90deg, #c9a37c 0 0.4rem, #f2dfbe 0.46rem 1.1rem)",
+        },
+        robco: {
+          title: "RobCo",
+          kind: "3D Motion",
+          summary: "A motion-led case study frame for a robotics brand world, with styleframes, cinematic loops, and modular 3D campaign assets.",
+          media: "radial-gradient(circle at 52% 48%, #ebe5db 0 18%, transparent 19%), linear-gradient(125deg, #3b3b3b, #9a8f7b, #171717)",
+        },
+        "hiring-calculator": {
+          title: "Hiring Calculator",
+          kind: "Gamified Digital Experience",
+          summary: "A gamified calculator experience that compares time, spend, and impact through a memorable interactive product story.",
+          media: "linear-gradient(135deg, #1b1b1b, #f6f1e8 50%, #191919 51%)",
+        },
+        "kikk-2024": {
+          title: "KIKK 2024",
+          kind: "Branding & Website",
+          summary: "A festival identity frame with bold graphics, digital systems, and high-energy event storytelling.",
+          media: "linear-gradient(135deg, #ff5c2b, #e6d44d 45%, #212121 46% 100%)",
+        },
+        "nikolas-type": {
+          title: "Nikolas Type",
+          kind: "Website",
+          summary: "A type-led web frame with elegant specimens, motion details, and refined typographic browsing.",
+          media: "radial-gradient(circle at 50% 24%, #f4efe4 0 16%, transparent 17%), repeating-linear-gradient(100deg, #222 0 0.5rem, #e6d9c2 0.56rem 0.86rem)",
+        },
+        "seascape-survey": {
+          title: "Seascape Survey",
+          kind: "Brand, Promotional Website, WebGL",
+          summary: "An experimental WebGL frame for ocean research, abstract simulation, and atmospheric campaign pages.",
+          media: "radial-gradient(circle at 48% 49%, #d7d3c6 0 19%, transparent 20%), radial-gradient(circle at 50% 50%, transparent 0 34%, #181818 35% 36%, transparent 37%), linear-gradient(135deg, #9cc6cf, #e9dfd3)",
+        },
+        "cult-of-the-north": {
+          title: "Cult of the North",
+          kind: "Website",
+          summary: "A mythic web frame with rune-like texture, dramatic contrast, and cinematic editorial sections.",
+          media: "radial-gradient(circle at 50% 42%, #f3e7ce 0 17%, transparent 18%), repeating-conic-gradient(from 20deg, #121212 0 8deg, #8b753c 8deg 15deg, #f0d47f 15deg 22deg)",
+        },
+        crosswire: {
+          title: "Crosswire",
+          kind: "Brand, Promotional Website, WebGL",
+          summary: "A sharp WebGL case-study frame with identity, interactive storytelling, and high-contrast campaign visuals.",
+          media: "linear-gradient(135deg, #0e0f13, #334ad7 38%, #f76025 39% 42%, #ece1cf 43% 100%)",
+        },
+        "blue-marine": {
+          title: "Blue Marine",
+          kind: "Immersive Digital",
+          summary: "An immersive ocean-focused case study frame with campaign narrative, spatial media, and conservation storytelling.",
+          media: "radial-gradient(circle at 44% 48%, #7cc7dc 0 20%, transparent 21%), linear-gradient(140deg, #06283b, #2c677c 50%, #eef0dc)",
+        },
+        "quai-network": {
+          title: "Quai Network",
+          kind: "Immersive Digital, Brand",
+          summary: "A crypto-network brand frame with structured systems, dense digital scenes, and motion-friendly campaign assets.",
+          media: "repeating-linear-gradient(45deg, #202020 0 0.45rem, #e8e2ce 0.5rem 0.68rem), radial-gradient(circle at 70% 35%, #9cff52 0 13%, transparent 14%)",
+        },
+        "clou-architects": {
+          title: "CLOU Architects",
+          kind: "Digital",
+          summary: "An architecture studio frame with calm editorial pacing, modular case studies, and high-contrast image systems.",
+          media: "linear-gradient(90deg, #efe8dc 0 48%, #111 48% 52%, #efe8dc 52% 100%), linear-gradient(180deg, #cbd5d2, #f3e1cf)",
+        },
+      };
+
+      function titleFromKey(key) {
+        return String(key || "project")
+          .split("-")
+          .filter(Boolean)
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" ");
+      }
+
+      function createWorldProject(key) {
+        const title = titleFromKey(key);
+        const palettes = [
+          "radial-gradient(circle at 40% 48%, #9cff52 0 18%, transparent 19%), linear-gradient(135deg, #050505, #2748ff 48%, #9cff52)",
+          "linear-gradient(118deg, transparent 0 34%, rgba(255,255,255,.8) 35% 40%, transparent 41%), linear-gradient(135deg, #f1e8d7, #111 46%, #9cff52)",
+          "repeating-linear-gradient(90deg, rgba(255,255,255,.22) 0 .24rem, transparent .3rem .8rem), linear-gradient(135deg, #101010, #2b67ff 52%, #f2e9da)",
+          "radial-gradient(circle at 62% 38%, #ff8a43 0 18%, transparent 19%), radial-gradient(circle at 40% 62%, #9cff52 0 20%, transparent 21%), linear-gradient(135deg, #070707, #222)",
+        ];
+        const paletteIndex = Math.abs([...String(key)].reduce((total, char) => total + char.charCodeAt(0), 0)) % palettes.length;
+
+        return {
+          title,
+          kind: "World Gallery Entry",
+          summary: `${title} is a CHENNN World gallery entry routed from the infinite canvas, ready for final case-study copy, production media, credits, and next-project transitions.`,
+          media: palettes[paletteIndex],
+        };
+      }
+
+      const params = new URLSearchParams(window.location.search);
+      const currentKey = params.get("project") || "klook";
+      const current = projects[currentKey] || createWorldProject(currentKey);
+      const body = document.body;
+      const projectPage = document.querySelector(".project-page");
+      const isCnyCase = currentKey === "the-symphony-of-vines";
+      const isKlookCase = !isCnyCase;
+      body.classList.toggle("is-cny-case", isCnyCase);
+      body.classList.toggle("is-klook-case", isKlookCase);
+      projectPage?.classList.toggle("is-klook-template", isKlookCase || isCnyCase);
+      const handoffKey = "chennn-project-route-handoff";
+      try {
+        sessionStorage.removeItem(handoffKey);
+      } catch (error) {
+        /* noop */
+      }
+      const menuButton = document.querySelector("[data-menu-trigger]") || document.querySelector(".menu-btn");
+      const menuCloseButton = document.querySelector(".menu-close");
+      const menu = document.querySelector(".menu");
+      const titleTopEl = document.querySelector(".project-title-top");
+      const titleBottomEl = document.querySelector(".project-title-bottom");
+      const summaryEl = document.querySelector("[data-project-summary]");
+      const mediaEl = document.querySelector("[data-project-media]");
+      const caseKickerEl = document.querySelector("[data-case-kicker]");
+      const caseTitleTopEl = document.querySelector("[data-case-title-top]");
+      const caseTitleBottomEl = document.querySelector("[data-case-title-bottom]");
+      const caseHeroMediaEl = document.querySelector("[data-case-hero-media]");
+      const caseSummaryEl = document.querySelector("[data-case-summary]");
+      const caseServicesEl = document.querySelector("[data-case-services]");
+      const caseDateEl = document.querySelector("[data-case-date]");
+      const caseClientEl = document.querySelector("[data-case-client]");
+      const caseLocationEl = document.querySelector("[data-case-location]");
+      const caseNextTitleEl = document.querySelector("[data-case-next-title]");
+      const caseCurtainTitleEl = document.querySelector("[data-case-curtain-title]");
+      const caseSliderCopyEl = document.querySelector(".klook-slider__copy");
+      const caseScrollMedia = [...document.querySelectorAll(".klook-scroll-card__media")];
+      const caseRouteTransition = document.querySelector("[data-route-transition]");
+      const genericTiles = [...document.querySelectorAll("[data-tile]")];
+      const klookTiles = [...document.querySelectorAll("[data-klook-tile]")];
+      const cnyTiles = [...document.querySelectorAll(".klook-case [data-klook-tile], .klook-case [data-cny-tile]")];
+      const tiles = isCnyCase ? cnyTiles : isKlookCase ? klookTiles : genericTiles;
+      
+      // Update DOM with project data
+      if (titleTopEl) titleTopEl.innerHTML = `PROJECTS/<br/>${current.title}`;
+      if (titleBottomEl) titleBottomEl.innerHTML = `${current.kind}<br/><em>WEBSITE</em>`;
+      if (summaryEl) summaryEl.textContent = current.summary;
+      if (mediaEl) mediaEl.style.background = current.media;
+      const lightbox = document.querySelector(".case-lightbox");
+      const lightboxMedia = document.querySelector(".case-lightbox__media");
+      const lightboxLabel = document.querySelector("[data-lightbox-label]");
+      const lightboxClose = document.querySelector(".case-lightbox__close");
+      const lightboxPrev = document.querySelector(".case-lightbox__prev");
+      const lightboxNext = document.querySelector(".case-lightbox__next");
+      const lightboxZoomIn = document.querySelector(".case-lightbox__zoom-in");
+      const lightboxZoomOut = document.querySelector(".case-lightbox__zoom-out");
+      const lightboxState = {
+        index: 0,
+        scale: 1,
+        x: 0,
+        y: 0,
+        dragging: false,
+        startX: 0,
+        startY: 0,
+      };
+      let suppressKlookClick = false;
+      const clamp = (min, value, max) => Math.max(min, Math.min(value, max));
+
+      function tintMedia(base, index) {
+        const overlays = [
+          "linear-gradient(115deg, transparent 0 40%, rgba(255,255,255,.55) 40.5% 46%, transparent 46.5%)",
+          "radial-gradient(circle at 28% 38%, rgba(255,255,255,.58), transparent 28%)",
+          "repeating-linear-gradient(105deg, rgba(23,23,23,.18) 0 .4rem, transparent .45rem 1.1rem)",
+          "linear-gradient(135deg, rgba(255,78,27,.22), transparent 42%, rgba(38,102,255,.2))",
+        ];
+        return `${overlays[index % overlays.length]}, ${base}`;
+      }
+
+      function displayTitle(title) {
+        return String(title || "Project").toUpperCase();
+      }
+
+      function caseTitleHtml(title) {
+        return `PROJECTS/<br />${displayTitle(title)}`;
+      }
+
+      function caseKindHtml(kind) {
+        const words = String(kind || "Case Study").split(/\s+/).filter(Boolean);
+        if (words.length <= 1) return `${displayTitle(kind || "Case")}<br />STUDY`;
+        const mid = Math.ceil(words.length / 2);
+        return `${displayTitle(words.slice(0, mid).join(" "))}<br />${displayTitle(words.slice(mid).join(" "))}`;
+      }
+
+      function caseServicesHtml(kind) {
+        const base = ["Experience design", "Interactive storytelling", "Motion direction"];
+        const first = String(kind || "").split(",")[0].trim();
+        if (first && !base.includes(first)) base.unshift(first);
+        return base.slice(0, 4).join("<br />");
+      }
+
+      function getProject(key) {
+        return projects[key] || createWorldProject(key);
+      }
+
+      function getCaseImage(background) {
+        const match = String(background || "").match(/url\((['"]?)(.*?)\1\)/);
+        return match ? match[2] : "";
+      }
+
+      function splitProjectTitle(title) {
+        const words = String(title || "").split(" ");
+        if (words.length <= 1) return `${title} <em>Project</em>`;
+        const last = words.pop();
+        return `${words.join(" ")} <em>${last}</em>`;
+      }
+
+      function renderProject() {
+        const keys = Object.keys(projects);
+        const currentIndex = Math.max(0, keys.indexOf(currentKey));
+        const nextKey = keys[(currentIndex + 1) % keys.length];
+        const next = projects[nextKey];
+        document.title = `CHENNN Studio® – ${current.title}`;
+        tiles.forEach((tile, index) => {
+          tile.style.setProperty("--tile", tintMedia(current.media, index));
+          tile.setAttribute("aria-label", `Open ${current.title} media ${index + 1}`);
+        });
+        
+        const btn = document.querySelector("[data-project-back]");
+        if (params.get("from") === "world" && btn) {
+          btn.href = "./works.html";
+          btn.textContent = "Back to world ↘";
+        }
+        
+        const nextLinkEl = document.querySelector(".next-project");
+        const nextTitleEl = document.querySelector(".next-project strong");
+        if (nextLinkEl) nextLinkEl.href = `./project.html?project=${nextKey}`;
+        if (nextTitleEl) nextTitleEl.textContent = next.title;
+
+        const caseConfig = current.case || {};
+        if (caseKickerEl) caseKickerEl.textContent = caseConfig.kicker || `${displayTitle(current.title)} & US`;
+        if (caseTitleTopEl) caseTitleTopEl.innerHTML = caseConfig.titleTop || caseTitleHtml(current.title);
+        if (caseTitleBottomEl) caseTitleBottomEl.innerHTML = caseConfig.titleBottom || caseKindHtml(current.kind);
+        if (caseSummaryEl) caseSummaryEl.textContent = current.summary;
+        if (caseServicesEl) caseServicesEl.innerHTML = caseConfig.services || caseServicesHtml(current.kind);
+        if (caseDateEl) caseDateEl.textContent = caseConfig.date || "Spring, 2026";
+        if (caseClientEl) caseClientEl.textContent = caseConfig.client || current.title;
+        if (caseLocationEl) caseLocationEl.textContent = caseConfig.location || "Shanghai / Online";
+        if (caseNextTitleEl) caseNextTitleEl.textContent = next.title;
+        if (caseCurtainTitleEl) caseCurtainTitleEl.innerHTML = `<em>Next</em>${next.title}`;
+        if (caseRouteTransition) caseRouteTransition.dataset.nextProject = nextKey;
+        if (caseSliderCopyEl && caseConfig.sliderTitle) {
+          const title = caseSliderCopyEl.querySelector("h2");
+          const copy = caseSliderCopyEl.querySelector("p");
+          if (title) title.textContent = caseConfig.sliderTitle;
+          if (copy) copy.textContent = caseConfig.sliderCopy || "";
+        }
+        if (caseConfig.splitTitle) {
+          const splitCopy = document.querySelector(".klook-scroll-card--split .klook-section-copy");
+          const title = splitCopy?.querySelector("h2");
+          const copy = splitCopy?.querySelector("p");
+          if (title) title.textContent = caseConfig.splitTitle;
+          if (copy) copy.textContent = caseConfig.splitCopy || "";
+        }
+        if (caseConfig.awardsTitle) {
+          const awardsTitle = document.querySelector(".klook-awards__title");
+          if (awardsTitle) awardsTitle.innerHTML = caseConfig.awardsTitle;
+        }
+        if (caseConfig.awards) {
+          document.querySelectorAll(".klook-award-row").forEach((row, index) => {
+            const data = caseConfig.awards[index];
+            if (!data) return;
+            const parts = row.querySelectorAll("span");
+            if (parts[0]) parts[0].textContent = data[0];
+            if (parts[1]) parts[1].textContent = data[1];
+          });
+        }
+        if (caseHeroMediaEl && caseConfig.hero) {
+          caseHeroMediaEl.style.backgroundImage = caseConfig.hero;
+        } else if (caseHeroMediaEl && currentKey !== "klook") {
+          caseHeroMediaEl.style.backgroundImage = current.media;
+        }
+        if (isCnyCase) {
+          const overviewTitle = document.querySelector(".klook-overview h2");
+          const overviewCta = document.querySelector(".klook-cta");
+          const metaTitles = [...document.querySelectorAll(".klook-meta h3")];
+          if (overviewTitle) overviewTitle.textContent = "项目总览";
+          if (overviewCta) overviewCta.textContent = "全部项目 ->";
+          ["职责", "时间", "项目", "场景"].forEach((label, index) => {
+            if (metaTitles[index]) metaTitles[index].textContent = label;
+          });
+        }
+        if (caseConfig.shots) {
+          klookTiles.forEach((tile, index) => {
+            const shot = caseConfig.shots[index] || current.media;
+            tile.style.setProperty("--shot", shot);
+            tile.style.setProperty("--shot-position", caseConfig.shotPositions?.[index] || "center");
+            tile.style.setProperty("--shot-size", caseConfig.shotSizes?.[index] || "cover");
+            tile.dataset.shotLabel = caseConfig.shotLabels?.[index] || `Media ${String(index + 1).padStart(2, "0")}`;
+            const image = getCaseImage(shot);
+            if (image) tile.dataset.lightboxImage = image;
+          });
+        } else if (currentKey !== "klook") {
+          klookTiles.forEach((tile, index) => {
+            tile.style.setProperty("--shot", tintMedia(current.media, index));
+          });
+        }
+        if (caseConfig.scroll) {
+          caseScrollMedia.forEach((media, index) => {
+            media.style.setProperty("--shot", caseConfig.scroll[index] || caseConfig.hero || current.media);
+          });
+        } else if (currentKey !== "klook") {
+          caseScrollMedia.forEach((media, index) => {
+            media.style.setProperty("--shot", tintMedia(current.media, index + 1));
+          });
+        }
+      }
+
+      function splitText(element) {
+        if (!element || element.dataset.splitReady === "true") return;
+        const text = element.textContent.trim();
+        element.setAttribute("aria-label", text);
+        element.textContent = "";
+        [...text].forEach((char, index) => {
+          const span = document.createElement("span");
+          span.className = "split-char";
+          span.style.setProperty("--i", index);
+          span.setAttribute("aria-hidden", "true");
+          span.textContent = char === " " ? "\u00a0" : char;
+          element.append(span);
+        });
+        element.dataset.splitReady = "true";
+      }
+
+      function syncLightbox() {
+        const tile = tiles[lightboxState.index];
+        const background = tile?.dataset.lightboxImage
+          ? `url('${tile.dataset.lightboxImage}')`
+          : (
+              tile?.style.getPropertyValue("--shot") ||
+              tile?.style.getPropertyValue("--tile") ||
+              current.media
+            );
+        lightboxMedia.style.setProperty("--lightbox-media", background);
+        lightboxMedia.style.background = background;
+        lightboxMedia.style.setProperty("--lightbox-scale", lightboxState.scale);
+        lightboxMedia.style.setProperty("--lightbox-x", `${lightboxState.x}px`);
+        lightboxMedia.style.setProperty("--lightbox-y", `${lightboxState.y}px`);
+        lightboxLabel.textContent = `${current.title} / Media ${String(lightboxState.index + 1).padStart(2, "0")}`;
+        lightboxZoomOut.disabled = lightboxState.scale <= 1;
+        lightboxZoomIn.disabled = lightboxState.scale >= 2.6;
+      }
+
+      function resetLightboxTransform() {
+        lightboxState.scale = 1;
+        lightboxState.x = 0;
+        lightboxState.y = 0;
+      }
+
+      function openLightbox(index) {
+        if (!tiles.length) return;
+        lightboxState.index = index;
+        resetLightboxTransform();
+        syncLightbox();
+        lightbox.classList.add("is-open");
+        lightbox.setAttribute("aria-hidden", "false");
+        body.classList.add("has-lightbox");
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove("is-open", "is-dragging");
+        lightbox.setAttribute("aria-hidden", "true");
+        body.classList.remove("has-lightbox");
+        lightboxState.dragging = false;
+      }
+
+      function stepLightbox(delta) {
+        if (!tiles.length) return;
+        lightboxState.index = (lightboxState.index + delta + tiles.length) % tiles.length;
+        resetLightboxTransform();
+        syncLightbox();
+      }
+
+      function zoomLightbox(delta) {
+        lightboxState.scale = clamp(1, Number((lightboxState.scale + delta).toFixed(2)), 2.6);
+        if (lightboxState.scale === 1) {
+          lightboxState.x = 0;
+          lightboxState.y = 0;
+        }
+        syncLightbox();
+      }
+
+      menuButton.addEventListener("click", () => {
+        const isOpen = body.classList.toggle("is-menu-open");
+        menu.setAttribute("aria-hidden", String(!isOpen));
+        menuButton.setAttribute("aria-expanded", String(isOpen));
+      });
+      menuCloseButton.addEventListener("click", () => {
+        body.classList.remove("is-menu-open");
+        menu.setAttribute("aria-hidden", "true");
+        menuButton.setAttribute("aria-expanded", "false");
+      });
+
+      window.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          closeLightbox();
+          body.classList.remove("is-menu-open");
+          menu.setAttribute("aria-hidden", "true");
+          menuButton.setAttribute("aria-expanded", "false");
+        }
+        if (!lightbox.classList.contains("is-open")) return;
+        if (event.key === "ArrowLeft") stepLightbox(-1);
+        if (event.key === "ArrowRight") stepLightbox(1);
+      });
+
+      renderProject();
+      splitText(titleTopEl);
+      splitText(titleBottomEl);
+      document.querySelectorAll(".menu-nav a > span").forEach(splitText);
+      tiles.forEach((tile, index) => {
+        tile.addEventListener("click", (event) => {
+          if (suppressKlookClick) {
+            event.preventDefault();
+            suppressKlookClick = false;
+            return;
+          }
+          openLightbox(index);
+        });
+      });
+      lightboxClose.addEventListener("click", closeLightbox);
+      lightboxPrev.addEventListener("click", () => stepLightbox(-1));
+      lightboxNext.addEventListener("click", () => stepLightbox(1));
+      lightboxZoomIn.addEventListener("click", () => zoomLightbox(0.2));
+      lightboxZoomOut.addEventListener("click", () => zoomLightbox(-0.2));
+      lightbox.addEventListener(
+        "wheel",
+        (event) => {
+          if (!lightbox.classList.contains("is-open")) return;
+          event.preventDefault();
+          zoomLightbox(event.deltaY > 0 ? -0.12 : 0.12);
+        },
+        { passive: false },
+      );
+      lightbox.addEventListener("pointerdown", (event) => {
+        if (event.target.closest("button") || lightboxState.scale <= 1) return;
+        lightboxState.dragging = true;
+        lightboxState.startX = event.clientX - lightboxState.x;
+        lightboxState.startY = event.clientY - lightboxState.y;
+        lightbox.classList.add("is-dragging");
+        lightbox.setPointerCapture?.(event.pointerId);
+      });
+      lightbox.addEventListener("pointermove", (event) => {
+        if (!lightboxState.dragging) return;
+        lightboxState.x = event.clientX - lightboxState.startX;
+        lightboxState.y = event.clientY - lightboxState.startY;
+        syncLightbox();
+      });
+      lightbox.addEventListener("pointerup", (event) => {
+        lightboxState.dragging = false;
+        lightbox.classList.remove("is-dragging");
+        lightbox.releasePointerCapture?.(event.pointerId);
+      });
+      lightbox.addEventListener("pointercancel", () => {
+        lightboxState.dragging = false;
+        lightbox.classList.remove("is-dragging");
+      });
+
+      function initKlookCase() {
+        if (!isKlookCase && !isCnyCase) return;
+
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const slider = document.querySelector(".klook-slider");
+        const track = document.querySelector(".klook-slider__track");
+        const scrollCards = [...document.querySelectorAll(".klook-scroll-card")];
+        const revealBlocks = [
+          ...document.querySelectorAll(".klook-overview > *, .klook-slider__copy, .klook-section-copy"),
+        ];
+        const awards = document.querySelector(".klook-awards");
+        const awardsTitle = document.querySelector(".klook-awards__title");
+        const awardRows = [...document.querySelectorAll(".klook-award-row")];
+        const routeTransition = document.querySelector("[data-route-transition]");
+        let routeTriggered = false;
+        const routeDrag = {
+          active: false,
+          startY: 0,
+          startScroll: 0,
+          pointerId: null,
+        };
+
+        if (slider && track && !reduceMotion) {
+          const state = {
+            active: false,
+            startX: 0,
+            originX: 0,
+            lastX: 0,
+            current: 0,
+            min: 0,
+            moved: false,
+          };
+
+          const measure = () => {
+            state.min = Math.min(0, slider.clientWidth - track.scrollWidth - 32);
+            state.current = clamp(state.min, state.current, 0);
+            track.style.transform = `translate3d(${state.current}px, 0, 0)`;
+          };
+
+          const setX = (value) => {
+            state.current = clamp(state.min, value, 0);
+            track.style.transform = `translate3d(${state.current}px, 0, 0)`;
+          };
+
+          measure();
+          window.addEventListener("resize", measure);
+
+          slider.addEventListener("pointerdown", (event) => {
+            state.active = true;
+            state.moved = false;
+            state.startX = event.clientX - state.current;
+            state.originX = event.clientX;
+            state.lastX = event.clientX;
+            slider.classList.add("is-dragging");
+            slider.setPointerCapture?.(event.pointerId);
+          });
+
+          slider.addEventListener("pointermove", (event) => {
+            if (!state.active) return;
+            const next = event.clientX - state.startX;
+            if (Math.abs(event.clientX - state.originX) > 5) state.moved = true;
+            state.lastX = event.clientX;
+            setX(next);
+          });
+
+          const finish = (event) => {
+            if (!state.active) return;
+            state.active = false;
+            suppressKlookClick = state.moved;
+            if (state.moved) window.setTimeout(() => {
+              suppressKlookClick = false;
+            }, 120);
+            slider.classList.remove("is-dragging");
+            slider.releasePointerCapture?.(event.pointerId);
+          };
+
+          slider.addEventListener("pointerup", finish);
+          slider.addEventListener("pointercancel", finish);
+
+          slider.addEventListener(
+            "wheel",
+            (event) => {
+              if (Math.abs(event.deltaX) < Math.abs(event.deltaY)) return;
+              event.preventDefault();
+              setX(state.current - event.deltaX);
+            },
+            { passive: false },
+          );
+        }
+
+        document.querySelectorAll("[data-cny-map-slider]").forEach((shell) => {
+          const rail = shell.querySelector(".cny-map-rail");
+          if (!rail) return;
+
+          const state = {
+            active: false,
+            startX: 0,
+            originX: 0,
+            current: 0,
+            min: 0,
+            moved: false,
+          };
+
+          const measure = () => {
+            const style = window.getComputedStyle(shell);
+            const sidePadding = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+            state.min = Math.min(0, shell.clientWidth - sidePadding - rail.scrollWidth - 24);
+            state.current = clamp(state.min, state.current, 0);
+            rail.style.transform = `translate3d(${state.current}px, 0, 0)`;
+          };
+
+          const setX = (value) => {
+            state.current = clamp(state.min, value, 0);
+            rail.style.transform = `translate3d(${state.current}px, 0, 0)`;
+          };
+
+          measure();
+          window.addEventListener("resize", measure);
+          window.addEventListener("pageshow", () => {
+            state.current = 0;
+            measure();
+          });
+
+          shell.addEventListener("pointerdown", (event) => {
+            if (event.button && event.button !== 0) return;
+            state.active = true;
+            state.moved = false;
+            state.startX = event.clientX - state.current;
+            state.originX = event.clientX;
+            shell.classList.add("is-dragging");
+            shell.setPointerCapture?.(event.pointerId);
+          });
+
+          shell.addEventListener("pointermove", (event) => {
+            if (!state.active) return;
+            if (Math.abs(event.clientX - state.originX) > 5) state.moved = true;
+            setX(event.clientX - state.startX);
+          });
+
+          const finish = (event) => {
+            if (!state.active) return;
+            state.active = false;
+            suppressKlookClick = state.moved;
+            if (state.moved) window.setTimeout(() => {
+              suppressKlookClick = false;
+            }, 120);
+            shell.classList.remove("is-dragging");
+            shell.releasePointerCapture?.(event.pointerId);
+          };
+
+          shell.addEventListener("pointerup", finish);
+          shell.addEventListener("pointercancel", finish);
+
+          shell.addEventListener(
+            "wheel",
+            (event) => {
+              if (Math.abs(event.deltaX) < Math.abs(event.deltaY)) return;
+              event.preventDefault();
+              setX(state.current - event.deltaX);
+            },
+            { passive: false },
+          );
+        });
+
+        const updateCards = () => {
+          const viewport = window.innerHeight || 1;
+          const smooth = (value) => {
+            const x = clamp(0, value, 1);
+            return x * x * (3 - 2 * x);
+          };
+
+          revealBlocks.forEach((block, index) => {
+            const rect = block.getBoundingClientRect();
+            const raw = (viewport * 0.92 - rect.top) / (viewport * 0.58);
+            const progress = reduceMotion ? 1 : smooth(raw);
+            const direction = index % 2 === 0 ? -1 : 1;
+            block.style.setProperty("--copy-opacity", progress.toFixed(3));
+            block.style.setProperty("--copy-x", `${direction * (1 - progress) * 74}px`);
+            block.style.setProperty("--copy-y", `${(1 - progress) * 48}px`);
+          });
+
+          klookTiles.forEach((tile, index) => {
+            const rect = tile.getBoundingClientRect();
+            const raw = (viewport * 0.9 - rect.top) / (viewport * 0.52);
+            const progress = reduceMotion ? 1 : smooth(raw);
+            const yLift = (1 - progress) * (index % 2 === 0 ? 86 : 116);
+            const xDrift = (1 - progress) * (index % 2 === 0 ? 42 : -42);
+            tile.style.setProperty("--shot-opacity", (0.18 + progress * 0.82).toFixed(3));
+            tile.style.setProperty("--tx", `${xDrift}px`);
+            tile.style.setProperty("--ty", `${yLift + (index % 2 === 0 ? -18 : 24)}px`);
+            tile.style.setProperty("--tz", `${(progress * 42) - (index % 2 === 0 ? 0 : 12)}px`);
+          });
+
+          scrollCards.forEach((card) => {
+            const media = card.querySelector(".klook-scroll-card__media");
+            if (!media) return;
+            if (reduceMotion) {
+              media.style.setProperty("--scroll-y", "0px");
+              media.style.setProperty("--scroll-rx", "0deg");
+              media.style.setProperty("--scroll-ry", "0deg");
+              media.style.setProperty("--scroll-scale", "1");
+              media.style.setProperty("--media-opacity", "1");
+              return;
+            }
+            const rect = card.getBoundingClientRect();
+            const raw = (viewport * 0.98 - rect.top) / (viewport + rect.height * 0.55);
+            const eased = 1 - Math.pow(1 - clamp(0, raw, 1), 3);
+            const side = card.classList.contains("klook-scroll-card--split") ? 1 : -1;
+            media.style.setProperty("--scroll-y", `${(1 - eased) * 112}px`);
+            media.style.setProperty("--media-x", `${(1 - eased) * side * 42}px`);
+            media.style.setProperty("--scroll-rx", `${(1 - eased) * 13}deg`);
+            media.style.setProperty("--scroll-ry", `${(1 - eased) * side * 4}deg`);
+            media.style.setProperty("--scroll-scale", `${0.91 + eased * 0.09}`);
+            media.style.setProperty("--media-opacity", `${0.22 + eased * 0.78}`);
+          });
+
+          if (awards && awardsTitle) {
+            const rect = awards.getBoundingClientRect();
+            const progress = reduceMotion ? 1 : smooth((viewport * 0.88 - rect.top) / (viewport * 0.7));
+            awardsTitle.style.setProperty("--awards-opacity", progress.toFixed(3));
+            awardsTitle.style.setProperty("--awards-title-x", `${(1 - progress) * -78}px`);
+            awardsTitle.style.setProperty("--awards-title-y", `${(1 - progress) * 54}px`);
+            awardRows.forEach((row, index) => {
+              const rowProgress = clamp(0, (progress - index * 0.08) / 0.72, 1);
+              const easedRow = smooth(rowProgress);
+              row.style.setProperty("--row-opacity", easedRow.toFixed(3));
+              row.style.setProperty("--row-x", `${(1 - easedRow) * 72}px`);
+              row.style.setProperty("--row-y", `${(1 - easedRow) * 34}px`);
+            });
+          }
+
+          if (routeTransition) {
+            const rect = routeTransition.getBoundingClientRect();
+            const travel = Math.max(1, rect.height - viewport);
+            const progress = reduceMotion ? 1 : clamp(0, -rect.top / travel, 1);
+            const preview = 1;
+            const curtain = smooth((progress - 0.14) / 0.68);
+            const copy = smooth((curtain - 0.18) / 0.34);
+            const radius = 42 * (1 - smooth((curtain - 0.58) / 0.32));
+            routeTransition.style.setProperty("--route-preview-opacity", preview.toFixed(3));
+            routeTransition.style.setProperty("--route-preview-y", `${(1 - preview) * 18}px`);
+            routeTransition.style.setProperty("--route-curtain-y", `${(1 - curtain) * 100}vh`);
+            routeTransition.style.setProperty("--route-curtain-radius", `${radius}vh`);
+            routeTransition.style.setProperty("--route-curtain-copy-opacity", copy.toFixed(3));
+            routeTransition.style.setProperty("--route-curtain-copy-y", `${(1 - copy) * 36}px`);
+            routeTransition.style.setProperty("--route-curtain-media-y", `${(1 - copy) * 140}px`);
+            body.classList.toggle("is-klook-next-dark", curtain > 0.62);
+
+            if (!routeTriggered && curtain >= 0.995) {
+              routeTriggered = true;
+              body.classList.add("is-klook-route-locked");
+              const nextKey = routeTransition.dataset.nextProject || "rspca-animal-futures";
+              window.setTimeout(() => {
+                window.location.assign(`./project.html?project=${nextKey}`);
+              }, 60);
+            }
+          }
+        };
+
+        if (routeTransition && !reduceMotion) {
+          routeTransition.addEventListener("pointerdown", (event) => {
+            if (event.button !== 0 || routeTriggered || event.target.closest("a, button")) return;
+            const rect = routeTransition.getBoundingClientRect();
+            const viewport = window.innerHeight || 1;
+            const isPinned = rect.top <= viewport * 0.38 && rect.bottom >= viewport * 0.42;
+            if (!isPinned) return;
+            event.preventDefault();
+            routeDrag.active = true;
+            routeDrag.startY = event.clientY;
+            routeDrag.startScroll = window.scrollY;
+            routeDrag.pointerId = event.pointerId;
+            routeTransition.classList.add("is-dragging");
+            routeTransition.setPointerCapture?.(event.pointerId);
+          });
+
+          routeTransition.addEventListener("pointermove", (event) => {
+            if (!routeDrag.active) return;
+            event.preventDefault();
+            const deltaY = routeDrag.startY - event.clientY;
+            window.scrollTo({ top: routeDrag.startScroll + deltaY * 1.85, behavior: "auto" });
+            requestUpdate();
+          });
+
+          const finishRouteDrag = (event) => {
+            if (!routeDrag.active) return;
+            routeDrag.active = false;
+            routeTransition.classList.remove("is-dragging");
+            if (routeDrag.pointerId !== null) {
+              routeTransition.releasePointerCapture?.(routeDrag.pointerId);
+            }
+            routeDrag.pointerId = null;
+            const deltaY = routeDrag.startY - (event.clientY || routeDrag.startY);
+            if (deltaY > 80) {
+              window.scrollBy({ top: Math.min(620, deltaY * 0.62), behavior: "smooth" });
+            }
+          };
+
+          routeTransition.addEventListener("pointerup", finishRouteDrag);
+          routeTransition.addEventListener("pointercancel", finishRouteDrag);
+        }
+
+        let ticking = false;
+        const requestUpdate = () => {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(() => {
+            ticking = false;
+            updateCards();
+          });
+        };
+
+        updateCards();
+        window.addEventListener("scroll", requestUpdate, { passive: true });
+        window.addEventListener("resize", requestUpdate);
+      }
+
+      initKlookCase();
+
+      function initCnyCase() {
+        if (!isCnyCase) return;
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const revealItems = [...document.querySelectorAll(".cny-reveal")];
+        if (reduceMotion || !("IntersectionObserver" in window)) {
+          body.classList.add("is-ready");
+          revealItems.forEach((item) => item.classList.add("is-visible"));
+          return;
+        }
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            });
+          },
+          { threshold: 0.16, rootMargin: "0px 0px -12% 0px" },
+        );
+        revealItems.forEach((item) => observer.observe(item));
+        window.setTimeout(() => body.classList.add("is-ready"), 180);
+      }
+
+      initCnyCase();
+    </script>
+    <script>
+      // Parallax effect for floating objects based on scroll
+      document.addEventListener('DOMContentLoaded', () => {
+        if (document.body.classList.contains("is-klook-case")) return;
+        const heroObj = document.querySelector('.hero-object');
+        const secondaryObjs = document.querySelectorAll('.hero-secondary-objects > div');
+        
+        window.addEventListener('scroll', () => {
+          const scrollY = window.scrollY;
+          
+          if (heroObj) {
+            // Base transform + scroll-based rotation and translation
+            heroObj.style.transform = `translateY(${scrollY * 0.15}px) rotate(${15 + scrollY * 0.02}deg) rotateY(${15 + scrollY * 0.05}deg) rotateX(${10 + scrollY * 0.03}deg)`;
+          }
+          
+          secondaryObjs.forEach((obj, index) => {
+            const speed = 0.1 + (index * 0.05);
+            const rotationSpeed = index % 2 === 0 ? 0.05 : -0.05;
+            // Get original transform rotation if any (simplified)
+            const baseRot = index === 0 ? 0 : index === 1 ? -15 : 45;
+            obj.style.transform = `translateY(${scrollY * speed * -1}px) rotate(${baseRot + (scrollY * rotationSpeed)}deg)`;
+          });
+        });
+      });
+    </script>
+    <script src="./assets/vendor/gsap.min.js"></script>
+    <script src="./assets/vendor/CustomEase.min.js"></script>
+    <script src="./assets/vendor/ScrollTrigger.min.js"></script>
+    <script src="./assets/gsap-motion-demo.js"></script>
+    <script src="./assets/chen-pet.js" defer></script>
+      <script src="./chen-fx/06-gsap-motion-engine/motion-engine.js"></script>
+      <script src="./assets/main-site-fixes.js?v=world-only-audio-187"></script>
+  </body>
+</html>

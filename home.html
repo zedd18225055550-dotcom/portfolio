@@ -1,0 +1,1858 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>CHENNN Studio® – Brand, Digital & Motion</title>
+    <link rel="icon" href="data:," />
+    
+    <!-- Load GSAP core -->
+    <script src="./assets/vendor/gsap.min.js"></script>
+    <script src="./assets/vendor/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/CustomEase.min.js"></script>
+    
+    <!-- Load Motion Engine -->
+    <link rel="stylesheet" href="./chen-fx/06-gsap-motion-engine/motion-engine.css" />
+    <script src="./chen-fx/06-gsap-motion-engine/motion-engine.js" defer></script>
+    <style>
+      @font-face {
+        font-display: swap;
+        font-family: "Smiley Sans";
+        font-style: oblique;
+        font-weight: 100 900;
+        src: url("./assets/fonts/SmileySans-Oblique-2.ttf") format("truetype");
+      }
+
+      /* :root tokens consolidated below — single source of truth (Node 017 cleanup). */
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        min-height: 100%;
+      }
+
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--font-main);
+        margin: 0;
+        overflow: hidden;
+        text-rendering: geometricPrecision;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        font: inherit;
+      }
+
+      .site-header {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        left: 0;
+        padding: clamp(1.25rem, 3vw, 2rem);
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 60;
+      }
+
+      .brand {
+        font-size: clamp(1.75rem, 5vw, 2.65rem);
+        font-weight: 400;
+        letter-spacing: 0;
+        line-height: 0.9;
+        transition:
+          box-shadow 0.24s ease,
+          transform 0.24s var(--ease-out);
+        text-transform: lowercase;
+      }
+
+      .brand:hover,
+      .brand:focus-visible {
+        box-shadow: 0 0 28px rgb(var(--accent-rgb) / 0.34);
+        transform: translateY(-0.12rem) rotate(-1.5deg);
+      }
+
+      .brand:active {
+        transform: translateY(0) scale(0.97);
+        transition-duration: 0.08s;
+      }
+
+      .nav {
+        align-items: center;
+        display: flex;
+        gap: clamp(1rem, 2vw, 1.75rem);
+      }
+
+      .nav a {
+        font-size: 1.05rem;
+        font-weight: 700;
+      }
+
+      .menu-btn,
+      .sound-btn {
+        align-items: center;
+        appearance: none;
+        background: var(--white);
+        border: 0;
+        border-radius: 50%;
+        cursor: pointer;
+        display: inline-flex;
+        height: 3.5rem;
+        justify-content: center;
+        padding: 0;
+        transition: transform 0.32s var(--ease-out);
+        width: 3.5rem;
+      }
+
+      .menu-btn:hover,
+      .sound-btn:hover {
+        transform: rotate(-8deg) scale(1.06);
+      }
+
+      .menu-btn span {
+        background: var(--ink);
+        border-radius: 50%;
+        display: block;
+        height: 0.34rem;
+        margin: 0 0.18rem;
+        width: 0.34rem;
+      }
+
+      .sound-btn {
+        bottom: 1.25rem;
+        left: 1.25rem;
+        position: fixed;
+        z-index: 58;
+      }
+
+      .sound-btn i {
+        background:
+          linear-gradient(90deg, var(--ink) 0 0.14rem, transparent 0.14rem 0.3rem, var(--ink) 0.3rem 0.44rem, transparent 0.44rem 0.62rem, var(--ink) 0.62rem 0.76rem);
+        display: block;
+        height: 1rem;
+        width: 0.82rem;
+      }
+
+      .wrapped-btn {
+        border: 2px solid rgba(255, 255, 255, 0.86);
+        border-radius: 999px;
+        bottom: 1.32rem;
+        color: var(--white);
+        font-size: 0.95rem;
+        font-weight: 800;
+        left: 50%;
+        min-width: 11.3rem;
+        padding: 0.72rem 1rem;
+        position: fixed;
+        text-align: center;
+        transform: translateX(-50%);
+        z-index: 55;
+      }
+
+      .home-stage {
+        align-items: center;
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        text-align: center;
+      }
+
+      .home-stage::before,
+      .home-stage::after {
+        content: "";
+        inset: 0;
+        pointer-events: none;
+        position: absolute;
+      }
+
+      .home-copy {
+        padding: 5rem 1.25rem 4rem;
+        position: relative;
+        transform: translateY(1.5rem);
+        width: min(100%, 52rem);
+        z-index: 5;
+      }
+
+      .home-kicker {
+        font-size: 0.76rem;
+        font-weight: 850;
+        margin: 0 0 0.7rem;
+        text-transform: uppercase;
+      }
+
+      .home-title {
+        font-size: clamp(5rem, 17vw, 12rem);
+        font-weight: 400;
+        letter-spacing: 0;
+        line-height: 0.76;
+        margin: 0 0 1.6rem;
+      }
+
+      .home-title em {
+        display: block;
+        font-family: var(--font-main);
+        font-style: italic;
+        line-height: 0.88;
+      }
+
+      .home-title span {
+        display: block;
+      }
+
+      .split-char {
+        display: inline-block;
+        transform: translateY(0);
+        transition:
+          color 0.18s ease,
+          transform 0.24s var(--ease-out);
+        transition-delay: calc(var(--i) * 12ms);
+      }
+
+      .view-work {
+        background: var(--white);
+        border-radius: 999px;
+        display: inline-flex;
+        font-size: 1rem;
+        padding: 0.82rem 1.45rem;
+        transition: transform 0.24s var(--ease-out);
+      }
+
+      .view-work:hover {
+        transform: translateY(-0.14rem);
+      }
+
+      /* .menu base block defined once below in the dark-glass token set (Node 017 cleanup). */
+
+      .menu-inner {
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+        padding: 6.5rem clamp(1.6rem, 7vw, 5rem) 2.2rem;
+      }
+
+      .menu-close {
+        align-items: center;
+        appearance: none;
+        background: var(--ink);
+        border: 0;
+        border-radius: 50%;
+        color: var(--white);
+        cursor: pointer;
+        display: flex;
+        font-size: 2.15rem;
+        height: 3.5rem;
+        justify-content: center;
+        line-height: 1;
+        position: absolute;
+        right: clamp(1.25rem, 3vw, 2rem);
+        top: clamp(1.25rem, 3vw, 2rem);
+        width: 3.5rem;
+      }
+
+      .menu-nav {
+        display: grid;
+        gap: 0.7rem;
+      }
+
+      .menu-nav a {
+        align-items: flex-start;
+        display: flex;
+        gap: 0.75rem;
+      }
+
+      .menu-nav small {
+        font-size: 1.1rem;
+        font-weight: 500;
+      }
+
+      .menu-nav span {
+        font-family: var(--font-main);
+        font-size: clamp(4.6rem, 15vw, 8.3rem);
+        line-height: 0.82;
+      }
+
+      .menu-nav a.is-active {
+        color: rgba(23, 23, 23, 0.18);
+      }
+
+      .menu-footer {
+        display: grid;
+        gap: 1.7rem;
+        grid-template-columns: 1fr 1fr;
+        margin-top: auto;
+      }
+
+      .menu-footer a {
+        display: block;
+        font-size: 0.82rem;
+        font-weight: 700;
+        line-height: 1.15;
+        text-transform: uppercase;
+      }
+
+      .loader {
+        align-items: center;
+        background: var(--ink);
+        color: #454140;
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        left: 0;
+        overflow: hidden;
+        position: fixed;
+        text-align: center;
+        top: 0;
+        width: 100%;
+        z-index: 120;
+      }
+
+      .loader__progress {
+        background: var(--paper);
+        height: 100%;
+        left: 0;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        transform: translateY(100%);
+        transition: transform 1s ease-out;
+        width: 100%;
+      }
+
+      .loader__inner {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        z-index: 2;
+      }
+
+      .loader__progress .loader__inner {
+        color: var(--ink);
+        height: 100vh;
+        justify-content: center;
+        transform: translateY(-100%);
+        transition: transform 1s ease-out;
+      }
+
+      .loader__title {
+        display: block;
+        font-size: 1.125rem;
+        font-weight: 650;
+        line-height: 1;
+        margin-bottom: 0.45rem;
+        text-transform: uppercase;
+      }
+
+      .loader__copy {
+        font-size: 1rem;
+        font-weight: 600;
+        line-height: 1.18;
+        margin: 0 0 1.75rem;
+        max-width: 28rem;
+      }
+
+      .loader__cube {
+        height: 7.5rem;
+        margin-bottom: 2rem;
+        perspective: 32rem;
+        position: relative;
+        width: 7.5rem;
+      }
+
+      .loader__cube-inner {
+        animation: cube-loader 4s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+        height: 100%;
+        position: relative;
+        transform-style: preserve-3d;
+        width: 100%;
+      }
+
+      .loader__cube span {
+        align-items: center;
+        background: var(--ink);
+        color: #424242;
+        display: flex;
+        font-size: 3.45rem;
+        font-weight: 650;
+        height: 100%;
+        justify-content: center;
+        position: absolute;
+        width: 100%;
+      }
+
+      .loader__progress .loader__cube span {
+        background: var(--paper);
+      }
+
+      .loader__cube span:nth-child(1) { transform: rotateY(0deg) translateZ(3.75rem); }
+      .loader__cube span:nth-child(2) { transform: rotateY(-90deg) translateZ(3.75rem); }
+      .loader__cube span:nth-child(3) { transform: rotateX(-90deg) rotate(-90deg) translateZ(3.75rem); }
+      .loader__cube span:nth-child(4) { transform: rotateX(180deg) rotate(-90deg) translateZ(3.75rem); }
+      .loader__cube span:nth-child(5) { transform: rotateX(90deg) translateZ(3.75rem); }
+      .loader__cube span:nth-child(6) { transform: rotateY(90deg) rotate(90deg) translateZ(3.75rem); }
+
+      .loader__actions {
+        align-items: center;
+        bottom: 3.8rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+        left: 50%;
+        opacity: 0;
+        position: absolute;
+        transform: translateX(-50%);
+        transition: opacity 0.45s var(--ease-out);
+        visibility: hidden;
+        z-index: 4;
+      }
+
+      .is-ready .loader__actions {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .enter-btn {
+        appearance: none;
+        background: var(--white);
+        border: 0;
+        border-radius: 999px;
+        cursor: pointer;
+        font-size: 1rem;
+        padding: 0.82rem 1.55rem;
+      }
+
+      .quiet-btn {
+        appearance: none;
+        background: transparent;
+        border: 0;
+        border-bottom: 1px solid currentColor;
+        cursor: pointer;
+        font-size: 0.72rem;
+        font-weight: 750;
+        padding: 0 0 0.16rem;
+        text-transform: uppercase;
+      }
+
+      .is-ready .loader__cube {
+        opacity: 0;
+        transform: scale(0);
+        transition:
+          opacity 0.48s var(--ease-out),
+          transform 0.48s var(--ease-out);
+      }
+
+      .is-entered .loader {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.7s var(--ease-out);
+        visibility: hidden;
+      }
+
+      .is-entered .loader__progress {
+        transform: translateY(0);
+      }
+
+      .is-entered .loader__progress .loader__inner {
+        transform: translateY(0);
+      }
+
+      @keyframes cube-loader {
+        0% { transform: rotateY(0) rotateX(0); }
+        16.6% { transform: rotateY(90deg) rotateX(0); }
+        33.3% { transform: rotateY(90deg) rotateX(0) rotate(90deg); }
+        50% { transform: rotateY(180deg) rotateX(0) rotate(90deg); }
+        66.6% { transform: rotateY(180deg) rotateX(-90deg) rotate(90deg); }
+        83.3% { transform: rotateY(270deg) rotateX(-90deg) rotate(90deg); }
+        100% { transform: rotateY(270deg) rotateX(-90deg) rotate(90deg) rotateX(90deg); }
+      }
+
+      /* Node 017: consolidated single :root (dark-glass tone). */
+      :root {
+        --font-main: "Smiley Sans", sans-serif;
+        --ink: #f6f6f1;
+        --paper: #050505;
+        --paper-soft: #f4f0ee;
+        --white: #ffffff;
+        --accent: #9cff52;
+        --accent-rgb: 156 255 82;
+        --soft-text: rgba(255, 255, 255, 0.68);
+        --line: rgba(255, 255, 255, 0.14);
+        --glass: rgba(255, 255, 255, 0.08);
+        --dark-ink: #101010;
+        --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .menu {
+        background:
+          radial-gradient(circle at 82% 18%, rgb(var(--accent-rgb) / 0.14), transparent 17rem),
+          linear-gradient(145deg, rgb(248, 245, 241), rgb(230, 225, 221));
+        color: var(--dark-ink);
+        inset: 0;
+        left: auto;
+        max-width: min(42rem, 100vw);
+        opacity: 0;
+        pointer-events: none;
+        position: fixed;
+        right: 0;
+        transform: translateX(105%);
+        transition:
+          opacity 0.34s var(--ease-out),
+          transform 0.42s var(--ease-out);
+        width: 100%;
+        z-index: 90;
+      }
+
+      .is-menu-open .menu {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateX(0);
+      }
+
+      body {
+        background: var(--paper);
+        color: var(--ink);
+      }
+
+      .site-header {
+        color: var(--ink);
+      }
+
+      .brand {
+        align-items: center;
+        background: var(--accent);
+        border-radius: 1rem;
+        color: var(--dark-ink);
+        display: inline-flex;
+        font-size: 0.78rem;
+        font-weight: 900;
+        height: 3.05rem;
+        justify-content: center;
+        line-height: 1;
+        padding: 0 0.82rem;
+        text-transform: uppercase;
+      }
+
+      .nav a {
+        color: var(--soft-text);
+        transition:
+          color 0.2s ease,
+          transform 0.2s var(--ease-out);
+      }
+
+      .nav a:hover,
+      .nav a:focus-visible {
+        color: var(--ink);
+        transform: translateY(-0.1rem);
+      }
+
+      .nav a.is-active,
+      .nav a.world-ip-entry {
+        color: var(--accent);
+        text-shadow: 0 0 18px rgb(var(--accent-rgb) / 0.34);
+      }
+
+      .nav a.world-ip-entry {
+        align-items: center;
+        display: inline-flex;
+        gap: 0.45rem;
+      }
+
+      .nav a.world-ip-entry::before {
+        background: currentColor;
+        border-radius: 999px;
+        content: "";
+        height: 0.42rem;
+        width: 0.42rem;
+      }
+
+      .menu-btn,
+      .sound-btn,
+      .view-work,
+      .enter-btn {
+        background: var(--white);
+        color: var(--dark-ink);
+      }
+
+      .menu-btn span {
+        background: var(--dark-ink);
+      }
+
+      .sound-btn i {
+        background:
+          linear-gradient(90deg, var(--dark-ink) 0 0.14rem, transparent 0.14rem 0.3rem, var(--dark-ink) 0.3rem 0.44rem, transparent 0.44rem 0.62rem, var(--dark-ink) 0.62rem 0.76rem);
+      }
+
+      .home-stage {
+        background:
+          radial-gradient(circle at 17% 18%, rgb(var(--accent-rgb) / 0.12), transparent 18rem),
+          radial-gradient(circle at 78% 36%, rgba(255, 255, 255, 0.08), transparent 24rem),
+          #050505;
+      }
+
+      .home-stage::before {
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+        background-size: 8rem 8rem;
+        filter: none;
+        opacity: 0.22;
+        transform: none;
+      }
+
+      .home-stage::after {
+        background:
+          radial-gradient(circle at 50% 52%, transparent 0 54%, rgba(0, 0, 0, 0.7) 100%),
+          linear-gradient(180deg, rgba(0, 0, 0, 0.46), transparent 28%, rgba(0, 0, 0, 0.58));
+        mix-blend-mode: normal;
+        opacity: 1;
+      }
+
+      .home-copy {
+        text-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.68);
+      }
+
+      .home-kicker {
+        color: var(--accent);
+      }
+
+      .view-work:hover,
+      .view-work:focus-visible {
+        background: var(--accent);
+        color: var(--dark-ink);
+      }
+
+      .wrapped-btn {
+        border-color: rgb(var(--accent-rgb) / 0.72);
+        color: var(--ink);
+      }
+
+      /* .menu now defined once above with consolidated transition (Node 017). */
+
+      .menu-close {
+        background: var(--dark-ink);
+        color: var(--white);
+      }
+
+      .menu-nav a.is-active {
+        color: rgba(16, 16, 16, 0.2);
+      }
+
+      .menu-nav a:hover {
+        color: var(--accent);
+      }
+
+      .menu-nav span {
+        font-size: clamp(3.7rem, 12vw, 6.65rem);
+      }
+
+      .menu-nav a {
+        transition:
+          color 0.28s ease,
+          opacity 0.28s ease,
+          transform 0.34s var(--ease-out);
+      }
+
+      .menu-nav a:hover,
+      .menu-nav a:focus-visible {
+        transform: translate3d(0.35rem, -0.08rem, 0);
+      }
+
+      .menu-nav:has(a:hover) a:not(:hover),
+      .menu-nav:has(a:focus-visible) a:not(:focus-visible) {
+        opacity: 0.22;
+      }
+
+      .loader {
+        background: #050505;
+        color: rgba(255, 255, 255, 0.28);
+      }
+
+      .loader__progress {
+        background: var(--accent);
+      }
+
+      .loader__cube span {
+        background: #050505;
+        color: rgba(255, 255, 255, 0.28);
+      }
+
+      .loader__progress .loader__inner {
+        color: var(--dark-ink);
+      }
+
+      .loader__progress .loader__cube span {
+        background: var(--accent);
+        color: rgba(16, 16, 16, 0.42);
+      }
+
+      @media (max-width: 767px) {
+        .nav a {
+          display: none;
+        }
+
+        .home-copy {
+          transform: translateY(0.4rem);
+        }
+
+        .home-title {
+          font-size: clamp(4rem, 15vw, 7rem);
+        }
+
+      }
+
+      /* Node 019: immersive KV test pass. */
+      .home-stage--immersive {
+        align-items: flex-end;
+        background: #030303;
+        justify-content: flex-start;
+        min-height: 100vh;
+        text-align: left;
+      }
+
+      .home-stage--immersive::before,
+      .home-stage--immersive::after {
+        z-index: 2;
+      }
+
+      .home-stage--immersive::before {
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.034) 1px, transparent 1px);
+        background-size: 8rem 8rem;
+        mask-image: linear-gradient(90deg, black, transparent 78%);
+        opacity: 0.144;
+        -webkit-mask-image: linear-gradient(90deg, black, transparent 78%);
+      }
+
+      .home-stage--immersive::after {
+        background:
+          radial-gradient(circle at 58% 40%, rgba(255, 255, 255, 0.13), transparent 24rem),
+          linear-gradient(90deg, rgba(0, 0, 0, 0.56) 0%, rgba(0, 0, 0, 0.22) 31%, rgba(0, 0, 0, 0.04) 63%, rgba(0, 0, 0, 0.31) 100%),
+          linear-gradient(180deg, rgba(0, 0, 0, 0.38) 0%, transparent 34%, rgba(0, 0, 0, 0.52) 100%);
+        mix-blend-mode: normal;
+        opacity: 0.9;
+      }
+
+      .home-kv {
+        inset: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: 1;
+      }
+
+      .home-kv__media,
+      .home-kv__ribbon {
+        display: block;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
+        position: absolute;
+        width: 100%;
+      }
+
+      .home-kv__media {
+        background: #050505;
+        filter: saturate(0.9) contrast(1) brightness(0.88);
+        object-position: 50% 50%;
+        transform: scale(1.02);
+      }
+
+      .home-kv__ribbon {
+        bottom: 14%;
+        height: min(28vw, 21rem);
+        left: 50%;
+        mix-blend-mode: screen;
+        object-position: center;
+        opacity: 0.08;
+        transform: translateX(-50%);
+        width: min(88vw, 84rem);
+      }
+
+      .home-kv__mask {
+        background:
+          radial-gradient(ellipse at 58% 42%, transparent 0 44%, rgba(0, 0, 0, 0.16) 72%, rgba(0, 0, 0, 0.61) 100%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 20%),
+          linear-gradient(0deg, rgba(5, 5, 5, 1) 0%, rgba(5, 5, 5, 0.6) 12%, rgba(0, 0, 0, 0.28) 36%);
+        inset: 0;
+        opacity: 0.9;
+        pointer-events: none;
+        position: absolute;
+      }
+
+      .home-stage--immersive .home-copy {
+        align-self: flex-end;
+        margin: 0;
+        padding: 0 0 clamp(8.1rem, 15vh, 10.5rem) clamp(1.6rem, 6.7vw, 8.1rem);
+        position: relative;
+        transform: none;
+        width: min(32rem, calc(100vw - 2.8rem));
+        z-index: 5;
+      }
+
+      .home-stage--immersive .home-kicker {
+        color: var(--accent);
+        font-size: clamp(0.78rem, 0.96vw, 0.96rem);
+        letter-spacing: 0;
+        margin-bottom: 0.7rem;
+        text-shadow: 0 0.55rem 1.4rem rgba(0, 0, 0, 0.58);
+      }
+
+      .home-stage--immersive .home-kicker {
+        animation: home-hero-in 0.78s cubic-bezier(0.16, 1, 0.3, 1) 0.42s both;
+      }
+
+      .home-stage--immersive .home-title {
+        font-size: clamp(2.55rem, 5.75vw, 5.75rem);
+        letter-spacing: 0;
+        line-height: 0.83;
+        margin-bottom: 0.95rem;
+        max-width: 7.2ch;
+      }
+
+      .home-stage--immersive .home-title em {
+        animation: home-hero-in 0.92s cubic-bezier(0.16, 1, 0.3, 1) 0.52s both;
+      }
+
+      .home-stage--immersive .home-title em {
+        color: rgba(255, 255, 255, 0.8);
+        font-style: oblique;
+      }
+
+      .home-stage--immersive .home-title span {
+        color: #fff;
+      }
+
+      .home-stage--immersive .home-title span {
+        animation: home-hero-in 0.92s cubic-bezier(0.16, 1, 0.3, 1) 0.62s both;
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        .menu-nav a:hover .split-char {
+          color: var(--accent);
+          transform: translateY(-0.12em);
+        }
+      }
+
+      .home-stage--immersive .home-brief {
+        color: rgba(255, 255, 255, 0.78);
+        font-size: clamp(0.88rem, 1.08vw, 1.06rem);
+        line-height: 1.25;
+        margin: 0 0 1.35rem;
+        max-width: 20rem;
+        text-shadow: 0 0.55rem 1.45rem rgba(0, 0, 0, 0.68);
+      }
+
+      .home-stage--immersive .home-brief {
+        animation: home-hero-in 0.82s cubic-bezier(0.16, 1, 0.3, 1) 0.73s both;
+      }
+
+      .home-stage--immersive .view-work {
+        align-items: center;
+        backdrop-filter: blur(18px);
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.24);
+        color: #fff;
+        gap: 0.55rem;
+        overflow: hidden;
+        position: relative;
+        /* added data-fx-link data-fx-magnetic via replace */
+      }
+
+      .home-stage--immersive .view-work {
+        animation: home-hero-in 0.78s cubic-bezier(0.16, 1, 0.3, 1) 0.84s both;
+      }
+
+      @keyframes home-hero-in {
+        from {
+          opacity: 0;
+          transform: translateY(2.5rem) scale(0.97);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .home-stage--immersive .view-work::after {
+        background: var(--accent);
+        border-radius: inherit;
+        content: "";
+        inset: 0;
+        opacity: 0;
+        position: absolute;
+        transform: translateY(100%);
+        transition:
+          opacity 0.28s ease,
+          transform 0.36s var(--ease-out);
+        z-index: -1;
+      }
+
+      .home-stage--immersive .view-work:hover,
+      .home-stage--immersive .view-work:focus-visible {
+        border-color: rgba(156, 255, 82, 0.74);
+        color: var(--dark-ink);
+        transform: translateY(-0.16rem);
+      }
+
+      .home-stage--immersive .view-work:hover::after,
+      .home-stage--immersive .view-work:focus-visible::after {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .wrapped-btn {
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(16px);
+        bottom: calc(1.25rem + 3.5rem + 10px);
+      }
+
+      @media (max-width: 767px) {
+        .home-stage--immersive .home-copy {
+          padding: 0 1.25rem 8.4rem;
+          width: min(100%, 27rem);
+        }
+
+        .home-stage--immersive .home-title {
+          font-size: clamp(3rem, 15vw, 4.8rem);
+        }
+
+        .home-stage--immersive .home-brief {
+          font-size: 1rem;
+        }
+
+        .home-kv__media {
+          object-position: 61% 50%;
+        }
+
+        .home-kv__ribbon {
+          bottom: 19%;
+          height: 12rem;
+          opacity: 0.14;
+          width: 120vw;
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="./chen-fx/03-page-transition/style.css" />
+    <link rel="stylesheet" href="./wrapped.css?v=storyboard-arrows-234" />
+    <style>
+      :root { --chen-page-bg: #efded9; }
+
+      /* ============================================================
+       * Node 032 — Append lu78-demo (Wrapped) below home stage
+       * 让 body 可竖向滚动；保留第一屏沉浸 KV
+       * ========================================================== */
+      html, body {
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        height: auto !important;
+        min-height: 100% !important;
+      }
+      html { scroll-behavior: smooth; }
+      body {
+        background: #050505;
+      }
+      /* sound-btn 已是 fixed，跟随屏幕；保持不变 */
+
+      /* 第一屏：保留全屏 KV */
+      .home-stage--immersive {
+        position: relative;
+        height: 100vh;
+        min-height: 100vh;
+      }
+
+      /* 滚动引导：右下角"Scroll · 2026 Wrapped"+ 呼吸下沉小线条 */
+      .home-scroll-cue {
+        position: absolute;
+        bottom: 1.6rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 6;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.6rem;
+        pointer-events: none;
+        color: rgba(255, 255, 255, 0.6);
+        font-family: var(--font-main, system-ui);
+        font-size: 0.68rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        animation: homeScrollCueFloat 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      .home-scroll-cue__line {
+        width: 1px;
+        height: 30px;
+        background: linear-gradient(to bottom, rgba(156, 255, 82, 0.9), transparent);
+      }
+      @keyframes homeScrollCueFloat {
+        0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.6; }
+        50%      { transform: translateX(-50%) translateY(8px); opacity: 1; }
+      }
+
+      /* Wrapped Section: lu78-demo iframe 下方接续 */
+      .home-wrapped {
+        position: relative;
+        background: #050505;
+        z-index: 3;
+      }
+      /* 顶部渐变遮罩（柔和过渡）：上方 KV 暗角向下融入 wrapped 黑场
+       * 覆盖在 KV 的最底部区域 */
+      .home-wrapped__bridge {
+        position: absolute;
+        top: -120px; 
+        left: 0;
+        width: 100%;
+        height: 120px;
+        background:
+          linear-gradient(to bottom,
+            rgba(5, 5, 5, 0)    0%,
+            rgba(5, 5, 5, 0.6)  40%,
+            rgba(5, 5, 5, 0.95) 80%,
+            #050505            100%);
+        z-index: 2;
+        pointer-events: none;
+      }
+      /* 在 bridge 末端加一道极细的 lime 横线（呼应 home-scroll-cue），强化"过渡完成"信号 */
+      .home-wrapped__bridge::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1px;
+        height: 18px;
+        background: linear-gradient(to bottom, transparent, rgba(255, 46, 66, 0.38));
+      }
+      /* lu78 inline 内容容器（不再是 iframe） */
+      .home-wrapped .wrapped-page {
+        position: relative;
+        z-index: 2;
+        /* 入场推上来（IntersectionObserver 触发） */
+        transform: translateY(40px);
+        /* opacity: 0; */
+        transition:
+          transform 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+          opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: transform, opacity;
+      }
+      .home-wrapped.is-entered .wrapped-page {
+        transform: translateY(0);
+        /* opacity: 1; */
+      }
+
+      /* 入场大字过渡：从 KV 滚到 wrapped 时，先看到这块大字"打招呼"再到内容 */
+      .home-wrapped__intro {
+        position: relative;
+        z-index: 3;
+        text-align: center;
+        padding: clamp(3rem, 8vw, 6rem) 1.6rem clamp(1rem, 2vw, 2rem);
+        color: #f6f6f1;
+        /* opacity: 0; */
+        transform: translateY(24px);
+        transition:
+          opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.05s,
+          transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.05s;
+      }
+      .home-wrapped.is-entered .home-wrapped__intro {
+        /* opacity: 1; */
+        transform: translateY(0);
+      }
+      .home-wrapped__intro-eyebrow {
+        display: inline-block;
+        font-size: 0.74rem;
+        letter-spacing: 0.32em;
+        color: rgba(156, 255, 82, 0.85);
+        font-weight: 700;
+      }
+      .home-wrapped__intro-title {
+        margin: 0.6rem 0 0;
+        font-family: "Smiley Sans", "Helvetica Neue", "PingFang SC", sans-serif;
+        font-style: oblique;
+        font-weight: 900;
+        font-size: clamp(2.6rem, 8vw, 5.8rem);
+        line-height: 1.02;
+        letter-spacing: -0.01em;
+      }
+      .home-wrapped__intro-title em {
+        color: #9cff52;
+        font-style: oblique;
+      }
+
+      .home-step-signal {
+        --signal-line: rgba(255, 255, 255, 0.14);
+        --signal-accent: rgb(156, 255, 82);
+        --signal-cyan: rgb(69, 222, 196);
+        background:
+          radial-gradient(circle at 72% 22%, rgba(156, 255, 82, 0.12), transparent 28rem),
+          radial-gradient(circle at 26% 72%, rgba(69, 222, 196, 0.09), transparent 24rem),
+          #050505;
+        color: #f6f6f1;
+        overflow: hidden;
+        padding: clamp(5rem, 10vw, 8rem) clamp(1.25rem, 5vw, 5rem) clamp(5.5rem, 10vw, 8.5rem);
+        position: relative;
+        z-index: 4;
+      }
+
+      .home-step-signal::before {
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+        background-size: 84px 84px;
+        content: "";
+        inset: 0;
+        mask-image: radial-gradient(circle at 62% 45%, #000 0 34%, transparent 72%);
+        opacity: 0.32;
+        pointer-events: none;
+        position: absolute;
+      }
+
+      .home-step-signal__inner {
+        align-items: center;
+        display: grid;
+        gap: clamp(2.5rem, 6vw, 6rem);
+        grid-template-columns: minmax(18rem, 0.72fr) minmax(20rem, 1fr);
+        margin: 0 auto;
+        max-width: 92rem;
+        position: relative;
+        z-index: 2;
+      }
+
+      .home-step-signal__kicker {
+        color: var(--signal-accent);
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: clamp(0.72rem, 0.88vw, 0.9rem);
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        margin: 0 0 1rem;
+        text-transform: uppercase;
+      }
+
+      .home-step-signal__title {
+        font-size: clamp(3.2rem, 8vw, 8rem);
+        font-weight: 900;
+        letter-spacing: 0;
+        line-height: 0.84;
+        margin: 0;
+        text-transform: uppercase;
+      }
+
+      .home-step-signal__title em {
+        color: var(--signal-accent);
+        display: block;
+        font-style: oblique;
+      }
+
+      .home-step-signal__copy {
+        color: rgba(255, 255, 255, 0.72);
+        font-size: clamp(1rem, 1.28vw, 1.18rem);
+        font-weight: 650;
+        line-height: 1.38;
+        margin: 1.35rem 0 0;
+        max-width: 35rem;
+      }
+
+      .home-step-signal__meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+        margin-top: 2rem;
+      }
+
+      .home-step-signal__meta span {
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 999px;
+        color: rgba(255, 255, 255, 0.78);
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.7rem;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        padding: 0.62rem 0.86rem;
+        text-transform: uppercase;
+      }
+
+      .home-step-signal__stage {
+        aspect-ratio: 802 / 402;
+        min-height: 19rem;
+        position: relative;
+      }
+
+      .home-step-signal__globe {
+        display: block;
+        filter: drop-shadow(0 2rem 5rem rgba(156, 255, 82, 0.14));
+        height: 100%;
+        overflow: visible;
+        width: 100%;
+      }
+
+      .home-step-signal__guide {
+        fill: none;
+        opacity: 0.72;
+        stroke: var(--signal-line);
+        stroke-width: 1.2;
+        vector-effect: non-scaling-stroke;
+      }
+
+      .home-step-signal__pulse {
+        animation: signalPath 4.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+        fill: none;
+        opacity: 0;
+        stroke: var(--signal-accent);
+        stroke-dasharray: 96 560;
+        stroke-linecap: round;
+        stroke-width: 2.4;
+        vector-effect: non-scaling-stroke;
+      }
+
+      .home-step-signal__pulse--alt {
+        animation-delay: 1.1s;
+        stroke: var(--signal-cyan);
+      }
+
+      .home-step-signal__pulse--slow {
+        animation-delay: 2.2s;
+        animation-duration: 6.2s;
+      }
+
+      .home-step-signal__node {
+        fill: #050505;
+        stroke: rgba(255, 255, 255, 0.84);
+        stroke-width: 2;
+        vector-effect: non-scaling-stroke;
+      }
+
+      .home-step-signal__node-dot {
+        animation: signalNode 2.8s ease-in-out infinite;
+        fill: var(--signal-accent);
+        transform-origin: center;
+      }
+
+      .home-step-signal__node-dot:nth-of-type(2n) {
+        animation-delay: 0.7s;
+        fill: var(--signal-cyan);
+      }
+
+      .home-step-signal__status {
+        align-items: center;
+        backdrop-filter: blur(20px);
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 999px;
+        bottom: 5%;
+        color: rgba(255, 255, 255, 0.88);
+        display: inline-flex;
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: clamp(0.62rem, 0.82vw, 0.78rem);
+        font-weight: 800;
+        gap: 0.72rem;
+        left: 50%;
+        letter-spacing: 0.11em;
+        padding: 0.76rem 1rem;
+        position: absolute;
+        text-transform: uppercase;
+        transform: translateX(-50%);
+        white-space: nowrap;
+      }
+
+      .home-step-signal__status::before {
+        animation: signalStatus 1.8s ease-in-out infinite;
+        background: var(--signal-accent);
+        border-radius: 999px;
+        box-shadow: 0 0 18px rgba(156, 255, 82, 0.78);
+        content: "";
+        height: 0.5rem;
+        width: 0.5rem;
+      }
+
+      @keyframes signalPath {
+        0% {
+          opacity: 0;
+          stroke-dashoffset: 210;
+        }
+        18%, 78% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+          stroke-dashoffset: -460;
+        }
+      }
+
+      @keyframes signalNode {
+        0%, 100% {
+          opacity: 0.55;
+          transform: scale(0.9);
+        }
+        45% {
+          opacity: 1;
+          transform: scale(1.22);
+        }
+      }
+
+      @keyframes signalStatus {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.42; }
+      }
+
+      /* ============================================================
+       * MOBILE ≤ 767px — first pass
+       * ============================================================ */
+      @media (max-width: 767px) {
+        .site-header {
+          grid-template-columns: auto auto;
+          justify-content: space-between;
+          max-width: 100dvw;
+          padding: 1rem 1.25rem;
+          right: auto;
+          width: 100dvw;
+        }
+
+        .site-header .nav a,
+        .site-header .nav a.world-ip-entry {
+          display: none;
+        }
+
+        .menu-btn,
+        .sound-btn {
+          height: 3rem;
+          width: 3rem;
+        }
+
+        .sound-btn {
+          bottom: max(1.25rem, env(safe-area-inset-bottom) + 0.75rem);
+          left: 1rem;
+        }
+
+        .wrapped-btn {
+          bottom: max(4.75rem, env(safe-area-inset-bottom) + 4.25rem);
+          font-size: 0.85rem;
+          min-width: 9rem;
+          padding: 0.6rem 0.85rem;
+        }
+
+        .home-stage {
+          height: 100svh;
+        }
+
+        .home-copy {
+          padding: 5.5rem 1.25rem 3rem;
+        }
+
+        .home-title {
+          line-height: 0.82;
+        }
+
+        .home-kicker {
+          font-size: 0.7rem;
+        }
+
+        .view-work {
+          font-size: 0.9rem;
+          padding: 0.72rem 1.2rem;
+        }
+
+        .home-scroll-cue {
+          bottom: max(5.5rem, env(safe-area-inset-bottom) + 5rem);
+        }
+
+        .home-step-signal {
+          padding: 4.5rem 1.25rem 5.5rem;
+        }
+
+        .home-step-signal__inner {
+          gap: 2.4rem;
+          grid-template-columns: 1fr;
+        }
+
+        .home-step-signal__title {
+          font-size: clamp(3.6rem, 18vw, 5rem);
+        }
+
+        .home-step-signal__stage {
+          margin-inline: -1.25rem;
+          min-height: 16rem;
+        }
+
+        .home-step-signal__status {
+          bottom: -0.2rem;
+        }
+
+        .menu {
+          max-width: 100dvw;
+          transform: none;
+          visibility: hidden;
+        }
+
+        .is-menu-open .menu {
+          transform: none;
+          visibility: visible;
+        }
+
+        .menu-inner {
+          padding: 5rem 1.5rem 2rem;
+        }
+
+        .menu-footer {
+          gap: 1rem;
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Marathon black-field sync for desktop dark sections. */
+      .site-header {
+        background: transparent;
+        border-bottom: 0;
+        box-shadow: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        padding: clamp(1rem, 1.75vw, 1.55rem) clamp(1rem, 2.5vw, 2.4rem);
+      }
+
+      .nav a {
+        color: rgba(244, 243, 237, 0.64);
+        text-shadow: none;
+      }
+
+      .nav a:hover,
+      .nav a:focus-visible {
+        color: #f4f3ed;
+      }
+
+      .nav a.is-active,
+      .nav a.world-ip-entry {
+        color: var(--accent);
+        text-shadow: 0 0 18px rgb(var(--accent-rgb) / 0.34);
+      }
+
+      .home-stage--immersive::before {
+        background:
+          radial-gradient(circle, rgba(244, 243, 237, 0.12) 0 0.055rem, transparent 0.065rem),
+          linear-gradient(90deg, rgba(244, 243, 237, 0.055) 1px, transparent 1px);
+        background-size: 0.86rem 0.86rem, 6.5rem 100%;
+        opacity: 0.198;
+      }
+
+      .home-wrapped {
+        background:
+          radial-gradient(circle at 91% 44%, rgba(244, 243, 237, 0.06), transparent 18rem),
+          #050505;
+        isolation: isolate;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .home-step-signal {
+        background:
+          radial-gradient(circle at 9% 13%, rgb(var(--accent-rgb) / 0.14), transparent 16rem),
+          radial-gradient(circle at 91% 44%, rgb(var(--accent-rgb) / 0.09), transparent 18rem),
+          #050505;
+        isolation: isolate;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .home-wrapped::before,
+      .home-step-signal::before {
+        background:
+          radial-gradient(circle, rgba(244, 243, 237, 0.16) 0 0.07rem, transparent 0.08rem),
+          linear-gradient(90deg, rgba(244, 243, 237, 0.06) 1px, transparent 1px);
+        background-size: 0.92rem 0.92rem, 6.5rem 100%;
+        content: "";
+        inset: 0;
+        opacity: 0.34;
+        pointer-events: none;
+        position: absolute;
+        z-index: 0;
+      }
+
+      .home-wrapped::after {
+        content: none;
+      }
+
+      .home-step-signal::after {
+        background:
+          linear-gradient(90deg, transparent 0 10%, var(--accent) 10% 28%, transparent 28%),
+          radial-gradient(circle, rgba(244, 243, 237, 0.76) 0 0.18rem, transparent 0.2rem);
+        background-size: 100% 100%, 0.95rem 0.95rem;
+        content: "";
+        height: clamp(4.2rem, 7vw, 5.8rem);
+        left: clamp(1.5rem, 10vw, 10rem);
+        opacity: 0.46;
+        pointer-events: none;
+        position: absolute;
+        top: clamp(1rem, 2vw, 1.8rem);
+        transform: rotate(-3.8deg);
+        width: min(52rem, 58vw);
+        z-index: 0;
+      }
+
+      .home-wrapped > *,
+      .home-step-signal > * {
+        position: relative;
+        z-index: 2;
+      }
+    </style>
+    <link rel="stylesheet" href="./assets/main-site-fixes.css?v=world-only-audio-187" />
+    <script src="./chen-fx/03-page-transition/script.js"></script>
+  </head>
+  <body class="chen-page chen-page--lite home-page">
+    <header class="site-header">
+      <a class="brand" href="./index.html" data-fx-link>chennn studio®</a>
+      <nav class="nav" aria-label="Primary">
+        <a class="is-active" href="./home.html?skipIntro=1" data-fx-link>Index</a>
+        <a href="./projects.html?skipIntro=1" data-fx-link>Projects</a>
+        <a href="./about.html" data-fx-link>About</a>
+        <a href="./services.html" data-fx-link>Services</a>
+        <a href="./contact.html?skipIntro=1" data-fx-link>Contact</a>
+        <a class="world-ip-entry" href="./ip-mask-demo.html?v=skin-ui-088" data-fx-link>IP Doorway</a>
+        <button class="menu-btn" type="button" aria-label="Toggle Menu">
+          <span></span>
+          <span></span>
+        </button>
+      </nav>
+    </header>
+
+    <button class="sound-btn" type="button" aria-label="Toggle Sound"><i></i></button>
+    <main class="home-stage home-stage--immersive">
+      <div class="home-kv" aria-hidden="true">
+        <video class="home-kv__media" autoplay muted loop playsinline preload="auto" poster="./assets/marathon/index-hero-marathon-cny.png">
+          <source src="./assets/marathon/index-hero-marathon-video.mp4" type="video/mp4" />
+        </video>
+        <div class="home-kv__mask"></div>
+      </div>
+      <section class="home-copy" aria-label="CHENNN Studio home">
+        <p class="home-kicker">Immersive visual archive</p>
+        <h1 class="home-title"><em>Here for</em><span>the unseen</span></h1>
+        <p class="home-brief">把影像、IP、空间与叙事压进同一个入口，先让画面成为作品集的第一句话。</p>
+        <a class="view-work" data-fx-magnetic="16" href="./projects.html?skipIntro=1" data-fx-link>Explore projects ↘</a>
+      </section>
+      <!-- 滚动引导：暗示下方还有 wrapped 区 -->
+      <div class="home-scroll-cue" aria-hidden="true" data-fx-parallax="-0.2">
+        <span class="home-scroll-cue__label">Scroll · 2026 Wrapped</span>
+        <span class="home-scroll-cue__line"></span>
+      </div>
+    </main>
+
+    <section class="home-step-signal" aria-label="CHENNN signal map" data-fx-stagger-group>
+      <div class="home-step-signal__inner">
+        <div>
+          <p class="home-step-signal__kicker" data-fx-stagger-item>Signal map · index footer</p>
+          <h2 class="home-step-signal__title" data-fx-stagger-item>Worlds<br /><em>in orbit</em></h2>
+          <p class="home-step-signal__copy" data-fx-stagger-item>
+            把 World、IP Doorway、Wrapped 和项目案例连成一张动线图：每个入口都可以被点亮，也都能回到作品集主叙事。
+          </p>
+          <div class="home-step-signal__meta" aria-label="Signal routes" data-fx-stagger-item>
+            <span>World hub</span>
+            <span>Motion archive</span>
+            <span>IP doorway</span>
+            <span>Case routes</span>
+          </div>
+        </div>
+        <div class="home-step-signal__stage" aria-hidden="true" data-fx-stagger-item data-fx-parallax="0.08">
+          <svg class="home-step-signal__globe" viewBox="0 0 802 402" role="img">
+            <path class="home-step-signal__guide" d="M80 201H722" />
+            <path class="home-step-signal__guide" d="M401 36C485 88 526 143 526 201C526 259 485 314 401 366C317 314 276 259 276 201C276 143 317 88 401 36Z" />
+            <path class="home-step-signal__guide" d="M401 36C565 75 668 136 668 201C668 266 565 327 401 366C237 327 134 266 134 201C134 136 237 75 401 36Z" />
+            <path class="home-step-signal__guide" d="M401 36V366" />
+            <path class="home-step-signal__guide" d="M174 104C248 139 324 157 401 157C478 157 554 139 628 104" />
+            <path class="home-step-signal__guide" d="M174 298C248 263 324 245 401 245C478 245 554 263 628 298" />
+            <path class="home-step-signal__pulse" d="M114 201C194 106 292 60 401 63C521 66 619 116 706 214" />
+            <path class="home-step-signal__pulse home-step-signal__pulse--alt" d="M162 298C244 251 323 229 401 232C495 236 573 270 640 334" />
+            <path class="home-step-signal__pulse home-step-signal__pulse--slow" d="M401 40C351 100 327 154 329 201C331 252 356 306 401 362" />
+            <circle class="home-step-signal__node" cx="114" cy="201" r="15" />
+            <circle class="home-step-signal__node-dot" cx="114" cy="201" r="5" />
+            <circle class="home-step-signal__node" cx="276" cy="157" r="15" />
+            <circle class="home-step-signal__node-dot" cx="276" cy="157" r="5" />
+            <circle class="home-step-signal__node" cx="401" cy="63" r="15" />
+            <circle class="home-step-signal__node-dot" cx="401" cy="63" r="5" />
+            <circle class="home-step-signal__node" cx="526" cy="245" r="15" />
+            <circle class="home-step-signal__node-dot" cx="526" cy="245" r="5" />
+            <circle class="home-step-signal__node" cx="706" cy="214" r="15" />
+            <circle class="home-step-signal__node-dot" cx="706" cy="214" r="5" />
+          </svg>
+          <div class="home-step-signal__status">Live routes · 05 active nodes</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Wrapped Section: lu78-demo 内联拼接（Node 033 — 取消 iframe 改原生 inline）-->
+    <section class="home-wrapped" aria-label="2026 Wrapped">
+      <div class="home-wrapped__bridge" aria-hidden="true"></div>
+      <div class="wrapped-page">
+
+            <!-- 2) PARALLAX -->
+            <section class="section parallax-intro" style="min-height: auto; padding-bottom: 1rem;">
+              <p class="eyebrow">02 · Tactical Parallax · sightline + mouse</p>
+              <h2 class="display" style="font-size: clamp(2.4rem, 6vw, 4.4rem);">
+                锁定 <em>现场</em> 视觉差
+              </h2>
+              <p class="lede">
+                枪械、角色、灯束与 HUD 分层漂移，鼠标靠近时警示点轻微亮起。<br />
+                滚动推进景深，让画面像一块可探索的现场监控界面。
+              </p>
+            </section>
+
+            <div class="parallax" id="parallax">
+              <div class="parallax__layer parallax__layer--bg" data-speed="0.08" data-mouse="8"></div>
+              <div class="parallax__layer parallax__layer--mid" data-speed="0.20" data-mouse="26">
+                <img class="parallax__image" src="./assets/marathon/拿枪.png" alt="" loading="lazy" decoding="async" />
+              </div>
+              <div class="parallax__layer parallax__layer--hud" data-speed="-0.10" data-mouse="42">
+                <span class="parallax__hud-dot parallax__hud-dot--one"></span>
+                <span class="parallax__hud-dot parallax__hud-dot--two"></span>
+                <span class="parallax__hud-dot parallax__hud-dot--three"></span>
+                <span class="parallax__hud-frame parallax__hud-frame--one"></span>
+                <span class="parallax__hud-frame parallax__hud-frame--two"></span>
+              </div>
+              <div class="parallax__copy" data-speed="-0.25">CHENNN · KUNG FU · 2026</div>
+              <div class="parallax__noise"></div>
+            </div>
+
+            <!-- 4) IP VISUAL ARCHIVE -->
+            <section class="section visual-archive" style="max-width:150rem;">
+              <p class="eyebrow">04 · Tangyuan Storyboard · 21:9 sequence</p>
+              <h2 class="display" style="font-size: clamp(2.4rem, 6vw, 4.4rem);">
+                汤圆 · <em>分镜长卷</em>
+              </h2>
+              <div class="marquee-section">
+                <div class="marquee-title">
+                  <p class="eyebrow">Storyboard reel</p>
+                  <h2 class="storyboard-lockup">
+                    <span class="storyboard-lockup__latin">TANGYUAN</span>
+                    <span class="storyboard-lockup__meta">
+                      <em class="storyboard-lockup__ratio">21:9</em>
+                      <span class="storyboard-lockup__format">cinema reel</span>
+                    </span>
+                    <span class="storyboard-lockup__title">分镜长卷</span>
+                  </h2>
+                  <p>拖拽或横向滑动浏览汤圆分镜，让角色动作、镜头节奏和世界观气质像一条可探索的宽银幕胶片。</p>
+                </div>
+                <div class="storyboard-rail-shell">
+                  <div class="marquee-col" data-dir="manual" aria-label="Tangyuan storyboard reel">
+                    <div class="marquee-track" id="marqueeTrack">
+                      <!-- JS will fill + duplicate -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+          </div>
+    </section>
+
+    <aside class="menu" aria-hidden="true">
+      <button class="menu-close" type="button" aria-label="Close Menu">×</button>
+      <div class="menu-inner">
+        <nav class="menu-nav" aria-label="Menu">
+          <a class="is-active" href="./home.html?skipIntro=1" data-fx-link><small>01</small><span>Index</span></a>
+          <a href="./projects.html?skipIntro=1" data-fx-link><small>02</small><span>Projects</span></a>
+          <a href="./about.html" data-fx-link><small>03</small><span>About</span></a>
+          <a href="./services.html" data-fx-link><small>04</small><span>Services</span></a>
+          <a href="./contact.html?skipIntro=1" data-fx-link><small>05</small><span>Contact</span></a>
+          <a href="./works.html" data-fx-link><small>06</small><span>World</span></a>
+          <a href="./ip-mask-demo.html?v=skin-ui-088" data-fx-link><small>07</small><span>IP Doorway</span></a>
+          <a href="./pet-demo.html" data-fx-link><small>08</small><span>Pet</span></a>
+        </nav>
+        <footer class="menu-footer">
+          <div>
+            <a href="mailto:1285293434@qq.com">1285293434@qq.com</a>
+            <a href="mailto:zedd18225055550@gmail.com">zedd18225055550@gmail.com</a>
+          </div>
+          <div>
+            <a href="https://www.xiaohongshu.com/user/profile/608ce124000000000100805f?mini=1&amp;tab=note" target="_blank" rel="noreferrer">Xiaohongshu</a>
+            <a href="./about.html" data-fx-link>About</a>
+            <a href="./ip-mask-demo.html?v=skin-ui-088" data-fx-link>IP Doorway</a>
+          </div>
+        </footer>
+      </div>
+    </aside>
+
+    <section class="loader" aria-label="Opening intro">
+      <div class="loader__inner">
+        <div class="loader__cube" aria-hidden="true">
+          <div class="loader__cube-inner">
+            <span>C</span><span>H</span><span>E</span><span>N</span><span>N</span><span>N</span>
+          </div>
+        </div>
+        <span class="loader__title">CHENNN STUDIO®</span>
+        <p class="loader__copy">一家品牌、数字和动态影像工作室<br />致力于创造耳目一新的视觉体验<br />帮助大胆的品牌被看见。</p>
+      </div>
+      <div class="loader__progress">
+        <div class="loader__inner">
+          <div class="loader__cube" aria-hidden="true">
+            <div class="loader__cube-inner">
+              <span>C</span><span>H</span><span>E</span><span>N</span><span>N</span><span>N</span>
+            </div>
+          </div>
+          <span class="loader__title">CHENNN STUDIO®</span>
+          <p class="loader__copy">一家品牌、数字和动态影像工作室<br />致力于创造耳目一新的视觉体验<br />帮助大胆的品牌被看见。</p>
+        </div>
+      </div>
+      <div class="loader__actions">
+        <button class="enter-btn" type="button">Enter ↘</button>
+        <button class="quiet-btn" type="button">Enter without audio</button>
+      </div>
+    </section>
+
+    <script>
+      const body = document.body;
+      const loader = document.querySelector(".loader");
+      const progress = document.querySelector(".loader__progress");
+      const progressInner = document.querySelector(".loader__progress .loader__inner");
+      const enterButton = document.querySelector(".enter-btn");
+      const quietButton = document.querySelector(".quiet-btn");
+      const menuButton = document.querySelector(".menu-btn");
+      const menuCloseButton = document.querySelector(".menu-close");
+      const menu = document.querySelector(".menu");
+      const clamp = (min, value, max) => Math.max(min, Math.min(value, max));
+      const introSeenKey = "chennnIntroSeen";
+
+      function hasSeenIntro() {
+        try {
+          return window.sessionStorage.getItem(introSeenKey) === "1";
+        } catch (error) {
+          return false;
+        }
+      }
+
+      function rememberIntro() {
+        try {
+          window.sessionStorage.setItem(introSeenKey, "1");
+        } catch (error) {}
+      }
+
+      function setProgress(value) {
+        const y = 100 - clamp(0, value, 100);
+        progress.style.transform = `translateY(${y}%)`;
+        progressInner.style.transform = `translateY(${-y}%)`;
+      }
+
+      function runIntro() {
+        let value = 0;
+        const tick = () => {
+          value += 10 + Math.random() * 12;
+          setProgress(value);
+          if (value < 100) {
+            window.setTimeout(tick, 120 + Math.random() * 70);
+            return;
+          }
+          window.setTimeout(() => {
+            loader.classList.add("is-ready");
+          }, 360);
+        };
+        window.setTimeout(tick, 220);
+      }
+
+      function enterPage() {
+        body.classList.add("is-entered");
+        rememberIntro();
+        setProgress(100);
+        window.setTimeout(() => {
+          loader.style.display = "none";
+        }, 900);
+      }
+
+      function shouldSkipIntro() {
+        return new URLSearchParams(window.location.search).get("skipIntro") === "1" || hasSeenIntro();
+      }
+
+      function skipIntro() {
+        rememberIntro();
+        body.classList.add("is-entered");
+        setProgress(100);
+        loader.style.display = "none";
+      }
+
+      function splitText(element) {
+        if (!element || element.dataset.splitReady === "true") return;
+        const text = element.textContent.trim();
+        element.setAttribute("aria-label", text);
+        element.textContent = "";
+        [...text].forEach((char, index) => {
+          const span = document.createElement("span");
+          span.className = "split-char";
+          span.style.setProperty("--i", index);
+          span.setAttribute("aria-hidden", "true");
+          span.textContent = char === " " ? "\u00a0" : char;
+          element.append(span);
+        });
+        element.dataset.splitReady = "true";
+      }
+
+      enterButton.addEventListener("click", enterPage);
+      quietButton.addEventListener("click", enterPage);
+      document.querySelectorAll(".menu-nav a > span").forEach(splitText);
+      menuButton.addEventListener("click", () => {
+        const isOpen = body.classList.toggle("is-menu-open");
+        menu.setAttribute("aria-hidden", String(!isOpen));
+      });
+      menuCloseButton.addEventListener("click", () => {
+        body.classList.remove("is-menu-open");
+        menu.setAttribute("aria-hidden", "true");
+      });
+      window.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          body.classList.remove("is-menu-open");
+          menu.setAttribute("aria-hidden", "true");
+        }
+      });
+
+      if (shouldSkipIntro()) {
+        skipIntro();
+      } else {
+        setProgress(0);
+        runIntro();
+      }
+    </script>
+    <script src="./assets/chen-pet.js" defer></script>
+    <script src="./wrapped.js?v=storyboard-arrows-234" defer></script>
+    <script>
+      // 每次进入 home.html 强制滚到顶部，避免浏览器恢复 scrollY 导致进来直接看到 wrapped 区
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+      window.scrollTo(0, 0);
+      window.addEventListener("load", () => window.scrollTo(0, 0));
+    </script>
+    <script>
+      /* Node 033: Wrapped 区入场动画 — IntersectionObserver 触发 .is-entered
+       * 当用户从 KV 往下滚到 wrapped 顶部进入视口 30% 时，整块"推上来 + 大字 fade in"。
+       * 一次性触发后 unobserve，避免来回滚动重复抖动。 */
+      (function () {
+        const wrapped = document.querySelector(".home-wrapped");
+        if (!wrapped) return;
+        if (!("IntersectionObserver" in window)) {
+          wrapped.classList.add("is-entered");
+          return;
+        }
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting || e.intersectionRatio > 0) {
+                wrapped.classList.add("is-entered");
+                io.unobserve(wrapped);
+              }
+            });
+          },
+          { threshold: 0, rootMargin: "0px 0px -5% 0px" }
+        );
+        io.observe(wrapped);
+      })();
+    </script>
+      <script src="./assets/vendor/gsap.min.js"></script>
+      <script src="./assets/vendor/CustomEase.min.js"></script>
+      <script src="./assets/vendor/ScrollTrigger.min.js"></script>
+      <script src="./chen-fx/06-gsap-motion-engine/motion-engine.js"></script>
+      <script src="./assets/main-site-fixes.js?v=world-only-audio-187"></script>
+  </body>
+</html>

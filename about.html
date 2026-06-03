@@ -1,0 +1,4003 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Chen Tong · About — CHENNN STUDIO®</title>
+    <meta name="description" content="Chen Tong — AI 创意探索者、独立设计师。用想象力和品味，把热爱装进另一个世界。">
+    <meta property="og:title" content="Chen Tong · AI Creative Explorer">
+    <meta property="og:description" content="设计师 / 独立开发 / AI 探索者 — 把想法落地成可以被打开的世界。">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="data:," />
+    
+    <!-- Load GSAP core -->
+    <script src="./assets/vendor/gsap.min.js"></script>
+    <script src="./assets/vendor/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/CustomEase.min.js"></script>
+    
+    <!-- Load Motion Engine -->
+    <link rel="stylesheet" href="./chen-fx/06-gsap-motion-engine/motion-engine.css" />
+    <script src="./chen-fx/06-gsap-motion-engine/motion-engine.js" defer></script>
+
+    <!--
+      MOCKUP v3 (Personal intro, World mode).
+      hi/.stitch/designs/about.html
+
+      Brief: a "Chen Tong / 创意探索者" personal page that lives next to the
+      studio's site. Borrows 3 framework moves from LQB reference:
+        1. Massive cropped wordmark hero (DESIGNER® style)
+        2. Personal info data-table (身份/方向/状态)
+        3. Stacked caps manifesto section w/ single-word lime accents
+
+      All copy is editable. The 5 EXPLORATION DIRECTIONS axis is curated for
+      "AI 探索落地、不只是设计提效" intent:
+        01 NEW VISUALS  · 视觉探索
+        02 WORKFLOW     · 工作流
+        03 INDIE BUILD  · 独立开发
+        04 END-TO-END   · 个人全流程
+        05 REAL APPS    · 落地应用
+
+      Title options for HERO (pick one; default below: "DESIGNER®"):
+        A. DESIGNER®     ← matches LQB DESIGN® move closest
+        B. MAKER®
+        C. EXPLORER®
+        D. TONG®         ← personal-name version
+        E. CHEN®
+
+      Page-specific classes prefixed `me-*`. Promote to hi/about.html (or
+      hi/me.html / hi/chen.html depending on URL preference).
+    -->
+
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css?v=about-main-086" />
+    <link rel="stylesheet" href="./chen-fx/03-page-transition/style.css" />
+
+    <style>
+      :root {
+        --chen-page-bg: #050505;
+        --about-safe-x: clamp(2rem, 5vw, 5rem);
+        --about-page-max: 104rem;
+      }
+
+      body {
+        background: var(--world-bg-deep, #050505);
+        color: var(--world-text, #fff);
+        font-family: var(--font-main);
+        margin: 0;
+        min-height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+      html {
+        overflow: auto;
+        scroll-behavior: smooth;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background:
+          linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+        background-size: 88px 88px;
+        opacity: 0.55;
+        mask-image: radial-gradient(circle at 50% 38%, #000 0%, transparent 78%);
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(circle at 18% 24%, rgba(156, 255, 82, 0.07), transparent 42%),
+          radial-gradient(circle at 86% 78%, rgba(156, 255, 82, 0.05), transparent 45%);
+      }
+
+      main, header { position: relative; z-index: 2; }
+
+      /* === HEADER (same World pattern) ====================== */
+
+      .world-header {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        padding: clamp(1.35rem, 2.3vw, 2rem);
+        z-index: 40;
+        gap: 2rem;
+        background: rgba(5, 5, 5, 0.48);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+
+      .brand-mark {
+        align-items: center;
+        background: var(--world-accent, #9cff52);
+        border-radius: 1rem;
+        color: var(--world-ink, #101010);
+        display: inline-flex;
+        font-size: 0.78rem;
+        font-weight: 900;
+        height: 3.05rem;
+        justify-content: center;
+        line-height: 1;
+        padding: 0 0.82rem;
+        text-decoration: none;
+        text-transform: uppercase;
+        transition:
+          box-shadow 0.24s ease,
+          transform 0.24s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+        width: max-content;
+        letter-spacing: 0.02em;
+      }
+
+      .brand-mark:hover,
+      .brand-mark:focus-visible {
+        box-shadow: 0 0 28px rgba(156, 255, 82, 0.34);
+        transform: translateY(-0.12rem) rotate(-1.5deg);
+      }
+
+      .brand-mark:active {
+        transform: translateY(0) scale(0.97);
+        transition-duration: 0.08s;
+      }
+
+      .world-nav {
+        display: flex;
+        gap: clamp(1.25rem, 2.1vw, 2.2rem);
+        align-items: center;
+        justify-self: end;
+        margin-left: auto;
+      }
+
+      .world-nav a {
+        color: rgba(255, 255, 255, 0.72);
+        font-size: clamp(0.95rem, 1.15vw, 1.18rem);
+        font-weight: 650;
+        font-style: italic;
+        text-decoration: none;
+        transition: color 0.2s ease, transform 0.2s ease;
+      }
+
+      .world-nav a:hover { color: #fff; transform: translateY(-0.1rem); }
+
+      .world-nav a.is-active {
+        color: var(--world-accent, #9cff52);
+        text-shadow: 0 0 18px rgba(156, 255, 82, 0.34);
+      }
+
+      .world-nav a.world-ip-entry {
+        align-items: center;
+        color: var(--world-accent, #9cff52) !important;
+        display: inline-flex;
+        gap: 0.45rem;
+        text-shadow: 0 0 18px rgba(156, 255, 82, 0.34);
+      }
+
+      .world-nav a.world-ip-entry::before {
+        content: "";
+        width: 0.52rem;
+        height: 0.52rem;
+        background: currentColor;
+        border-radius: 999px;
+        transform: rotate(45deg) scale(0.76);
+      }
+
+      .explore-pill {
+        align-items: center;
+        appearance: none;
+        background: #fff;
+        color: #050505;
+        border: 0;
+        border-radius: 999px;
+        padding: 0.85rem 1.85rem;
+        display: inline-flex;
+        font-size: 0.95rem;
+        font-weight: 700;
+        text-decoration: none;
+        cursor: pointer;
+        font-family: var(--font-main);
+        /* Add hover styles for magnetic buttons */
+        transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease;
+      }
+      
+      .explore-pill:hover,
+      .explore-pill:focus-visible {
+        background: var(--world-accent, #9cff52);
+      }
+
+      .menu {
+        background:
+          radial-gradient(circle at 82% 18%, rgba(156, 255, 82, 0.14), transparent 17rem),
+          linear-gradient(145deg, rgb(248, 245, 241), rgb(230, 225, 221));
+        color: var(--world-ink, #101010);
+        inset: 0;
+        left: auto;
+        max-width: min(42rem, 100vw);
+        opacity: 0;
+        pointer-events: none;
+        position: fixed;
+        right: 0;
+        transform: translateX(105%);
+        transition:
+          opacity 0.34s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+          transform 0.42s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+        width: 100%;
+        z-index: 90;
+      }
+
+      .is-menu-open .menu {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateX(0);
+      }
+
+      .menu-inner {
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+        padding: 6.5rem clamp(1.6rem, 7vw, 5rem) 2.2rem;
+      }
+
+      .menu-close {
+        align-items: center;
+        appearance: none;
+        background: var(--world-ink, #101010);
+        border: 0;
+        border-radius: 50%;
+        color: #fff;
+        cursor: pointer;
+        display: flex;
+        font-size: 2.15rem;
+        height: 3.5rem;
+        justify-content: center;
+        line-height: 1;
+        position: absolute;
+        right: clamp(1.25rem, 3vw, 2rem);
+        top: clamp(1.25rem, 3vw, 2rem);
+        transition: transform 0.24s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+        width: 3.5rem;
+      }
+
+      .menu-close:hover,
+      .menu-close:focus-visible {
+        transform: rotate(-8deg) scale(1.06);
+      }
+
+      .menu-nav {
+        display: grid;
+        gap: 0.7rem;
+      }
+
+      .menu-nav a {
+        align-items: flex-start;
+        color: inherit;
+        display: flex;
+        gap: 0.75rem;
+        text-decoration: none;
+        transition:
+          color 0.28s ease,
+          opacity 0.28s ease,
+          transform 0.34s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+      }
+
+      .menu-nav a:hover,
+      .menu-nav a:focus-visible {
+        color: var(--world-accent, #9cff52);
+        transform: translate3d(0.35rem, -0.08rem, 0);
+      }
+
+      .menu-nav:has(a:hover) a:not(:hover),
+      .menu-nav:has(a:focus-visible) a:not(:focus-visible) {
+        opacity: 0.22;
+      }
+
+      .menu-nav small {
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 1.1rem;
+        font-weight: 500;
+      }
+
+      .menu-nav span {
+        font-family: var(--font-main);
+        font-size: clamp(3.7rem, 12vw, 6.65rem);
+        line-height: 0.82;
+      }
+
+      .menu-nav a.is-active {
+        color: rgba(16, 16, 16, 0.2);
+      }
+
+      .menu-footer {
+        display: grid;
+        gap: 1.7rem;
+        grid-template-columns: 1fr 1fr;
+        margin-top: auto;
+      }
+
+      .menu-footer a {
+        color: inherit;
+        display: block;
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.82rem;
+        font-weight: 700;
+        line-height: 1.15;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      /* === HERO (image-led doorway, ref. frame 3) ============= */
+
+      .me-stage {
+        max-width: none;
+        margin: 0 auto;
+        padding: 0 0 5rem;
+      }
+
+      .me-stage > :not(.me-hero):not(.me-works):not(.me-quote):not(.me-lede) {
+        box-sizing: border-box;
+        margin-left: auto;
+        margin-right: auto;
+        width: min(var(--about-page-max), calc(100% - (var(--about-safe-x) * 2)));
+      }
+
+      .me-hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.5fr);
+        min-height: 100svh;
+        overflow: hidden;
+        position: relative;
+        padding: 8.5rem clamp(1.5rem, 4vw, 4rem) clamp(2rem, 5vw, 4rem);
+        isolation: isolate;
+      }
+
+      .me-hero__image {
+        height: 100%;
+        inset: 0;
+        object-fit: cover;
+        object-position: center;
+        position: absolute;
+        width: 100%;
+        z-index: -3;
+      }
+
+      .me-hero::before,
+      .me-hero::after {
+        content: "";
+        inset: 0;
+        pointer-events: none;
+        position: absolute;
+      }
+
+      .me-hero::before {
+        background:
+          linear-gradient(90deg, rgba(5, 5, 5, 0.7) 0 22%, rgba(5, 5, 5, 0.18) 50%, rgba(5, 5, 5, 0.55) 100%),
+          linear-gradient(180deg, rgba(5, 5, 5, 0.32) 0 16%, transparent 48%, rgba(5, 5, 5, 0.58) 100%);
+        z-index: -2;
+      }
+
+      .me-hero::after {
+        background:
+          radial-gradient(circle at 50% 52%, transparent 0 30rem, rgba(5, 5, 5, 0.24) 46rem),
+          linear-gradient(rgba(156, 255, 82, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(156, 255, 82, 0.035) 1px, transparent 1px);
+        background-size: 100% 100%, 88px 88px, 88px 88px;
+        mix-blend-mode: screen;
+        opacity: 0.38;
+        z-index: -1;
+      }
+
+      .me-wordmark {
+        font-family: var(--font-main);
+        font-size: 8.5rem;
+        font-weight: 900;
+        line-height: 0.82;
+        letter-spacing: 0;
+        color: rgba(255, 255, 255, 0.66);
+        text-transform: uppercase;
+        margin: 0;
+        position: relative;
+        user-select: none;
+        text-shadow: 0 1.4rem 5rem rgba(0, 0, 0, 0.46);
+      }
+
+      .me-wordmark sup {
+        font-size: 0.18em;
+        font-weight: 700;
+        color: var(--world-accent, #9cff52);
+        vertical-align: super;
+        margin-left: 0.2em;
+        text-shadow: 0 0 16px rgba(156, 255, 82, 0.5);
+      }
+
+      .me-wordmark__sub {
+        display: block;
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.08em;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        color: rgba(255, 255, 255, 0.72);
+        margin-left: 0.64rem;
+        margin-top: 0.78rem;
+      }
+
+      .me-hero__caption {
+        position: absolute;
+        bottom: clamp(2rem, 5vw, 4rem);
+        left: clamp(1.5rem, 4vw, 4rem);
+        max-width: 31rem;
+        font-size: 1.12rem;
+        line-height: 1.5;
+        color: rgba(255, 255, 255, 0.86);
+        margin: 0;
+        text-shadow: 0 0.9rem 2.4rem rgba(0, 0, 0, 0.54);
+      }
+
+      .me-hero__caption::before {
+        content: "< ";
+        color: var(--world-accent, #9cff52);
+        font-weight: 700;
+      }
+
+      .me-hero__right {
+        align-self: center;
+        justify-self: end;
+        text-align: right;
+        transform: translateY(2rem);
+        max-width: 24rem;
+      }
+
+      .me-hero__status {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0.55rem 1rem;
+        background: rgba(156, 255, 82, 0.08);
+        border: 1px solid rgba(156, 255, 82, 0.35);
+        border-radius: 999px;
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--world-accent, #9cff52);
+        margin-bottom: 2rem;
+      }
+
+      .me-hero__status::before {
+        content: "";
+        width: 0.5rem;
+        height: 0.5rem;
+        background: currentColor;
+        border-radius: 999px;
+        box-shadow: 0 0 10px currentColor;
+        animation: me-pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes me-pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.4; }
+      }
+
+      .me-hero__role {
+        font-family: var(--font-main);
+        font-size: 3.35rem;
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: 0;
+        color: #fff;
+        margin: 0;
+        text-shadow: 0 1.1rem 3rem rgba(0, 0, 0, 0.58);
+      }
+
+      .me-hero__role span {
+        display: block;
+      }
+
+      .me-hero__role .accent {
+        color: var(--world-accent, #9cff52);
+        font-style: italic;
+      }
+
+      .me-title-deck {
+        margin-top: 2.3rem;
+        display: grid;
+        gap: 0.65rem;
+        justify-items: end;
+        opacity: 0.94;
+      }
+
+      @media (min-width: 1280px) {
+        .me-wordmark { font-size: 10.75rem; }
+        .me-hero__role { font-size: 4rem; }
+      }
+
+      @media (min-width: 1680px) {
+        .me-wordmark { font-size: 12.5rem; }
+        .me-hero__role { font-size: 4.4rem; }
+      }
+
+      .me-title-option {
+        align-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 999px;
+        color: rgba(255, 255, 255, 0.74);
+        display: inline-flex;
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.72rem;
+        font-weight: 800;
+        gap: 0.55rem;
+        letter-spacing: 0.11em;
+        line-height: 1;
+        padding: 0.68rem 0.92rem;
+        text-transform: uppercase;
+        transition:
+          border-color 0.24s ease,
+          color 0.24s ease,
+          transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .me-title-option::before {
+        background: currentColor;
+        border-radius: 999px;
+        content: "";
+        height: 0.45rem;
+        transform: rotate(45deg) scale(0.72);
+        width: 0.45rem;
+      }
+
+      .me-title-option:hover {
+        border-color: rgba(156, 255, 82, 0.56);
+        color: var(--world-accent, #9cff52);
+        transform: translateY(-0.18rem);
+      }
+
+      .me-title-option.is-picked {
+        background: rgba(156, 255, 82, 0.08);
+        border-color: rgba(156, 255, 82, 0.5);
+        color: var(--world-accent, #9cff52);
+        text-shadow: 0 0 14px rgba(156, 255, 82, 0.3);
+      }
+
+      /* === IDENTITY DATA TABLE (LQB 个人信息 move) =========== */
+
+      .me-id {
+        margin-top: 3rem;
+        padding: 2.5rem 2.5rem;
+        background: rgba(255, 255, 255, 0.025);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+        position: relative;
+      }
+
+      .me-id::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0;
+        width: 3rem;
+        height: 2px;
+        background: var(--world-accent, #9cff52);
+        box-shadow: 0 0 12px currentColor;
+      }
+
+      .me-id__row {
+        display: flex;
+        flex-direction: column;
+        gap: 0.55rem;
+      }
+
+      .me-id__row h4 {
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.5);
+        margin: 0;
+      }
+
+      .me-id__row p {
+        font-size: 1.05rem;
+        font-weight: 700;
+        line-height: 1.35;
+        margin: 0;
+        color: #fff;
+      }
+
+      .me-id__row p em {
+        color: var(--world-accent, #9cff52);
+        font-style: normal;
+      }
+
+      /* === LEDE BLOCK ====================================== */
+
+      .me-lede {
+        max-width: 60rem;
+        margin: 5rem 0 6rem;
+        font-size: clamp(1.35rem, 2vw, 1.85rem);
+        line-height: 1.5;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.92);
+      }
+
+      .me-lede em {
+        color: var(--world-accent, #9cff52);
+        font-style: normal;
+      }
+
+      .me-line {
+        color: rgba(255, 255, 255, 0.42);
+        text-decoration: line-through;
+        text-decoration-thickness: 0.08em;
+      }
+
+      .me-gold {
+        color: #e6c35c;
+        text-decoration: none;
+      }
+
+      /* === FIVE DIRECTIONS (modular grid) =================== */
+
+      .me-section {
+        padding: 4rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .me-section__head {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        margin-bottom: 3rem;
+        gap: 2rem;
+      }
+
+      .me-section__title {
+        font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+        font-weight: 900;
+        line-height: 1;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+        margin: 0;
+        color: #fff;
+      }
+
+      .me-section__title em {
+        color: var(--world-accent, #9cff52);
+        font-style: italic;
+      }
+
+      .me-section__count {
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        color: rgba(255, 255, 255, 0.5);
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .me-directions {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 0.85rem;
+      }
+
+      .me-direction {
+        background: rgba(255, 255, 255, 0.025);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1.75rem 1.5rem 1.5rem;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-height: 16rem;
+        transition: border-color 0.25s ease, transform 0.3s ease;
+      }
+
+      .me-direction:hover {
+        border-color: rgba(156, 255, 82, 0.4);
+        transform: translateY(-0.3rem);
+      }
+
+      .me-direction__num {
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        color: var(--world-accent, #9cff52);
+        margin-bottom: 1.5rem;
+      }
+
+      .me-direction__en {
+        font-size: 1.1rem;
+        font-weight: 900;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        color: #fff;
+        margin: 0 0 0.3rem;
+      }
+
+      .me-direction__zh {
+        font-size: 1rem;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.7);
+        margin: 0 0 1rem;
+      }
+
+      .me-direction__body {
+        font-size: 0.88rem;
+        line-height: 1.55;
+        color: rgba(255, 255, 255, 0.6);
+        margin: 0;
+        flex: 1;
+      }
+
+      /* === WORKS CAROUSEL (pitch carousel move) ============ */
+
+      .me-works {
+        margin: 0;
+        padding: 4.6rem 0 6.2rem;
+        overflow: hidden;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
+      }
+
+      .me-works::before,
+      .me-works::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        pointer-events: none;
+        top: 9rem;
+        width: min(16vw, 14rem);
+        z-index: 3;
+      }
+
+      .me-works::before {
+        background: linear-gradient(90deg, var(--world-bg-deep, #050505), transparent);
+        left: 0;
+      }
+
+      .me-works::after {
+        background: linear-gradient(270deg, var(--world-bg-deep, #050505), transparent);
+        right: 0;
+      }
+
+      .me-works__head {
+        padding: 0 max(var(--about-safe-x), calc((100vw - var(--about-page-max)) / 2));
+        margin-bottom: 3.4rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 2rem;
+      }
+
+      .me-works__row {
+        display: flex;
+        gap: clamp(1.1rem, 2vw, 2.2rem);
+        padding: 0 max(var(--about-safe-x), calc((100vw - var(--about-page-max)) / 2));
+        width: max-content;
+        animation: me-work-marquee 38s linear infinite;
+        will-change: transform;
+      }
+
+      .me-works:hover .me-works__row {
+        animation-play-state: paused;
+      }
+
+      @keyframes me-work-marquee {
+        from { transform: translate3d(0, 0, 0); }
+        to { transform: translate3d(calc(-50% - clamp(0.55rem, 1vw, 1.1rem)), 0, 0); }
+      }
+
+      .me-works__row.is-dragging {
+        animation-play-state: paused;
+      }
+
+      .me-works__hint {
+        color: rgba(255, 255, 255, 0.42);
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.24em;
+        margin: 1.8rem 0 0;
+        padding: 0 max(var(--about-safe-x), calc((100vw - var(--about-page-max)) / 2));
+        text-transform: uppercase;
+      }
+
+      .me-works__row::-webkit-scrollbar {
+        display: none;
+      }
+
+      .me-works__row {
+        cursor: grab;
+        scrollbar-width: none;
+      }
+
+      .me-works__row.is-dragging {
+        cursor: grabbing;
+      }
+
+      .me-work {
+        aspect-ratio: 16 / 10;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: clamp(1rem, 1.8vw, 1.6rem);
+        box-shadow:
+          0 2.8rem 5.2rem rgba(0, 0, 0, 0.4),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.035);
+        display: flex;
+        flex: 0 0 clamp(28rem, 39vw, 46rem);
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden;
+        padding: clamp(1.5rem, 2vw, 2.25rem);
+        position: relative;
+        scroll-snap-align: start;
+        transform: translateZ(0);
+        transition:
+          border-color 0.24s ease,
+          box-shadow 0.24s ease,
+          transform 0.36s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .me-work:hover {
+        border-color: rgba(156, 255, 82, 0.45);
+        box-shadow:
+          0 3.2rem 6.4rem rgba(0, 0, 0, 0.52),
+          0 0 0 0.32rem rgba(156, 255, 82, 0.055),
+          inset 0 0 0 1px rgba(156, 255, 82, 0.2);
+        transform: translateY(-0.3rem) rotateZ(-0.35deg);
+      }
+
+      .me-work::before {
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+        background-size: 4.2rem 4.2rem;
+        content: "";
+        inset: 0;
+        opacity: 0.45;
+        pointer-events: none;
+        position: absolute;
+      }
+
+      .me-work::after {
+        aspect-ratio: 1;
+        background:
+          radial-gradient(circle at 50% 50%, rgba(156, 255, 82, 0.72), rgba(156, 255, 82, 0.18) 36%, transparent 68%),
+          linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.15));
+        border-radius: 1rem;
+        bottom: clamp(1.5rem, 2vw, 2.25rem);
+        box-shadow: 0 1rem 2.4rem rgba(0, 0, 0, 0.34);
+        content: "";
+        pointer-events: none;
+        position: absolute;
+        right: clamp(1.5rem, 2vw, 2.25rem);
+        width: clamp(5rem, 7.4vw, 8.4rem);
+      }
+
+      .me-work:nth-child(odd),
+      .me-work:nth-child(even) {
+        transform: translateY(0);
+      }
+
+      .me-work:nth-child(odd):hover,
+      .me-work:nth-child(even):hover {
+        transform: translateY(-0.3rem) rotateZ(-0.35deg);
+      }
+
+      .me-work:nth-child(1) {
+        background:
+          radial-gradient(circle at 78% 74%, rgba(156, 255, 82, 0.22), transparent 34%),
+          linear-gradient(135deg, #d9ddd0, #aeb5a6);
+        color: #050505;
+      }
+      .me-work:nth-child(2) {
+        background:
+          radial-gradient(circle at 78% 68%, rgba(255, 126, 88, 0.72), transparent 18%),
+          linear-gradient(135deg, #0b0b0b, #151515);
+      }
+      .me-work:nth-child(3) {
+        background:
+          radial-gradient(circle at 74% 73%, rgba(255, 119, 88, 0.45), transparent 28%),
+          linear-gradient(135deg, #d8d0bd, #c5baa5);
+        color: #050505;
+      }
+      .me-work:nth-child(4) {
+        background:
+          radial-gradient(circle at 76% 70%, rgba(156, 255, 82, 0.42), transparent 24%),
+          linear-gradient(135deg, #101f1a, #050706);
+      }
+      .me-work:nth-child(5) {
+        background:
+          radial-gradient(circle at 76% 72%, rgba(255, 255, 255, 0.38), transparent 24%),
+          linear-gradient(135deg, #eee8dc, #c7c0b5);
+        color: #050505;
+      }
+      .me-work:nth-child(6) {
+        background:
+          radial-gradient(circle at 76% 70%, rgba(156, 255, 82, 0.34), transparent 25%),
+          linear-gradient(135deg, #050505, #151515);
+      }
+
+      .me-work__num {
+        position: relative;
+        z-index: 1;
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: clamp(0.76rem, 0.9vw, 0.95rem);
+        font-weight: 700;
+        letter-spacing: 0.24em;
+        color: rgba(255, 255, 255, 0.52);
+      }
+
+      .me-work__num strong {
+        color: var(--world-accent, #9cff52);
+      }
+
+      .me-work:nth-child(1) .me-work__num,
+      .me-work:nth-child(3) .me-work__num,
+      .me-work:nth-child(5) .me-work__num {
+        color: rgba(5, 5, 5, 0.45);
+      }
+
+      .me-work__title {
+        font-size: clamp(2.2rem, 3.2vw, 4rem);
+        font-weight: 900;
+        line-height: 0.92;
+        text-transform: uppercase;
+        margin: 0 0 0.45rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .me-work__zh {
+        font-size: clamp(1rem, 1.15vw, 1.22rem);
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.62);
+        margin: 0 0 0.85rem;
+        max-width: 58%;
+        position: relative;
+        z-index: 1;
+      }
+
+      .me-work:nth-child(1) .me-work__zh,
+      .me-work:nth-child(3) .me-work__zh,
+      .me-work:nth-child(5) .me-work__zh {
+        color: rgba(5, 5, 5, 0.62);
+      }
+
+      .me-work__tags {
+        display: flex;
+        gap: 0.4rem;
+        flex-wrap: wrap;
+        position: relative;
+        z-index: 1;
+      }
+
+      .me-work__tags span {
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        padding: 0.35rem 0.65rem;
+        background: rgba(255, 255, 255, 0.08);
+        color: rgba(255, 255, 255, 0.85);
+        border-radius: 999px;
+      }
+
+      .me-work:nth-child(1) .me-work__tags span,
+      .me-work:nth-child(3) .me-work__tags span,
+      .me-work:nth-child(5) .me-work__tags span {
+        background: rgba(5, 5, 5, 0.1);
+        color: rgba(5, 5, 5, 0.72);
+      }
+
+      /* === MANIFESTO (LQB stacking caps move) =============== */
+
+      .me-manifesto {
+        margin: 7rem 0 0;
+        padding: 7rem 0;
+        text-align: center;
+        position: relative;
+      }
+
+      .me-manifesto::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(156, 255, 82, 0.4), transparent);
+      }
+
+      .me-manifesto__kicker {
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--world-accent, #9cff52);
+        margin: 0 0 3rem;
+      }
+
+      .me-manifesto__kicker::before { content: "● "; text-shadow: 0 0 10px currentColor; }
+
+      .me-manifesto__title {
+        font-size: clamp(3rem, 8vw, 7rem);
+        font-weight: 900;
+        line-height: 0.95;
+        letter-spacing: -0.025em;
+        text-transform: uppercase;
+        margin: 0 0 1.5rem;
+        color: #fff;
+      }
+
+      .me-manifesto__title em {
+        color: var(--world-accent, #9cff52);
+        font-style: italic;
+      }
+
+      .me-manifesto__sub {
+        font-size: 1.1rem;
+        line-height: 1.5;
+        color: rgba(255, 255, 255, 0.6);
+        max-width: 36rem;
+        margin: 0 auto;
+      }
+
+      /* Five-pillar grid */
+      .me-pillars {
+        margin: 5rem 0 0;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 0.85rem;
+      }
+
+      .me-pillar {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1.75rem 1.25rem;
+        text-align: center;
+        position: relative;
+        transition:
+          background-color 0.24s ease,
+          border-color 0.24s ease,
+          transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .me-pillar:hover {
+        background: rgba(156, 255, 82, 0.05);
+        border-color: rgba(156, 255, 82, 0.4);
+        transform: translateY(-0.4rem);
+      }
+
+      .me-pillar__icon {
+        font-size: 1.8rem;
+        margin-bottom: 0.85rem;
+        filter: grayscale(0.2);
+      }
+
+      .me-pillar__en {
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--world-accent, #9cff52);
+        margin: 0 0 0.5rem;
+      }
+
+      .me-pillar__zh {
+        font-size: 1.05rem;
+        font-weight: 900;
+        color: #fff;
+        margin: 0;
+      }
+
+      /* === PHILOSOPHY QUOTE BLOCK =========================== */
+
+      .me-quote {
+        margin: 6rem 0 0;
+        padding: 5rem var(--about-safe-x);
+        border: 0;
+        background:
+          linear-gradient(90deg, transparent 0%, rgba(156, 255, 82, 0.06) 14%, rgba(156, 255, 82, 0.24) 50%, rgba(156, 255, 82, 0.06) 86%, transparent 100%) top center / 100% 1px no-repeat,
+          linear-gradient(90deg, transparent 0%, rgba(156, 255, 82, 0.05) 14%, rgba(156, 255, 82, 0.2) 50%, rgba(156, 255, 82, 0.05) 86%, transparent 100%) bottom center / 100% 1px no-repeat,
+          radial-gradient(ellipse at 50% 52%, rgba(156, 255, 82, 0.145) 0%, rgba(156, 255, 82, 0.082) 33%, rgba(156, 255, 82, 0.024) 58%, transparent 76%),
+          linear-gradient(90deg, transparent 0%, rgba(156, 255, 82, 0.02) 18%, rgba(156, 255, 82, 0.062) 50%, rgba(156, 255, 82, 0.02) 82%, transparent 100%);
+        box-sizing: border-box;
+        isolation: isolate;
+        overflow: hidden;
+        position: relative;
+        text-align: center;
+      }
+
+      .me-quote::before {
+        content: "“";
+        position: absolute;
+        top: 1.5rem;
+        left: 2.5rem;
+        font-size: 5rem;
+        line-height: 1;
+        color: var(--world-accent, #9cff52);
+        font-family: serif;
+        opacity: 0.4;
+        z-index: 2;
+      }
+
+      .me-quote::after {
+        content: "";
+        position: absolute;
+        inset: -40% 4%;
+        z-index: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(ellipse at 50% 50%, rgba(156, 255, 82, 0.18), transparent 36%),
+          radial-gradient(circle at 34% 44%, rgba(156, 255, 82, 0.12), transparent 21%),
+          radial-gradient(circle at 68% 58%, rgba(156, 255, 82, 0.1), transparent 24%),
+          repeating-linear-gradient(
+            102deg,
+            transparent 0 2.7rem,
+            rgba(156, 255, 82, 0.04) 2.7rem 2.78rem
+          );
+        mask-image: linear-gradient(90deg, transparent 0%, #000 18%, #000 82%, transparent 100%);
+        opacity: 0.58;
+        transform: translate3d(-4%, 2%, 0) rotate(0.001deg);
+        animation: me-quote-flow 8.5s cubic-bezier(0.45, 0, 0.2, 1) infinite alternate;
+      }
+
+      @keyframes me-quote-flow {
+        0% {
+          opacity: 0.48;
+          transform: translate3d(-5%, 3%, 0) scale(1) rotate(0.001deg);
+        }
+        48% {
+          opacity: 0.74;
+          transform: translate3d(3%, -2%, 0) scale(1.04) rotate(2deg);
+        }
+        100% {
+          opacity: 0.58;
+          transform: translate3d(6%, 2%, 0) scale(1.02) rotate(-1.5deg);
+        }
+      }
+
+      .me-quote p {
+        font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+        font-weight: 700;
+        line-height: 1.4;
+        margin: 0 0 1rem;
+        color: #fff;
+        max-width: 48rem;
+        margin-inline: auto;
+        position: relative;
+        z-index: 1;
+      }
+
+      .me-quote p:last-of-type { margin-bottom: 0; }
+
+      .me-quote p em {
+        color: var(--world-accent, #9cff52);
+        font-style: normal;
+      }
+
+      .me-quote__sep {
+        display: block;
+        width: 3rem;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.2);
+        margin: 1.5rem auto;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* === FOOTER w/ SKILL BARS ============================ */
+
+      .me-footer {
+        margin: 6rem 0 0;
+        padding: 4rem 0 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, 1.2fr);
+        gap: clamp(2rem, 4vw, 4rem);
+      }
+
+      .me-footer__brand h3 {
+        font-size: 1.5rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: -0.01em;
+        margin: 0 0 0.6rem;
+      }
+
+      .me-footer__brand p {
+        font-size: 0.9rem;
+        line-height: 1.55;
+        color: rgba(255, 255, 255, 0.55);
+        margin: 0;
+        max-width: 22rem;
+      }
+
+      .me-footer__list h4 {
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.5);
+        margin: 0 0 1rem;
+      }
+
+      .me-footer__list a {
+        display: block;
+        padding: 0.55rem 0;
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.85);
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        transition: color 0.2s ease;
+      }
+
+      .me-footer__list a:hover { color: var(--world-accent, #9cff52); }
+
+      .me-footer__list a small {
+        display: block;
+        font-size: 0.72rem;
+        color: rgba(255, 255, 255, 0.45);
+        margin-top: 0.15rem;
+      }
+
+      /* Skill bars (LQB-inspired colored bars) */
+      .me-skills h4 {
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.5);
+        margin: 0 0 1.25rem;
+      }
+
+      .me-skill {
+        display: grid;
+        grid-template-columns: 6.5rem 1fr auto;
+        gap: 1rem;
+        align-items: center;
+        margin-bottom: 1rem;
+        font-size: 0.85rem;
+      }
+
+      .me-skill__name {
+        color: rgba(255, 255, 255, 0.85);
+        font-weight: 600;
+      }
+
+      .me-skill__bar {
+        height: 4px;
+        background: rgba(255, 255, 255, 0.08);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .me-skill__bar span {
+        position: absolute;
+        top: 0; left: 0;
+        height: 100%;
+        background: var(--world-accent, #9cff52);
+        box-shadow: 0 0 8px rgba(156, 255, 82, 0.5);
+      }
+
+      .me-skill__pct {
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.72rem;
+        color: rgba(255, 255, 255, 0.5);
+        font-weight: 600;
+        letter-spacing: 0.06em;
+      }
+
+      .me-end {
+        margin-top: 5rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      .me-end strong { color: var(--world-accent, #9cff52); }
+
+      /* === SCROLL REVEAL === */
+      .reveal {
+        opacity: 0;
+        transform: translateY(2rem);
+        transition:
+          opacity 0.7s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+          transform 0.7s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+      }
+
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .reveal-stagger > .reveal {
+        transition-delay: calc(var(--i, 0) * 80ms);
+      }
+
+      .me-wordmark {
+        animation: me-wordmark-in 1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+      }
+
+      @keyframes me-wordmark-in {
+        from {
+          opacity: 0;
+          transform: translateY(2.5rem) scale(0.97);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .me-hero__role {
+        animation: me-wordmark-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+      }
+
+      .me-hero__caption {
+        animation: me-wordmark-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
+      }
+
+      .explore-pill {
+        transition:
+          box-shadow 0.22s ease,
+          transform 0.22s ease;
+      }
+
+      .explore-pill:hover {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        transform: translateY(-0.12rem);
+      }
+
+      .explore-pill:active {
+        transform: translateY(0) scale(0.97);
+        transition-duration: 0.08s;
+      }
+
+      .me-stage > :not(.me-hero):not(.me-works):not(.me-quote):not(.me-lede) {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .me-stage > .me-lede {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: none;
+        width: min(60rem, calc(100% - (var(--about-safe-x) * 2)));
+      }
+
+      /* === MOBILE =========================================== */
+
+      @media (max-width: 960px) {
+        .world-header { grid-template-columns: auto auto; }
+        .world-nav { display: none; }
+        .me-stage { padding-bottom: 4rem; }
+        .me-hero {
+          grid-template-columns: 1fr;
+          min-height: 100svh;
+          padding: 7rem 1.4rem 2rem;
+        }
+        .me-wordmark { font-size: 5.2rem; }
+        .me-hero__caption { position: static; margin-top: 2rem; }
+        .me-hero__right {
+          align-self: end;
+          justify-self: start;
+          max-width: 100%;
+          text-align: left;
+          transform: none;
+        }
+        .me-hero__role { font-size: 2.55rem; }
+        .me-title-deck { justify-items: start; }
+        .me-id { grid-template-columns: 1fr 1fr; gap: 1.5rem; padding: 1.75rem; }
+        .me-directions { grid-template-columns: 1fr 1fr; }
+        .me-pillars { grid-template-columns: 1fr 1fr; }
+        .me-footer { grid-template-columns: 1fr; }
+        .me-section__head { flex-direction: column; align-items: flex-start; }
+      }
+
+      @media (max-width: 767px) {
+        .world-header {
+          gap: 1rem;
+          padding: 1rem 1.25rem;
+        }
+
+        .world-header .world-nav {
+          display: none;
+        }
+
+        .explore-pill {
+          display: inline-flex;
+        }
+
+        .me-hero {
+          grid-template-columns: 1fr;
+          min-height: 100svh;
+          padding: 5.5rem 1.25rem 2.5rem;
+        }
+
+        .me-wordmark {
+          font-size: clamp(3.2rem, 17vw, 5.5rem);
+        }
+
+        .me-hero__right {
+          justify-self: start;
+          margin-top: 2rem;
+          text-align: left;
+          transform: none;
+        }
+
+        .me-hero__caption {
+          margin-top: 1.5rem;
+          max-width: 100%;
+          position: static;
+        }
+
+        .me-hero__role {
+          font-size: clamp(2rem, 8vw, 3.5rem);
+        }
+
+        .me-stage > section {
+          padding-left: 1.25rem;
+          padding-right: 1.25rem;
+        }
+
+        .me-id,
+        .me-pillars {
+          grid-template-columns: 1fr;
+        }
+
+        .me-id {
+          gap: 1.25rem;
+          padding: 1.5rem;
+        }
+
+        .me-directions {
+          gap: 0.6rem;
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .me-direction {
+          min-height: 11rem;
+          padding: 1.25rem;
+        }
+
+        .me-section__head {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 0.5rem;
+          margin-bottom: 1.5rem;
+        }
+
+        .me-lede {
+          font-size: clamp(1.6rem, 5.5vw, 2.4rem);
+          padding: 0 1.25rem;
+        }
+
+        .me-works {
+          padding: 0 1.25rem;
+        }
+
+        .menu {
+          max-width: 100dvw;
+          transform: none;
+          visibility: hidden;
+        }
+
+        .is-menu-open .menu {
+          transform: none;
+          visibility: visible;
+        }
+
+        .menu-inner {
+          padding: 5rem 1.5rem 2rem;
+        }
+
+        .menu-footer {
+          gap: 1rem;
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
+
+        .me-works__row {
+          animation: none;
+          overflow-x: auto;
+          width: auto;
+        }
+      }
+      </style>
+    <style>
+      /* Marathon Skill experiment: acid print tech-symbol full-page skin.
+         This file is an isolated preview; original about.html is unchanged. */
+      :root {
+        --marathon-paper: #f4f3ed;
+        --marathon-paper-warm: #e8e7de;
+        --marathon-ink: #050505;
+        --marathon-acid: #9cff52;
+        --marathon-acid-rgb: 156 255 82;
+        --marathon-soft: rgba(5, 5, 5, 0.62);
+        --marathon-line: rgba(5, 5, 5, 0.92);
+        --marathon-scuff: rgba(5, 5, 5, 0.1);
+        --chen-page-bg: var(--marathon-paper);
+      }
+
+      html,
+      body.marathon-about {
+        background: var(--marathon-paper);
+      }
+
+      body.marathon-about {
+        color: var(--marathon-ink);
+      }
+
+      body.marathon-about::before {
+        background:
+          linear-gradient(102deg, transparent 0 11rem, rgba(5, 5, 5, 0.035) 11rem 11.08rem, transparent 11.08rem 18rem),
+          radial-gradient(circle at 12% 24%, var(--marathon-scuff) 0 0.08rem, transparent 0.09rem),
+          radial-gradient(circle at 86% 36%, var(--marathon-scuff) 0 0.07rem, transparent 0.08rem),
+          linear-gradient(rgba(5, 5, 5, 0.052) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(5, 5, 5, 0.04) 1px, transparent 1px);
+        background-size: 100% 100%, 1.1rem 1.1rem, 1.45rem 1.45rem, 5.5rem 5.5rem, 5.5rem 5.5rem;
+        mask-image: none;
+        opacity: 0.66;
+      }
+
+      body.marathon-about::after {
+        background:
+          radial-gradient(circle at 13% 18%, rgba(var(--marathon-acid-rgb), 0.24), transparent 13rem),
+          radial-gradient(circle at 88% 10%, rgba(var(--marathon-acid-rgb), 0.18), transparent 14rem),
+          linear-gradient(90deg, var(--marathon-ink) 0 0.65rem, transparent 0.65rem calc(100% - 0.65rem), var(--marathon-ink) calc(100% - 0.65rem)),
+          linear-gradient(180deg, transparent 0 calc(100% - 0.65rem), var(--marathon-ink) calc(100% - 0.65rem));
+        opacity: 1;
+      }
+
+      .marathon-about .world-header {
+        background: var(--marathon-ink);
+        border-bottom: 3px solid var(--marathon-acid);
+        box-shadow: 0 0.7rem 0 rgba(var(--marathon-acid-rgb), 0.16);
+        color: var(--marathon-paper);
+        grid-template-columns: auto 1fr auto;
+        padding: clamp(1rem, 1.75vw, 1.55rem) clamp(1rem, 2.5vw, 2.4rem);
+      }
+
+      .marathon-about .brand-mark {
+        background: var(--marathon-acid);
+        border: 2px solid var(--marathon-acid);
+        border-radius: 0.5rem;
+        box-shadow: 0.42rem 0.42rem 0 rgba(255, 255, 255, 0.16);
+        color: var(--marathon-ink);
+        height: 2.85rem;
+        letter-spacing: 0;
+        transform: rotate(-1.4deg);
+      }
+
+      .marathon-about .brand-mark:hover,
+      .marathon-about .brand-mark:focus-visible {
+        box-shadow: 0.62rem 0.62rem 0 rgba(var(--marathon-acid-rgb), 0.26);
+        transform: translateY(-0.12rem) rotate(1deg);
+      }
+
+      .marathon-about .world-nav {
+        background:
+          linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+        gap: clamp(0.95rem, 1.9vw, 2rem);
+      }
+
+      .marathon-about .world-nav a {
+        color: rgba(244, 243, 237, 0.64);
+        font-style: oblique;
+        letter-spacing: 0;
+      }
+
+      .marathon-about .world-nav a:hover,
+      .marathon-about .world-nav a:focus-visible,
+      .marathon-about .world-nav a.is-active,
+      .marathon-about .world-nav a.world-ip-entry {
+        color: var(--marathon-acid) !important;
+        text-shadow: none;
+      }
+
+      .marathon-about .world-nav a.world-ip-entry {
+        border-bottom: 2px solid currentColor;
+        padding-bottom: 0.22rem;
+      }
+
+      .marathon-about .world-nav a.world-ip-entry::before {
+        border-radius: 0;
+        transform: rotate(0deg);
+      }
+
+      .marathon-about .explore-pill {
+        background: var(--marathon-paper);
+        border: 2px solid var(--marathon-paper);
+        border-radius: 999px;
+        color: var(--marathon-ink);
+        min-height: 2.95rem;
+        padding-inline: 1.8rem;
+        transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, border-color 0.2s ease;
+      }
+
+      .marathon-about .explore-pill:hover {
+        background: var(--marathon-acid);
+        border-color: var(--marathon-acid);
+        box-shadow: none;
+      }
+
+      .marathon-about .me-stage {
+        background:
+          linear-gradient(90deg, transparent 0 calc(100% - 3.4rem), var(--marathon-acid) calc(100% - 3.4rem) calc(100% - 2.15rem), transparent calc(100% - 2.15rem)),
+          var(--marathon-paper);
+      }
+
+      .marathon-about .me-stage > :not(.me-hero):not(.me-works):not(.me-quote):not(.me-lede) {
+        width: min(var(--about-page-max), calc(100% - (var(--about-safe-x) * 2)));
+      }
+
+      .marathon-about .me-hero {
+        background:
+          linear-gradient(90deg, var(--marathon-ink) 0 2.1rem, transparent 2.1rem calc(100% - 2.1rem), var(--marathon-ink) calc(100% - 2.1rem)),
+          linear-gradient(180deg, var(--marathon-paper) 0 78%, var(--marathon-paper-warm) 100%);
+        border-bottom: 0.65rem solid var(--marathon-ink);
+        color: var(--marathon-ink);
+        grid-template-columns: minmax(0, 1.08fr) minmax(22rem, 0.62fr);
+        min-height: 100svh;
+        padding: clamp(7.2rem, 11vw, 10rem) clamp(2.3rem, 5.5vw, 6.2rem) clamp(3rem, 6vw, 5.5rem);
+      }
+
+      .marathon-about .me-hero__image {
+        filter: grayscale(0.92) contrast(1.42) brightness(1.06);
+        mix-blend-mode: multiply;
+        object-position: 50% 48%;
+        opacity: 0.62;
+        transform: scale(1.04);
+      }
+
+      .marathon-about .me-hero::before {
+        background:
+          linear-gradient(102deg, transparent 0 7%, rgba(var(--marathon-acid-rgb), 0.92) 7% 11%, transparent 11%),
+          radial-gradient(circle at 61% 43%, transparent 0 22rem, rgba(244, 243, 237, 0.78) 22.2rem 38rem, transparent 38.2rem),
+          linear-gradient(90deg, rgba(244, 243, 237, 0.92) 0 43%, rgba(244, 243, 237, 0.3) 63%, rgba(244, 243, 237, 0.88) 100%);
+        z-index: -2;
+      }
+
+      .marathon-about .me-hero::after {
+        background:
+          radial-gradient(circle at 78% 32%, transparent 0 1.9rem, var(--marathon-ink) 1.96rem 2.38rem, transparent 2.44rem),
+          radial-gradient(circle at 85% 44%, transparent 0 1.55rem, var(--marathon-ink) 1.6rem 1.96rem, transparent 2.02rem),
+          radial-gradient(circle at 71% 48%, transparent 0 1.4rem, var(--marathon-ink) 1.45rem 1.8rem, transparent 1.86rem),
+          linear-gradient(45deg, transparent 0 46%, var(--marathon-ink) 46.2% 47.2%, transparent 47.4%),
+          radial-gradient(circle at 9% 74%, var(--marathon-ink) 0 0.18rem, transparent 0.2rem),
+          linear-gradient(rgba(5, 5, 5, 0.09) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(5, 5, 5, 0.07) 1px, transparent 1px);
+        background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 0.8rem 0.8rem, 5.5rem 5.5rem, 5.5rem 5.5rem;
+        mix-blend-mode: normal;
+        opacity: 0.96;
+        z-index: -1;
+      }
+
+      .marathon-about .me-wordmark {
+        color: var(--marathon-ink);
+        font-size: clamp(7rem, 15vw, 16rem);
+        line-height: 0.7;
+        max-width: 6ch;
+        text-shadow: none;
+        transform: skewX(-7deg);
+      }
+
+      .marathon-about .me-wordmark sup {
+        color: var(--marathon-acid);
+        text-shadow: none;
+      }
+
+      .marathon-about .me-wordmark__sub {
+        background: var(--marathon-ink);
+        color: var(--marathon-paper);
+        display: inline-block;
+        font-size: clamp(0.72rem, 0.95vw, 1rem);
+        line-height: 1;
+        margin-left: 0;
+        margin-top: 1rem;
+        padding: 0.72rem 0.9rem;
+      }
+
+      .marathon-about .me-hero__caption {
+        background: rgba(244, 243, 237, 0.82);
+        border-left: 0.35rem solid var(--marathon-acid);
+        bottom: clamp(2rem, 4vw, 3.8rem);
+        color: var(--marathon-ink);
+        font-weight: 750;
+        max-width: 38rem;
+        padding: 0.95rem 1rem;
+        text-shadow: none;
+      }
+
+      .marathon-about .me-hero__caption::before {
+        color: var(--marathon-acid);
+      }
+
+      .marathon-about .me-hero__right {
+        background:
+          linear-gradient(180deg, var(--marathon-ink) 0 0.45rem, transparent 0.45rem),
+          rgba(244, 243, 237, 0.82);
+        border: 2px solid var(--marathon-ink);
+        box-shadow: 0.85rem 0.85rem 0 var(--marathon-acid);
+        max-width: 28rem;
+        padding: clamp(1.1rem, 2.4vw, 2rem);
+        text-align: left;
+        transform: rotate(1deg) translateY(1.25rem);
+      }
+
+      .marathon-about .me-hero__status,
+      .marathon-about .me-title-option,
+      .marathon-about .me-title-option.is-picked {
+        background: transparent;
+        border: 2px solid var(--marathon-ink);
+        border-radius: 999px;
+        color: var(--marathon-ink);
+        text-shadow: none;
+      }
+
+      .marathon-about .me-hero__status {
+        background: var(--marathon-acid);
+        margin-bottom: 1.5rem;
+      }
+
+      .marathon-about .me-hero__status::before {
+        background: var(--marathon-ink);
+        box-shadow: none;
+      }
+
+      .marathon-about .me-hero__role {
+        color: var(--marathon-ink);
+        font-size: clamp(2.8rem, 5.6vw, 5.5rem);
+        text-shadow: none;
+      }
+
+      .marathon-about .me-hero__role .accent {
+        color: var(--marathon-acid);
+        text-shadow:
+          -1px -1px 0 var(--marathon-ink),
+          1px -1px 0 var(--marathon-ink),
+          -1px 1px 0 var(--marathon-ink),
+          1px 1px 0 var(--marathon-ink);
+      }
+
+      .marathon-about .me-title-deck {
+        justify-items: start;
+      }
+
+      .marathon-about .me-title-option {
+        background: var(--marathon-paper);
+      }
+
+      .marathon-about .me-title-option::before {
+        border-radius: 0;
+        transform: rotate(0deg);
+      }
+
+      .marathon-about .me-title-option.is-picked,
+      .marathon-about .me-title-option:hover {
+        background: var(--marathon-acid);
+        transform: translateX(0.2rem);
+      }
+
+      .marathon-about .me-id,
+      .marathon-about .me-direction,
+      .marathon-about .me-pillar,
+      .marathon-about .me-footer,
+      .marathon-about .me-end {
+        background: var(--marathon-paper);
+        border: 2px solid var(--marathon-ink);
+        color: var(--marathon-ink);
+      }
+
+      .marathon-about .me-id {
+        box-shadow: 0.65rem 0.65rem 0 rgba(5, 5, 5, 0.12);
+        gap: 0;
+        margin-top: 3.5rem;
+        padding: 0;
+      }
+
+      .marathon-about .me-id::before {
+        background: var(--marathon-acid);
+        box-shadow: none;
+        height: 0.42rem;
+        width: 100%;
+      }
+
+      .marathon-about .me-id__row {
+        border-right: 2px solid var(--marathon-ink);
+        padding: 1.65rem;
+      }
+
+      .marathon-about .me-id__row:last-child {
+        border-right: 0;
+      }
+
+      .marathon-about .me-id__row h4,
+      .marathon-about .me-section__count,
+      .marathon-about .me-works__hint,
+      .marathon-about .me-footer__list h4,
+      .marathon-about .me-skills h4,
+      .marathon-about .me-skill__pct,
+      .marathon-about .me-end {
+        color: rgba(5, 5, 5, 0.56);
+      }
+
+      .marathon-about .me-id__row p,
+      .marathon-about .me-direction__en,
+      .marathon-about .me-pillar__zh,
+      .marathon-about .me-footer__brand h3,
+      .marathon-about .me-footer__list a,
+      .marathon-about .me-skill__name {
+        color: var(--marathon-ink);
+      }
+
+      .marathon-about .me-id__row p em,
+      .marathon-about .me-section__title em,
+      .marathon-about .me-direction__num,
+      .marathon-about .me-work__num strong,
+      .marathon-about .me-manifesto__kicker,
+      .marathon-about .me-manifesto__title em,
+      .marathon-about .me-pillar__en,
+      .marathon-about .me-quote p em,
+      .marathon-about .me-end strong {
+        color: var(--marathon-acid);
+      }
+
+      .marathon-about .me-lede {
+        background: var(--marathon-ink);
+        border-left: clamp(1rem, 2vw, 1.7rem) solid var(--marathon-acid);
+        color: var(--marathon-paper);
+        font-size: clamp(1.45rem, 2.5vw, 2.5rem);
+        line-height: 1.28;
+        margin-block: 5.5rem;
+        padding: clamp(1.8rem, 4vw, 3.2rem);
+        transform: rotate(-0.5deg);
+      }
+
+      .marathon-about .me-line {
+        color: rgba(244, 243, 237, 0.48);
+      }
+
+      .marathon-about .me-gold {
+        color: var(--marathon-acid);
+      }
+
+      .marathon-about .me-section {
+        border-top: 0;
+        padding-block: clamp(4rem, 6vw, 6.5rem);
+      }
+
+      .marathon-about .me-section__head,
+      .marathon-about .me-works__head {
+        border-bottom: 3px solid var(--marathon-ink);
+        margin-bottom: 2rem;
+        padding-bottom: 1.2rem;
+      }
+
+      .marathon-about .me-section__title,
+      .marathon-about .me-manifesto__title {
+        color: var(--marathon-ink);
+        letter-spacing: 0;
+      }
+
+      .marathon-about .me-directions {
+        gap: 0;
+      }
+
+      .marathon-about .me-direction {
+        border-right: 0;
+        min-height: 18rem;
+        overflow: hidden;
+      }
+
+      .marathon-about .me-direction:last-child {
+        border-right: 2px solid var(--marathon-ink);
+      }
+
+      .marathon-about .me-direction::after {
+        background:
+          radial-gradient(circle at 50% 50%, transparent 0 1.15rem, var(--marathon-ink) 1.22rem 1.48rem, transparent 1.55rem),
+          linear-gradient(90deg, transparent 0 45%, var(--marathon-ink) 45% 52%, transparent 52%);
+        bottom: 1rem;
+        content: "";
+        height: 4rem;
+        opacity: 0.22;
+        position: absolute;
+        right: 0.8rem;
+        width: 5rem;
+      }
+
+      .marathon-about .me-direction:hover {
+        background: var(--marathon-acid);
+        border-color: var(--marathon-ink);
+        transform: translateY(-0.25rem) rotate(-0.5deg);
+      }
+
+      .marathon-about .me-direction__zh,
+      .marathon-about .me-direction__body,
+      .marathon-about .me-footer__brand p,
+      .marathon-about .me-footer__list a small,
+      .marathon-about .me-manifesto__sub {
+        color: var(--marathon-soft);
+      }
+
+      .marathon-about .me-works {
+        background: var(--marathon-ink);
+        border-top: 0;
+        color: var(--marathon-paper);
+        margin-top: 3rem;
+        padding-block: 5rem 6rem;
+      }
+
+      .marathon-about .me-works::before,
+      .marathon-about .me-works::after {
+        display: none;
+      }
+
+      .marathon-about .me-works .me-section__title {
+        color: var(--marathon-paper);
+      }
+
+      .marathon-about .me-works__head {
+        border-bottom-color: var(--marathon-acid);
+      }
+
+      .marathon-about .me-work {
+        background: var(--marathon-paper) !important;
+        border: 2px solid var(--marathon-paper);
+        border-radius: 0;
+        box-shadow: 0.8rem 0.8rem 0 rgba(var(--marathon-acid-rgb), 0.88);
+        color: var(--marathon-ink) !important;
+      }
+
+      .marathon-about .me-work::before {
+        background:
+          radial-gradient(circle at 78% 22%, transparent 0 1.6rem, var(--marathon-ink) 1.68rem 2rem, transparent 2.08rem),
+          radial-gradient(circle at 86% 34%, transparent 0 1.2rem, var(--marathon-ink) 1.28rem 1.52rem, transparent 1.6rem),
+          linear-gradient(rgba(5, 5, 5, 0.08) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(5, 5, 5, 0.065) 1px, transparent 1px);
+        background-size: 100% 100%, 100% 100%, 3.6rem 3.6rem, 3.6rem 3.6rem;
+        opacity: 1;
+      }
+
+      .marathon-about .me-work::after {
+        background: var(--marathon-acid);
+        border: 2px solid var(--marathon-ink);
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .marathon-about .me-work__num,
+      .marathon-about .me-work__zh {
+        color: rgba(5, 5, 5, 0.58) !important;
+      }
+
+      .marathon-about .me-work__tags span {
+        background: var(--marathon-ink) !important;
+        border-radius: 0;
+        color: var(--marathon-paper) !important;
+      }
+
+      .marathon-about .me-manifesto {
+        background:
+          linear-gradient(90deg, var(--marathon-acid) 0 1.25rem, transparent 1.25rem calc(100% - 1.25rem), var(--marathon-acid) calc(100% - 1.25rem)),
+          var(--marathon-paper-warm);
+        border-block: 0.65rem solid var(--marathon-ink);
+        margin-top: 0;
+        padding-inline: var(--about-safe-x);
+      }
+
+      .marathon-about .me-manifesto::before {
+        background: var(--marathon-ink);
+        height: 0.25rem;
+        opacity: 1;
+        width: min(28rem, 64vw);
+      }
+
+      .marathon-about .me-manifesto__kicker::before {
+        text-shadow: none;
+      }
+
+      .marathon-about .me-pillars {
+        gap: 0;
+      }
+
+      .marathon-about .me-pillar {
+        border-right: 0;
+        border-radius: 0;
+      }
+
+      .marathon-about .me-pillar:last-child {
+        border-right: 2px solid var(--marathon-ink);
+      }
+
+      .marathon-about .me-pillar:hover {
+        background: var(--marathon-acid);
+        border-color: var(--marathon-ink);
+        transform: translateY(-0.28rem);
+      }
+
+      .marathon-about .me-quote {
+        background:
+          radial-gradient(circle at 16% 50%, transparent 0 2.2rem, var(--marathon-acid) 2.28rem 2.6rem, transparent 2.68rem),
+          radial-gradient(circle at 84% 50%, transparent 0 2.2rem, var(--marathon-acid) 2.28rem 2.6rem, transparent 2.68rem),
+          var(--marathon-ink);
+        color: var(--marathon-paper);
+        margin-top: 0;
+      }
+
+      .marathon-about .me-quote::before {
+        color: var(--marathon-acid);
+        opacity: 1;
+      }
+
+      .marathon-about .me-quote::after {
+        background:
+          linear-gradient(90deg, transparent 0 48%, rgba(var(--marathon-acid-rgb), 0.4) 48% 52%, transparent 52%),
+          repeating-linear-gradient(90deg, transparent 0 2.4rem, rgba(244, 243, 237, 0.08) 2.4rem 2.48rem);
+        opacity: 0.7;
+      }
+
+      .marathon-about .me-quote p {
+        color: var(--marathon-paper);
+      }
+
+      .marathon-about .me-footer {
+        border-width: 2px;
+        margin-top: 5rem;
+        padding: 2.5rem;
+      }
+
+      .marathon-about .me-footer__list a {
+        border-bottom-color: rgba(5, 5, 5, 0.16);
+      }
+
+      .marathon-about .me-footer__list a:hover {
+        color: #4a8d13;
+      }
+
+      .marathon-about .me-skill__bar {
+        background: rgba(5, 5, 5, 0.12);
+        border: 1px solid var(--marathon-ink);
+        height: 0.55rem;
+      }
+
+      .marathon-about .me-skill__bar span {
+        background: var(--marathon-acid);
+        box-shadow: none;
+      }
+
+      .marathon-about .me-end {
+        border-top: 0;
+        margin-top: 2rem;
+        padding: 1rem 1.25rem;
+      }
+
+      .marathon-about .menu {
+        background: var(--marathon-paper);
+        border-left: 0.65rem solid var(--marathon-ink);
+        color: var(--marathon-ink);
+      }
+
+      .marathon-about .menu-close {
+        background: var(--marathon-ink);
+        color: var(--marathon-paper);
+      }
+
+      .marathon-about .menu-nav a.is-active {
+        color: rgba(5, 5, 5, 0.22);
+      }
+
+      .marathon-about .menu-nav a:hover,
+      .marathon-about .menu-nav a:focus-visible {
+        color: #4a8d13;
+      }
+
+      @media (min-width: 1680px) {
+        .marathon-about .me-wordmark {
+          font-size: clamp(9rem, 15vw, 18rem);
+        }
+      }
+
+      @media (max-width: 960px) {
+        .marathon-about .me-hero {
+          grid-template-columns: 1fr;
+          padding-inline: 1.4rem;
+        }
+
+        .marathon-about .me-hero__right {
+          justify-self: start;
+          max-width: min(32rem, 100%);
+          transform: none;
+        }
+
+        .marathon-about .me-id,
+        .marathon-about .me-directions,
+        .marathon-about .me-pillars {
+          gap: 0;
+        }
+
+        .marathon-about .me-id__row,
+        .marathon-about .me-direction,
+        .marathon-about .me-pillar {
+          border-bottom: 2px solid var(--marathon-ink);
+          border-right: 0;
+        }
+
+        .marathon-about .me-id__row:last-child,
+        .marathon-about .me-direction:last-child,
+        .marathon-about .me-pillar:last-child {
+          border-bottom: 0;
+          border-right: 0;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .marathon-about .world-header {
+          border-bottom-width: 2px;
+        }
+
+        .marathon-about .me-hero {
+          background:
+            linear-gradient(180deg, var(--marathon-ink) 0 1rem, transparent 1rem calc(100% - 1rem), var(--marathon-ink) calc(100% - 1rem)),
+            var(--marathon-paper);
+          padding-top: 6rem;
+        }
+
+        .marathon-about .me-wordmark {
+          font-size: clamp(4.1rem, 21vw, 7rem);
+        }
+
+        .marathon-about .me-wordmark__sub {
+          font-size: 0.68rem;
+          line-height: 1.2;
+        }
+
+        .marathon-about .me-hero__caption {
+          bottom: auto;
+          position: relative;
+        }
+
+        .marathon-about .me-directions,
+        .marathon-about .me-pillars {
+          grid-template-columns: 1fr;
+        }
+
+        .marathon-about .me-work {
+          flex-basis: min(82vw, 26rem);
+        }
+
+        .marathon-about .me-footer,
+        .marathon-about .me-end {
+          width: calc(100% - 2.5rem);
+        }
+      }
+    </style>
+    <style>
+      /* Dark revision: closer to the generated image mockup.
+         Keep black site atmosphere; use white print panels only as modules. */
+      body.marathon-about {
+        background: #050505;
+        color: #f4f3ed;
+      }
+
+      body.marathon-about::before {
+        background:
+          radial-gradient(circle at 18% 18%, rgba(var(--marathon-acid-rgb), 0.12), transparent 16rem),
+          radial-gradient(circle at 84% 28%, rgba(255, 255, 255, 0.08), transparent 18rem),
+          linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.032) 1px, transparent 1px);
+        background-size: 100% 100%, 100% 100%, 5.5rem 5.5rem, 5.5rem 5.5rem;
+        opacity: 1;
+      }
+
+      body.marathon-about::after {
+        background:
+          linear-gradient(90deg, #050505 0 0.65rem, transparent 0.65rem calc(100% - 0.65rem), #050505 calc(100% - 0.65rem)),
+          linear-gradient(180deg, transparent 0 calc(100% - 0.65rem), #050505 calc(100% - 0.65rem));
+      }
+
+      .marathon-about .world-header {
+        background: rgba(5, 5, 5, 0.94);
+        border-bottom: 2px solid rgba(var(--marathon-acid-rgb), 0.9);
+        box-shadow: none;
+      }
+
+      .marathon-about .brand-mark {
+        border-radius: 1rem;
+        box-shadow: 0 0 0 0.2rem rgba(var(--marathon-acid-rgb), 0.12);
+      }
+
+      .marathon-about .explore-pill {
+        border-color: #fff;
+      }
+
+      .marathon-about .me-stage {
+        background:
+          linear-gradient(90deg, transparent 0 calc(100% - 3.2rem), var(--marathon-acid) calc(100% - 3.2rem) calc(100% - 2.4rem), transparent calc(100% - 2.4rem)),
+          #050505;
+      }
+
+      .marathon-about .me-hero {
+        background: #050505;
+        border-bottom: 0.35rem solid #111;
+        color: #f4f3ed;
+      }
+
+      .marathon-about .me-hero__image {
+        filter: saturate(0.72) contrast(1.18) brightness(0.72);
+        mix-blend-mode: normal;
+        opacity: 1;
+      }
+
+      .marathon-about .me-hero::before {
+        background:
+          radial-gradient(circle at 58% 43%, transparent 0 24rem, rgba(5, 5, 5, 0.22) 36rem, rgba(5, 5, 5, 0.8) 65rem),
+          linear-gradient(90deg, rgba(5, 5, 5, 0.58) 0 22%, rgba(5, 5, 5, 0.12) 50%, rgba(5, 5, 5, 0.48) 100%),
+          linear-gradient(180deg, rgba(5, 5, 5, 0.5), transparent 42%, rgba(5, 5, 5, 0.62));
+      }
+
+      .marathon-about .me-hero::after {
+        background:
+          linear-gradient(52deg, transparent 0 46%, rgba(0, 0, 0, 0.74) 46.2% 47.1%, transparent 47.3%),
+          radial-gradient(circle at 78% 31%, transparent 0 2.1rem, rgba(244, 243, 237, 0.28) 2.18rem 2.5rem, transparent 2.58rem),
+          radial-gradient(circle at 84% 42%, transparent 0 1.55rem, rgba(244, 243, 237, 0.24) 1.62rem 1.88rem, transparent 1.96rem),
+          radial-gradient(circle at 11% 74%, rgba(var(--marathon-acid-rgb), 0.92) 0 0.18rem, transparent 0.2rem),
+          radial-gradient(circle, rgba(0, 0, 0, 0.72) 0 0.08rem, transparent 0.09rem);
+        background-size: 100% 100%, 100% 100%, 100% 100%, 0.8rem 0.8rem, 0.72rem 0.72rem;
+        opacity: 0.9;
+      }
+
+      .marathon-about .me-wordmark {
+        color: rgba(244, 243, 237, 0.78);
+        text-shadow: 0 1.4rem 4.4rem rgba(0, 0, 0, 0.56);
+      }
+
+      .marathon-about .me-wordmark__sub {
+        background: #050505;
+        border-left: 0.35rem solid var(--marathon-acid);
+        color: #f4f3ed;
+      }
+
+      .marathon-about .me-hero__caption {
+        background: rgba(244, 243, 237, 0.9);
+        color: #050505;
+      }
+
+      .marathon-about .me-hero__right {
+        background:
+          radial-gradient(circle at 78% 13%, transparent 0 2rem, rgba(5, 5, 5, 0.08) 2.08rem 2.38rem, transparent 2.46rem),
+          radial-gradient(circle, rgba(5, 5, 5, 0.06) 0 0.08rem, transparent 0.09rem),
+          rgba(244, 243, 237, 0.94);
+        background-size: 100% 100%, 0.82rem 0.82rem, 100% 100%;
+        border-color: #050505;
+        box-shadow: 0.85rem 0.85rem 0 var(--marathon-acid);
+        color: #050505;
+      }
+
+      .marathon-about .me-hero__role {
+        color: #050505;
+      }
+
+      .marathon-about .me-id {
+        margin-top: clamp(3rem, 6vw, 6rem);
+      }
+
+      .marathon-about .me-stage > :not(.me-hero):not(.me-works):not(.me-quote):not(.me-lede) {
+        color: #f4f3ed;
+      }
+
+      .marathon-about .me-id,
+      .marathon-about .me-direction,
+      .marathon-about .me-pillar,
+      .marathon-about .me-footer,
+      .marathon-about .me-end {
+        background:
+          radial-gradient(circle, rgba(5, 5, 5, 0.045) 0 0.08rem, transparent 0.09rem),
+          var(--marathon-paper);
+        background-size: 0.86rem 0.86rem, 100% 100%;
+      }
+
+      .marathon-about .me-lede {
+        background:
+          linear-gradient(90deg, rgba(var(--marathon-acid-rgb), 0.9) 0 0.7rem, transparent 0.7rem),
+          #050505;
+        border: 2px solid rgba(244, 243, 237, 0.18);
+        color: #f4f3ed;
+        box-shadow: 0.75rem 0.75rem 0 rgba(var(--marathon-acid-rgb), 0.18);
+      }
+
+      .marathon-about .me-section {
+        color: #f4f3ed;
+      }
+
+      .marathon-about .me-section__head {
+        border-bottom-color: rgba(244, 243, 237, 0.82);
+      }
+
+      .marathon-about .me-section__title {
+        color: #f4f3ed;
+      }
+
+      .marathon-about .me-section__count {
+        color: rgba(244, 243, 237, 0.5);
+      }
+
+      .marathon-about .me-directions {
+        box-shadow: 0.8rem 0.8rem 0 rgba(var(--marathon-acid-rgb), 0.74);
+      }
+
+      .marathon-about .me-works {
+        background:
+          radial-gradient(circle at 10% 28%, rgba(var(--marathon-acid-rgb), 0.18), transparent 20rem),
+          #050505;
+      }
+
+      .marathon-about .me-manifesto {
+        background:
+          linear-gradient(90deg, var(--marathon-acid) 0 1.15rem, transparent 1.15rem calc(100% - 1.15rem), var(--marathon-acid) calc(100% - 1.15rem)),
+          var(--marathon-paper);
+      }
+
+      .marathon-about .me-quote {
+        background:
+          radial-gradient(circle at 16% 50%, transparent 0 2.2rem, var(--marathon-acid) 2.28rem 2.6rem, transparent 2.68rem),
+          radial-gradient(circle at 84% 50%, transparent 0 2.2rem, var(--marathon-acid) 2.28rem 2.6rem, transparent 2.68rem),
+          #050505;
+      }
+
+      .marathon-about .me-footer,
+      .marathon-about .me-end {
+        box-shadow: 0.62rem 0.62rem 0 rgba(var(--marathon-acid-rgb), 0.18);
+      }
+
+      .marathon-about .menu {
+        background:
+          radial-gradient(circle, rgba(5, 5, 5, 0.05) 0 0.08rem, transparent 0.09rem),
+          var(--marathon-paper);
+        background-size: 0.82rem 0.82rem, 100% 100%;
+      }
+
+      @media (max-width: 767px) {
+        .marathon-about .me-hero {
+          background: #050505;
+        }
+      }
+    </style>
+    <style>
+      /* Target pass: black UI + angled white print board + colored mascot. */
+      .marathon-about .world-header {
+        border-bottom: 0;
+        padding-top: 1.35rem;
+      }
+
+      .marathon-about .me-hero {
+        align-items: stretch;
+        background:
+          linear-gradient(8deg, transparent 0 75%, rgba(var(--marathon-acid-rgb), 0.96) 75.2% 82%, transparent 82.2%),
+          #050505;
+        border-bottom: 0;
+        isolation: isolate;
+        min-height: 100svh;
+        overflow: hidden;
+      }
+
+      .marathon-about .me-hero__image {
+        filter: saturate(1.03) contrast(1.04) brightness(0.95);
+        height: 94%;
+        inset: auto 7% 0 auto;
+        object-fit: contain;
+        object-position: center bottom;
+        opacity: 1;
+        transform: none;
+        width: min(66vw, 78rem);
+        z-index: -1;
+      }
+
+      .marathon-about .me-hero::before {
+        background:
+          radial-gradient(circle, rgba(5, 5, 5, 0.12) 0 0.08rem, transparent 0.09rem),
+          linear-gradient(102deg, transparent 0 64%, rgba(5, 5, 5, 0.94) 64.15% 65.2%, transparent 65.35%),
+          linear-gradient(0deg, rgba(244, 243, 237, 0.96), rgba(244, 243, 237, 0.96));
+        background-size: 0.82rem 0.82rem, 100% 100%, 100% 100%;
+        border: 2px solid rgba(244, 243, 237, 0.8);
+        box-shadow:
+          -2rem 1.6rem 0 rgba(0, 0, 0, 0.86),
+          1.3rem 1.3rem 0 rgba(var(--marathon-acid-rgb), 0.82);
+        clip-path: polygon(3% 7%, 88% 0, 96% 79%, 0 92%);
+        content: "";
+        inset: 8.2rem 3.8rem 3.2rem 4.4rem;
+        opacity: 0.92;
+        position: absolute;
+        transform: rotate(-2.4deg);
+        z-index: -2;
+      }
+
+      .marathon-about .me-hero::after {
+        background:
+          linear-gradient(90deg, #050505 0 3.5rem, transparent 3.5rem),
+          linear-gradient(0deg, #050505 0 3.7rem, transparent 3.7rem),
+          radial-gradient(circle at 17% 49%, transparent 0 3.1rem, #050505 3.18rem 3.62rem, transparent 3.7rem),
+          radial-gradient(circle at 23% 58%, transparent 0 2.65rem, #050505 2.72rem 3.12rem, transparent 3.2rem),
+          radial-gradient(circle at 13% 62%, transparent 0 2.25rem, #050505 2.32rem 2.72rem, transparent 2.8rem),
+          linear-gradient(115deg, transparent 0 28%, #050505 28.2% 29.4%, transparent 29.6%),
+          radial-gradient(circle at 92% 18%, rgba(5, 5, 5, 0.98) 0 0.12rem, transparent 0.13rem),
+          radial-gradient(circle at 7% 76%, rgba(var(--marathon-acid-rgb), 0.96) 0 0.16rem, transparent 0.18rem);
+        background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 0.72rem 0.72rem, 0.72rem 0.72rem;
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        opacity: 1;
+        z-index: -1;
+      }
+
+      .marathon-about .me-wordmark {
+        color: #050505;
+        font-size: clamp(7.8rem, 15.5vw, 16.5rem);
+        margin-top: clamp(0.8rem, 2vw, 2rem);
+        max-width: 5.5ch;
+        position: relative;
+        z-index: 2;
+      }
+
+      .marathon-about .me-wordmark::after {
+        color: var(--marathon-acid);
+        content: "01";
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: clamp(2.2rem, 4.2vw, 5rem);
+        font-style: normal;
+        font-weight: 900;
+        left: -3.2rem;
+        letter-spacing: 0;
+        position: absolute;
+        top: 1.2rem;
+        transform: rotate(-90deg);
+      }
+
+      .marathon-about .me-wordmark__sub {
+        background: transparent;
+        border-left: 0;
+        color: #050505;
+        display: block;
+        font-size: clamp(0.78rem, 1.05vw, 1.08rem);
+        margin-top: 0.78rem;
+        padding: 0;
+      }
+
+      .marathon-about .me-hero__caption {
+        background: rgba(5, 5, 5, 0.9);
+        border-left: 0.35rem solid var(--marathon-acid);
+        color: #f4f3ed;
+        max-width: 45rem;
+        z-index: 5;
+      }
+
+      .marathon-about .me-hero__right {
+        align-self: center;
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+        color: #050505;
+        justify-self: end;
+        max-width: min(28rem, 28vw);
+        padding: 0;
+        position: relative;
+        text-align: right;
+        transform: translateY(2rem);
+        z-index: 4;
+      }
+
+      .marathon-about .me-hero__right::before {
+        background:
+          radial-gradient(circle, rgba(5, 5, 5, 0.08) 0 0.08rem, transparent 0.09rem),
+          rgba(244, 243, 237, 0.9);
+        background-size: 0.8rem 0.8rem, 100% 100%;
+        border: 2px solid #050505;
+        box-shadow: 0.65rem 0.65rem 0 var(--marathon-acid);
+        content: "";
+        inset: -2.4rem -1.4rem -1.8rem -2.2rem;
+        position: absolute;
+        transform: rotate(1.4deg);
+        z-index: -1;
+      }
+
+      .marathon-about .me-hero__status {
+        background: var(--marathon-acid);
+      }
+
+      .marathon-about .me-hero__role {
+        font-size: clamp(3.3rem, 5vw, 5.8rem);
+        text-align: right;
+      }
+
+      .marathon-about .me-title-deck {
+        justify-items: end;
+      }
+
+      .marathon-about .me-title-option {
+        background: rgba(244, 243, 237, 0.92);
+        min-width: 15.8rem;
+        justify-content: center;
+      }
+
+      .marathon-about .me-title-option.is-picked {
+        background: var(--marathon-acid);
+      }
+
+      .marathon-about .me-stage::before,
+      .marathon-about .me-stage::after {
+        content: "";
+        pointer-events: none;
+        position: fixed;
+        z-index: 1;
+      }
+
+      .marathon-about .me-stage::before {
+        background:
+          linear-gradient(90deg, transparent 0 10%, rgba(var(--marathon-acid-rgb), 0.95) 10% 28%, transparent 28%),
+          radial-gradient(circle, rgba(244, 243, 237, 0.82) 0 0.18rem, transparent 0.2rem);
+        background-size: 100% 100%, 0.95rem 0.95rem;
+        height: 5.4rem;
+        left: 11rem;
+        opacity: 0.78;
+        top: -1.8rem;
+        transform: rotate(-5deg);
+        width: min(52rem, 52vw);
+      }
+
+      .marathon-about .me-stage::after {
+        background:
+          linear-gradient(90deg, transparent 0 22%, var(--marathon-acid) 22% 100%);
+        bottom: -1.3rem;
+        height: 6rem;
+        right: -1rem;
+        transform: rotate(-6deg);
+        width: min(42rem, 44vw);
+      }
+
+      @media (max-width: 960px) {
+        .marathon-about .me-hero {
+          grid-template-columns: 1fr;
+        }
+
+        .marathon-about .me-hero__image {
+          height: 60%;
+          inset: auto -8% 0 auto;
+          opacity: 0.88;
+          width: 105vw;
+        }
+
+        .marathon-about .me-hero::before {
+          inset: 6.5rem 1.4rem 28%;
+        }
+
+        .marathon-about .me-hero__right {
+          max-width: 100%;
+          text-align: left;
+        }
+
+        .marathon-about .me-hero__role,
+        .marathon-about .me-title-deck {
+          text-align: left;
+          justify-items: start;
+        }
+      }
+    </style>
+    <style>
+      /* Hero fallback: use the approved generated art directly, keep original text in DOM. */
+      .marathon-about .me-hero {
+        background: #050505;
+        display: block;
+        min-height: 100svh;
+        padding: 0;
+      }
+
+      .marathon-about .me-hero__image {
+        animation: marathonHeroDrift 12s ease-in-out infinite alternate;
+        filter: none;
+        height: 100%;
+        inset: 0;
+        object-fit: cover;
+        object-position: center;
+        opacity: 1;
+        position: absolute;
+        transform: scale(1.006);
+        width: 100%;
+        z-index: -3;
+      }
+
+      .marathon-about .me-hero::before {
+        background:
+          linear-gradient(180deg, rgba(5, 5, 5, 0.64) 0 5.9rem, transparent 7.2rem),
+          radial-gradient(circle at 54% 50%, transparent 0 22rem, rgba(0, 0, 0, 0.08) 54rem, rgba(0, 0, 0, 0.34) 100%);
+        border: 0;
+        box-shadow: none;
+        clip-path: none;
+        inset: 0;
+        opacity: 1;
+        transform: none;
+        z-index: -2;
+      }
+
+      .marathon-about .me-hero::after {
+        background:
+          radial-gradient(circle, rgba(255, 255, 255, 0.08) 0 0.055rem, transparent 0.065rem),
+          linear-gradient(90deg, rgba(var(--marathon-acid-rgb), 0.95) 0 0.32rem, transparent 0.32rem calc(100% - 0.32rem), rgba(var(--marathon-acid-rgb), 0.95) calc(100% - 0.32rem));
+        background-size: 0.8rem 0.8rem, 100% 100%;
+        opacity: 0.16;
+        z-index: -1;
+      }
+
+      .marathon-about .me-hero > div {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      @keyframes marathonHeroDrift {
+        from {
+          transform: scale(1.006) translate3d(-0.25%, -0.15%, 0);
+        }
+        to {
+          transform: scale(1.018) translate3d(0.35%, 0.2%, 0);
+        }
+      }
+
+      @media (max-width: 960px) {
+        .marathon-about .me-hero__image {
+          height: 100%;
+          inset: 0;
+          object-fit: cover;
+          object-position: 50% 50%;
+          width: 100%;
+        }
+      }
+    </style>
+    <style>
+      /* Below-hero pass: black editorial field with white print modules. */
+      .marathon-about .me-stage {
+        background:
+          radial-gradient(circle at 8% 23%, rgba(var(--marathon-acid-rgb), 0.13), transparent 16rem),
+          radial-gradient(circle at 91% 55%, rgba(var(--marathon-acid-rgb), 0.1), transparent 18rem),
+          linear-gradient(90deg, transparent 0 calc(100% - 3.2rem), var(--marathon-acid) calc(100% - 3.2rem) calc(100% - 2.45rem), transparent calc(100% - 2.45rem)),
+          #050505;
+      }
+
+      .marathon-about .me-stage > :not(.me-hero) {
+        position: relative;
+        z-index: 3;
+      }
+
+      .marathon-about .reveal {
+        opacity: 1;
+        transform: none;
+      }
+
+      .marathon-about .reveal-stagger > .reveal {
+        transition-delay: 0ms;
+      }
+
+      .marathon-about .me-id {
+        background:
+          radial-gradient(circle, rgba(5, 5, 5, 0.08) 0 0.07rem, transparent 0.08rem),
+          linear-gradient(100deg, transparent 0 88%, rgba(var(--marathon-acid-rgb), 0.86) 88.2% 100%),
+          var(--marathon-paper);
+        background-size: 0.82rem 0.82rem, 100% 100%, 100% 100%;
+        border: 2px solid #050505;
+        box-shadow: 0.8rem 0.8rem 0 var(--marathon-acid);
+        color: #050505;
+        margin-top: clamp(4rem, 8vw, 7rem);
+        transform: rotate(-0.7deg);
+      }
+
+      .marathon-about .me-id__row {
+        border-right: 2px solid #050505;
+        padding: clamp(1.3rem, 2vw, 2rem);
+      }
+
+      .marathon-about .me-id__row:last-child {
+        border-right: 0;
+      }
+
+      .marathon-about .me-id__row h4 {
+        background: #050505;
+        color: var(--marathon-paper);
+        display: inline-flex;
+        margin-bottom: 0.5rem;
+        padding: 0.38rem 0.5rem;
+        width: fit-content;
+      }
+
+      .marathon-about .me-id__row p {
+        color: #050505;
+      }
+
+      .marathon-about .me-lede {
+        background:
+          linear-gradient(90deg, var(--marathon-acid) 0 0.55rem, transparent 0.55rem),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.055), transparent 55%),
+          #050505;
+        border: 2px solid rgba(244, 243, 237, 0.22);
+        box-shadow: 0.75rem 0.75rem 0 rgba(var(--marathon-acid-rgb), 0.25);
+        color: var(--marathon-paper);
+        margin-block: clamp(4rem, 7vw, 6.6rem);
+        max-width: none;
+        padding: clamp(2rem, 4vw, 3.6rem);
+        transform: rotate(0.45deg);
+      }
+
+      .marathon-about .me-lede::after {
+        background:
+          radial-gradient(circle, rgba(244, 243, 237, 0.75) 0 0.14rem, transparent 0.16rem);
+        background-size: 0.72rem 0.72rem;
+        content: "";
+        height: 3.6rem;
+        opacity: 0.45;
+        position: absolute;
+        right: 1.2rem;
+        top: 1.1rem;
+        width: 5.8rem;
+      }
+
+      .marathon-about .me-section:not(.me-manifesto) {
+        background:
+          radial-gradient(circle, rgba(5, 5, 5, 0.065) 0 0.07rem, transparent 0.08rem),
+          var(--marathon-paper);
+        background-size: 0.88rem 0.88rem, 100% 100%;
+        border: 2px solid #050505;
+        box-shadow: 0.8rem 0.8rem 0 rgba(var(--marathon-acid-rgb), 0.95);
+        color: #050505;
+        padding: clamp(2rem, 4vw, 3.2rem);
+        transform: rotate(-0.35deg);
+      }
+
+      .marathon-about .me-section__head {
+        border-bottom: 3px solid #050505;
+        margin-bottom: 1.8rem;
+        padding-bottom: 1rem;
+      }
+
+      .marathon-about .me-section__title {
+        color: #050505;
+      }
+
+      .marathon-about .me-section__title em,
+      .marathon-about .me-direction__num,
+      .marathon-about .me-work__num strong,
+      .marathon-about .me-manifesto__kicker,
+      .marathon-about .me-manifesto__title em,
+      .marathon-about .me-pillar__en,
+      .marathon-about .me-quote p em,
+      .marathon-about .me-end strong {
+        color: var(--marathon-acid);
+      }
+
+      .marathon-about .me-section__count {
+        color: rgba(5, 5, 5, 0.56);
+      }
+
+      .marathon-about .me-directions {
+        display: grid;
+        gap: 0;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+      }
+
+      .marathon-about .me-direction {
+        background: transparent;
+        border: 2px solid #050505;
+        border-right: 0;
+        box-shadow: none;
+        color: #050505;
+        min-height: 18rem;
+      }
+
+      .marathon-about .me-direction:last-child {
+        border-right: 2px solid #050505;
+      }
+
+      .marathon-about .me-direction:hover {
+        background: var(--marathon-acid);
+        transform: translateY(-0.22rem);
+      }
+
+      .marathon-about .me-direction__en {
+        color: #050505;
+      }
+
+      .marathon-about .me-direction__zh,
+      .marathon-about .me-direction__body {
+        color: rgba(5, 5, 5, 0.64);
+      }
+
+      .marathon-about .me-works {
+        background:
+          linear-gradient(180deg, transparent 0 1.2rem, rgba(var(--marathon-acid-rgb), 0.95) 1.2rem 1.75rem, transparent 1.75rem),
+          radial-gradient(circle at 14% 32%, rgba(var(--marathon-acid-rgb), 0.18), transparent 20rem),
+          #050505;
+        border-block: 0.45rem solid #050505;
+        color: var(--marathon-paper);
+        margin-top: clamp(5rem, 8vw, 7rem);
+        padding-block: clamp(4rem, 7vw, 6rem);
+      }
+
+      .marathon-about .me-works__head {
+        border-bottom: 3px solid var(--marathon-acid);
+      }
+
+      .marathon-about .me-works .me-section__title {
+        color: var(--marathon-paper);
+      }
+
+      .marathon-about .me-works .me-section__count,
+      .marathon-about .me-works__hint {
+        color: rgba(244, 243, 237, 0.54);
+      }
+
+      .marathon-about .me-work {
+        background:
+          radial-gradient(circle, rgba(5, 5, 5, 0.075) 0 0.07rem, transparent 0.08rem),
+          var(--marathon-paper) !important;
+        background-size: 0.82rem 0.82rem, 100% 100% !important;
+        border: 2px solid var(--marathon-paper);
+        border-radius: 0;
+        box-shadow: 0.75rem 0.75rem 0 var(--marathon-acid);
+        color: #050505 !important;
+      }
+
+      .marathon-about .me-work:nth-child(2n) {
+        transform: rotate(0.75deg);
+      }
+
+      .marathon-about .me-work:nth-child(2n + 1) {
+        transform: rotate(-0.55deg);
+      }
+
+      .marathon-about .me-work__num,
+      .marathon-about .me-work__zh {
+        color: rgba(5, 5, 5, 0.62) !important;
+      }
+
+      .marathon-about .me-work__tags span {
+        background: #050505 !important;
+        border: 1px solid #050505;
+        border-radius: 999px;
+        color: var(--marathon-paper) !important;
+      }
+
+      .marathon-about .me-manifesto {
+        background:
+          linear-gradient(90deg, var(--marathon-acid) 0 1.1rem, transparent 1.1rem calc(100% - 1.1rem), var(--marathon-acid) calc(100% - 1.1rem)),
+          radial-gradient(circle, rgba(5, 5, 5, 0.05) 0 0.07rem, transparent 0.08rem),
+          var(--marathon-paper);
+        background-size: 100% 100%, 0.9rem 0.9rem, 100% 100%;
+        border-block: 0.45rem solid #050505;
+        color: #050505;
+        margin-top: 0;
+      }
+
+      .marathon-about .me-manifesto__title {
+        color: #050505;
+      }
+
+      .marathon-about .me-manifesto__sub {
+        color: rgba(5, 5, 5, 0.6);
+      }
+
+      .marathon-about .me-pillars {
+        gap: 0;
+      }
+
+      .marathon-about .me-pillar {
+        background: transparent;
+        border: 2px solid #050505;
+        border-right: 0;
+        color: #050505;
+      }
+
+      .marathon-about .me-pillar:last-child {
+        border-right: 2px solid #050505;
+      }
+
+      .marathon-about .me-pillar:hover {
+        background: var(--marathon-acid);
+      }
+
+      .marathon-about .me-pillar__zh {
+        color: #050505;
+      }
+
+      .marathon-about .me-quote {
+        background:
+          radial-gradient(circle at 12% 50%, transparent 0 2rem, var(--marathon-acid) 2.08rem 2.36rem, transparent 2.44rem),
+          radial-gradient(circle at 88% 50%, transparent 0 2rem, var(--marathon-acid) 2.08rem 2.36rem, transparent 2.44rem),
+          #050505;
+        color: var(--marathon-paper);
+        margin-top: 0;
+      }
+
+      .marathon-about .me-footer {
+        background:
+          radial-gradient(circle, rgba(5, 5, 5, 0.052) 0 0.07rem, transparent 0.08rem),
+          var(--marathon-paper);
+        background-size: 0.86rem 0.86rem, 100% 100%;
+        border: 2px solid #050505;
+        box-shadow: 0.75rem 0.75rem 0 rgba(var(--marathon-acid-rgb), 0.8);
+        color: #050505;
+        margin-top: clamp(4rem, 7vw, 6rem);
+      }
+
+      .marathon-about .me-footer__brand h3,
+      .marathon-about .me-footer__list a,
+      .marathon-about .me-skill__name {
+        color: #050505;
+      }
+
+      .marathon-about .me-footer__brand p,
+      .marathon-about .me-footer__list a small {
+        color: rgba(5, 5, 5, 0.62);
+      }
+
+      .marathon-about .me-skill__bar {
+        background: transparent;
+        border: 1px solid #050505;
+      }
+
+      .marathon-about .me-skill__bar span {
+        background: var(--marathon-acid);
+      }
+
+      .marathon-about .me-end {
+        background: #050505;
+        border: 1px solid rgba(244, 243, 237, 0.2);
+        box-shadow: none;
+        color: rgba(244, 243, 237, 0.5);
+      }
+
+      @media (max-width: 960px) {
+        .marathon-about .me-id,
+        .marathon-about .me-directions,
+        .marathon-about .me-pillars {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .marathon-about .me-id__row,
+        .marathon-about .me-direction,
+        .marathon-about .me-pillar {
+          border: 2px solid #050505;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .marathon-about .me-id,
+        .marathon-about .me-directions,
+        .marathon-about .me-pillars {
+          grid-template-columns: 1fr;
+        }
+
+        .marathon-about .me-section:not(.me-manifesto),
+        .marathon-about .me-footer {
+          width: calc(100% - 2.5rem);
+        }
+      }
+    </style>
+    <style>
+      /* User pass: remove following green slab and refine identity frame. */
+      .marathon-about .me-stage {
+        background:
+          radial-gradient(circle at 8% 23%, rgba(var(--marathon-acid-rgb), 0.13), transparent 16rem),
+          radial-gradient(circle at 91% 55%, rgba(var(--marathon-acid-rgb), 0.08), transparent 18rem),
+          #050505;
+      }
+
+      .marathon-about .me-stage::before,
+      .marathon-about .me-stage::after {
+        display: none !important;
+      }
+
+      .marathon-about .me-id {
+        background:
+          radial-gradient(circle, rgba(5, 5, 5, 0.06) 0 0.07rem, transparent 0.08rem),
+          linear-gradient(90deg, transparent 0 calc(100% - 9rem), rgba(var(--marathon-acid-rgb), 0.16) calc(100% - 9rem)),
+          var(--marathon-paper) !important;
+        background-size: 0.82rem 0.82rem, 100% 100%, 100% 100% !important;
+        border: 2px solid #050505 !important;
+        box-shadow:
+          0 0 0 0.34rem rgba(244, 243, 237, 0.08),
+          0.55rem 0.55rem 0 rgba(0, 0, 0, 0.78) !important;
+        color: #050505 !important;
+        margin-top: clamp(4rem, 8vw, 6.5rem);
+        padding: 0 !important;
+        transform: none !important;
+      }
+
+      .marathon-about .me-id::before {
+        background:
+          linear-gradient(90deg, var(--marathon-acid) 0 12rem, #050505 12rem 100%) !important;
+        box-shadow: none !important;
+        content: "";
+        height: 0.42rem !important;
+        left: 0 !important;
+        position: absolute;
+        top: 0 !important;
+        width: 100% !important;
+      }
+
+      .marathon-about .me-id::after {
+        background: var(--marathon-paper);
+        border: 1px solid rgba(5, 5, 5, 0.45);
+        color: rgba(5, 5, 5, 0.62);
+        content: "MS-ACID-TECH · IDENTITY TABLE";
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.58rem;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        padding: 0.34rem 0.48rem;
+        position: absolute;
+        right: 1rem;
+        top: 0.9rem;
+      }
+
+      .marathon-about .me-id__row {
+        border-right: 2px solid #050505 !important;
+        color: #050505 !important;
+        min-height: 8.8rem;
+        padding: clamp(1.35rem, 2vw, 1.9rem) !important;
+      }
+
+      .marathon-about .me-id__row:last-child {
+        border-right: 0 !important;
+      }
+
+      .marathon-about .me-id__row h4 {
+        background: transparent !important;
+        color: rgba(5, 5, 5, 0.62) !important;
+        padding: 0 !important;
+      }
+
+      .marathon-about .me-id__row p {
+        color: #050505 !important;
+      }
+
+      .marathon-about .me-id__row p em {
+        color: #4f9f18 !important;
+      }
+
+      @media (max-width: 960px) {
+        .marathon-about .me-id::after {
+          display: none;
+        }
+
+        .marathon-about .me-id__row {
+          border: 2px solid #050505 !important;
+          border-bottom: 0 !important;
+        }
+
+        .marathon-about .me-id__row:last-child {
+          border-bottom: 2px solid #050505 !important;
+        }
+      }
+    </style>
+    <style>
+      /* Hero background swap pass: preserve DOM copy, use the new image as the visual field. */
+      .marathon-about .me-hero {
+        align-items: end;
+        background: #050505 !important;
+        display: grid !important;
+        gap: clamp(2rem, 5vw, 5rem);
+        grid-template-columns: minmax(0, 1.1fr) minmax(20rem, 0.62fr);
+        isolation: isolate;
+        min-height: 100svh;
+        overflow: hidden;
+        padding: clamp(8rem, 12vw, 12rem) clamp(1.25rem, 5vw, 5rem) clamp(3.2rem, 6vw, 5.5rem);
+        position: relative;
+      }
+
+      .marathon-about .me-hero__image {
+        animation: none !important;
+        filter: contrast(1.08) saturate(1.08) brightness(0.84);
+        height: 100% !important;
+        inset: 0 !important;
+        object-fit: cover;
+        object-position: 52% 50%;
+        opacity: 0.82;
+        position: absolute;
+        transform: scale(1.035) !important;
+        width: 100% !important;
+        z-index: 0 !important;
+      }
+
+      .marathon-about .me-hero::before {
+        background:
+          linear-gradient(90deg, rgba(5, 5, 5, 0.92) 0 12%, rgba(5, 5, 5, 0.38) 43%, rgba(5, 5, 5, 0.82) 100%),
+          linear-gradient(180deg, rgba(5, 5, 5, 0.88) 0 6.8rem, transparent 12rem, rgba(5, 5, 5, 0.72) 100%);
+        border: 0 !important;
+        box-shadow: none !important;
+        clip-path: none !important;
+        content: "" !important;
+        inset: 0 !important;
+        opacity: 1 !important;
+        position: absolute;
+        transform: none !important;
+        z-index: 1 !important;
+      }
+
+      .marathon-about .me-hero::after {
+        background:
+          radial-gradient(circle, rgba(244, 243, 237, 0.12) 0 0.055rem, transparent 0.065rem),
+          linear-gradient(90deg, var(--marathon-acid) 0 0.3rem, transparent 0.3rem calc(100% - 0.3rem), var(--marathon-acid) calc(100% - 0.3rem)),
+          linear-gradient(135deg, transparent 0 75%, rgba(var(--marathon-acid-rgb), 0.72) 75.2% 78.5%, transparent 78.7%);
+        background-size: 0.82rem 0.82rem, 100% 100%, 100% 100%;
+        content: "" !important;
+        inset: 0 !important;
+        opacity: 0.48 !important;
+        pointer-events: none;
+        position: absolute;
+        z-index: 1 !important;
+      }
+
+      .marathon-about .me-hero > div {
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        position: relative;
+        z-index: 2;
+      }
+
+      .marathon-about .me-hero > div:first-of-type {
+        align-self: end;
+        background:
+          radial-gradient(circle, rgba(5, 5, 5, 0.07) 0 0.07rem, transparent 0.08rem),
+          linear-gradient(90deg, var(--marathon-acid) 0 0.55rem, transparent 0.55rem),
+          rgba(244, 243, 237, 0.94);
+        background-size: 0.82rem 0.82rem, 100% 100%, 100% 100%;
+        border: 2px solid #050505;
+        box-shadow:
+          0 0 0 1px rgba(244, 243, 237, 0.38),
+          0.75rem 0.75rem 0 rgba(var(--marathon-acid-rgb), 0.92);
+        color: #050505;
+        max-width: min(58rem, 58vw);
+        padding: clamp(1.3rem, 2.6vw, 2.4rem);
+        transform: rotate(-0.55deg);
+      }
+
+      .marathon-about .me-wordmark {
+        color: #050505 !important;
+        font-size: clamp(4.5rem, 10.5vw, 12.4rem);
+        line-height: 0.78;
+        margin: 0;
+        max-width: 5.4ch;
+      }
+
+      .marathon-about .me-wordmark::after {
+        color: var(--marathon-acid);
+      }
+
+      .marathon-about .me-wordmark__sub {
+        color: #050505 !important;
+      }
+
+      .marathon-about .me-hero__caption {
+        background: #050505 !important;
+        border-left: 0.4rem solid var(--marathon-acid) !important;
+        color: var(--marathon-paper) !important;
+        margin-top: clamp(1rem, 2vw, 1.45rem);
+        max-width: 45rem;
+        position: static !important;
+        transform: none !important;
+        width: auto !important;
+      }
+
+      .marathon-about .me-hero__right {
+        align-self: center;
+        background:
+          radial-gradient(circle, rgba(244, 243, 237, 0.12) 0 0.07rem, transparent 0.08rem),
+          rgba(5, 5, 5, 0.84) !important;
+        background-size: 0.78rem 0.78rem, 100% 100%;
+        border: 1px solid rgba(244, 243, 237, 0.42) !important;
+        box-shadow:
+          inset 0 0 0 1px rgba(5, 5, 5, 0.74),
+          0.55rem 0.55rem 0 rgba(var(--marathon-acid-rgb), 0.7) !important;
+        color: var(--marathon-paper) !important;
+        justify-self: end;
+        max-width: min(32rem, 32vw);
+        padding: clamp(1.1rem, 2.4vw, 2rem) !important;
+        text-align: left !important;
+        transform: none !important;
+      }
+
+      .marathon-about .me-hero__right::before {
+        display: none !important;
+      }
+
+      .marathon-about .me-hero__role {
+        color: var(--marathon-paper) !important;
+        font-size: clamp(2.4rem, 4.25vw, 4.95rem);
+        text-align: left !important;
+      }
+
+      .marathon-about .me-title-deck {
+        justify-items: stretch !important;
+        text-align: left !important;
+      }
+
+      .marathon-about .me-title-option {
+        background: rgba(244, 243, 237, 0.92) !important;
+        color: #050505 !important;
+      }
+
+      .marathon-about .me-title-option.is-picked {
+        background: var(--marathon-acid) !important;
+      }
+
+      .marathon-about .me-stage::before,
+      .marathon-about .me-stage::after {
+        display: none !important;
+      }
+
+      .marathon-about .me-id {
+        background: #050505 !important;
+        border: 1px solid rgba(244, 243, 237, 0.72) !important;
+        box-shadow:
+          0 0 0 0.3rem rgba(5, 5, 5, 0.95),
+          0.42rem 0.42rem 0 rgba(var(--marathon-acid-rgb), 0.78) !important;
+        color: #050505 !important;
+        display: grid;
+        gap: 0.55rem;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        margin-top: clamp(4rem, 8vw, 6.5rem);
+        padding: 0.55rem !important;
+        position: relative;
+        transform: none !important;
+        z-index: 3;
+      }
+
+      .marathon-about .me-id::before {
+        background:
+          linear-gradient(90deg, var(--marathon-acid) 0 0.28rem, transparent 0.28rem calc(100% - 0.28rem), rgba(var(--marathon-acid-rgb), 0.6) calc(100% - 0.28rem)),
+          linear-gradient(180deg, var(--marathon-acid) 0 0.28rem, transparent 0.28rem calc(100% - 0.28rem), rgba(var(--marathon-acid-rgb), 0.6) calc(100% - 0.28rem)) !important;
+        border: 1px solid rgba(var(--marathon-acid-rgb), 0.45);
+        box-shadow: none !important;
+        content: "" !important;
+        height: auto !important;
+        inset: -0.72rem !important;
+        pointer-events: none;
+        position: absolute;
+        width: auto !important;
+        z-index: -1;
+      }
+
+      .marathon-about .me-id::after {
+        background: #050505 !important;
+        border: 1px solid rgba(var(--marathon-acid-rgb), 0.72) !important;
+        color: var(--marathon-acid) !important;
+        content: "MS-ACID-TECH · IDENTITY TABLE";
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.58rem;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        padding: 0.36rem 0.52rem;
+        position: absolute;
+        right: 1rem;
+        top: -1rem;
+      }
+
+      .marathon-about .me-id__row {
+        background:
+          radial-gradient(circle, rgba(5, 5, 5, 0.07) 0 0.07rem, transparent 0.08rem),
+          var(--marathon-paper) !important;
+        background-size: 0.78rem 0.78rem, 100% 100% !important;
+        border: 2px solid #050505 !important;
+        min-height: 9rem;
+        padding: clamp(1.2rem, 2vw, 1.8rem) !important;
+      }
+
+      .marathon-about .me-id__row:last-child {
+        border: 2px solid #050505 !important;
+      }
+
+      .marathon-about .me-id__row h4 {
+        background: #050505 !important;
+        color: var(--marathon-paper) !important;
+        padding: 0.36rem 0.5rem !important;
+      }
+
+      .marathon-about .me-id__row p {
+        color: #050505 !important;
+      }
+
+      .marathon-about .me-id__row p em {
+        color: #4f9f18 !important;
+      }
+
+      @media (max-width: 960px) {
+        .marathon-about .me-hero {
+          align-items: stretch;
+          gap: 1.2rem;
+          grid-template-columns: 1fr;
+          padding: 7.4rem 1.25rem 3rem;
+        }
+
+        .marathon-about .me-hero__image {
+          object-position: 50% 50%;
+          transform: scale(1.08) !important;
+        }
+
+        .marathon-about .me-hero > div:first-of-type,
+        .marathon-about .me-hero__right {
+          max-width: 100%;
+          transform: none !important;
+        }
+
+        .marathon-about .me-hero__right {
+          justify-self: stretch;
+        }
+
+        .marathon-about .me-id {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .marathon-about .me-id::after {
+          display: none;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .marathon-about .me-wordmark {
+          font-size: clamp(3.8rem, 19vw, 6.1rem);
+        }
+
+        .marathon-about .me-hero__role {
+          font-size: clamp(2.1rem, 12vw, 3.4rem);
+        }
+
+        .marathon-about .me-id {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+    <style>
+      /* Restore pass: keep hero as image-only until the user's edited hero image is dropped in. */
+      .marathon-about .me-hero {
+        background: #050505 !important;
+        display: block !important;
+        min-height: 100svh;
+        overflow: hidden;
+        padding: 0 !important;
+        position: relative;
+      }
+
+      .marathon-about .me-hero__image {
+        animation: none !important;
+        display: block;
+        filter: none !important;
+        height: 100% !important;
+        inset: 0 !important;
+        object-fit: cover;
+        object-position: center;
+        opacity: 1 !important;
+        pointer-events: none;
+        position: absolute;
+        transform: none !important;
+        width: 100% !important;
+        z-index: -3 !important;
+      }
+
+      .marathon-about .me-hero::before {
+        background:
+          linear-gradient(180deg, rgba(5, 5, 5, 0.64) 0 5.9rem, transparent 7.2rem),
+          radial-gradient(circle at 54% 50%, transparent 0 22rem, rgba(0, 0, 0, 0.08) 54rem, rgba(0, 0, 0, 0.34) 100%) !important;
+        border: 0 !important;
+        box-shadow: none !important;
+        clip-path: none !important;
+        content: "" !important;
+        inset: 0 !important;
+        opacity: 1 !important;
+        position: absolute;
+        transform: none !important;
+        z-index: -2 !important;
+      }
+
+      .marathon-about .me-hero::after {
+        background:
+          radial-gradient(circle, rgba(255, 255, 255, 0.08) 0 0.055rem, transparent 0.065rem),
+          linear-gradient(90deg, rgba(var(--marathon-acid-rgb), 0.95) 0 0.32rem, transparent 0.32rem calc(100% - 0.32rem), rgba(var(--marathon-acid-rgb), 0.95) calc(100% - 0.32rem)) !important;
+        background-size: 0.8rem 0.8rem, 100% 100% !important;
+        content: "" !important;
+        inset: 0 !important;
+        opacity: 0.16 !important;
+        position: absolute;
+        z-index: -1 !important;
+      }
+
+      .marathon-about .me-hero > div {
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
+
+      .marathon-about .me-hero > div:first-of-type {
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
+
+      .marathon-about .me-hero .me-hero__right {
+        background: transparent !important;
+        border: 0 !important;
+        box-shadow: none !important;
+        color: #050505 !important;
+        max-width: min(23rem, 25vw);
+        opacity: 1 !important;
+        padding: 0 !important;
+        pointer-events: auto !important;
+        position: absolute;
+        right: clamp(2rem, 4vw, 4.5rem);
+        text-align: left !important;
+        top: clamp(9.2rem, 21vh, 12.5rem);
+        transform: none !important;
+        width: min(23rem, 25vw);
+        z-index: 4;
+      }
+
+      .marathon-about .me-hero .me-hero__right::before {
+        display: none !important;
+      }
+
+      .marathon-about .me-hero__status {
+        background: var(--marathon-acid) !important;
+        border: 2px solid #050505 !important;
+        color: #050505 !important;
+        margin-bottom: clamp(1.25rem, 2.6vw, 2.25rem);
+        box-shadow: 0.18rem 0.18rem 0 rgba(5, 5, 5, 0.22);
+        animation: about-hero-copy-in 0.78s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+      }
+
+      .marathon-about .me-hero__status::before {
+        background: #050505 !important;
+        box-shadow: none !important;
+      }
+
+      .marathon-about .me-hero__role {
+        color: #050505 !important;
+        font-size: clamp(2.65rem, 3.65vw, 4.45rem);
+        line-height: 0.92;
+        margin: 0;
+        text-align: left !important;
+        text-shadow: none !important;
+      }
+
+      .marathon-about .me-hero__role > span {
+        display: block;
+        overflow: hidden;
+        padding-bottom: 0.04em;
+      }
+
+      .marathon-about .me-hero__line {
+        display: block;
+        animation: about-hero-line-in 0.86s cubic-bezier(0.16, 1, 0.3, 1) both;
+        transform-origin: left bottom;
+      }
+
+      .marathon-about .me-hero__role > span:nth-child(1) .me-hero__line {
+        animation-delay: 0.28s;
+      }
+
+      .marathon-about .me-hero__role > span:nth-child(2) .me-hero__line {
+        animation-delay: 0.36s;
+      }
+
+      .marathon-about .me-hero__role > span:nth-child(3) .me-hero__line {
+        animation-delay: 0.44s;
+      }
+
+      .marathon-about .me-hero__role .accent {
+        color: var(--marathon-acid) !important;
+        text-shadow: 0.026em 0.026em 0 #050505;
+      }
+
+      .marathon-about .me-title-deck {
+        gap: 0.58rem;
+        justify-items: stretch !important;
+        margin-top: clamp(1.45rem, 2.4vw, 2.05rem);
+        opacity: 1 !important;
+        text-align: left !important;
+      }
+
+      .marathon-about .me-title-option {
+        background: rgba(244, 243, 237, 0.78) !important;
+        border: 1.5px solid #050505 !important;
+        color: #050505 !important;
+        justify-content: center;
+        animation: about-hero-chip-in 0.72s cubic-bezier(0.16, 1, 0.3, 1) both;
+        transform-origin: center;
+      }
+
+      .marathon-about .me-title-option:nth-child(1) {
+        animation-delay: 0.52s;
+      }
+
+      .marathon-about .me-title-option:nth-child(2) {
+        animation-delay: 0.575s;
+      }
+
+      .marathon-about .me-title-option:nth-child(3) {
+        animation-delay: 0.63s;
+      }
+
+      .marathon-about .me-title-option:nth-child(4) {
+        animation-delay: 0.685s;
+      }
+
+      .marathon-about .me-title-option.is-picked {
+        background: var(--marathon-acid) !important;
+        border-color: #050505 !important;
+        color: #050505 !important;
+      }
+
+      .marathon-about .me-stage::before,
+      .marathon-about .me-stage::after {
+        display: none !important;
+      }
+
+      @keyframes about-hero-copy-in {
+        from {
+          opacity: 0;
+          transform: translate3d(0, 1.75rem, 0) scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: translate3d(0, 0, 0) scale(1);
+        }
+      }
+
+      @keyframes about-hero-line-in {
+        from {
+          opacity: 0;
+          transform: translate3d(0, 112%, 0) skewY(2deg);
+        }
+        to {
+          opacity: 1;
+          transform: translate3d(0, 0, 0) skewY(0deg);
+        }
+      }
+
+      @keyframes about-hero-chip-in {
+        from {
+          opacity: 0;
+          transform: translate3d(0, 1.35rem, 0) scale(0.985);
+        }
+        to {
+          opacity: 1;
+          transform: translate3d(0, 0, 0) scale(1);
+        }
+      }
+
+      @media (max-width: 960px) {
+        .marathon-about .me-hero .me-hero__right {
+          background: rgba(5, 5, 5, 0.74) !important;
+          border: 1px solid rgba(244, 243, 237, 0.38) !important;
+          bottom: 2rem;
+          color: var(--marathon-paper) !important;
+          left: 1.25rem;
+          max-width: calc(100% - 2.5rem);
+          padding: 1.1rem !important;
+          right: 1.25rem;
+          top: auto;
+          width: auto;
+        }
+
+        .marathon-about .me-hero__role {
+          color: var(--marathon-paper) !important;
+          font-size: clamp(2.1rem, 11vw, 3.35rem);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .marathon-about .me-hero__status,
+        .marathon-about .me-hero__line,
+        .marathon-about .me-title-option {
+          animation: none !important;
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="chen-page chen-page--lite marathon-about">
+    <header class="world-header">
+      <a href="./index.html" class="brand-mark" data-fx-link>CHENNN STUDIO®</a>
+      <nav class="world-nav" aria-label="Primary">
+        <a href="./home.html?skipIntro=1" data-fx-link>Index</a>
+        <a href="./projects.html?skipIntro=1" data-fx-link>Projects</a>
+        <a class="is-active" href="./about.html" data-fx-link>About</a>
+        <a href="./services.html" data-fx-link>Services</a>
+        <a href="./contact.html?skipIntro=1" data-fx-link>Contact</a>
+        <a class="world-ip-entry" href="./ip-mask-demo.html?v=skin-ui-088" data-fx-link>IP Doorway</a>
+      </nav>
+      <button class="explore-pill" data-fx-magnetic="16" type="button" data-menu-trigger aria-controls="siteMenu" aria-expanded="false">Explore</button>
+    </header>
+
+    <main class="me-stage">
+      <!-- =========== HERO: cropped DESIGNER® wordmark =========== -->
+      <section class="me-hero">
+        <video class="me-hero__image" autoplay muted loop playsinline preload="auto" poster="./assets/about/here背景.png" aria-hidden="true">
+          <source src="./assets/about/about-hero-marathon-video.mp4" type="video/mp4" />
+        </video>
+        <div>
+          <h1 class="me-wordmark">
+            MAKER<sup>®</sup>
+            <span class="me-wordmark__sub">AI CREATIVE · SOLO BUILD · VISUAL WORLDS</span>
+          </h1>
+          <p class="me-hero__caption">
+            How to use AI to explore, build, and ship new visual worlds. 我想做的不是更快出图，而是把想象真正落到页面、产品和体验里。
+          </p>
+        </div>
+        <div class="me-hero__right">
+          <span class="me-hero__status">ONLINE · BUILDING</span>
+          <h2 class="me-hero__role">
+            <span><span class="me-hero__line">Designer.</span></span>
+            <span><span class="me-hero__line">Solo Builder.</span></span>
+            <span><span class="me-hero__line accent">AI Explorer.</span></span>
+          </h2>
+          <div class="me-title-deck" aria-label="Title options">
+            <span class="me-title-option is-picked">AI Creative Explorer</span>
+            <span class="me-title-option">Visual Workflow Builder</span>
+            <span class="me-title-option">Solo World Maker</span>
+            <span class="me-title-option">Idea-to-Launch Designer</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========== IDENTITY DATA TABLE =========== -->
+      <section class="me-id reveal reveal-stagger" aria-label="Personal info">
+        <div class="me-id__row reveal" style="--i: 0">
+          <h4>身份 / Identity</h4>
+          <p>AI 创意探索者<br/><em>Designer / Solo Builder</em></p>
+        </div>
+        <div class="me-id__row reveal" style="--i: 1">
+          <h4>方向 / Direction</h4>
+          <p>新视觉 · 新工作流<br/><em>从想法到上线</em></p>
+        </div>
+        <div class="me-id__row reveal" style="--i: 2">
+          <h4>状态 / Status</h4>
+          <p>边学边做边发布<br/><em>Learning by Shipping</em></p>
+        </div>
+        <div class="me-id__row reveal" style="--i: 3">
+          <h4>基地 / Base</h4>
+          <p>Shanghai<br/><em>Remote-first</em></p>
+        </div>
+      </section>
+
+      <!-- =========== LEDE =========== -->
+      <p class="me-lede reveal">
+        我对 AI 的兴趣，<span class="me-line">不只是把设计做快一点</span>，
+        <span class="me-gold">而是它让一个创意人可以重新拥有完整的创造链路。</span><br/>
+        从新的视觉语言，到工作流、网站、IP、交互和上线，很多以前卡在“不会代码 / 没团队 / 做不完”的想法，
+        现在都可以被一个人慢慢装进另一个世界。
+      </p>
+
+      <!-- =========== 5 EXPLORATION DIRECTIONS =========== -->
+      <section class="me-section">
+        <header class="me-section__head" data-fx-stagger-group>
+          <h2 class="me-section__title" data-fx-stagger-item data-fx-magnetic="10">Five Directions<br/>I'm <em>exploring.</em></h2>
+          <span class="me-section__count" data-fx-stagger-item>05 MODULES · ACTIVE</span>
+        </header>
+        <div class="me-directions reveal-stagger" data-fx-stagger-group>
+          <div class="me-direction reveal" style="--i: 0" data-fx-stagger-item>
+            <div class="me-direction__num">01 · NEW VISUALS</div>
+            <h3 class="me-direction__en">New Visuals</h3>
+            <p class="me-direction__zh">新视觉探索</p>
+            <p class="me-direction__body">
+              把 AI 当成新的视觉合作者：不是复刻风格，而是寻找人、工具和偶然性之间新的图像语言。
+            </p>
+          </div>
+          <div class="me-direction reveal" style="--i: 1" data-fx-stagger-item>
+            <div class="me-direction__num">02 · WORKFLOW</div>
+            <h3 class="me-direction__en">Workflow</h3>
+            <p class="me-direction__zh">工作流再造</p>
+            <p class="me-direction__body">
+              重新组织创作流程：灵感、资料、设计、代码、动效、测试都进入同一个循环，而不是分散在不同阶段。
+            </p>
+          </div>
+          <div class="me-direction reveal" style="--i: 2" data-fx-stagger-item>
+            <div class="me-direction__num">03 · INDIE BUILD</div>
+            <h3 class="me-direction__en">Indie Build</h3>
+            <p class="me-direction__zh">独立开发</p>
+            <p class="me-direction__body">
+              没有编程基础，也能把一个想法拆成界面、逻辑、素材和部署。热爱不再只能停在收藏夹里。
+            </p>
+          </div>
+          <div class="me-direction reveal" style="--i: 3" data-fx-stagger-item>
+            <div class="me-direction__num">04 · END-TO-END</div>
+            <h3 class="me-direction__en">End-to-End</h3>
+            <p class="me-direction__zh">个人全流程</p>
+            <p class="me-direction__body">
+              从一句话的念头，到品牌、视觉、页面、交互、上线和复盘，一个人也可以跑完整条链路。
+            </p>
+          </div>
+          <div class="me-direction reveal" style="--i: 4" data-fx-stagger-item>
+            <div class="me-direction__num">05 · REAL APPS</div>
+            <h3 class="me-direction__en">Real Apps</h3>
+            <p class="me-direction__zh">落地应用</p>
+            <p class="me-direction__body">
+              我更关心“能不能变成真实体验”。Demo 只是开始，真正有意思的是让它被打开、被使用、被记住。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========== RECENT WORKS CAROUSEL =========== -->
+      <section class="me-works reveal">
+        <header class="me-works__head">
+          <h2 class="me-section__title">Recent <em>signals.</em></h2>
+          <span class="me-section__count">06 TRACKS · LEARNING IN PUBLIC</span>
+        </header>
+        <div class="me-works__row">
+          <article class="me-work">
+            <div class="me-work__num"><strong>01</strong> · NEW VISUALS</div>
+            <div>
+              <h3 class="me-work__title">Aigc · Creative</h3>
+              <p class="me-work__zh">从出图到视觉系统的探索</p>
+              <div class="me-work__tags"><span>AI</span><span>Visual</span><span>System</span></div>
+            </div>
+          </article>
+          <article class="me-work">
+            <div class="me-work__num"><strong>02</strong> · INDIE BUILD</div>
+            <div>
+              <h3 class="me-work__title">Spark</h3>
+              <p class="me-work__zh">把灵感和工作流做成工具</p>
+              <div class="me-work__tags"><span>Build</span><span>Web</span><span>Solo</span></div>
+            </div>
+          </article>
+          <article class="me-work">
+            <div class="me-work__num"><strong>03</strong> · END-TO-END</div>
+            <div>
+              <h3 class="me-work__title">Easyfamily</h3>
+              <p class="me-work__zh">用产品思路解决真实生活问题</p>
+              <div class="me-work__tags"><span>Product</span><span>Solo</span><span>App</span></div>
+            </div>
+          </article>
+          <article class="me-work">
+            <div class="me-work__num"><strong>04</strong> · WORKFLOW</div>
+            <div>
+              <h3 class="me-work__title">Studio OS</h3>
+              <p class="me-work__zh">让创作、管理、发布变成一个系统</p>
+              <div class="me-work__tags"><span>Workflow</span><span>Tooling</span></div>
+            </div>
+          </article>
+          <article class="me-work">
+            <div class="me-work__num"><strong>05</strong> · REAL APPS</div>
+            <div>
+              <h3 class="me-work__title">Tangyuan IP</h3>
+              <p class="me-work__zh">原创 IP、皮肤、门面页和交互世界</p>
+              <div class="me-work__tags"><span>IP</span><span>3D</span><span>Brand</span></div>
+            </div>
+          </article>
+          <article class="me-work">
+            <div class="me-work__num"><strong>06</strong> · NEW VISUALS</div>
+            <div>
+              <h3 class="me-work__title">CHENNN World</h3>
+              <p class="me-work__zh">把作品集做成可进入的视觉世界</p>
+              <div class="me-work__tags"><span>Web</span><span>Canvas</span><span>Self</span></div>
+            </div>
+          </article>
+        </div>
+        <p class="me-works__hint">auto slide · hover to pause · drag later</p>
+      </section>
+
+      <!-- =========== MANIFESTO + 5 PILLARS =========== -->
+      <section class="me-manifesto">
+        <p class="me-manifesto__kicker">Manifesto · AI 时代的核心</p>
+        <h2 class="me-manifesto__title reveal">
+          Tech is cheaper.<br/>
+          <em>Taste is louder.</em>
+        </h2>
+        <p class="me-manifesto__sub">
+          当技术逐渐平权，真正稀缺的会变成：想象力、品味、愿景、判断力，以及把事情推进到上线的行动力。
+        </p>
+
+        <div class="me-pillars reveal-stagger" data-fx-stagger-group>
+          <div class="me-pillar reveal" style="--i: 0" data-fx-stagger-item>
+            <div class="me-pillar__icon">✦</div>
+            <p class="me-pillar__en">Imagination</p>
+            <p class="me-pillar__zh">想象力</p>
+          </div>
+          <div class="me-pillar reveal" style="--i: 1" data-fx-stagger-item>
+            <div class="me-pillar__icon">◇</div>
+            <p class="me-pillar__en">Taste</p>
+            <p class="me-pillar__zh">品味</p>
+          </div>
+          <div class="me-pillar reveal" style="--i: 2" data-fx-stagger-item>
+            <div class="me-pillar__icon">◎</div>
+            <p class="me-pillar__en">Vision</p>
+            <p class="me-pillar__zh">愿景</p>
+          </div>
+          <div class="me-pillar reveal" style="--i: 3" data-fx-stagger-item>
+            <div class="me-pillar__icon">⊕</div>
+            <p class="me-pillar__en">Judgment</p>
+            <p class="me-pillar__zh">判断力</p>
+          </div>
+          <div class="me-pillar reveal" style="--i: 4" data-fx-stagger-item>
+            <div class="me-pillar__icon">→</div>
+            <p class="me-pillar__en">Execution</p>
+            <p class="me-pillar__zh">行动力</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========== PHILOSOPHY QUOTE =========== -->
+      <section class="me-quote reveal">
+        <p><em>AI 时代</em>给了创意更多真正<em>落地的机会。</em></p>
+        <span class="me-quote__sep"></span>
+        <p>没有编程基础，也可以把<em>热爱、品味和愿景</em>装进另一个世界。</p>
+      </section>
+
+      <!-- =========== FOOTER · BRAND / SOCIAL / SKILLS =========== -->
+      <footer class="me-footer reveal">
+        <div class="me-footer__brand">
+          <h3>CHEN TONG.</h3>
+          <p>
+            AI 创意探索者、独立设计师、正在学习独立开发的人。
+            我想把那些原本只存在于脑海里的视觉、IP 和交互，慢慢做成能被打开的东西。
+          </p>
+        </div>
+
+        <div class="me-footer__list">
+          <h4>Find Me · 社媒</h4>
+          <a href="https://www.xiaohongshu.com/user/profile/608ce124000000000100805f?mini=1&amp;tab=note" target="_blank" rel="noreferrer">小红书 <small>608ce124000000000100805f</small></a>
+          <a href="mailto:1285293434@qq.com">QQ Mail <small>1285293434@qq.com</small></a>
+          <a href="mailto:zedd18225055550@gmail.com">Gmail <small>zedd18225055550@gmail.com</small></a>
+          <a href="./ip-mask-demo.html?v=skin-ui-088" data-fx-link>Tangyuan IP <small>Doorway</small></a>
+          <a href="./projects.html?skipIntro=1" data-fx-link>Projects <small>Case studies</small></a>
+        </div>
+
+        <div class="me-skills">
+          <h4>能力分布 · Skill Mix</h4>
+          <div class="me-skill">
+            <span class="me-skill__name">视觉设计</span>
+            <div class="me-skill__bar"><span style="width: 92%;"></span></div>
+            <span class="me-skill__pct">92%</span>
+          </div>
+          <div class="me-skill">
+            <span class="me-skill__name">AI 工作流</span>
+            <div class="me-skill__bar"><span style="width: 88%;"></span></div>
+            <span class="me-skill__pct">88%</span>
+          </div>
+          <div class="me-skill">
+            <span class="me-skill__name">独立开发</span>
+            <div class="me-skill__bar"><span style="width: 76%;"></span></div>
+            <span class="me-skill__pct">76%</span>
+          </div>
+          <div class="me-skill">
+            <span class="me-skill__name">动态影像</span>
+            <div class="me-skill__bar"><span style="width: 68%;"></span></div>
+            <span class="me-skill__pct">68%</span>
+          </div>
+          <div class="me-skill">
+            <span class="me-skill__name">3D / IP</span>
+            <div class="me-skill__bar"><span style="width: 62%;"></span></div>
+            <span class="me-skill__pct">62%</span>
+          </div>
+        </div>
+      </footer>
+
+      <div class="me-end">
+        <span>CHENNN_2026 · PERSONAL AI CREATIVE PROFILE</span>
+        <span><strong>● ONLINE</strong> · LAST PUSH 2026.05.28</span>
+      </div>
+    </main>
+    <aside class="menu" id="siteMenu" aria-hidden="true">
+      <button class="menu-close" type="button" data-menu-close aria-label="Close Menu">×</button>
+      <div class="menu-inner">
+        <nav class="menu-nav" aria-label="Menu">
+          <a href="./home.html?skipIntro=1" data-fx-link><small>01</small><span>Index</span></a>
+          <a href="./projects.html?skipIntro=1" data-fx-link><small>02</small><span>Projects</span></a>
+          <a class="is-active" href="./about.html" data-fx-link><small>03</small><span>About</span></a>
+          <a href="./services.html" data-fx-link><small>04</small><span>Services</span></a>
+          <a href="./contact.html?skipIntro=1" data-fx-link><small>05</small><span>Contact</span></a>
+          <a href="./works.html" data-fx-link><small>06</small><span>World</span></a>
+          <a href="./ip-mask-demo.html?v=skin-ui-088" data-fx-link><small>07</small><span>IP Doorway</span></a>
+          <a href="./pet-demo.html" data-fx-link><small>08</small><span>Pet</span></a>
+        </nav>
+        <footer class="menu-footer">
+          <div>
+            <a href="mailto:1285293434@qq.com">1285293434@qq.com</a>
+            <a href="mailto:zedd18225055550@gmail.com">zedd18225055550@gmail.com</a>
+          </div>
+          <div>CHENNN WORLD · 2026</div>
+        </footer>
+      </div>
+    </aside>
+    <script>
+      (function () {
+        var body = document.body;
+        var menuButton = document.querySelector("[data-menu-trigger]");
+        var menuCloseButton = document.querySelector("[data-menu-close]");
+        var menu = document.getElementById("siteMenu");
+        if (!menuButton || !menuCloseButton || !menu) return;
+        function setMenu(open) {
+          body.classList.toggle("is-menu-open", open);
+          menu.setAttribute("aria-hidden", String(!open));
+          menuButton.setAttribute("aria-expanded", String(open));
+        }
+        menuButton.addEventListener("click", function () {
+          setMenu(!body.classList.contains("is-menu-open"));
+        });
+        menuCloseButton.addEventListener("click", function () {
+          setMenu(false);
+        });
+        menu.querySelectorAll("a").forEach(function (link) {
+          link.addEventListener("click", function () { setMenu(false); });
+        });
+        window.addEventListener("keydown", function (event) {
+          if (event.key === "Escape") setMenu(false);
+        });
+      })();
+    </script>
+    <script>
+      const worksRow = document.querySelector(".me-works__row");
+      if (worksRow && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        const originals = [...worksRow.children];
+        originals.forEach((card) => {
+          const clone = card.cloneNode(true);
+          clone.setAttribute("aria-hidden", "true");
+          worksRow.append(clone);
+        });
+      }
+    </script>
+    <script>
+      (function () {
+        var reveals = document.querySelectorAll(".reveal");
+        if (!reveals.length) return;
+        if (!("IntersectionObserver" in window)) {
+          reveals.forEach(function (el) { el.classList.add("is-visible"); });
+          return;
+        }
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting || entry.boundingClientRect.top < window.innerHeight) {
+              entry.target.classList.add("is-visible");
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: "0px 0px -60px 0px" });
+        reveals.forEach(function (el) { io.observe(el); });
+      })();
+    </script>
+    <link rel="stylesheet" href="./assets/main-site-fixes.css?v=world-only-audio-187" />
+    <script src="./chen-fx/03-page-transition/script.js"></script>
+      <script src="./assets/vendor/gsap.min.js"></script>
+      <script src="./assets/vendor/CustomEase.min.js"></script>
+      <script src="./assets/vendor/ScrollTrigger.min.js"></script>
+      <script src="./chen-fx/06-gsap-motion-engine/motion-engine.js"></script>
+      <script src="./assets/main-site-fixes.js?v=world-only-audio-187"></script>
+  </body>
+</html>

@@ -1,0 +1,1496 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>How I Work — CHENNN STUDIO®</title>
+    <link rel="icon" href="data:," />
+    
+    <!-- Load GSAP core -->
+    <script src="./assets/vendor/gsap.min.js"></script>
+    <script src="./assets/vendor/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/CustomEase.min.js"></script>
+    
+    <!-- Load Motion Engine -->
+    <link rel="stylesheet" href="./chen-fx/06-gsap-motion-engine/motion-engine.css" />
+    <script src="./chen-fx/06-gsap-motion-engine/motion-engine.js" defer></script>
+    <meta name="description" content="品牌视觉、网站产品、动态影像、AI 创意——一个设计师 + AI 工作流能交付的比你想的多。">
+    <meta property="og:title" content="How I Work · CHENNN STUDIO®">
+    <meta property="og:description" content="从想法到上线，一个人的完整创造链路。">
+    <meta property="og:type" content="website">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+
+    <!--
+      MOCKUP v3 (World mode). hi/.stitch/designs/services.html.
+      Reframed from "studio services" to "How I Work / 合作方式".
+      Personal voice ("我"), AI-native angle per module.
+      Four capability modules, gaming-HUD aesthetic.
+      Page-specific classes prefixed `svc-*`.
+
+      Codex promotion note: when moving to hi/services.html,
+      fix ./ paths → ./ and add to unified navigation.
+    -->
+
+    <link rel="stylesheet" href="./styles.css?v=mockup-world-v2" />
+    <link rel="stylesheet" href="./chen-fx/03-page-transition/style.css" />
+
+    <style>
+      :root { --chen-page-bg: #050505; }
+
+      body {
+        background: var(--world-bg-deep, #050505);
+        color: var(--world-text, #fff);
+        font-family: var(--font-main);
+        margin: 0;
+        min-height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+      html {
+        overflow: auto;
+        scroll-behavior: smooth;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background:
+          linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+        background-size: 88px 88px;
+        opacity: 0.55;
+        mask-image: radial-gradient(circle at 50% 38%, #000 0%, transparent 78%);
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(circle at 22% 30%, rgba(156, 255, 82, 0.06), transparent 42%),
+          radial-gradient(circle at 78% 76%, rgba(156, 255, 82, 0.05), transparent 45%);
+      }
+
+      main, header, .svc-poster-hero { position: relative; z-index: 2; }
+
+      /* === HEADER (same pattern as about.html) ============= */
+
+      .world-header {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        padding: clamp(1.35rem, 2.3vw, 2rem);
+        z-index: 40;
+        gap: 2rem;
+        background: rgba(5, 5, 5, 0.48);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+
+      .brand-mark {
+        align-items: center;
+        background: var(--world-accent, #9cff52);
+        border-radius: 1rem;
+        color: var(--world-ink, #101010);
+        display: inline-flex;
+        font-size: 0.78rem;
+        font-weight: 900;
+        height: 3.05rem;
+        justify-content: center;
+        line-height: 1;
+        padding: 0 0.82rem;
+        text-decoration: none;
+        text-transform: uppercase;
+        transition:
+          box-shadow 0.24s ease,
+          transform 0.24s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+        width: max-content;
+        letter-spacing: 0.02em;
+      }
+
+      .brand-mark:hover,
+      .brand-mark:focus-visible {
+        box-shadow: 0 0 28px rgba(156, 255, 82, 0.34);
+        transform: translateY(-0.12rem) rotate(-1.5deg);
+      }
+
+      .brand-mark:active {
+        transform: translateY(0) scale(0.97);
+        transition-duration: 0.08s;
+      }
+
+      .world-nav {
+        display: flex;
+        gap: clamp(1.25rem, 2.1vw, 2.2rem);
+        align-items: center;
+        justify-self: end;
+        margin-left: auto;
+      }
+
+      .world-nav a {
+        color: rgba(255, 255, 255, 0.72);
+        font-size: clamp(0.95rem, 1.15vw, 1.18rem);
+        font-weight: 650;
+        font-style: italic;
+        text-decoration: none;
+        transition: color 0.2s ease, transform 0.2s ease;
+      }
+
+      .world-nav a:hover { color: #fff; transform: translateY(-0.1rem); }
+
+      .world-nav a.is-active {
+        color: var(--world-accent, #9cff52);
+        text-shadow: 0 0 18px rgba(156, 255, 82, 0.34);
+      }
+
+      .world-nav a.world-ip-entry {
+        align-items: center;
+        color: var(--world-accent, #9cff52) !important;
+        display: inline-flex;
+        gap: 0.45rem;
+        text-shadow: 0 0 18px rgba(156, 255, 82, 0.34);
+      }
+
+      .world-nav a.world-ip-entry::before {
+        content: "";
+        width: 0.52rem;
+        height: 0.52rem;
+        background: currentColor;
+        border-radius: 999px;
+        transform: rotate(45deg) scale(0.76);
+      }
+
+      .explore-pill {
+        align-items: center;
+        appearance: none;
+        background: #fff;
+        color: #050505;
+        border: 0;
+        border-radius: 999px;
+        padding: 0.85rem 1.85rem;
+        display: inline-flex;
+        font-size: 0.95rem;
+        font-weight: 700;
+        text-decoration: none;
+        cursor: pointer;
+        font-family: var(--font-main);
+        transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease;
+      }
+      
+      .explore-pill:hover,
+      .explore-pill:focus-visible {
+        background: var(--world-accent, #9cff52);
+      }
+
+      .menu {
+        background:
+          radial-gradient(circle at 82% 18%, rgba(156, 255, 82, 0.14), transparent 17rem),
+          linear-gradient(145deg, rgb(248, 245, 241), rgb(230, 225, 221));
+        color: var(--world-ink, #101010);
+        inset: 0;
+        left: auto;
+        max-width: min(42rem, 100vw);
+        opacity: 0;
+        pointer-events: none;
+        position: fixed;
+        right: 0;
+        transform: translateX(105%);
+        transition:
+          opacity 0.34s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+          transform 0.42s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+        width: 100%;
+        z-index: 90;
+      }
+
+      .is-menu-open .menu {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateX(0);
+      }
+
+      .menu-inner {
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+        padding: 6.5rem clamp(1.6rem, 7vw, 5rem) 2.2rem;
+      }
+
+      .menu-close {
+        align-items: center;
+        appearance: none;
+        background: var(--world-ink, #101010);
+        border: 0;
+        border-radius: 50%;
+        color: #fff;
+        cursor: pointer;
+        display: flex;
+        font-size: 2.15rem;
+        height: 3.5rem;
+        justify-content: center;
+        line-height: 1;
+        position: absolute;
+        right: clamp(1.25rem, 3vw, 2rem);
+        top: clamp(1.25rem, 3vw, 2rem);
+        transition: transform 0.24s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+        width: 3.5rem;
+      }
+
+      .menu-close:hover,
+      .menu-close:focus-visible {
+        transform: rotate(-8deg) scale(1.06);
+      }
+
+      .menu-nav {
+        display: grid;
+        gap: 0.7rem;
+      }
+
+      .menu-nav a {
+        align-items: flex-start;
+        color: inherit;
+        display: flex;
+        gap: 0.75rem;
+        text-decoration: none;
+        transition:
+          color 0.28s ease,
+          opacity 0.28s ease,
+          transform 0.34s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+      }
+
+      .menu-nav a:hover,
+      .menu-nav a:focus-visible {
+        color: var(--world-accent, #9cff52);
+        transform: translate3d(0.35rem, -0.08rem, 0);
+      }
+
+      .menu-nav:has(a:hover) a:not(:hover),
+      .menu-nav:has(a:focus-visible) a:not(:focus-visible) {
+        opacity: 0.22;
+      }
+
+      .menu-nav small {
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 1.1rem;
+        font-weight: 500;
+      }
+
+      .menu-nav span {
+        font-family: var(--font-main);
+        font-size: clamp(3.7rem, 12vw, 6.65rem);
+        line-height: 0.82;
+      }
+
+      .menu-nav a.is-active {
+        color: rgba(16, 16, 16, 0.2);
+      }
+
+      .menu-footer {
+        display: grid;
+        gap: 1.7rem;
+        grid-template-columns: 1fr 1fr;
+        margin-top: auto;
+      }
+
+      .menu-footer a {
+        color: inherit;
+        display: block;
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.82rem;
+        font-weight: 700;
+        line-height: 1.15;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      /* === STAGE & HERO ===================================== */
+
+      .svc-stage {
+        max-width: 96rem;
+        margin: 0 auto;
+        padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 4vw, 4rem) 5rem;
+      }
+
+      .svc-poster-hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.52fr);
+        min-height: 100svh;
+        overflow: hidden;
+        padding: 8.5rem clamp(1.5rem, 4vw, 4rem) clamp(2rem, 5vw, 4rem);
+        isolation: isolate;
+      }
+
+      .svc-poster-hero__image {
+        height: 100%;
+        inset: 0;
+        object-fit: cover;
+        object-position: center;
+        position: absolute;
+        width: 100%;
+        z-index: -3;
+      }
+
+      .svc-poster-hero::before,
+      .svc-poster-hero::after {
+        content: "";
+        inset: 0;
+        pointer-events: none;
+        position: absolute;
+      }
+
+      .svc-poster-hero::before {
+        background:
+          linear-gradient(90deg, rgba(5, 5, 5, 0.66) 0 22%, rgba(5, 5, 5, 0.2) 50%, rgba(5, 5, 5, 0.58) 100%),
+          linear-gradient(180deg, rgba(5, 5, 5, 0.34) 0 16%, transparent 48%, rgba(5, 5, 5, 0.6) 100%);
+        z-index: -2;
+      }
+
+      .svc-poster-hero::after {
+        background:
+          radial-gradient(circle at 50% 52%, transparent 0 30rem, rgba(5, 5, 5, 0.24) 46rem),
+          linear-gradient(rgba(156, 255, 82, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(156, 255, 82, 0.035) 1px, transparent 1px);
+        background-size: 100% 100%, 88px 88px, 88px 88px;
+        mix-blend-mode: screen;
+        opacity: 0.38;
+        z-index: -1;
+      }
+
+      .svc-poster-left {
+        position: relative;
+      }
+
+      .svc-poster-wordmark {
+        color: rgba(255, 255, 255, 0.68);
+        font-family: var(--font-main);
+        font-size: clamp(5.8rem, 11vw, 12.5rem);
+        font-weight: 900;
+        line-height: 0.82;
+        margin: 0;
+        text-shadow: 0 1.4rem 5rem rgba(0, 0, 0, 0.46);
+        text-transform: uppercase;
+        user-select: none;
+      }
+
+      .svc-poster-wordmark sup {
+        color: var(--world-accent, #9cff52);
+        font-size: 0.18em;
+        font-weight: 700;
+        margin-left: 0.2em;
+        text-shadow: 0 0 16px rgba(156, 255, 82, 0.5);
+        vertical-align: super;
+      }
+
+      .svc-poster-sub {
+        color: rgba(255, 255, 255, 0.72);
+        display: block;
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: clamp(0.72rem, 1vw, 0.92rem);
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        margin-left: 0.64rem;
+        margin-top: 0.78rem;
+      }
+
+      .svc-poster-caption {
+        bottom: clamp(2rem, 5vw, 4rem);
+        color: rgba(255, 255, 255, 0.88);
+        font-size: clamp(1rem, 1.4vw, 1.16rem);
+        left: clamp(1.5rem, 4vw, 4rem);
+        line-height: 1.48;
+        margin: 0;
+        max-width: 34rem;
+        position: absolute;
+        text-shadow: 0 0.9rem 2.4rem rgba(0, 0, 0, 0.54);
+      }
+
+      .svc-poster-caption::before {
+        color: var(--world-accent, #9cff52);
+        content: "< ";
+        font-weight: 700;
+      }
+
+      .svc-poster-right {
+        align-self: center;
+        justify-self: end;
+        max-width: 26rem;
+        text-align: right;
+        transform: translateY(2rem);
+      }
+
+      .svc-poster-status {
+        align-items: center;
+        background: rgba(156, 255, 82, 0.08);
+        border: 1px solid rgba(156, 255, 82, 0.35);
+        border-radius: 999px;
+        color: var(--world-accent, #9cff52);
+        display: inline-flex;
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.7rem;
+        font-weight: 700;
+        gap: 0.55rem;
+        letter-spacing: 0.16em;
+        margin-bottom: 2rem;
+        padding: 0.55rem 1rem;
+        text-transform: uppercase;
+      }
+
+      .svc-poster-status::before {
+        animation: svc-pulse 2s ease-in-out infinite;
+        background: currentColor;
+        border-radius: 999px;
+        box-shadow: 0 0 10px currentColor;
+        content: "";
+        height: 0.5rem;
+        width: 0.5rem;
+      }
+
+      @keyframes svc-pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.4; }
+      }
+
+      .svc-poster-title {
+        color: #fff;
+        font-family: var(--font-main);
+        font-size: clamp(3rem, 4.8vw, 4.4rem);
+        font-weight: 800;
+        letter-spacing: 0;
+        line-height: 1;
+        margin: 0;
+        text-shadow: 0 1.1rem 3rem rgba(0, 0, 0, 0.58);
+      }
+
+      .svc-poster-title span {
+        display: block;
+      }
+
+      .svc-poster-title .accent {
+        color: var(--world-accent, #9cff52);
+        font-style: italic;
+      }
+
+      .svc-poster-deck {
+        display: grid;
+        gap: 0.65rem;
+        justify-items: end;
+        margin-top: 2.3rem;
+        opacity: 0.94;
+      }
+
+      .svc-poster-chip {
+        align-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 999px;
+        color: rgba(255, 255, 255, 0.74);
+        display: inline-flex;
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.72rem;
+        font-weight: 800;
+        gap: 0.55rem;
+        letter-spacing: 0.11em;
+        padding: 0.62rem 1rem;
+        text-transform: uppercase;
+      }
+
+      .svc-poster-chip::before {
+        background: currentColor;
+        border-radius: 999px;
+        content: "";
+        height: 0.36rem;
+        width: 0.36rem;
+      }
+
+      .svc-poster-chip.is-picked {
+        border-color: rgba(156, 255, 82, 0.42);
+        color: var(--world-accent, #9cff52);
+      }
+
+      .svc-poster-wordmark {
+        animation: svc-poster-in 1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+      }
+
+      .svc-poster-status {
+        animation: svc-poster-in 0.78s cubic-bezier(0.16, 1, 0.3, 1) 0.22s both;
+      }
+
+      .svc-poster-title {
+        animation: svc-poster-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+      }
+
+      .svc-poster-deck {
+        animation: svc-poster-in 0.86s cubic-bezier(0.16, 1, 0.3, 1) 0.42s both;
+      }
+
+      .svc-poster-caption {
+        animation: svc-poster-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.48s both;
+      }
+
+      @keyframes svc-poster-in {
+        from {
+          opacity: 0;
+          transform: translateY(2.5rem) scale(0.97);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .svc-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--world-accent, #9cff52);
+        margin: 0 0 1.75rem;
+      }
+
+      .svc-kicker::before {
+        content: "";
+        display: inline-block;
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 999px;
+        background: currentColor;
+        box-shadow: 0 0 10px currentColor;
+      }
+
+      .svc-title {
+        font-family: var(--font-main);
+        font-size: clamp(3.5rem, 9vw, 8.5rem);
+        font-weight: 900;
+        line-height: 0.92;
+        letter-spacing: -0.025em;
+        color: #fff;
+        text-transform: uppercase;
+        margin: 0 0 2.5rem;
+      }
+
+      .svc-title em {
+        color: var(--world-accent, #9cff52);
+        font-style: italic;
+      }
+
+      .svc-lede {
+        max-width: 56rem;
+        font-size: clamp(1.2rem, 1.7vw, 1.55rem);
+        line-height: 1.55;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.88);
+        margin: 0 0 5rem;
+      }
+
+      /* === FILTER CHIPS ===================================== */
+
+      .svc-index {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+        margin: 0 0 5rem;
+        padding: 1.5rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .svc-index a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0.6rem 1.15rem;
+        background: rgba(255, 255, 255, 0.025);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 999px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: rgba(255, 255, 255, 0.85);
+        text-decoration: none;
+        transition: all 0.22s ease;
+      }
+
+      .svc-index a:hover {
+        background: var(--world-accent, #9cff52);
+        color: var(--world-ink, #101010);
+        border-color: var(--world-accent, #9cff52);
+      }
+
+      .svc-index a small {
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.65rem;
+        color: var(--world-accent, #9cff52);
+        font-weight: 600;
+      }
+
+      .svc-index a:hover small { color: var(--world-ink, #101010); }
+
+      /* === DISCIPLINE BLOCKS =============================== */
+
+      .svc-block {
+        padding: 5rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(0, 2fr);
+        gap: clamp(2rem, 4vw, 5rem);
+      }
+
+      .svc-block:first-of-type { border-top: none; padding-top: 0; }
+
+      .svc-block__header {
+        position: sticky;
+        top: 8rem;
+        align-self: start;
+      }
+
+      .svc-block__num {
+        font-size: clamp(5rem, 11vw, 9rem);
+        font-weight: 900;
+        line-height: 0.85;
+        letter-spacing: -0.04em;
+        color: var(--world-accent, #9cff52);
+        text-shadow: 0 0 60px rgba(156, 255, 82, 0.4);
+        margin: 0 0 1rem;
+      }
+
+      .svc-block__num-label {
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.55);
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+
+      .svc-block__status {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        color: var(--world-accent, #9cff52);
+      }
+
+      .svc-block__status::before {
+        content: "";
+        display: inline-block;
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 999px;
+        background: currentColor;
+        box-shadow: 0 0 8px currentColor;
+      }
+
+      .svc-block h2 {
+        font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+        font-weight: 900;
+        line-height: 1;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+        margin: 0 0 0.75rem;
+        color: #fff;
+      }
+
+      .svc-block h2 em {
+        color: var(--world-accent, #9cff52);
+        font-style: italic;
+      }
+
+      .svc-block__sub {
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.78rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.5);
+        margin: 0 0 1.75rem;
+      }
+
+      .svc-block p {
+        font-size: 1.05rem;
+        line-height: 1.65;
+        max-width: 44rem;
+        margin: 0 0 2rem;
+        color: rgba(255, 255, 255, 0.78);
+      }
+
+      .svc-capabilities {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem 2rem;
+        margin: 1rem 0 2rem;
+        padding: 0;
+        list-style: none;
+      }
+
+      .svc-capabilities li {
+        font-size: 0.98rem;
+        line-height: 1.5;
+        padding-left: 1.5rem;
+        position: relative;
+        color: rgba(255, 255, 255, 0.88);
+      }
+
+      .svc-capabilities li::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: var(--world-accent, #9cff52);
+      }
+
+      .svc-example {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0.65rem 1.1rem;
+        background: rgba(255, 255, 255, 0.025);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: #fff;
+        border-radius: 999px;
+      }
+
+      .svc-example small {
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.65rem;
+        font-weight: 700;
+        color: var(--world-accent, #9cff52);
+        letter-spacing: 0.14em;
+      }
+
+      /* === CTA ============================================= */
+
+      .svc-cta {
+        margin-top: 6rem;
+        padding: 5rem 2.5rem;
+        border: 1px solid rgba(156, 255, 82, 0.32);
+        background:
+          radial-gradient(circle at 30% 50%, rgba(156, 255, 82, 0.08), transparent 65%),
+          rgba(156, 255, 82, 0.02);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .svc-cta::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0;
+        width: 3rem;
+        height: 3px;
+        background: var(--world-accent, #9cff52);
+        box-shadow: 0 0 16px currentColor;
+      }
+
+      .svc-cta h2 {
+        font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+        font-weight: 900;
+        text-transform: uppercase;
+        line-height: 0.95;
+        letter-spacing: -0.02em;
+        margin: 0 0 2rem;
+        color: #fff;
+        max-width: 40rem;
+      }
+
+      .svc-cta h2 em { color: var(--world-accent, #9cff52); font-style: italic; }
+
+      .svc-cta__primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: var(--world-accent, #9cff52);
+        color: var(--world-ink, #101010);
+        padding: 1.1rem 2rem;
+        border-radius: 999px;
+        font-size: 1rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        text-decoration: none;
+        box-shadow: 0 0 32px rgba(156, 255, 82, 0.3);
+      }
+
+      /* === SCROLL REVEAL === */
+      .reveal {
+        opacity: 0;
+        transform: translateY(2rem);
+        transition:
+          opacity 0.7s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+          transform 0.7s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+      }
+
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .reveal-stagger > .reveal {
+        transition-delay: calc(var(--i, 0) * 80ms);
+      }
+
+      .svc-block__num {
+        transition:
+          text-shadow 0.35s ease,
+          transform 0.35s ease;
+      }
+
+      .svc-block:hover .svc-block__num {
+        text-shadow: 0 0 80px rgba(156, 255, 82, 0.6);
+        transform: translateX(0.15rem);
+      }
+
+      .svc-capabilities li {
+        transition:
+          color 0.2s ease,
+          transform 0.2s ease;
+      }
+
+      .svc-capabilities li:hover {
+        color: #fff;
+        transform: translateX(0.3rem);
+      }
+
+      .svc-example {
+        transition:
+          border-color 0.22s ease,
+          transform 0.22s ease;
+      }
+
+      .svc-example:hover {
+        border-color: rgba(156, 255, 82, 0.5);
+        transform: translateY(-0.12rem);
+      }
+
+      .svc-cta__primary {
+        transition:
+          box-shadow 0.24s ease,
+          transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .svc-cta__primary:hover {
+        box-shadow: 0 0 48px rgba(156, 255, 82, 0.45);
+        transform: translateY(-0.18rem) scale(1.02);
+      }
+
+      .svc-cta__primary:active {
+        transform: translateY(0) scale(0.97);
+        transition-duration: 0.08s;
+      }
+
+      .explore-pill {
+        transition:
+          box-shadow 0.22s ease,
+          transform 0.22s ease;
+      }
+
+      .explore-pill:hover {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        transform: translateY(-0.12rem);
+      }
+
+      .explore-pill:active {
+        transform: translateY(0) scale(0.97);
+        transition-duration: 0.08s;
+      }
+
+      @media (max-width: 880px) {
+        .world-header { grid-template-columns: auto auto; }
+        .world-nav { display: none; }
+        .svc-poster-hero {
+          grid-template-columns: 1fr;
+          min-height: auto;
+          padding: 7rem 1.25rem 8rem;
+        }
+        .svc-poster-right {
+          justify-self: start;
+          max-width: 100%;
+          text-align: left;
+          transform: none;
+        }
+        .svc-poster-deck {
+          justify-items: start;
+        }
+        .svc-poster-caption {
+          bottom: 1.5rem;
+          left: 1.25rem;
+          max-width: calc(100% - 2.5rem);
+        }
+        .svc-block { grid-template-columns: 1fr; gap: 1.5rem; padding: 3.5rem 0; }
+        .svc-block__header { position: static; }
+        .svc-capabilities { grid-template-columns: 1fr; }
+      }
+
+      @media (max-width: 767px) {
+        .world-header {
+          gap: 1rem;
+          padding: 1rem 1.25rem;
+        }
+
+        .world-header .world-nav {
+          display: none;
+        }
+
+        .explore-pill {
+          display: inline-flex;
+        }
+
+        .svc-stage {
+          padding: 5.5rem 1.25rem 3rem;
+        }
+
+        .svc-title {
+          font-size: clamp(2.8rem, 10vw, 5rem);
+        }
+
+        .svc-index {
+          gap: 0.5rem;
+        }
+
+        .svc-index a {
+          font-size: 0.85rem;
+          padding: 0.55rem 0.85rem;
+        }
+
+        .svc-block {
+          gap: 1.5rem;
+          grid-template-columns: 1fr;
+          padding: 3rem 0;
+        }
+
+        .svc-block__header {
+          position: static;
+        }
+
+        .svc-block__num {
+          font-size: clamp(3.5rem, 14vw, 6rem);
+        }
+
+        .svc-capabilities {
+          gap: 0.5rem;
+          grid-template-columns: 1fr;
+        }
+
+        .menu {
+          max-width: 100dvw;
+          transform: none;
+          visibility: hidden;
+        }
+
+        .is-menu-open .menu {
+          transform: none;
+          visibility: visible;
+        }
+
+        .menu-inner {
+          padding: 5rem 1.5rem 2rem;
+        }
+
+        .menu-footer {
+          gap: 1rem;
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+    <style>
+      /* Marathon Services below-area brush: preserve copy and modules, repaint the field. */
+      :root {
+        --svc-marathon-paper: #f4f3ed;
+        --svc-marathon-ink: #050505;
+        --svc-marathon-acid: var(--world-accent, #9cff52);
+        --svc-marathon-acid-rgb: 156 255 82;
+      }
+
+      .svc-stage {
+        background:
+          radial-gradient(circle at 8% 19%, rgb(var(--svc-marathon-acid-rgb) / 0.13), transparent 16rem),
+          radial-gradient(circle at 92% 49%, rgb(var(--svc-marathon-acid-rgb) / 0.08), transparent 18rem),
+          linear-gradient(90deg, transparent 0 calc(100% - 3rem), rgb(var(--svc-marathon-acid-rgb) / 0.36) calc(100% - 3rem) calc(100% - 2.86rem), transparent calc(100% - 2.86rem)),
+          var(--svc-marathon-ink);
+        isolation: isolate;
+        margin: 0;
+        max-width: none;
+        overflow: hidden;
+        padding: clamp(4rem, 8vw, 6rem) clamp(1.25rem, 4vw, 4rem) 6rem;
+        position: relative;
+        width: 100%;
+      }
+
+      .svc-stage::before,
+      .svc-stage::after {
+        content: "";
+        pointer-events: none;
+        position: absolute;
+        z-index: 0;
+      }
+
+      .svc-stage::before {
+        background:
+          radial-gradient(circle, rgba(244, 243, 237, 0.22) 0 0.08rem, transparent 0.09rem),
+          linear-gradient(90deg, rgba(244, 243, 237, 0.075) 1px, transparent 1px);
+        background-size: 0.92rem 0.92rem, 6.5rem 100%;
+        inset: 0;
+        opacity: 0.34;
+      }
+
+      .svc-stage::after {
+        background:
+          linear-gradient(90deg, transparent 0 10%, var(--svc-marathon-acid) 10% 28%, transparent 28%),
+          radial-gradient(circle, rgba(244, 243, 237, 0.76) 0 0.18rem, transparent 0.2rem);
+        background-size: 100% 100%, 0.95rem 0.95rem;
+        height: clamp(4.2rem, 7vw, 5.8rem);
+        left: clamp(1.5rem, 10vw, 10rem);
+        opacity: 0.58;
+        top: clamp(1rem, 2vw, 1.8rem);
+        transform: rotate(-3.8deg);
+        width: min(52rem, 58vw);
+      }
+
+      .svc-stage > * {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 96rem;
+        position: relative;
+        z-index: 2;
+      }
+
+      .svc-kicker {
+        background: var(--svc-marathon-ink);
+        border: 1px solid rgba(244, 243, 237, 0.24);
+        color: var(--svc-marathon-acid);
+        padding: 0.72rem 0.9rem;
+        width: fit-content;
+      }
+
+      .svc-kicker::before,
+      .svc-block__status::before {
+        box-shadow: none;
+      }
+
+      .svc-index {
+        background:
+          radial-gradient(circle, rgba(5, 5, 5, 0.07) 0 0.07rem, transparent 0.08rem),
+          linear-gradient(90deg, var(--svc-marathon-acid) 0 0.55rem, transparent 0.55rem),
+          var(--svc-marathon-paper);
+        background-size: 0.82rem 0.82rem, 100% 100%, 100% 100%;
+        border: 2px solid var(--svc-marathon-ink);
+        box-shadow: 0.7rem 0.7rem 0 rgb(var(--svc-marathon-acid-rgb) / 0.9);
+        gap: 0.75rem;
+        margin-bottom: clamp(3.6rem, 6vw, 5rem);
+        padding: 1.2rem 1.25rem;
+      }
+
+      .svc-index a {
+        background: rgba(244, 243, 237, 0.78);
+        border: 1.5px solid var(--svc-marathon-ink);
+        border-radius: 999px;
+        color: var(--svc-marathon-ink);
+      }
+
+      .svc-index a small {
+        color: #4f9f18;
+      }
+
+      .svc-index a:hover {
+        background: var(--svc-marathon-acid);
+        border-color: var(--svc-marathon-ink);
+        color: var(--svc-marathon-ink);
+      }
+
+      .svc-block {
+        background:
+          radial-gradient(circle, rgba(5, 5, 5, 0.06) 0 0.07rem, transparent 0.08rem),
+          linear-gradient(100deg, transparent 0 88%, rgb(var(--svc-marathon-acid-rgb) / 0.18) 88.2% 100%),
+          var(--svc-marathon-paper);
+        background-size: 0.84rem 0.84rem, 100% 100%, 100% 100%;
+        border: 2px solid var(--svc-marathon-ink);
+        box-shadow: 0.75rem 0.75rem 0 rgb(var(--svc-marathon-acid-rgb) / 0.86);
+        color: var(--svc-marathon-ink);
+        gap: clamp(1.8rem, 4vw, 4rem);
+        margin-bottom: clamp(2rem, 4vw, 3.4rem);
+        padding: clamp(1.6rem, 3.6vw, 3rem);
+      }
+
+      .svc-block:first-of-type {
+        border-top: 2px solid var(--svc-marathon-ink);
+        padding-top: clamp(1.6rem, 3.6vw, 3rem);
+      }
+
+      .svc-block__header {
+        top: 7.5rem;
+      }
+
+      .svc-block__num {
+        color: var(--svc-marathon-ink);
+        text-shadow: 0.045em 0.045em 0 var(--svc-marathon-acid);
+      }
+
+      .svc-block:hover .svc-block__num {
+        text-shadow: 0.06em 0.06em 0 var(--svc-marathon-acid);
+      }
+
+      .svc-block__num-label,
+      .svc-block__sub {
+        color: rgba(5, 5, 5, 0.55);
+      }
+
+      .svc-block__status {
+        background: var(--svc-marathon-acid);
+        border: 1.5px solid var(--svc-marathon-ink);
+        color: var(--svc-marathon-ink);
+        padding: 0.45rem 0.62rem;
+        width: fit-content;
+      }
+
+      .svc-block h2,
+      .svc-block p,
+      .svc-capabilities li,
+      .svc-example {
+        color: var(--svc-marathon-ink);
+      }
+
+      .svc-block h2 em,
+      .svc-capabilities li::before,
+      .svc-example small {
+        color: #4f9f18;
+      }
+
+      .svc-capabilities {
+        gap: 0.7rem 1.5rem;
+      }
+
+      .svc-capabilities li {
+        background: rgba(5, 5, 5, 0.035);
+        border: 1px solid rgba(5, 5, 5, 0.12);
+        padding: 0.75rem 0.85rem 0.75rem 1.7rem;
+      }
+
+      .svc-capabilities li::before {
+        left: 0.65rem;
+        top: 0.74rem;
+      }
+
+      .svc-example {
+        background: var(--svc-marathon-ink);
+        border: 1px solid var(--svc-marathon-ink);
+        border-radius: 0;
+        color: var(--svc-marathon-paper);
+      }
+
+      .svc-example small {
+        color: var(--svc-marathon-acid);
+      }
+
+      .svc-cta {
+        background:
+          radial-gradient(circle at 14% 46%, transparent 0 2rem, var(--svc-marathon-acid) 2.08rem 2.36rem, transparent 2.44rem),
+          radial-gradient(circle at 88% 48%, transparent 0 2rem, var(--svc-marathon-acid) 2.08rem 2.36rem, transparent 2.44rem),
+          var(--svc-marathon-ink);
+        border: 2px solid rgba(244, 243, 237, 0.24);
+        box-shadow: none;
+        color: var(--svc-marathon-paper);
+        margin-top: clamp(4rem, 7vw, 6rem);
+      }
+
+      .svc-cta::before {
+        background: var(--svc-marathon-acid);
+        box-shadow: none;
+        height: 0.45rem;
+        width: 9rem;
+      }
+
+      .svc-cta h2 {
+        color: var(--svc-marathon-paper);
+      }
+
+      .svc-cta__primary {
+        border: 2px solid var(--svc-marathon-ink);
+        box-shadow: 0.35rem 0.35rem 0 rgba(244, 243, 237, 0.18);
+      }
+
+      .world-header {
+        background: #050505;
+        border-bottom: 0;
+        box-shadow: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        padding: clamp(1rem, 1.75vw, 1.55rem) clamp(1rem, 2.5vw, 2.4rem);
+      }
+
+      @media (max-width: 880px) {
+        .svc-stage::after {
+          height: 4rem;
+          left: 1rem;
+          opacity: 0.42;
+          width: min(24rem, 82vw);
+        }
+
+        .svc-block {
+          grid-template-columns: 1fr;
+          padding: 1.35rem;
+        }
+
+        .svc-block__header {
+          position: static;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="chen-page chen-page--lite svc-page">
+    <header class="world-header">
+      <a href="./index.html" class="brand-mark" data-fx-link data-fx-magnetic="10">CHENNN STUDIO®</a>
+      <nav class="world-nav" aria-label="Primary">
+        <a href="./home.html?skipIntro=1" data-fx-link data-fx-magnetic="15">Index</a>
+        <a href="./projects.html?skipIntro=1" data-fx-link data-fx-magnetic="15">Projects</a>
+        <a href="./about.html" data-fx-link data-fx-magnetic="15">About</a>
+        <a class="is-active" href="./services.html" data-fx-link data-fx-magnetic="15">Services</a>
+        <a href="./contact.html?skipIntro=1" data-fx-link data-fx-magnetic="15">Contact</a>
+        <a class="world-ip-entry" href="./ip-mask-demo.html?v=skin-ui-088" data-fx-link data-fx-magnetic="15">IP Doorway</a>
+      </nav>
+      <button class="explore-pill" data-fx-magnetic="16" type="button" data-menu-trigger aria-controls="siteMenu" aria-expanded="false">Explore</button>
+    </header>
+
+    <section class="svc-poster-hero" aria-label="How I Work hero">
+      <img class="svc-poster-hero__image" src="./assets/marathon/generated-previews/marathon-style-gun-character-01-dark-hero.png" alt="Marathon style tactical character banner" />
+      <div class="svc-poster-left">
+        <h1 class="svc-poster-wordmark">
+          BUILD<sup>®</sup>
+          <span class="svc-poster-sub">BRAND SYSTEMS · WEB LAUNCH · MOTION IP</span>
+        </h1>
+        <p class="svc-poster-caption">
+          一个设计师 + AI 工作流，能交付的比你想的多。品牌系统、网站上线、动态影像、IP 角色——从想法到上线在同一条时间线上推进。
+        </p>
+      </div>
+      <div class="svc-poster-right">
+        <span class="svc-poster-status">AVAILABLE · MODULES</span>
+        <h2 class="svc-poster-title">
+          <span>Brand Systems.</span>
+          <span>Web Products.</span>
+          <span class="accent">AI Creative.</span>
+        </h2>
+        <div class="svc-poster-deck" aria-label="Service focus">
+          <span class="svc-poster-chip is-picked">Design-to-Launch Workflow</span>
+          <span class="svc-poster-chip">Brand & Visual System</span>
+          <span class="svc-poster-chip">Motion & IP Extension</span>
+          <span class="svc-poster-chip">AI-native Exploration</span>
+        </div>
+      </div>
+    </section>
+
+    <main class="svc-stage">
+      <p class="svc-kicker">How I Work · 合作方式 · 04 modules</p>
+
+      <nav class="svc-index reveal" aria-label="Modules" data-fx-stagger-group>
+        <a href="#brand" data-fx-stagger-item><small>01</small> Brand &amp; Visual</a>
+        <a href="#website" data-fx-stagger-item><small>02</small> Website &amp; Product</a>
+        <a href="#motion" data-fx-stagger-item><small>03</small> Motion &amp; IP</a>
+        <a href="#ai" data-fx-stagger-item><small>04</small> AI Creative</a>
+      </nav>
+
+      <!-- 01 BRAND -->
+      <section class="svc-block reveal" id="brand">
+        <div class="svc-block__header">
+          <span class="svc-block__num-label">Module · 01</span>
+          <div class="svc-block__num">01</div>
+          <span class="svc-block__status">ACTIVE</span>
+        </div>
+        <div>
+          <h2>Brand &amp; Visual<br /><em>品牌与视觉系统。</em></h2>
+          <p class="svc-block__sub">Strategy · Identity · System</p>
+          <p>
+            我做的不是 logo 和色板，是一套能在不同尺寸、不同场景、不同时间里还能保持脾气的视觉系统。从 naming 到字体配对，再到那些"不被人记住、但出错就崩"的细节——AI 帮我更快探索方向，但每一个最终决定都是品味和判断力在做。
+          </p>
+          <ul class="svc-capabilities">
+            <li>品牌定位 &amp; naming</li>
+            <li>视觉识别系统</li>
+            <li>字体策略 &amp; 自定义字</li>
+            <li>品牌指南 / brand book</li>
+            <li>线下应用与物料</li>
+            <li>品牌声音 &amp; 文案语调</li>
+          </ul>
+          <span class="svc-example"><small>RECENT</small> KIKK 2024 · 艺术节系统</span>
+        </div>
+      </section>
+
+      <!-- 02 WEBSITE -->
+      <section class="svc-block reveal" id="website">
+        <div class="svc-block__header">
+          <span class="svc-block__num-label">Module · 02</span>
+          <div class="svc-block__num">02</div>
+          <span class="svc-block__status">ACTIVE</span>
+        </div>
+        <div>
+          <h2>Website &amp; Product<br /><em>从设计到上线。</em></h2>
+          <p class="svc-block__sub">Design · Dev · Deploy</p>
+          <p>
+            从一个静态展示页到一个带交互逻辑的完整产品，设计和代码在我这里不分家。我用 AI 辅助开发，一个人就能完成从设计稿到部署上线的完整链路——以前需要 3-4 人团队才能做的事，现在一个人带着正确的工作流就能推完。
+          </p>
+          <ul class="svc-capabilities">
+            <li>品牌官网 / 作品集</li>
+            <li>活动页 / campaign</li>
+            <li>互动工具 &amp; 产品原型</li>
+            <li>独立前端开发</li>
+            <li>响应式 &amp; 动效实现</li>
+            <li>部署上线 &amp; 持续迭代</li>
+          </ul>
+          <span class="svc-example"><small>RECENT</small> Klook · 旅行问答</span>
+        </div>
+      </section>
+
+      <!-- 03 MOTION -->
+      <section class="svc-block reveal" id="motion">
+        <div class="svc-block__header">
+          <span class="svc-block__num-label">Module · 03</span>
+          <div class="svc-block__num">03</div>
+          <span class="svc-block__status">ACTIVE</span>
+        </div>
+        <div>
+          <h2>Motion &amp; IP<br /><em>动态影像与角色。</em></h2>
+          <p class="svc-block__sub">Motion · Character · World</p>
+          <p>
+            动效不是装饰——它是产品的"脾气"。从一个按钮的回弹到一支完整的品牌片，从页面过渡到 IP 角色的世界观，我用同一套节奏语言串起来。AI 生成提供视觉灵感的起点，但节奏和叙事永远是人来定。
+          </p>
+          <ul class="svc-capabilities">
+            <li>品牌动态影像</li>
+            <li>UI 动效 &amp; 微交互系统</li>
+            <li>页面过渡 / spring 动画</li>
+            <li>IP 角色设计 &amp; 延展</li>
+            <li>世界观构建</li>
+            <li>原型与实验</li>
+          </ul>
+          <span class="svc-example"><small>RECENT</small> Tangyuan IP · 藤蔓交响</span>
+        </div>
+      </section>
+
+      <!-- 04 AI CREATIVE -->
+      <section class="svc-block reveal" id="ai">
+        <div class="svc-block__header">
+          <span class="svc-block__num-label">Module · 04</span>
+          <div class="svc-block__num">04</div>
+          <span class="svc-block__status">EXPLORING</span>
+        </div>
+        <div>
+          <h2>AI Creative<br /><em>创意新物种。</em></h2>
+          <p class="svc-block__sub">AIGC · Workflow · New Format</p>
+          <p>
+            这是我最近长出来的第四条线。不是"用 AI 提效"，而是探索 AI 作为创意伙伴能打开什么新可能——新的图像语言、新的工作流结构、新的产品形态。如果你的项目里想要一些 AI 原生的东西，可以聊聊。
+          </p>
+          <ul class="svc-capabilities">
+            <li>AIGC 视觉探索 &amp; 风格定义</li>
+            <li>AI 工作流搭建</li>
+            <li>创意落地方案</li>
+            <li>Prompt 系统 &amp; 生成管线</li>
+            <li>AI + 品牌结合</li>
+            <li>实验性项目合作</li>
+          </ul>
+          <span class="svc-example"><small>RECENT</small> CHENNN World · 这个网站</span>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="svc-cta reveal">
+        <h2>有想法想聊？<br /><em>先说说看。</em></h2>
+        <a class="svc-cta__primary" data-fx-magnetic="18" href="./contact.html?skipIntro=1" data-fx-link>TALK TO ME ↘</a>
+      </section>
+    </main>
+    <aside class="menu" id="siteMenu" aria-hidden="true">
+      <button class="menu-close" type="button" data-menu-close aria-label="Close Menu">×</button>
+      <div class="menu-inner">
+        <nav class="menu-nav" aria-label="Menu">
+          <a href="./home.html?skipIntro=1" data-fx-link><small>01</small><span>Index</span></a>
+          <a href="./projects.html?skipIntro=1" data-fx-link><small>02</small><span>Projects</span></a>
+          <a href="./about.html" data-fx-link><small>03</small><span>About</span></a>
+          <a class="is-active" href="./services.html" data-fx-link><small>04</small><span>Services</span></a>
+          <a href="./contact.html?skipIntro=1" data-fx-link><small>05</small><span>Contact</span></a>
+          <a href="./works.html" data-fx-link><small>06</small><span>World</span></a>
+          <a href="./ip-mask-demo.html?v=skin-ui-088" data-fx-link><small>07</small><span>IP Doorway</span></a>
+          <a href="./pet-demo.html" data-fx-link><small>08</small><span>Pet</span></a>
+        </nav>
+        <footer class="menu-footer">
+          <div>
+            <a href="mailto:1285293434@qq.com">1285293434@qq.com</a>
+            <a href="mailto:zedd18225055550@gmail.com">zedd18225055550@gmail.com</a>
+          </div>
+          <div>CHENNN WORLD · 2026</div>
+        </footer>
+      </div>
+    </aside>
+    <script>
+      (function () {
+        var body = document.body;
+        var menuButton = document.querySelector("[data-menu-trigger]");
+        var menuCloseButton = document.querySelector("[data-menu-close]");
+        var menu = document.getElementById("siteMenu");
+        if (!menuButton || !menuCloseButton || !menu) return;
+        function setMenu(open) {
+          body.classList.toggle("is-menu-open", open);
+          menu.setAttribute("aria-hidden", String(!open));
+          menuButton.setAttribute("aria-expanded", String(open));
+        }
+        menuButton.addEventListener("click", function () {
+          setMenu(!body.classList.contains("is-menu-open"));
+        });
+        menuCloseButton.addEventListener("click", function () {
+          setMenu(false);
+        });
+        menu.querySelectorAll("a").forEach(function (link) {
+          link.addEventListener("click", function () { setMenu(false); });
+        });
+        window.addEventListener("keydown", function (event) {
+          if (event.key === "Escape") setMenu(false);
+        });
+      })();
+    </script>
+    <script>
+      (function () {
+        var reveals = document.querySelectorAll(".reveal");
+        if (!reveals.length) return;
+        if (!("IntersectionObserver" in window)) {
+          reveals.forEach(function (el) { el.classList.add("is-visible"); });
+          return;
+        }
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting || entry.boundingClientRect.top < window.innerHeight) {
+              entry.target.classList.add("is-visible");
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: "0px 0px -60px 0px" });
+        reveals.forEach(function (el) { io.observe(el); });
+      })();
+    </script>
+    <link rel="stylesheet" href="./assets/main-site-fixes.css?v=world-only-audio-187" />
+    <script src="./chen-fx/03-page-transition/script.js"></script>
+    <script src="./assets/vendor/gsap.min.js"></script>
+    <script src="./assets/vendor/CustomEase.min.js"></script>
+    <script src="./assets/vendor/ScrollTrigger.min.js"></script>
+    <script src="./assets/gsap-page-demo.js"></script>
+      <script src="./chen-fx/06-gsap-motion-engine/motion-engine.js"></script>
+      <script src="./assets/main-site-fixes.js?v=world-only-audio-187"></script>
+  </body>
+</html>

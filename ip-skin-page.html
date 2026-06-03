@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>TANGYUAN — Skin Calendar</title>
+    <link rel="icon" href="data:," />
+    
+    <!-- Load GSAP core -->
+    <script src="./assets/vendor/gsap.min.js"></script>
+    <script src="./assets/vendor/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/CustomEase.min.js"></script>
+    
+    <!-- Load Motion Engine -->
+    <link rel="stylesheet" href="./chen-fx/06-gsap-motion-engine/motion-engine.css" />
+    <script src="./chen-fx/06-gsap-motion-engine/motion-engine.js" defer></script>
+    <link rel="stylesheet" href="./ip-mask-demo.css?v=marathon-map-206" />
+    <link rel="stylesheet" href="./assets/main-site-fixes.css?v=world-only-audio-187" />
+  </head>
+  <body class="skin-page">
+    <main class="skin-stage" aria-label="TANGYUAN skin calendar" data-skin-stage>
+      <header class="skin-meta" aria-label="Skin calendar issue">
+        <h1><span>TANG</span><em>YUAN</em></h1>
+        <p>March/2026</p>
+      </header>
+
+      <div class="skin-flow" aria-label="Skin preview cards">
+        <div class="skin-flow__column skin-flow__column--a">
+          <article class="skin-card skin-card--galaxy skin-card--large">
+            <img src="./assets/ip-mask-demo/skin-card-galaxy-ref.png" alt="Galaxy Tangyuan skin" />
+          </article>
+          <article class="skin-card skin-card--kungfu">
+            <img src="./assets/ip-mask-demo/skin-card-kungfu-ref.png" alt="Kungfu Tangyuan skin" />
+          </article>
+          <article class="skin-card skin-card--galaxy skin-card--large" aria-hidden="true">
+            <img src="./assets/ip-mask-demo/skin-card-galaxy-ref.png" alt="" />
+          </article>
+          <article class="skin-card skin-card--kungfu" aria-hidden="true">
+            <img src="./assets/ip-mask-demo/skin-card-kungfu-ref.png" alt="" />
+          </article>
+        </div>
+        <div class="skin-flow__column skin-flow__column--b">
+          <article class="skin-card skin-card--surf">
+            <img src="./assets/ip-mask-demo/skin-card-surf-ref.png" alt="Surf Tangyuan skin" />
+          </article>
+          <article class="skin-card skin-card--sheriff skin-card--large">
+            <img src="./assets/ip-mask-demo/skin-card-sheriff-ref.png" alt="Sheriff Tangyuan skin" />
+          </article>
+          <article class="skin-card skin-card--surf" aria-hidden="true">
+            <img src="./assets/ip-mask-demo/skin-card-surf-ref.png" alt="" />
+          </article>
+          <article class="skin-card skin-card--sheriff skin-card--large" aria-hidden="true">
+            <img src="./assets/ip-mask-demo/skin-card-sheriff-ref.png" alt="" />
+          </article>
+        </div>
+      </div>
+
+      <section class="skin-copy" aria-label="Skin calendar copy">
+        <div class="skin-copy__brand">
+          <span class="skin-copy__mark" aria-hidden="true"></span>
+          <strong>YZT</strong>
+        </div>
+        <h1>皮肤切换</h1>
+        <h2 class="skin-copy__title" data-bounce-title><span>OFF TRACK</span><span>CALENDAR</span></h2>
+        <button class="skin-copy__enter-detail" type="button" data-skin-enter-detail>
+          <span>Explore today skin</span>
+          <strong aria-hidden="true">→</strong>
+        </button>
+        <p class="skin-copy__business">BUSINESS ENQUIRIES</p>
+        <div class="skin-copy__links" aria-label="Social links">
+          <a href="#" aria-label="Tiktok">TIKTOK</a>
+          <a href="#" aria-label="Instagram">INSTAGRAM</a>
+          <a href="#" aria-label="Youtube">YOUTUBE</a>
+          <a href="#" aria-label="Twitch">TWITCH</a>
+        </div>
+      </section>
+
+      <section class="skin-showcase" aria-label="TANGYUAN skin detail" data-skin-showcase>
+        <img class="skin-showcase__frame skin-showcase__frame--detail" src="./assets/ip-mask-demo/skin-frame-detail-clean.png" alt="" aria-hidden="true" />
+        <img class="skin-showcase__frame skin-showcase__frame--expanded" src="./assets/ip-mask-demo/skin-frame-expanded-clean.png" alt="" aria-hidden="true" />
+        <div class="skin-showcase__side">
+          <span data-skin-kicker>Forest bonfire</span>
+          <span class="skin-showcase__side-mark">◈</span>
+          <button class="skin-showcase__shrink" type="button" aria-label="Shrink showcase" data-skin-shrink>
+            <span>↙</span>
+          </button>
+        </div>
+        <figure class="skin-showcase__media">
+          <img src="./assets/ip-mask-demo/skin-card-kungfu-ref.png" alt="Forest bonfire Tangyuan skin" data-skin-showcase-image />
+        </figure>
+        <div class="skin-showcase__arrows" aria-label="Skin image controls">
+          <button type="button" aria-label="Previous skin" data-skin-prev>↩</button>
+          <button type="button" aria-label="Next skin" data-skin-next>↪</button>
+        </div>
+        <section class="skin-showcase__copy">
+          <div class="skin-copy__brand">
+            <span class="skin-copy__mark" aria-hidden="true"></span>
+            <strong>YZT</strong>
+          </div>
+          <h2 data-skin-showcase-title>TANGYUAN<br />FOREST CAMPING</h2>
+          <button class="skin-showcase__philosophy" type="button" data-skin-philosophy>PHILOSOPHY</button>
+          <p class="skin-copy__business">BUSINESS ENQUIRIES</p>
+          <div class="skin-copy__links">
+            <a href="#">XIAOHONGSHU</a>
+            <span>X</span>
+            <a href="#">INSTAGRAM</a>
+          </div>
+        </section>
+      </section>
+
+      <a class="skin-stage__back skin-store-button" href="./ip-mask-demo.html?v=skin-ui-088" aria-label="Back to IP doorway" data-fx-link data-fx-magnetic="15">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M7 9V7a5 5 0 0 1 10 0v2" />
+          <path d="M5 9h14l-1 11H6L5 9Z" />
+        </svg>
+        STORE
+      </a>
+    </main>
+    <script src="./ip-skin-page.js?v=087"></script>
+      <script src="./assets/main-site-fixes.js?v=world-only-audio-187"></script>
+  </body>
+</html>

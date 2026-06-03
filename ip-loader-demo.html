@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CHENNN Studio® – IP Loader Demo</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="./ip-loader-fx.css" />
+  </head>
+  <body class="ip-loader-page is-ip-loading">
+    <section class="ip-loader-fx" data-ip-loader aria-label="IP loading animation">
+      <div class="ip-loader__stage">
+        <svg class="ip-loader__eyes" viewBox="0 0 320 230" role="img" aria-label="CHENNN eyes" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="ip-left-eye-mask">
+              <circle cx="120" cy="115" r="55" />
+            </clipPath>
+            <clipPath id="ip-right-eye-mask">
+              <circle cx="200" cy="115" r="55" />
+            </clipPath>
+          </defs>
+          <circle class="ip-eye-shell" cx="120" cy="115" r="55" />
+          <circle class="ip-eye-shell" cx="200" cy="115" r="55" />
+
+          <g clip-path="url(#ip-left-eye-mask)">
+            <rect class="ip-eye-white" x="65" y="60" width="110" height="110" rx="55" />
+            <ellipse class="ip-eye-pupil" cx="120" cy="118" rx="22" ry="30" />
+            <circle class="ip-eye-shine" cx="132" cy="102" r="9" />
+            <path class="ip-eye-heart" d="M120 139 C99 124 93 109 101 100 C107 92 117 94 120 104 C126 91 139 92 145 102 C153 115 140 128 120 139 Z" />
+            <rect class="ip-eyelid ip-eyelid--top" x="55" y="20" width="130" height="90" />
+            <rect class="ip-eyelid ip-eyelid--bottom" x="55" y="125" width="130" height="90" />
+          </g>
+
+          <g clip-path="url(#ip-right-eye-mask)">
+            <rect class="ip-eye-white" x="145" y="60" width="110" height="110" rx="55" />
+            <ellipse class="ip-eye-pupil" cx="200" cy="118" rx="22" ry="30" />
+            <circle class="ip-eye-shine" cx="212" cy="102" r="9" />
+            <path class="ip-eye-heart" d="M200 139 C179 124 173 109 181 100 C187 92 197 94 200 104 C206 91 219 92 225 102 C233 115 220 128 200 139 Z" />
+            <rect class="ip-eyelid ip-eyelid--top" x="135" y="20" width="130" height="90" />
+            <rect class="ip-eyelid ip-eyelid--bottom" x="135" y="125" width="130" height="90" />
+          </g>
+        </svg>
+        <p class="ip-loader__status">Half awake / heart lock / lime handoff</p>
+      </div>
+
+      <div class="ip-loader__lime" aria-hidden="true">
+        <div class="ip-loader__logo" aria-label="CHENNN">
+          <span style="--i: 0">C</span>
+          <span style="--i: 1">H</span>
+          <span style="--i: 2">E</span>
+          <span style="--i: 3">N</span>
+          <span style="--i: 4">N</span>
+          <span style="--i: 5">N</span>
+        </div>
+      </div>
+    </section>
+
+    <main class="ip-loader-demo">
+      <section class="ip-loader-demo__scene">
+        <header class="ip-loader-demo__nav">
+          <h1 class="ip-loader-demo__brand">chennn studio®</h1>
+          <div class="ip-loader-demo__actions">
+            <a href="./home.html?skipIntro=1">Home</a>
+            <button class="ip-loader-demo__replay" type="button" data-ip-loader-replay>Replay</button>
+          </div>
+        </header>
+
+        <div class="ip-loader-demo__hero">
+          <h2 class="ip-loader-demo__title">IP<br /><em>LOADER</em></h2>
+          <p class="ip-loader-demo__copy">
+            独立验证页：复用眼睛开场逻辑，半睁眼、突然放大、爱心爆出，再切入黑 / 荧光绿 loading。
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <script src="./ip-loader-fx.js"></script>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+/* Liquid Veil Routing */
+.fx-veil {
+  align-items: center;
+  background: #050505;
+  color: #f4f3ed;
+  display: grid;
+  inset: 0;
+  justify-items: center;
+  pointer-events: none;
+  position: fixed;
+  z-index: 9999;
+  clip-path: inset(100% 0 0 0); /* Start hidden at bottom */
+}
+
+.fx-veil::before {
+  background:
+    radial-gradient(circle, rgb(156 255 82 / 0.68) 0 0.12rem, transparent 0.13rem),
+    linear-gradient(90deg, transparent 0 16%, #9cff52 16% 36%, transparent 36%);
+  background-size: 0.88rem 0.88rem, 100% 100%;
+  content: "";
+  inset: 0;
+  opacity: 0.28;
+  position: absolute;
+  transform: skewY(-4deg);
+}
+
+.fx-veil__spinner {
+  position: relative;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(156, 255, 82, 0.2);
+  border-top-color: #9cff52;
+  border-radius: 50%;
+  animation: fx-spin 1s linear infinite;
+  opacity: 0; /* Handled by GSAP */
+}
+
+@keyframes fx-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Magnetic Hover Resets */
+[data-fx-magnetic] {
+  will-change: transform;
+  /* GSAP handles the logic, but we need to ensure the element can be transformed smoothly */
+  display: inline-block; 
+}
+[data-fx-magnetic] * {
+  pointer-events: none; /* Let the wrapper handle the mouse event cleanly */
+}
+
+/* Stagger Item default hidden state */
+[data-fx-stagger-item] {
+  visibility: hidden;
+  opacity: 0;
+}
