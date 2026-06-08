@@ -2,29 +2,29 @@
 
 Date: 2026-06-08
 Deploy: https://portfolio-deploy-kappa-three.vercel.app
-Code commit: be1dd80 perf(3pass): poster-first hero media on secondary pages
+Code commit: e12f44a perf(3pass): defer projects card assets until scroll
 
 ## Curl Baseline
 
 | Path | Status | TTFB | Total | HTML Size |
 | --- | ---: | ---: | ---: | ---: |
-| / | 200 | 1.099926s | 1.200085s | 115557 |
-| /home.html | 200 | 1.085620s | 1.178299s | 60332 |
-| /projects.html | 200 | 1.017762s | 1.199643s | 115742 |
-| /project.html?project=the-symphony-of-vines | 200 | 1.008271s | 1.270019s | 287748 |
-| /works.html | 200 | 0.651467s | 0.744329s | 114315 |
-| /about.html | 200 | 0.820455s | 1.006987s | 129702 |
-| /contact.html | 200 | 0.871275s | 0.961919s | 58981 |
+| / | 200 | 1.064442s | 1.158114s | 115557 |
+| /home.html | 200 | 0.831277s | 0.918253s | 60332 |
+| /projects.html | 200 | 0.906569s | 1.086797s | 116944 |
+| /project.html?project=the-symphony-of-vines | 200 | 0.966166s | 1.225641s | 287748 |
+| /works.html | 200 | 1.062312s | 1.255467s | 114315 |
+| /about.html | 200 | 0.608278s | 0.791822s | 129702 |
+| /contact.html | 200 | 0.706003s | 0.793528s | 58981 |
 
 ## Browser Resource Timing
 
 Measured at DOMContentLoaded + 1.2s in Chromium, 1440x900 viewport.
 
-| Page | Total Transfer | MP4 Resource Entries | Video preload | currentSrc | source Count |
-| --- | ---: | ---: | --- | --- | ---: |
-| /projects.html | 4753135 | 0 | none | empty | 0 |
-| /about.html | 705950 | 0 | none | empty | 0 |
-| /contact.html | 582022 | 0 | none | empty | 0 |
+| Page | Total Transfer | MP4 Transfer | Project Card Image Transfer | Video preload | currentSrc | source Count |
+| --- | ---: | ---: | ---: | --- | --- | ---: |
+| /projects.html | 3006266 | 0 | 0 | none | empty | 0 |
+| /about.html | 705950 | 0 | 0 | none | empty | 0 |
+| /contact.html | 582022 | 0 | 0 | none | empty | 0 |
 
 ## Asset Changes
 
@@ -40,4 +40,5 @@ Measured at DOMContentLoaded + 1.2s in Chromium, 1440x900 viewport.
 
 - `/projects.html`, `/about.html`, and `/contact.html` use poster-first lazy hero video.
 - The three checked hero videos did not transfer during initial page load.
+- `/projects.html` project-card images did not transfer during initial page load; after scroll, the three real card assets loaded normally.
 - Static reference scan found only two template-string false positives: `${mediaAsset}` and `${videoSrc}`.
