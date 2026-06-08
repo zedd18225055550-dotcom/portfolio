@@ -3174,6 +3174,10 @@
         const hasStaticAsset = Boolean(card.dataset.projectSlug);
         const videoSrc = hasStaticAsset ? "" : card.dataset.videoSrc || projectVideoFallback;
         const mediaAsset = card.style.getPropertyValue("--media").trim().replace(/^url\(['"]?/, "").replace(/['"]?\)$/, "");
+        if (hasStaticAsset) {
+          card.dataset.mediaAsset = mediaAsset;
+          card.style.setProperty("--media", "linear-gradient(135deg, #161a1d, #2c3437 48%, #c8ff32 49%, #f4f1e9)");
+        }
         card.dataset.projectTitle = originalTitle;
         card.dataset.videoSrc = videoSrc;
         card.href = `./project.html?project=${card.dataset.projectSlug || slugify(originalTitle)}`;
@@ -3184,8 +3188,8 @@
           <div class="project-media project-media--asset project-media--video" aria-hidden="true">
             ${hasStaticAsset ? "" : `<span class="project-object project-object--base"></span>`}
             ${hasStaticAsset ? "" : `<span class="project-object project-object--reveal"></span>`}
-            ${hasStaticAsset ? `<img class="project-asset project-asset--base" src="${mediaAsset}" alt="" loading="lazy" decoding="async" />` : ""}
-            ${hasStaticAsset ? `<img class="project-asset project-asset--reveal" src="${mediaAsset}" alt="" loading="lazy" decoding="async" />` : ""}
+            ${hasStaticAsset ? `<img class="project-asset project-asset--base" data-project-asset data-src="${mediaAsset}" alt="" loading="lazy" decoding="async" />` : ""}
+            ${hasStaticAsset ? `<img class="project-asset project-asset--reveal" data-project-asset data-src="${mediaAsset}" alt="" loading="lazy" decoding="async" />` : ""}
             ${hasStaticAsset ? "" : `<video class="project-video" data-video-src="${videoSrc}" muted loop playsinline preload="none"></video>`}
           </div>
           <div class="project-meta">
@@ -3194,6 +3198,28 @@
           </div>
         `;
         splitText(card.querySelector(".project-title"));
+      }
+
+      function loadProjectCardAssets() {
+        document.querySelectorAll(".project-card[data-media-asset]").forEach((card) => {
+          if (card.dataset.assetsLoaded === "true") return;
+          card.dataset.assetsLoaded = "true";
+          card.style.setProperty("--media", `url('${card.dataset.mediaAsset}')`);
+          card.querySelectorAll("img[data-project-asset]").forEach((img) => {
+            if (!img.getAttribute("src")) {
+              img.setAttribute("src", img.dataset.src);
+            }
+          });
+        });
+      }
+
+      function setupProjectCardAssets() {
+        const load = () => loadProjectCardAssets();
+        window.addEventListener("scroll", load, { once: true, passive: true });
+        projectCards.forEach((card) => {
+          card.addEventListener("pointerenter", load, { once: true });
+          card.addEventListener("focusin", load, { once: true });
+        });
       }
 
       const clamp = (min, value, max) => Math.max(min, Math.min(value, max));
@@ -3428,6 +3454,7 @@
       syncFilterCounts();
       setProjectStreamTheme("all");
       projectCards.forEach(enhanceProjectCard);
+      setupProjectCardAssets();
       setupProjectVideos();
       splitText(document.querySelector(".projects-hero h1"));
       document.querySelectorAll(".menu-nav a > span").forEach(splitText);
