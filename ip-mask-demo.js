@@ -15,6 +15,45 @@
   const maskOutline = document.getElementById("maskOutline");
   const skinLinks = [...document.querySelectorAll("[data-skin-link]")];
   const isSkinBackdrop = document.body.classList.contains("ip-doorway--skin");
+  const archive = document.getElementById("ipArchive");
+  const archiveCue = document.querySelector(".ip-archive-cue");
+  const archiveRailLinks = [...document.querySelectorAll(".ip-archive__years a[href^='#ip-archive-']")];
+
+  if (isSkinBackdrop) {
+    document.documentElement.classList.add("ip-doorway-scroll-page");
+  }
+
+  function goToSkinPage(href) {
+    const loader = document.querySelector("[data-ip-loader]");
+
+    if (!loader || !loader.__ipLoaderFx) {
+      window.location.assign(href);
+      return;
+    }
+
+    loader.dispatchEvent(new CustomEvent("ip-loader:start", {
+      bubbles: true,
+      detail: {
+        mode: "transition",
+        replay: true
+      }
+    }));
+
+    window.setTimeout(() => {
+      window.location.assign(href);
+    }, 760);
+  }
+
+  if (skinLinks.length) {
+    skinLinks.forEach((skinLink) => {
+      skinLink.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const href = skinLink.getAttribute("data-skin-link") || "./ip-skin-page.html";
+        goToSkinPage(href);
+      });
+    });
+  }
 
   if (!scene || !layerBg || !layerMask || !layerCharacter || !characterImg || !maskSurface) {
     return;
@@ -235,30 +274,111 @@
     }
   }
 
-  if (skinLinks.length) {
-    skinLinks.forEach((skinLink) => {
-    skinLink.addEventListener("click", () => {
-      const href = skinLink.getAttribute("data-skin-link") || "./ip-skin-page.html";
-      const loader = document.querySelector("[data-ip-loader]");
+  if (isSkinBackdrop) {
+    const updateArchiveMode = () => {
+      const threshold = Math.max(240, window.innerHeight * 0.66);
+      document.body.classList.toggle("is-archive-mode", window.scrollY > threshold);
+    };
 
-      if (!loader || !loader.__ipLoaderFx) {
-        window.location.href = href;
-        return;
+    updateArchiveMode();
+    window.addEventListener("scroll", updateArchiveMode, { passive: true });
+    window.addEventListener("resize", updateArchiveMode, { passive: true });
+
+    if (archive) {
+      let archiveIntentLocked = false;
+      let touchStartY = null;
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const archivePanels = archiveRailLinks
+        .map((link) => {
+          const target = document.querySelector(link.getAttribute("href"));
+          return target ? { link, target } : null;
+        })
+        .filter(Boolean);
+
+      const unlockArchiveIntent = () => {
+        window.setTimeout(() => {
+          archiveIntentLocked = false;
+        }, 900);
+      };
+
+      const enterArchive = () => {
+        if (archiveIntentLocked || window.scrollY > 8) return;
+        archiveIntentLocked = true;
+        const archiveTop = archive.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+          top: archiveTop,
+          behavior: prefersReducedMotion ? "auto" : "smooth",
+        });
+        window.setTimeout(() => {
+          if (window.scrollY < archiveTop - 24) {
+            window.scrollTo(0, archiveTop);
+          }
+        }, prefersReducedMotion ? 0 : 460);
+        unlockArchiveIntent();
+      };
+
+      if (archiveCue) {
+        archiveCue.addEventListener("click", (event) => {
+          event.preventDefault();
+          enterArchive();
+        });
       }
 
-      loader.dispatchEvent(new CustomEvent("ip-loader:start", {
-        bubbles: true,
-        detail: {
-          mode: "transition",
-          replay: true
-        }
-      }));
+      if (archivePanels.length) {
+        const setActiveArchiveLink = (activeLink) => {
+          archiveRailLinks.forEach((link) => {
+            link.classList.toggle("is-active", link === activeLink);
+          });
+        };
 
-      window.setTimeout(() => {
-        window.location.href = href;
-      }, 760);
-    });
-    });
+        const updateActiveArchivePanel = () => {
+          const anchorY = window.innerHeight * 0.5;
+          const activePanel = archivePanels.reduce((current, panel) => {
+            const rect = panel.target.getBoundingClientRect();
+            const distance = Math.abs(rect.top + rect.height * 0.12 - anchorY);
+            if (!current || distance < current.distance) {
+              return { ...panel, distance };
+            }
+            return current;
+          }, null);
+
+          if (activePanel) setActiveArchiveLink(activePanel.link);
+        };
+
+        archiveRailLinks.forEach((link) => {
+          link.addEventListener("click", () => {
+            setActiveArchiveLink(link);
+          });
+        });
+
+        updateActiveArchivePanel();
+        window.addEventListener("scroll", updateActiveArchivePanel, { passive: true });
+        window.addEventListener("resize", updateActiveArchivePanel, { passive: true });
+      }
+
+      scene.addEventListener("wheel", (event) => {
+        if (event.target.closest("a, button, [role='button']")) return;
+        if (Math.abs(event.deltaY) < 24 || event.deltaY <= Math.abs(event.deltaX)) return;
+        if (event.deltaY > 0 && window.scrollY <= 8) {
+          event.preventDefault();
+          enterArchive();
+        }
+      }, { passive: false });
+
+      scene.addEventListener("touchstart", (event) => {
+        touchStartY = event.touches[0]?.clientY ?? null;
+      }, { passive: true });
+
+      scene.addEventListener("touchend", (event) => {
+        if (touchStartY == null) return;
+        const touchEndY = event.changedTouches[0]?.clientY ?? touchStartY;
+        const deltaY = touchStartY - touchEndY;
+        touchStartY = null;
+        if (deltaY > 44 && window.scrollY <= 8) {
+          enterArchive();
+        }
+      }, { passive: true });
+    }
   }
 
   resetHiddenMask();

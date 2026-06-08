@@ -2192,7 +2192,7 @@
           rightBottom: document.querySelector(".intro-eyelid-right-bottom"),
         };
         const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        const skipIntro = true;
+        const skipIntro = new URLSearchParams(window.location.search).get("skipIntro") === "1";
         const state = {
           ready: false,
           entered: false,
@@ -2443,25 +2443,25 @@
           href: "./project.html?project=the-symphony-of-vines",
         },
         {
-          title: "Klook",
-          display: "Klook",
-          kind: "Interactive Quiz",
-          tag: "Quiz",
-          desc: "A high-saturation quiz experience that turns campaign conversion into a playful product moment.",
-          media: "linear-gradient(100deg, #2a61ff, #4be1d1 28%, #f6d83f 48%, #ff7d18 72%, #ee4a18)",
-          accent: "#ff7d18",
-          video: "./assets/projects/海浪.mp4",
-          href: "./project.html?project=klook",
+          title: "Time Slot Battle",
+          display: "Time Slot",
+          kind: "Campaign IP / Visual System",
+          tag: "Time Slot",
+          desc: "A recurring S-level campaign visual IP built for monthly competition, reusable assets, and stronger event recognition.",
+          media: "url('./assets/projects/time-arena/Frame 2090059732.png')",
+          accent: "#d6a84a",
+          video: "./assets/projects/时间档争霸赛封面。.mp4",
+          href: "./project.html?project=time-arena",
         },
         {
-          title: "RSPCA Animal Futures",
-          display: "RSPCA",
-          kind: "Interactive Learning Experience",
-          tag: "Learning",
-          desc: "A gentle public-learning experience that explains complex topics through scenes and choices.",
-          media: "radial-gradient(circle at 58% 52%, #97d331 0 9%, transparent 10%), radial-gradient(circle at 50% 52%, #95c6cd 0 34%, transparent 35%), linear-gradient(160deg, #bce8e7, #73bcc4 58%, #d6e9e7)",
-          accent: "#97d331",
-          href: "./project.html?project=rspca-animal-futures",
+          title: "S+ Gala System",
+          display: "S+ Gala",
+          kind: "AI Workflow / Rights System",
+          tag: "Rights System",
+          desc: "An AI-assisted workflow and visual guideline system for reusable S+ Gala rights assets across the year.",
+          media: "url('./assets/projects/benefit-system/27Frame 1940698828.png')",
+          accent: "#d7b45a",
+          href: "./project.html?project=benefit-system",
         },
         {
           title: "BlueYard",
@@ -2898,7 +2898,7 @@
               <p class="work-card__kind">${project.kind}</p>
             </div>
             <div class="work-card__media">
-              <span class="work-card__button">Open</span>
+              <span class="work-card__button">${project.video ? "Play" : "Preview"}</span>
             </div>
           </div>
         `;
@@ -3323,12 +3323,15 @@
           });
           card.addEventListener("pointerleave", () => setPlayCursorVisible(false));
           card.addEventListener("click", (event) => {
-            if (!card.classList.contains("is-active")) return;
             event.preventDefault();
+            const project = projects[Number(card.dataset.projectIndex)];
+            if (!card.classList.contains("is-active")) {
+              moveToProject(Number(card.dataset.projectIndex));
+              return;
+            }
             cards.forEach((item) => {
               if (item !== card) stopCardPlayback(item, true);
             });
-            const project = projects[Number(card.dataset.projectIndex)];
             const video = card.querySelector(".work-card__video");
             if (video && project?.video) {
               if (!video.getAttribute("src")) {

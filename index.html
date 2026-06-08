@@ -2012,9 +2012,9 @@
         </div>
         <span class="site-intro__title">CHENNN STUDIO®</span>
         <p class="site-intro__tagline">
-          一家品牌、数字和动态影像工作室<br />
-          致力于创造耳目一新的视觉体验<br />
-          帮助大胆的品牌被看见。
+          视觉设计师 CHEN 的个人作品集。<br />
+          这里收录 IP 视觉、活动系统、动态影像，<br />
+          以及用 AI 提质提效的真实项目实践。
         </p>
       </div>
 
@@ -2104,9 +2104,9 @@
 
             <span class="site-intro__title">CHENNN STUDIO®</span>
             <p class="site-intro__tagline">
-              一家品牌、数字和动态影像工作室<br />
-              致力于创造耳目一新的视觉体验<br />
-              帮助大胆的品牌被看见。
+              视觉设计师 CHEN 的个人作品集。<br />
+              这里收录 IP 视觉、活动系统、动态影像，<br />
+              以及用 AI 提质提效的真实项目实践。
             </p>
 
             <button class="intro-enter" type="button" data-site-intro-enter aria-label="进入作品卡片页">
@@ -2193,7 +2193,7 @@
         };
         const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         const skipIntro = new URLSearchParams(window.location.search).get("skipIntro") === "1";
-        const worksPageHref = "./works.html";
+        const worksPageHref = "./works.html?skipIntro=1";
         const state = {
           ready: false,
           entered: false,
@@ -2203,7 +2203,8 @@
           mouse: { x: window.innerWidth / 2, y: window.innerHeight / 2 },
           current: { x: 0, y: 0 },
           target: { x: 0, y: 0 },
-          openness: 1,
+          openness: 0.28,
+          buttonHover: false,
           loveActive: false,
           eyesCenter: null,
           buttonCenter: null,
@@ -2263,12 +2264,7 @@
           const distance = Math.hypot(relativeX * 2.8, buttonRelativeY * 3.4);
           state.target.x = clampValue(-1, relativeX * 3, 1);
           state.target.y = clampValue(-1.25, eyeRelativeY * 4, 1.25);
-          state.openness = 1 - clampValue(0, distance * 1.35, 0.92);
-          const nearButton = distance < 0.34;
-          if (nearButton !== state.loveActive) {
-            state.loveActive = nearButton;
-            intro.classList.toggle("is-love", nearButton);
-          }
+          state.openness = state.buttonHover ? 1 : 1 - clampValue(0, distance * 1.35, 0.92);
         }
 
         function renderIntroEyes() {
@@ -2344,7 +2340,7 @@
           setEyelids(0);
           window.setTimeout(() => {
             updateCenters();
-            setEyelids(1);
+            setEyelids(state.openness);
           }, immediate ? 0 : 80);
         }
 
@@ -2402,16 +2398,34 @@
         }, { passive: true });
         window.addEventListener("resize", updateCenters);
         intro.addEventListener("pointerdown", (event) => {
+          if (event.target.closest("[data-site-intro-enter]")) return;
           state.mouse.x = event.clientX;
           state.mouse.y = event.clientY;
           spawnEyeEntryBurst(event);
         });
         enterButton.addEventListener("mouseenter", () => {
+          state.buttonHover = true;
           state.loveActive = true;
+          state.openness = 1;
           intro.classList.add("is-love");
+          if (!state.blinking) setEyelids(1);
         });
         enterButton.addEventListener("mouseleave", () => {
           if (state.entered) return;
+          state.buttonHover = false;
+          state.loveActive = false;
+          intro.classList.remove("is-love");
+        });
+        enterButton.addEventListener("focus", () => {
+          state.buttonHover = true;
+          state.loveActive = true;
+          state.openness = 1;
+          intro.classList.add("is-love");
+          if (!state.blinking) setEyelids(1);
+        });
+        enterButton.addEventListener("blur", () => {
+          if (state.entered) return;
+          state.buttonHover = false;
           state.loveActive = false;
           intro.classList.remove("is-love");
         });
@@ -2447,15 +2461,25 @@
           href: "./project.html?project=the-symphony-of-vines",
         },
         {
-          title: "Klook",
-          display: "Klook",
-          kind: "Interactive Quiz",
-          tag: "Quiz",
-          desc: "A high-saturation quiz experience that turns campaign conversion into a playful product moment.",
-          media: "linear-gradient(100deg, #2a61ff, #4be1d1 28%, #f6d83f 48%, #ff7d18 72%, #ee4a18)",
-          accent: "#ff7d18",
-          video: "./assets/projects/海浪.mp4",
-          href: "./project.html?project=klook",
+          title: "Time Slot Battle",
+          display: "Time Slot",
+          kind: "Campaign IP / Visual System",
+          tag: "Time Slot",
+          desc: "A recurring S-level campaign visual IP built for monthly competition, reusable assets, and stronger event recognition.",
+          media: "url('./assets/projects/time-arena/Frame 2090059732.png')",
+          accent: "#d6a84a",
+          video: "./assets/projects/时间档争霸赛封面。.mp4",
+          href: "./project.html?project=time-arena",
+        },
+        {
+          title: "S+ Gala System",
+          display: "S+ Gala",
+          kind: "AI Workflow / Rights System",
+          tag: "Rights System",
+          desc: "An AI-assisted workflow and visual guideline system for reusable S+ Gala rights assets across the year.",
+          media: "url('./assets/projects/benefit-system/27Frame 1940698828.png')",
+          accent: "#d7b45a",
+          href: "./project.html?project=benefit-system",
         },
         {
           title: "RSPCA Animal Futures",

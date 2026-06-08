@@ -1584,12 +1584,12 @@
       }
 
       body.is-cny-case .klook-title {
-        border-left: 1px solid rgb(var(--cny-red-rgb) / 0.46);
-        bottom: clamp(3.9rem, 5.6vw, 6.2rem);
-        gap: clamp(0.42rem, 0.72vw, 0.78rem);
-        left: clamp(3rem, 6.6vw, 7.6rem);
-        max-width: min(25rem, 34vw);
-        padding-left: clamp(0.82rem, 1.05vw, 1.18rem);
+        border-left: 1px solid rgb(var(--cny-red-rgb) / 0.34);
+        bottom: clamp(4.6rem, 6.2vw, 7rem);
+        gap: clamp(0.42rem, 0.72vw, 0.82rem);
+        left: clamp(3.2rem, 6vw, 6.6rem);
+        max-width: min(20rem, 28vw);
+        padding-left: clamp(0.92rem, 1.12vw, 1.22rem);
         position: absolute;
         z-index: 3;
       }
@@ -1597,36 +1597,37 @@
       body.is-cny-case .klook-title span {
         display: grid;
         gap: 0.34rem;
-        color: rgba(247, 243, 238, 0.9);
-        font-size: clamp(2rem, 3.4vw, 4rem);
+        color: rgba(247, 243, 238, 0.84);
+        font-size: clamp(1.5rem, 2.55vw, 3rem);
         font-weight: 650;
-        line-height: 0.94;
-        text-shadow: 0 1.1rem 3.2rem rgba(0, 0, 0, 0.42);
+        line-height: 0.96;
+        text-shadow: 0 0.85rem 2.4rem rgba(0, 0, 0, 0.5);
       }
 
       body.is-cny-case .klook-title span small {
-        color: rgba(247, 243, 238, 0.54);
+        color: rgba(247, 243, 238, 0.58);
         display: block;
-        font-size: clamp(0.68rem, 0.72vw, 0.82rem);
+        font-size: clamp(0.58rem, 0.6vw, 0.7rem);
         font-weight: 850;
+        letter-spacing: 0.02em;
         line-height: 1;
       }
 
       body.is-cny-case .klook-title span strong {
-        color: rgba(247, 243, 238, 0.92);
+        color: rgba(247, 243, 238, 0.88);
         display: block;
-        font-size: clamp(2.1rem, 3.55vw, 4.25rem);
+        font-size: clamp(1.62rem, 2.72vw, 3.15rem);
         font-weight: 700;
-        letter-spacing: 0;
+        letter-spacing: 0.01em;
         line-height: 0.92;
       }
 
       body.is-cny-case .klook-title em {
-        color: rgba(255, 211, 122, 0.78);
+        color: rgba(255, 211, 122, 0.72);
         display: grid;
-        font-size: clamp(0.92rem, 1.16vw, 1.3rem);
+        font-size: clamp(0.74rem, 0.92vw, 1.02rem);
         font-style: normal;
-        gap: 0.22rem;
+        gap: 0.28rem;
         font-weight: 750;
         justify-self: start;
         line-height: 1;
@@ -1636,20 +1637,27 @@
         text-shadow: 0 0.85rem 2.4rem rgba(0, 0, 0, 0.42);
       }
 
+      body.is-cny-case .klook-cta {
+        background: rgba(5, 5, 5, 0.78);
+        border: 1px solid rgba(255, 211, 122, 0.58);
+        color: var(--cny-gold);
+      }
+
       body.is-cny-case .klook-title em small {
         color: rgba(255, 211, 122, 0.58);
         display: block;
-        font-size: clamp(0.62rem, 0.66vw, 0.74rem);
+        font-size: clamp(0.54rem, 0.58vw, 0.66rem);
         font-weight: 850;
+        letter-spacing: 0.08em;
         line-height: 1;
       }
 
       body.is-cny-case .klook-title em strong {
         color: rgba(255, 221, 162, 0.9);
         display: block;
-        font-size: clamp(0.98rem, 1.28vw, 1.46rem);
+        font-size: clamp(0.8rem, 1vw, 1.12rem);
         font-weight: 850;
-        letter-spacing: 0;
+        letter-spacing: 0.03em;
         line-height: 0.98;
       }
 
@@ -1708,7 +1716,7 @@
       body.is-cny-case .klook-overview {
         gap: clamp(2.5rem, 6vw, 7rem);
         grid-template-columns: 0.95fr 1.05fr;
-        margin: 0 auto clamp(7rem, 11vw, 12rem);
+        margin: 0 auto clamp(5.6rem, 8.2vw, 9rem);
         max-width: min(88rem, 94vw);
       }
 
@@ -1749,7 +1757,7 @@
       }
 
       .cny-logic-board {
-        margin: clamp(1rem, 2.5vw, 2.4rem) auto clamp(7rem, 11vw, 12rem);
+        margin: clamp(0.8rem, 2vw, 1.8rem) auto clamp(5.4rem, 8vw, 8.8rem);
         max-width: min(88rem, 94vw);
       }
 
@@ -1765,20 +1773,21 @@
         align-items: center;
         aspect-ratio: 1.04;
         background:
-          radial-gradient(circle at 50% 112%, rgba(255, 211, 122, 0.46), transparent 54%),
-          linear-gradient(180deg, rgb(var(--cny-red-rgb) / 0.88), rgb(var(--cny-red-rgb) / 0.44) 58%, rgba(78, 7, 5, 0.9));
-        border: 1px solid rgb(var(--cny-red-rgb) / 0.34);
-        border-radius: 34% 34% 28% 28%;
+          radial-gradient(circle at 50% 115%, rgba(255, 211, 122, 0.24), transparent 58%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.026)),
+          rgba(16, 10, 9, 0.9);
+        border: 1px solid rgba(255, 211, 122, 0.22);
+        border-radius: 1.05rem;
         box-shadow:
-          0 1.8rem 5rem rgb(var(--cny-red-rgb) / 0.18),
+          0 1.4rem 4rem rgb(var(--cny-red-rgb) / 0.12),
           0 0 0 1px rgba(255, 211, 122, 0.12) inset;
-        color: #fff;
+        color: rgba(255, 230, 170, 0.96);
         display: grid;
-        font-size: clamp(2rem, 3.6vw, 4.2rem);
+        font-size: clamp(1.8rem, 3.2vw, 3.75rem);
         font-weight: 600;
         height: 100%;
         justify-items: center;
-        line-height: 1;
+        line-height: 0.94;
         min-height: clamp(13rem, 23vw, 20rem);
         padding: 1rem;
         text-align: center;
@@ -1837,25 +1846,21 @@
         margin: 0;
       }
 
-      .cny-placeholder {
-        background:
-          linear-gradient(135deg, rgba(255, 211, 122, 0.1), rgba(255, 255, 255, 0.022)),
-          repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.055) 0 1px, transparent 1px 0.65rem);
-        border-style: dashed;
-      }
-
-      .cny-placeholder small {
-        color: rgba(255, 211, 122, 0.9);
-        display: block;
-        font-size: 0.78rem;
-        font-weight: 900;
-        margin-bottom: 0.85rem;
-        text-transform: uppercase;
-      }
-
       body.is-cny-case .klook-slider {
-        margin-bottom: clamp(6rem, 10vw, 11rem);
+        margin-bottom: clamp(4.8rem, 7.5vw, 8.4rem);
         padding-left: clamp(1rem, 10vw, 10rem);
+      }
+
+      body.is-cny-case .klook-slider__copy {
+        flex-basis: min(28rem, 48vw);
+      }
+
+      body.is-cny-case .klook-slider__copy h2 {
+        color: var(--cny-gold);
+      }
+
+      body.is-cny-case .klook-slider__copy p {
+        color: rgba(247, 243, 238, 0.68);
       }
 
       body.is-cny-case .klook-shot {
@@ -1887,7 +1892,7 @@
       }
 
       body.is-cny-case .klook-scroll-card {
-        margin-bottom: clamp(7rem, 11vw, 12rem);
+        margin-bottom: clamp(5.2rem, 8vw, 8.8rem);
       }
 
       body.is-cny-case .klook-scroll-card[data-case-media="hero"] {
@@ -1927,6 +1932,17 @@
         font-size: clamp(1.75rem, 3.1vw, 3.35rem);
         line-height: 0.94;
         margin-bottom: 1.1rem;
+      }
+
+      body.is-cny-case .klook-section-copy h2 em {
+        color: rgba(255, 211, 122, 0.72);
+        display: block;
+        font-size: clamp(1.02rem, 1.45vw, 1.52rem);
+        font-style: normal;
+        font-weight: 760;
+        line-height: 1.05;
+        margin-top: 0.54rem;
+        text-transform: none;
       }
 
       body.is-cny-case .klook-scroll-card[data-case-media="process"] .klook-section-copy p {
@@ -1974,21 +1990,12 @@
       body.is-cny-case .cny-process-steps span {
         font-size: clamp(0.88rem, 1vw, 1rem);
         font-weight: 760;
-        line-height: 1.12;
+        line-height: 1.2;
       }
 
       body.is-cny-case .cny-process-steps .cny-step-copy {
         display: grid;
-        gap: 0.42rem;
-      }
-
-      body.is-cny-case .cny-process-steps .cny-step-copy del {
-        color: rgba(247, 243, 238, 0.34);
-        font-size: clamp(0.74rem, 0.82vw, 0.82rem);
-        font-weight: 650;
-        line-height: 1.08;
-        text-decoration-color: rgba(255, 211, 122, 0.55);
-        text-decoration-thickness: 1px;
+        gap: 0;
       }
 
       body.is-cny-case .cny-process-steps .cny-step-new {
@@ -2013,6 +2020,200 @@
         grid-template-columns: 0.74fr 0.72fr 1fr;
         grid-template-rows: none;
         min-height: 0;
+      }
+
+      .cny-map-preview-parallax {
+        margin: clamp(2.2rem, 5vw, 5.4rem) auto clamp(5.4rem, 9vw, 9rem);
+        max-width: min(118rem, 96vw);
+        --map-preview-x: 50%;
+        --map-preview-y: 50%;
+      }
+
+      body.is-cny-case .cny-map-preview-parallax.cny-only {
+        display: block;
+      }
+
+      .cny-map-preview-parallax__viewport {
+        aspect-ratio: 16 / 9;
+        background: #050505;
+        box-shadow:
+          0 2rem 7rem rgba(0, 0, 0, 0.52),
+          0 0 0 1px rgba(255, 211, 122, 0.08);
+        isolation: isolate;
+        min-height: clamp(28rem, 50vw, 54rem);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .cny-map-preview-parallax__viewport::before,
+      .cny-map-preview-parallax__viewport::after {
+        content: "";
+        inset: 0;
+        pointer-events: none;
+        position: absolute;
+        z-index: 5;
+      }
+
+      .cny-map-preview-parallax__viewport::before {
+        background:
+          linear-gradient(180deg, #050505 0%, rgba(5, 5, 5, 0.96) 4%, rgba(5, 5, 5, 0.74) 12%, rgba(5, 5, 5, 0.22) 25%, transparent 36%, transparent 64%, rgba(5, 5, 5, 0.25) 76%, rgba(5, 5, 5, 0.84) 90%, #050505 100%),
+          linear-gradient(90deg, rgba(5, 5, 5, 0.74), transparent 18%, transparent 80%, rgba(5, 5, 5, 0.58));
+      }
+
+      .cny-map-preview-parallax__viewport::after {
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+          radial-gradient(circle at var(--map-preview-x, 50%) var(--map-preview-y, 50%), rgba(255, 211, 122, 0.18), transparent 18rem);
+        background-size: 100% 7px, 8rem 8rem, 100% 100%;
+        mix-blend-mode: screen;
+        opacity: 0.34;
+      }
+
+      .cny-map-preview-parallax__layer {
+        inset: -10%;
+        pointer-events: none;
+        position: absolute;
+        transform: translate3d(0, 0, 0);
+        will-change: transform;
+        z-index: 1;
+      }
+
+      .cny-map-preview-parallax__bg {
+        background:
+          linear-gradient(180deg, rgba(5, 5, 5, 0.34), rgba(5, 5, 5, 0.08) 48%, rgba(5, 5, 5, 0.42)),
+          url("./assets/projects/the-symphony-of-vines/cny-map-preview.webp") center / cover no-repeat,
+          radial-gradient(circle at 22% 72%, rgba(241, 59, 45, 0.14), transparent 28%),
+          radial-gradient(circle at 78% 24%, rgba(255, 211, 122, 0.12), transparent 30%),
+          #050505;
+        filter: blur(8px) saturate(0.92) brightness(0.62);
+        inset: -18%;
+        opacity: 0.86;
+        z-index: 0;
+      }
+
+      .cny-map-preview-parallax__media {
+        inset: -9%;
+        z-index: 2;
+      }
+
+      .cny-map-preview-parallax__media img {
+        display: block;
+        filter: saturate(1.02) contrast(1.04) brightness(0.98);
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        transform: scale(1.06);
+        width: 100%;
+      }
+
+      .cny-map-preview-parallax__hud {
+        z-index: 4;
+      }
+
+      .cny-map-preview-parallax__hud::before {
+        background:
+          radial-gradient(circle, rgba(255, 211, 122, 0.18) 0 0.08rem, transparent 0.1rem),
+          linear-gradient(rgba(247, 243, 238, 0.12) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(247, 243, 238, 0.1) 1px, transparent 1px);
+        background-size: 4.8rem 4.8rem, 9rem 9rem, 9rem 9rem;
+        content: "";
+        inset: 10% 5%;
+        mask-image:
+          linear-gradient(90deg, black, transparent 34%, transparent 66%, black),
+          linear-gradient(180deg, black, transparent 38%, transparent 64%, black);
+        opacity: 0.25;
+        pointer-events: none;
+        position: absolute;
+        -webkit-mask-image:
+          linear-gradient(90deg, black, transparent 34%, transparent 66%, black),
+          linear-gradient(180deg, black, transparent 38%, transparent 64%, black);
+      }
+
+      .cny-map-preview-parallax__dot,
+      .cny-map-preview-parallax__frame {
+        display: block;
+        pointer-events: none;
+        position: absolute;
+      }
+
+      .cny-map-preview-parallax__dot {
+        --hud-heat: 0;
+        aspect-ratio: 1;
+        background: rgba(255, 211, 122, 0.88);
+        border-radius: 999px;
+        box-shadow:
+          0 0 calc(0.8rem + (var(--hud-heat) * 1rem)) rgba(255, 211, 122, calc(0.26 + (var(--hud-heat) * 0.38))),
+          0 0 calc(2rem + (var(--hud-heat) * 3.6rem)) rgba(241, 59, 45, calc(0.12 + (var(--hud-heat) * 0.22)));
+        opacity: calc(0.44 + (var(--hud-heat) * 0.46));
+        transform: scale(calc(1 + (var(--hud-heat) * 0.32)));
+        transition:
+          opacity 180ms ease,
+          transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+          box-shadow 220ms cubic-bezier(0.22, 1, 0.36, 1);
+        width: clamp(0.5rem, 0.8vw, 0.82rem);
+      }
+
+      .cny-map-preview-parallax__dot--one { left: 8%; top: 34%; }
+      .cny-map-preview-parallax__dot--two { right: 18%; top: 23%; }
+      .cny-map-preview-parallax__dot--three { right: 10%; bottom: 22%; }
+
+      .cny-map-preview-parallax__frame {
+        border: 1px solid rgba(255, 211, 122, 0.34);
+        color: rgba(255, 211, 122, 0.44);
+        height: clamp(3rem, 5vw, 5.8rem);
+        opacity: 0.42;
+        width: clamp(3.5rem, 6vw, 6.4rem);
+      }
+
+      .cny-map-preview-parallax__frame::before,
+      .cny-map-preview-parallax__frame::after {
+        background: currentColor;
+        content: "";
+        position: absolute;
+      }
+
+      .cny-map-preview-parallax__frame::before {
+        height: 1px;
+        left: -1.2rem;
+        right: -1.2rem;
+        top: 50%;
+      }
+
+      .cny-map-preview-parallax__frame::after {
+        bottom: -1.2rem;
+        left: 50%;
+        top: -1.2rem;
+        width: 1px;
+      }
+
+      .cny-map-preview-parallax__frame--one { left: 6%; top: 12%; }
+      .cny-map-preview-parallax__frame--two { bottom: 11%; right: 7%; }
+
+      .cny-map-preview-parallax__caption {
+        bottom: clamp(1rem, 2vw, 1.6rem);
+        color: rgba(247, 243, 238, 0.72);
+        display: flex;
+        font-size: clamp(0.76rem, 0.9vw, 0.9rem);
+        font-weight: 900;
+        gap: 0.85rem;
+        left: clamp(1rem, 2vw, 1.6rem);
+        letter-spacing: 0;
+        line-height: 1;
+        position: absolute;
+        text-transform: uppercase;
+        z-index: 6;
+      }
+
+      .cny-map-preview-parallax__caption em {
+        color: rgba(255, 211, 122, 0.9);
+        font-style: normal;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .cny-map-preview-parallax__layer {
+          transform: none !important;
+        }
       }
 
       .cny-process-slice {
@@ -2118,7 +2319,7 @@
       }
 
       .cny-map-setting-section {
-        margin: 0 auto clamp(7rem, 11vw, 12rem);
+        margin: 0 auto clamp(5.2rem, 8vw, 8.8rem);
         max-width: min(96rem, 94vw);
       }
 
@@ -2159,8 +2360,12 @@
       .cny-chapter-head h2 em {
         color: rgba(255, 211, 122, 0.68);
         display: block;
-        font-style: oblique;
-        font-weight: 520;
+        font-size: clamp(1.18rem, 2vw, 2.15rem);
+        font-style: normal;
+        font-weight: 720;
+        line-height: 1.08;
+        margin-top: 0.62rem;
+        text-transform: none;
       }
 
       .cny-chapter-head p {
@@ -2187,6 +2392,8 @@
         margin: 0;
         overflow: hidden;
         position: relative;
+        transform: translateZ(0);
+        -webkit-mask-image: -webkit-radial-gradient(white, black);
       }
 
       .cny-setting-card--wide {
@@ -2194,6 +2401,7 @@
       }
 
       .cny-setting-card img {
+        border-radius: inherit;
         display: block;
         width: 100%;
       }
@@ -2211,6 +2419,21 @@
         text-transform: uppercase;
         top: 1rem;
         z-index: 2;
+      }
+
+      .cny-map-setting-section .cny-setting-card {
+        background: transparent;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+        overflow: visible;
+        -webkit-mask-image: none;
+      }
+
+      .cny-map-setting-section .cny-setting-card img {
+        border-radius: 1.15rem;
+        box-shadow: 0 1.5rem 4.2rem rgba(0, 0, 0, 0.28);
+        overflow: hidden;
       }
 
       body.is-cny-case .klook-duo {
@@ -2260,9 +2483,13 @@
       .cny-map-showcase__head h2 em {
         color: rgba(255, 211, 122, 0.76);
         display: block;
-        font-style: oblique;
-        font-weight: 520;
+        font-size: clamp(1.22rem, 2.2vw, 2.35rem);
+        font-style: normal;
+        font-weight: 720;
+        line-height: 1.08;
+        margin-top: 0.62rem;
         padding-bottom: 0.1em;
+        text-transform: none;
       }
 
       .cny-map-showcase__head p {
@@ -2294,21 +2521,94 @@
       }
 
       body.is-cny-case .klook-next {
-        color: var(--ink);
+        color: #f7f3ee;
+        cursor: default;
+        margin: clamp(4rem, 8vw, 8rem) auto clamp(6rem, 10vw, 10rem);
+        min-height: auto;
+        overflow: visible;
+        width: min(88rem, 94vw);
       }
 
-      body.is-cny-case .klook-route-preview__mark {
-        background:
-          radial-gradient(circle, rgba(255, 211, 122, 0.28), transparent 58%),
-          conic-gradient(from 0deg, rgba(255, 211, 122, 0.18) 0 25%, transparent 25% 50%, rgba(241, 59, 45, 0.2) 50% 75%, transparent 75% 100%);
+      body.is-cny-case .klook-route-pin {
+        display: none;
       }
 
       body.is-cny-case .klook-curtain {
+        display: none;
+      }
+
+      body:not(.is-cny-case):not(.is-benefit-case) .klook-next-static {
+        display: none;
+      }
+
+      body.is-cny-case .klook-next-static,
+      body.is-benefit-case .klook-next-static {
+        align-items: end;
         background:
-          radial-gradient(circle at 74% 22%, rgb(var(--cny-red-rgb) / 0.2), transparent 24rem),
-          linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
-          #050505;
-        background-size: 100% 100%, 7.5rem 7.5rem, 100% 100%;
+          linear-gradient(145deg, rgba(247, 243, 238, 0.1), rgba(247, 243, 238, 0.035)),
+          radial-gradient(circle at 78% 18%, rgba(255, 211, 122, 0.18), transparent 24rem),
+          #070605;
+        border: 1px solid rgba(255, 211, 122, 0.2);
+        color: #f7f3ee;
+        cursor: pointer;
+        display: grid;
+        gap: clamp(2rem, 7vw, 7rem);
+        grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+        min-height: clamp(18rem, 28vw, 25rem);
+        overflow: hidden;
+        padding: clamp(1.4rem, 4vw, 4rem);
+        position: relative;
+        text-decoration: none;
+      }
+
+      body.is-cny-case .klook-next-static::before,
+      body.is-benefit-case .klook-next-static::before {
+        background:
+          linear-gradient(90deg, rgba(255, 211, 122, 0.22), transparent),
+          linear-gradient(rgba(247, 243, 238, 0.07) 1px, transparent 1px);
+        background-size: 100% 100%, 100% 3.4rem;
+        content: "";
+        inset: 0;
+        opacity: 0.5;
+        pointer-events: none;
+        position: absolute;
+      }
+
+      body.is-cny-case .klook-next-static__eyebrow,
+      body.is-benefit-case .klook-next-static__eyebrow {
+        color: rgba(255, 211, 122, 0.88);
+        font-size: clamp(0.78rem, 1vw, 0.94rem);
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        position: relative;
+        text-transform: uppercase;
+      }
+
+      body.is-cny-case .klook-next-static__copy,
+      body.is-benefit-case .klook-next-static__copy {
+        display: grid;
+        gap: 1rem;
+        justify-items: end;
+        position: relative;
+        text-align: right;
+      }
+
+      body.is-cny-case .klook-next-static__copy strong,
+      body.is-benefit-case .klook-next-static__copy strong {
+        display: block;
+        font-size: clamp(2.7rem, 7vw, 7.2rem);
+        font-weight: 520;
+        letter-spacing: 0;
+        line-height: 0.88;
+        text-transform: uppercase;
+      }
+
+      body.is-cny-case .klook-next-static__copy span,
+      body.is-benefit-case .klook-next-static__copy span {
+        color: rgba(247, 243, 238, 0.66);
+        font-size: clamp(0.95rem, 1.2vw, 1.12rem);
+        line-height: 1.35;
+        max-width: 28rem;
       }
 
       body.is-cny-case .klook-curtain__media {
@@ -2332,6 +2632,930 @@
 
       body.is-cny-case .cny-case {
         display: block;
+      }
+
+      body.is-benefit-case {
+        --ink: #f8f1dc;
+        --paper: #040403;
+        --line: rgba(248, 218, 142, 0.18);
+        --soft-text: rgba(248, 241, 220, 0.64);
+        --benefit-gold: #f6c95f;
+        --benefit-deep-gold: #a76b1f;
+        --benefit-red: #8b1f16;
+        background:
+          radial-gradient(circle at 50% 0%, rgba(246, 201, 95, 0.18), transparent 34rem),
+          radial-gradient(circle at 84% 18%, rgba(139, 31, 22, 0.28), transparent 28rem),
+          linear-gradient(180deg, #080604 0%, #030303 48%, #080604 100%);
+        color: var(--ink);
+      }
+
+      body.is-benefit-case::before {
+        background: radial-gradient(circle, rgba(246, 201, 95, 0.15) 0 0.07rem, transparent 0.08rem);
+        background-size: 1rem 1rem;
+        mix-blend-mode: screen;
+        opacity: 0.22;
+      }
+
+      body.is-benefit-case .site-header,
+      body.is-benefit-case .site-header--world {
+        color: var(--ink);
+      }
+
+      body.is-benefit-case .site-header--world .nav a {
+        color: rgba(248, 241, 220, 0.74);
+        mix-blend-mode: normal;
+      }
+
+      body.is-benefit-case .site-header--world .nav a:hover,
+      body.is-benefit-case .site-header--world .nav a:focus-visible {
+        color: #fff8e6;
+      }
+
+      body.is-benefit-case .site-header--world .nav a.is-active,
+      body.is-benefit-case .site-header--world .nav a.world-ip-entry {
+        color: var(--benefit-gold);
+        text-shadow: 0 0 1.2rem rgba(246, 201, 95, 0.28);
+      }
+
+      body.is-benefit-case .project-page {
+        padding: 0 clamp(1rem, 3vw, 2.5rem);
+      }
+
+      .benefit-case {
+        color: var(--ink);
+        display: none;
+        position: relative;
+        z-index: 10;
+      }
+
+      body.is-benefit-case .benefit-case {
+        display: block;
+      }
+
+      body.is-benefit-case:not(.is-time-arena-case):not(.is-summer-gala-case) .time-arena-case,
+      body.is-benefit-case:not(.is-time-arena-case):not(.is-summer-gala-case) .summer-gala-case,
+      body.is-time-arena-case .benefit-case:not(.time-arena-case),
+      body.is-summer-gala-case .benefit-case:not(.summer-gala-case) {
+        display: none;
+      }
+
+      body.is-summer-gala-case .summer-gala-case .benefit-hero-media {
+        background:
+          linear-gradient(90deg, rgba(5, 5, 5, 0.72), rgba(5, 5, 5, 0.22) 31%, rgba(5, 5, 5, 0.08) 56%, rgba(5, 5, 5, 0.2)),
+          linear-gradient(180deg, rgba(5, 5, 5, 0.08), rgba(5, 5, 5, 0.34)),
+          radial-gradient(circle at 72% 30%, rgba(246, 201, 95, 0.26), transparent 20rem),
+          radial-gradient(circle at 42% 72%, rgba(139, 31, 22, 0.22), transparent 24rem),
+          url("./assets/projects/summer-gala-2026/hero.png") center / cover no-repeat,
+          #080604;
+      }
+
+      body.is-time-arena-case {
+        --cny-gold: var(--benefit-gold);
+        --cny-red: #4e7dff;
+        --cny-red-rgb: 78 125 255;
+        --cny-rose: #7ba4ff;
+      }
+
+      body.is-time-arena-case .project-page {
+        padding: 0;
+      }
+
+      body.is-time-arena-case .time-arena-case .cny-hero {
+        min-height: 100dvh;
+        overflow: hidden;
+        padding: 0;
+      }
+
+      body.is-time-arena-case .time-arena-case .cny-kicker {
+        color: rgba(246, 201, 95, 0.86);
+        right: clamp(1rem, 4vw, 4rem);
+      }
+
+      body.is-time-arena-case .time-arena-case .cny-title {
+        border-left: 1px solid rgba(246, 201, 95, 0.62);
+        bottom: clamp(4.4rem, 9vh, 7.2rem);
+        gap: clamp(0.2rem, 0.38vw, 0.42rem);
+        left: 5.45vw;
+        max-width: min(28rem, 20vw);
+        padding-left: clamp(0.9rem, 1.24vw, 1.34rem);
+        position: absolute;
+        z-index: 4;
+      }
+
+      body.is-time-arena-case .time-arena-case .cny-title::before,
+      body.is-time-arena-case .time-arena-case .cny-hero-panel::before {
+        background: linear-gradient(90deg, rgba(11, 18, 36, 0.28), rgba(11, 18, 36, 0.1) 72%, transparent);
+        border-radius: 1.2rem;
+        content: "";
+        filter: blur(0.2px);
+        inset: -0.9rem -1.4rem -0.95rem -1.05rem;
+        pointer-events: none;
+        position: absolute;
+        z-index: -1;
+      }
+
+      body.is-time-arena-case .time-arena-case .cny-title br {
+        display: none;
+      }
+
+      body.is-time-arena-case .time-arena-case .cny-title span,
+      body.is-time-arena-case .time-arena-case .cny-title em {
+        display: block;
+        letter-spacing: 0;
+        line-height: 0.88;
+      }
+
+      body.is-time-arena-case .time-arena-case .cny-title small,
+      body.is-time-arena-case .time-arena-case .cny-title strong {
+        display: block;
+      }
+
+      body.is-time-arena-case .time-arena-case .cny-title small {
+        color: rgba(246, 201, 95, 0.9);
+        font-size: clamp(0.72rem, 0.78vw, 0.92rem);
+        font-weight: 860;
+        line-height: 1;
+        margin-bottom: 0.28rem;
+        text-shadow: 0 0.18rem 0.72rem rgba(5, 8, 16, 0.54);
+        text-transform: uppercase;
+      }
+
+      body.is-time-arena-case .time-arena-case .cny-title strong {
+        color: rgba(247, 243, 238, 0.94);
+        font-size: clamp(2.7rem, 3.35vw, 4.55rem);
+        font-style: oblique;
+        font-weight: 520;
+        line-height: 0.84;
+        text-shadow: 0 0.28rem 1.15rem rgba(5, 8, 16, 0.58);
+      }
+
+      body.is-time-arena-case .time-arena-case .cny-title em {
+        color: rgba(246, 201, 95, 0.82);
+        font-style: oblique;
+        font-weight: 360;
+        justify-self: start;
+        padding-bottom: 0.14em;
+      }
+
+      body.is-time-arena-case .time-arena-case .cny-title em strong {
+        color: inherit;
+        font-size: clamp(1.05rem, 1.24vw, 1.62rem);
+        font-weight: 420;
+        line-height: 0.94;
+      }
+
+      body.is-time-arena-case .time-arena-case .cny-hero-media {
+        background-position: center;
+        background-size: 100% 100%;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+        height: 100%;
+        inset: 0;
+        opacity: 1;
+        position: absolute;
+        transform: none;
+        width: 100%;
+        z-index: 1;
+      }
+
+      body.is-time-arena-case .time-arena-case .cny-hero-media::after {
+        display: none;
+      }
+
+      body.is-time-arena-case .time-arena-case .cny-hero-panel {
+        bottom: clamp(4.6rem, 8vh, 7rem);
+        display: none;
+        gap: clamp(0.38rem, 0.62vw, 0.68rem);
+        grid-template-columns: 1fr;
+        margin-top: 0;
+        max-width: min(30rem, 21.2vw);
+        position: absolute;
+        right: 5.15vw;
+        z-index: 4;
+      }
+
+      body.is-time-arena-case .time-arena-case .cny-hero-panel p {
+        border-bottom: 1px solid rgba(247, 243, 238, 0.22);
+        color: rgba(247, 243, 238, 0.82);
+        display: block;
+        font-size: clamp(0.9rem, 1.02vw, 1.28rem);
+        font-style: oblique;
+        font-weight: 520;
+        line-height: 1.15;
+        margin: 0;
+        padding-bottom: clamp(0.42rem, 0.64vw, 0.66rem);
+        text-shadow: 0 0.24rem 0.9rem rgba(5, 8, 16, 0.56);
+      }
+
+      body.is-time-arena-case .time-arena-case .cny-role-list span {
+        align-items: center;
+        border-bottom: 1px solid rgba(247, 243, 238, 0.2);
+        color: rgba(247, 243, 238, 0.62);
+        display: grid;
+        font-size: clamp(0.7rem, 0.78vw, 0.94rem);
+        gap: clamp(0.72rem, 1.1vw, 1.18rem);
+        grid-template-columns: minmax(3.2rem, 0.34fr) minmax(0, 1fr);
+        padding: clamp(0.34rem, 0.54vw, 0.56rem) 0;
+      }
+
+      body.is-time-arena-case .time-arena-case .cny-role-list strong {
+        color: rgba(247, 243, 238, 0.6);
+        font-style: oblique;
+        font-weight: 620;
+        text-shadow: 0 0.2rem 0.7rem rgba(5, 8, 16, 0.5);
+      }
+
+      body.is-time-arena-case .time-arena-case .cny-role-list em {
+        color: rgba(247, 243, 238, 0.68);
+        font-style: oblique;
+        font-weight: 520;
+        text-align: right;
+        text-shadow: 0 0.2rem 0.7rem rgba(5, 8, 16, 0.52);
+      }
+
+      body.is-time-arena-case .time-arena-case .time-arena-evidence {
+        max-width: min(118rem, 96vw);
+      }
+
+      body.is-time-arena-case .time-arena-case .time-arena-evidence .benefit-wide-shot img {
+        height: auto;
+        object-fit: contain;
+      }
+
+      body.is-time-arena-case .time-arena-case .time-arena-card-grid {
+        margin-top: clamp(1rem, 2.6vw, 2.4rem);
+      }
+
+      body.is-time-arena-case .time-arena-case .time-arena-card-grid .cny-strategy-card h3 {
+        color: rgba(246, 201, 95, 0.78);
+        font-size: clamp(0.86rem, 1vw, 1.02rem);
+      }
+
+      body.is-benefit-case.is-ready .cny-reveal {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+
+      .benefit-hero {
+        display: grid;
+        min-height: 112vh;
+        padding: clamp(8rem, 11vw, 10.5rem) clamp(0.4rem, 6vw, 8rem) 5rem;
+        position: relative;
+      }
+
+      .benefit-kicker,
+      .benefit-label {
+        color: var(--benefit-gold);
+        font-size: 0.82rem;
+        font-weight: 950;
+        letter-spacing: 0.02em;
+        margin: 0;
+        text-transform: uppercase;
+      }
+
+      .benefit-kicker {
+        position: absolute;
+        right: clamp(0.4rem, 6vw, 8rem);
+        top: clamp(6.6rem, 9vw, 9rem);
+      }
+
+      .benefit-title {
+        bottom: clamp(8.5rem, 12vw, 11rem);
+        display: grid;
+        gap: clamp(0.35rem, 0.8vw, 0.6rem);
+        left: clamp(0.4rem, 6vw, 8rem);
+        margin: 0;
+        max-width: 25rem;
+        pointer-events: none;
+        position: absolute;
+        text-transform: uppercase;
+        z-index: 3;
+      }
+
+      .benefit-title span,
+      .benefit-title em {
+        display: block;
+        font-size: clamp(2.25rem, 3.9vw, 4.1rem);
+        letter-spacing: 0;
+        line-height: 0.86;
+      }
+
+      .benefit-title span {
+        color: #fff5df;
+        font-weight: 540;
+      }
+
+      .benefit-title em {
+        color: rgba(246, 201, 95, 0.78);
+        font-style: oblique;
+        font-weight: 260;
+        justify-self: start;
+        padding-bottom: 0.14em;
+      }
+
+      .benefit-hero-media {
+        background:
+          linear-gradient(90deg, rgba(5, 5, 5, 0.72), rgba(5, 5, 5, 0.22) 31%, rgba(5, 5, 5, 0.08) 56%, rgba(5, 5, 5, 0.18)),
+          linear-gradient(180deg, rgba(5, 5, 5, 0.02), rgba(5, 5, 5, 0.34)),
+          url("./assets/projects/benefit-system/27Frame 1940698828.png") center / contain no-repeat;
+        border: 1px solid rgba(246, 201, 95, 0.22);
+        border-radius: 0.85rem;
+        box-shadow:
+          0 3rem 8rem rgba(0, 0, 0, 0.62),
+          0 0 0 1px rgba(246, 201, 95, 0.08) inset,
+          0 0 7rem rgba(246, 201, 95, 0.16);
+        aspect-ratio: 3147 / 1008;
+        bottom: auto;
+        height: auto;
+        left: clamp(0.4rem, 6vw, 8rem);
+        overflow: hidden;
+        position: absolute;
+        right: clamp(0.4rem, 3vw, 3rem);
+        top: clamp(8rem, 12vw, 11rem);
+        transform: none;
+        width: auto;
+        z-index: 1;
+      }
+
+      .benefit-hero-media::after,
+      .benefit-media-button::after,
+      .benefit-wide-shot::after {
+        background: radial-gradient(circle at 50% 12%, rgba(246, 201, 95, 0.12), transparent 38%);
+        content: "";
+        inset: 0;
+        mix-blend-mode: soft-light;
+        pointer-events: none;
+        position: absolute;
+      }
+
+      .benefit-hero-panel {
+        display: grid;
+        gap: clamp(1.6rem, 4vw, 5rem);
+        grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.68fr);
+        isolation: isolate;
+        margin: clamp(1.6rem, 4vw, 3.5rem) auto clamp(7rem, 10vw, 10.5rem);
+        padding: clamp(1.4rem, 2.4vw, 2rem) clamp(1.4rem, 2.6vw, 2.2rem);
+        position: relative;
+        width: min(86rem, 88vw);
+        z-index: 4;
+      }
+
+      .benefit-hero-panel::before {
+        background:
+          linear-gradient(90deg, rgba(246, 201, 95, 0.12), rgba(246, 201, 95, 0.04) 42%, rgba(139, 31, 22, 0.1)),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.018), rgba(255, 255, 255, 0.006));
+        border-bottom: 1px solid rgba(246, 201, 95, 0.2);
+        border-top: 1px solid rgba(246, 201, 95, 0.16);
+        content: "";
+        inset: 0;
+        pointer-events: none;
+        position: absolute;
+        z-index: -1;
+      }
+
+      .benefit-hero-panel p {
+        color: rgba(248, 241, 220, 0.76);
+        font-size: clamp(1rem, 1.18vw, 1.22rem);
+        line-height: 1.55;
+        margin: 0;
+        max-width: 48rem;
+        text-wrap: pretty;
+      }
+
+      .benefit-hero-panel p strong {
+        color: rgba(246, 201, 95, 0.9);
+        font-weight: 760;
+      }
+
+      .benefit-role-list,
+      .benefit-process-list {
+        display: grid;
+        gap: 0;
+      }
+
+      .benefit-role-list span,
+      .benefit-process-list span {
+        border-top: 1px solid var(--line);
+        color: rgba(248, 241, 220, 0.7);
+        display: flex;
+        font-size: clamp(0.9rem, 1vw, 1rem);
+        justify-content: space-between;
+        line-height: 1.15;
+        padding: 0.78rem 0;
+      }
+
+      .benefit-role-list strong,
+      .benefit-process-list strong {
+        color: var(--benefit-gold);
+        font-weight: 950;
+      }
+
+      .benefit-section {
+        margin: 0 auto clamp(7rem, 10vw, 10.5rem);
+        max-width: min(88rem, 94vw);
+        position: relative;
+      }
+
+      .benefit-section--wide {
+        max-width: min(108rem, 96vw);
+      }
+
+      .benefit-section-title {
+        font-size: clamp(2rem, 3.45vw, 3.75rem);
+        font-weight: 540;
+        letter-spacing: 0;
+        line-height: 0.98;
+        margin: 0;
+        max-width: 56rem;
+        text-transform: uppercase;
+        text-wrap: balance;
+      }
+
+      .benefit-section-title em {
+        color: rgba(246, 201, 95, 0.68);
+        display: block;
+        font-style: oblique;
+        font-weight: 260;
+        padding-bottom: 0.12em;
+      }
+
+      .benefit-copy {
+        color: rgba(248, 241, 220, 0.72);
+        font-size: clamp(1.02rem, 1.28vw, 1.22rem);
+        line-height: 1.55;
+        margin: clamp(1.3rem, 2vw, 2rem) 0 0;
+        max-width: 50rem;
+        text-wrap: pretty;
+      }
+
+      .benefit-overview {
+        display: grid;
+        gap: clamp(2.5rem, 7vw, 8rem);
+        grid-template-columns: 0.92fr 1.08fr;
+      }
+
+      .benefit-overview .benefit-grid {
+        align-self: start;
+        gap: 0;
+        grid-template-columns: 1fr;
+      }
+
+      .benefit-overview .benefit-card {
+        display: grid;
+        gap: clamp(0.9rem, 2vw, 2rem);
+        grid-template-columns: minmax(7.5rem, 0.36fr) minmax(0, 1fr);
+        padding: 1.05rem 0;
+      }
+
+      .benefit-overview .benefit-card::before {
+        background: rgba(246, 201, 95, 0.22);
+      }
+
+      .benefit-overview .benefit-card h3 {
+        margin: 0;
+      }
+
+      .benefit-grid,
+      .benefit-rule-grid,
+      .benefit-result-grid {
+        display: grid;
+        gap: clamp(1.25rem, 2.5vw, 2.4rem);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .benefit-spaced {
+        margin-top: clamp(2rem, 4vw, 3rem);
+      }
+
+      .benefit-grid--three {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .benefit-card,
+      .benefit-rule-card,
+      .benefit-result-card {
+        background: transparent;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+        padding: clamp(0.95rem, 1.6vw, 1.35rem) 0 0;
+        position: relative;
+      }
+
+      .benefit-card::before,
+      .benefit-rule-card::before,
+      .benefit-result-card::before {
+        background: linear-gradient(90deg, rgba(246, 201, 95, 0.58), rgba(246, 201, 95, 0.08));
+        content: "";
+        height: 1px;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+
+      .benefit-card h3,
+      .benefit-rule-card h3,
+      .benefit-result-card h3 {
+        color: rgba(246, 201, 95, 0.8);
+        font-size: 0.76rem;
+        font-weight: 950;
+        margin: 0 0 0.72rem;
+        text-transform: uppercase;
+      }
+
+      .benefit-card p,
+      .benefit-rule-card p,
+      .benefit-result-card p {
+        color: rgba(248, 241, 220, 0.76);
+        font-size: clamp(0.98rem, 1.1vw, 1.08rem);
+        line-height: 1.36;
+        margin: 0;
+        text-wrap: pretty;
+      }
+
+      .benefit-result-card strong {
+        color: var(--benefit-gold);
+        display: block;
+        font-size: clamp(2rem, 3.8vw, 3.9rem);
+        font-weight: 560;
+        letter-spacing: 0;
+        line-height: 0.92;
+        margin-bottom: 0.9rem;
+      }
+
+      .benefit-media-pair,
+      .benefit-media-stack {
+        display: grid;
+        gap: clamp(1rem, 2.5vw, 2.4rem);
+        margin-top: clamp(2rem, 4.2vw, 4.2rem);
+      }
+
+      .benefit-media-pair {
+        align-items: center;
+        grid-template-columns: minmax(0, 1.16fr) minmax(20rem, 0.84fr);
+      }
+
+      .benefit-media-stack {
+        grid-template-columns: 1fr;
+      }
+
+      .benefit-media-button,
+      .benefit-wide-shot {
+        appearance: none;
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(246, 201, 95, 0.13);
+        border-radius: 0.85rem;
+        box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.32);
+        cursor: zoom-in;
+        display: block;
+        overflow: hidden;
+        padding: 0;
+        position: relative;
+        width: 100%;
+      }
+
+      .benefit-media-button img,
+      .benefit-wide-shot img,
+      .benefit-output-wall img {
+        display: block;
+        height: 100%;
+        object-fit: cover;
+        width: 100%;
+      }
+
+      .benefit-wide-shot img {
+        height: auto;
+      }
+
+      .benefit-media-button--landscape {
+        aspect-ratio: 16 / 9;
+      }
+
+      .benefit-media-button--square {
+        aspect-ratio: 1;
+      }
+
+      .benefit-media-button--poster {
+        aspect-ratio: 10 / 14;
+      }
+
+      .benefit-flow {
+        display: grid;
+        gap: clamp(1rem, 2vw, 1.6rem);
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        margin-top: clamp(1.8rem, 3.2vw, 2.8rem);
+      }
+
+      .benefit-compression {
+        align-items: stretch;
+        display: grid;
+        gap: clamp(1rem, 2.2vw, 2rem);
+        grid-template-columns: minmax(0, 0.92fr) minmax(12rem, 0.42fr) minmax(0, 0.92fr);
+        margin-top: clamp(2.2rem, 4.6vw, 4.6rem);
+        position: relative;
+      }
+
+      .benefit-compression::before {
+        background: linear-gradient(90deg, rgba(246, 201, 95, 0.08), rgba(246, 201, 95, 0.64), rgba(246, 201, 95, 0.08));
+        content: "";
+        height: 1px;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .benefit-compression__side,
+      .benefit-compression__core {
+        min-height: clamp(12rem, 18vw, 17rem);
+        position: relative;
+        z-index: 1;
+      }
+
+      .benefit-compression__side {
+        align-content: space-between;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.032), rgba(255, 255, 255, 0.01));
+        border: 1px solid rgba(246, 201, 95, 0.12);
+        border-radius: 0.85rem;
+        display: grid;
+        overflow: hidden;
+        padding: clamp(1rem, 2vw, 1.6rem);
+      }
+
+      .benefit-compression__side::after {
+        background: radial-gradient(circle at 50% 0%, rgba(246, 201, 95, 0.12), transparent 55%);
+        content: "";
+        inset: 0;
+        opacity: 0.7;
+        pointer-events: none;
+        position: absolute;
+      }
+
+      .benefit-compression__side small,
+      .benefit-compression__core small {
+        color: rgba(246, 201, 95, 0.78);
+        display: block;
+        font-size: 0.78rem;
+        font-weight: 950;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+      }
+
+      .benefit-compression__side strong {
+        color: #fff5df;
+        display: block;
+        font-size: clamp(3.6rem, 8vw, 7.2rem);
+        font-weight: 560;
+        letter-spacing: 0;
+        line-height: 0.82;
+        margin-top: clamp(1.5rem, 4vw, 3.6rem);
+        position: relative;
+        z-index: 1;
+      }
+
+      .benefit-compression__side em {
+        color: rgba(248, 241, 220, 0.7);
+        display: block;
+        font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+        font-style: normal;
+        line-height: 1.35;
+        margin-top: 0.8rem;
+        max-width: 21rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .benefit-compression__side--after {
+        background:
+          radial-gradient(circle at 80% 18%, rgba(246, 201, 95, 0.22), transparent 46%),
+          linear-gradient(180deg, rgba(246, 201, 95, 0.12), rgba(255, 255, 255, 0.018));
+        border-color: rgba(246, 201, 95, 0.32);
+      }
+
+      .benefit-compression__side--after strong {
+        color: var(--benefit-gold);
+        text-shadow: 0 0 2rem rgba(246, 201, 95, 0.22);
+      }
+
+      .benefit-compression__core {
+        align-items: center;
+        display: grid;
+        justify-items: center;
+        text-align: center;
+      }
+
+      .benefit-compression__core b {
+        align-items: center;
+        background: rgba(246, 201, 95, 0.12);
+        border: 1px solid rgba(246, 201, 95, 0.32);
+        border-radius: 999px;
+        color: var(--benefit-gold);
+        display: inline-flex;
+        font-size: clamp(1.7rem, 4.2vw, 3.8rem);
+        font-weight: 560;
+        height: clamp(7rem, 13vw, 11rem);
+        justify-content: center;
+        line-height: 1;
+        width: clamp(7rem, 13vw, 11rem);
+      }
+
+      .benefit-compression__core small {
+        margin-top: 0.9rem;
+      }
+
+      .benefit-flow span {
+        border-top: 1px solid var(--line);
+        color: rgba(248, 241, 220, 0.72);
+        display: grid;
+        gap: 0.75rem;
+        padding-top: 1rem;
+      }
+
+      .benefit-flow strong {
+        color: var(--benefit-gold);
+        font-size: 0.8rem;
+        font-weight: 950;
+        text-transform: uppercase;
+      }
+
+      .benefit-flow em {
+        font-size: clamp(0.98rem, 1.14vw, 1.1rem);
+        font-style: normal;
+        line-height: 1.32;
+      }
+
+      .benefit-rule-table {
+        display: grid;
+        margin-top: clamp(2rem, 4vw, 3rem);
+        overflow: hidden;
+        border: 0;
+        border-radius: 0;
+      }
+
+      .benefit-rule-row {
+        display: grid;
+        grid-template-columns: 0.9fr repeat(4, minmax(0, 1fr));
+      }
+
+      .benefit-rule-row span {
+        background: transparent;
+        border-top: 1px solid rgba(246, 201, 95, 0.13);
+        color: rgba(248, 241, 220, 0.72);
+        font-size: clamp(0.86rem, 1vw, 1rem);
+        line-height: 1.16;
+        min-height: 4rem;
+        padding: 0.95rem;
+      }
+
+      .benefit-rule-row:first-child span,
+      .benefit-rule-row span:first-child {
+        color: var(--benefit-gold);
+        font-weight: 950;
+        text-transform: uppercase;
+      }
+
+      .benefit-medal-rail {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin-top: clamp(2.2rem, 5vw, 4rem);
+      }
+
+      .benefit-medal-card {
+        background: transparent;
+        border: 0;
+        border-radius: 0;
+        overflow: hidden;
+        padding: clamp(0.6rem, 1.4vw, 1rem) 0 0;
+        position: relative;
+      }
+
+      .benefit-medal-card::before {
+        background: rgba(246, 201, 95, 0.18);
+        content: "";
+        height: 1px;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+
+      .benefit-medal-card img {
+        display: block;
+        margin: 0 auto;
+        width: min(100%, 18rem);
+      }
+
+      .benefit-medal-card figcaption,
+      .benefit-wide-shot figcaption,
+      .benefit-output-wall figcaption {
+        color: rgba(246, 201, 95, 0.76);
+        font-size: 0.76rem;
+        font-weight: 950;
+        margin-top: 0.9rem;
+        text-transform: uppercase;
+      }
+
+      .benefit-output-wall {
+        background: transparent;
+        border: 0;
+        border-radius: 0;
+        margin-top: clamp(2rem, 4vw, 3.5rem);
+        overflow: hidden;
+        padding: 0;
+      }
+
+      .benefit-output-wall img {
+        border: 1px solid rgba(246, 201, 95, 0.12);
+        border-radius: 0.85rem;
+      }
+
+      .benefit-case > .klook-next-static {
+        margin: clamp(4rem, 8vw, 8rem) auto clamp(6rem, 10vw, 10rem);
+        width: min(88rem, 94vw);
+      }
+
+      @media (max-width: 900px) {
+        .benefit-hero {
+          min-height: auto;
+          padding-bottom: 4rem;
+        }
+
+        .benefit-kicker {
+          left: clamp(1rem, 6vw, 2rem);
+          right: auto;
+        }
+
+        .benefit-title span,
+        .benefit-title em {
+          font-size: clamp(3.2rem, 18vw, 5.8rem);
+        }
+
+        .benefit-title em {
+          justify-self: start;
+        }
+
+        .benefit-hero-media {
+          height: auto;
+          margin-top: 1.4rem;
+          position: relative;
+          inset: auto;
+          transform: none;
+          width: 100%;
+          aspect-ratio: 16 / 9;
+        }
+
+        .benefit-hero-panel,
+        .benefit-overview,
+        .benefit-media-pair {
+          grid-template-columns: 1fr;
+        }
+
+        .benefit-hero-panel {
+          inset: auto;
+          margin-top: 1.6rem;
+          padding: 1rem 0;
+          position: relative;
+          width: 100%;
+        }
+
+        .benefit-grid,
+        .benefit-grid--three,
+        .benefit-rule-grid,
+        .benefit-result-grid,
+        .benefit-flow,
+        .benefit-medal-rail,
+        .benefit-compression {
+          grid-template-columns: 1fr;
+        }
+
+        .benefit-compression::before {
+          bottom: 0;
+          height: auto;
+          left: 50%;
+          right: auto;
+          top: 0;
+          transform: translateX(-50%);
+          width: 1px;
+        }
+
+        .benefit-rule-table {
+          overflow-x: auto;
+        }
+
+        .benefit-rule-row {
+          min-width: 48rem;
+        }
+
+        .benefit-role-list span,
+        .benefit-process-list span {
+          display: grid;
+          gap: 0.45rem;
+          justify-content: start;
+        }
       }
 
       .cny-case button {
@@ -2720,6 +3944,39 @@
         text-align: right;
       }
 
+      .cny-map-card__ownership {
+        border: 1px solid rgba(255, 255, 255, 0.26);
+        border-radius: 999px;
+        font-size: 0.72rem;
+        font-style: normal;
+        font-weight: 950;
+        line-height: 1;
+        padding: 0.42rem 0.58rem;
+        pointer-events: none;
+        position: absolute;
+        right: 0.9rem;
+        top: 3.7rem;
+        z-index: 4;
+      }
+
+      .cny-map-card__ownership--origin {
+        background: #9cff52;
+        border-color: #9cff52;
+        color: #050705;
+      }
+
+      .cny-map-card__ownership--solo {
+        background: rgba(156, 255, 82, 0.16);
+        border-color: rgba(156, 255, 82, 0.86);
+        color: #b8ff78;
+      }
+
+      .cny-map-card__ownership--reuse {
+        background: rgba(245, 247, 239, 0.08);
+        border-color: rgba(245, 247, 239, 0.34);
+        color: rgba(245, 247, 239, 0.74);
+      }
+
       .cny-map-card span {
         background: rgba(5, 5, 5, 0.58);
         border: 1px solid rgba(255, 255, 255, 0.12);
@@ -2823,8 +4080,12 @@
       .cny-gate-gradient-copy h2 em {
         color: rgba(255, 211, 122, 0.72);
         display: block;
-        font-style: oblique;
-        font-weight: 520;
+        font-size: clamp(1.18rem, 2vw, 2.15rem);
+        font-style: normal;
+        font-weight: 720;
+        line-height: 1.08;
+        margin-top: 0.62rem;
+        text-transform: none;
       }
 
       .cny-gate-gradient-copy p {
@@ -2919,7 +4180,7 @@
       }
 
       .cny-gate-levels--finished .cny-gate-level {
-        aspect-ratio: 16 / 10;
+        aspect-ratio: 1;
         border-radius: 1rem;
       }
 
@@ -2940,6 +4201,12 @@
         object-fit: cover;
         object-position: center;
         width: 100%;
+      }
+
+      .cny-gate-levels--finished .cny-gate-level img {
+        background: rgba(5, 5, 5, 0.72);
+        object-fit: cover;
+        padding: 0;
       }
 
       .cny-gate-level figcaption {
@@ -3013,15 +4280,15 @@
 
       .cny-making-section,
       .cny-final-output {
-        margin: 0 auto clamp(7rem, 11vw, 12rem);
+        margin: 0 auto clamp(5.2rem, 8vw, 8.8rem);
         max-width: min(96rem, 94vw);
       }
 
       .cny-making-section {
         align-items: start;
         display: grid;
-        gap: clamp(2rem, 4.5vw, 5rem);
-        grid-template-columns: minmax(22rem, 0.54fr) minmax(0, 1.2fr);
+        gap: clamp(1.7rem, 3.6vw, 4.2rem);
+        grid-template-columns: minmax(22rem, 0.5fr) minmax(0, 1.25fr);
       }
 
       body.is-cny-case .cny-making-section.cny-only {
@@ -3070,8 +4337,12 @@
       .cny-final-output__copy h2 em {
         color: rgba(255, 211, 122, 0.72);
         display: block;
-        font-style: oblique;
-        font-weight: 520;
+        font-size: clamp(1.18rem, 2vw, 2.15rem);
+        font-style: normal;
+        font-weight: 720;
+        line-height: 1.08;
+        margin-top: 0.62rem;
+        text-transform: none;
       }
 
       .cny-making-title--ip {
@@ -3125,6 +4396,11 @@
         display: grid;
         gap: 0.9rem;
         min-width: 0;
+      }
+
+      body.is-cny-case .cny-making-section[aria-label="CNY IP setting and figurine production"] .cny-making-visual {
+        box-sizing: border-box;
+        padding-right: clamp(4.6rem, 6.2vw, 6.8rem);
       }
 
       .cny-role-setting-grid {
@@ -3191,7 +4467,7 @@
 
       .cny-stage-strip {
         display: grid;
-        gap: 0.9rem;
+        gap: 0.82rem;
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
@@ -3291,7 +4567,7 @@
       }
 
       .cny-showcase-card--figure {
-        grid-template-columns: minmax(0, 1.34fr) minmax(18rem, 0.72fr);
+        grid-template-columns: minmax(0, 1.72fr) minmax(12rem, 0.46fr);
         min-height: clamp(28rem, 38vw, 42rem);
       }
 
@@ -3331,6 +4607,10 @@
 
       .cny-poster-display-grid .cny-showcase-card {
         grid-template-columns: 1fr;
+      }
+
+      .cny-poster-display-grid .cny-showcase-card:only-child {
+        grid-column: 1 / -1;
       }
 
       .cny-poster-display-grid .cny-showcase-card img {
@@ -3930,6 +5210,17 @@
           grid-template-columns: 1fr;
         }
 
+        body.is-cny-case .klook-next-static {
+          align-items: start;
+          grid-template-columns: 1fr;
+          min-height: auto;
+        }
+
+        body.is-cny-case .klook-next-static__copy {
+          justify-items: start;
+          text-align: left;
+        }
+
         .cny-stage-card--wide {
           grid-column: auto;
         }
@@ -4008,14 +5299,14 @@
       }
 
       /* Marathon black-field sync for dark project routes. */
-      body:not(.is-klook-case):not(.is-cny-case) {
+      body:not(.is-klook-case):not(.is-cny-case):not(.is-benefit-case) {
         background:
           radial-gradient(circle at 9% 13%, rgb(var(--accent-rgb) / 0.14), transparent 16rem),
           radial-gradient(circle at 91% 44%, rgb(var(--accent-rgb) / 0.09), transparent 18rem),
           #050505 !important;
       }
 
-      body:not(.is-klook-case):not(.is-cny-case)::before {
+      body:not(.is-klook-case):not(.is-cny-case):not(.is-benefit-case)::before {
         background:
           radial-gradient(circle, rgba(244, 243, 237, 0.16) 0 0.07rem, transparent 0.08rem),
           linear-gradient(90deg, rgba(244, 243, 237, 0.06) 1px, transparent 1px) !important;
@@ -4162,7 +5453,7 @@
         <section class="klook-overview">
           <div>
             <h2>Project Overview</h2>
-            <p data-case-summary>A campaign case page built around travel energy, soft perspective, and scroll-held media moments.</p>
+            <p data-case-summary>公司级 S++ 春节项目里，我用第一张完整地图定义建筑、路径、定点与风格规范，再让后面 4 张地图、IP、海报和上线页面长在同一个龙年世界里。</p>
             <a class="klook-cta" data-fx-magnetic="16" href="./projects.html?skipIntro=1" data-fx-link>All projects -></a>
           </div>
           <div class="klook-meta" aria-label="Project metadata">
@@ -4185,39 +5476,38 @@
           </div>
         </section>
 
-        <section class="cny-logic-board cny-only" aria-label="CNY design logic">
+        <section class="cny-logic-board cny-only" aria-label="CNY context">
           <div class="cny-logic-top">
-            <div class="cny-logic-node">活动<br />策略</div>
+            <div class="cny-logic-node">S++<br />Level</div>
             <div class="cny-logic-middle">
-              <small>对 CNY 预热数据、业务目标和节日情绪做一次重新聚焦</small>
-              <div class="cny-logic-core">差异 / 创意 / 价值找寻</div>
-              <p>把“春节视觉好看”推进为“用户愿意探索、愿意分享、后续可复用”的活动系统。</p>
+              <small>春节项目不是做一组好看的图，而是在两个月内把 IP、五个地域会场、海报、挂件和移动端拉成一套系统。</small>
+              <div class="cny-logic-core">定义第一张地图</div>
+              <p>我的命题是先把“龙年世界”的规则跑通：路径怎么走、利益点怎么放、建筑怎么统一，后面的地图才能跟得上。</p>
             </div>
-            <div class="cny-logic-node">视觉<br />系统</div>
+            <div class="cny-logic-node">Template<br />System</div>
           </div>
         </section>
 
-        <section class="cny-proof-grid cny-only" aria-label="CNY strategy proof">
+        <section class="cny-proof-grid cny-only" aria-label="CNY ownership proof">
           <div class="cny-proof-card">
-            <h3>01 / 差异</h3>
-            <p>春节活动容易落成红金氛围图。这个项目先把五个地域关卡拆开，让每个会场有自己的建筑、路径和色彩记忆。</p>
+            <h3>01 / Solo 0→1</h3>
+            <p>Map 01 中原古镇由我从 0 到 1 完整产出，包含路径节点、建筑定型、地域氛围、配色基调和视觉节奏。</p>
           </div>
           <div class="cny-proof-card">
-            <h3>02 / 创意</h3>
-            <p>不是平铺入口，而是把用户带进“地图会场”。IP、路径和奖励节点共同承担探索感。</p>
+            <h3>02 / Solo 变奏</h3>
+            <p>Map 04 西部风光、Map 05 新春灯会在 Map 01 规范下继续做地域设定，验证同一套规则可以长出不同主题。</p>
           </div>
-          <div class="cny-proof-card cny-placeholder">
-            <small>Need Asset</small>
-            <h3>03 / 证据</h3>
-            <p>这里适合补一张数据/业务目标/用户路径推导图，能把“为什么这样做”讲得更有份量。</p>
+          <div class="cny-proof-card">
+            <h3>03 / 规范沿用</h3>
+            <p>Map 02 江南水乡、Map 03 古侠仙岛由其他设计师基于我建立的建筑、路径、定点规范产出；IP 方向参与，3D 还原持续 review。</p>
           </div>
         </section>
 
         <section class="klook-slider" aria-label="Initial ideation media rail">
           <div class="klook-slider__track">
             <div class="klook-slider__copy">
-              <h2>Initial Ideation</h2>
-              <p>Loose routes, ticket moments, UI fragments, and visual tests sit on one tactile rail so the case study feels explored instead of simply listed.</p>
+              <h2>Design Direction</h2>
+              <p>我的方向不是把春节做得更红更热闹，而是先建立一个能产生探索价值的地图系统：用户愿意逛，运营能放权益，品牌能露出，后续设计师也能继续沿用。做法是用 Map 01 先跑通路径、建筑、龙门和定点规则，再把这套规则扩展到五张会场。</p>
             </div>
             <button class="klook-shot" type="button" data-klook-tile="0" aria-label="Open Klook media 1" style="--shot: url('./assets/projects/klook/letter-unseen-01.png'); --tx: 0; --ty: -1.4rem; --tz: 20px; --ry: -8deg; --rz: -2deg;"></button>
             <button class="klook-shot" type="button" data-klook-tile="1" aria-label="Open Klook media 2" style="--shot: url('./assets/projects/klook/letter-unseen-02.png'); --tx: 0; --ty: 2.4rem; --tz: 0px; --ry: 7deg; --rz: 1.5deg;"></button>
@@ -4227,75 +5517,51 @@
           </div>
         </section>
 
+        <section class="cny-map-preview-parallax cny-only" data-cny-map-preview-parallax aria-label="CNY panoramic map preview">
+          <div class="cny-map-preview-parallax__viewport">
+            <div class="cny-map-preview-parallax__layer cny-map-preview-parallax__bg" data-cny-preview-layer data-speed="0.16" data-mouse="14"></div>
+            <div class="cny-map-preview-parallax__layer cny-map-preview-parallax__media" data-cny-preview-layer data-speed="0.34" data-mouse="34">
+              <img src="./assets/projects/the-symphony-of-vines/cny-map-preview.webp" alt="龙年 CNY 全景式地图预览" loading="lazy" decoding="async" />
+            </div>
+            <div class="cny-map-preview-parallax__layer cny-map-preview-parallax__hud" data-cny-preview-layer data-speed="-0.18" data-mouse="58" aria-hidden="true">
+              <span class="cny-map-preview-parallax__dot cny-map-preview-parallax__dot--one"></span>
+              <span class="cny-map-preview-parallax__dot cny-map-preview-parallax__dot--two"></span>
+              <span class="cny-map-preview-parallax__dot cny-map-preview-parallax__dot--three"></span>
+              <span class="cny-map-preview-parallax__frame cny-map-preview-parallax__frame--one"></span>
+              <span class="cny-map-preview-parallax__frame cny-map-preview-parallax__frame--two"></span>
+            </div>
+            <div class="cny-map-preview-parallax__caption" data-cny-preview-layer data-speed="-0.28" data-mouse="26">
+              <span>03 / Scene Setting</span>
+              <em>Panoramic map preview</em>
+            </div>
+          </div>
+        </section>
+
         <section class="klook-scroll-card" aria-label="Klook media chapter 1" data-case-media="hero">
           <div class="klook-scroll-card__media" style="--shot: url('./assets/projects/klook/letter-unseen-02.png');"></div>
         </section>
 
-        <section class="cny-making-section cny-only" aria-label="CNY IP setting and figurine production">
-          <div class="cny-making-copy">
-            <span>IP Setting</span>
-            <h2 class="cny-making-title--ip" aria-label="Loong IP from character to reward.">
-              <span class="cny-title-line cny-title-line--hero">Loong IP</span>
-              <span class="cny-title-line cny-title-line--connector">from</span>
-              <span class="cny-title-line cny-title-line--subject">character</span>
-              <span class="cny-title-line cny-title-line--outcome">to reward.</span>
-            </h2>
-            <p>角色先作为整套活动的情绪锚点出现，再被拆到线稿、色稿、成品和卡片里，最后落到手办包装和奖励物件上。</p>
-          </div>
-          <div class="cny-making-visual">
-            <figure class="cny-role-card cny-role-card--full">
-              <img src="./assets/projects/the-symphony-of-vines/cny-role-setting-full.webp" alt="龙年 CNY 角色设定整图" loading="lazy" />
-              <figcaption>01 / Character Sheet</figcaption>
-            </figure>
-            <div class="cny-stage-strip" aria-label="Figurine line color final comparison">
-              <figure class="cny-stage-card cny-stage-card--dark">
-                <img src="./assets/projects/the-symphony-of-vines/cny-ip-line-stage.webp" alt="手办线稿" loading="lazy" />
-                <figcaption>02 / Line</figcaption>
-              </figure>
-              <figure class="cny-stage-card cny-stage-card--dark">
-                <img src="./assets/projects/the-symphony-of-vines/cny-ip-color-stage.webp" alt="手办色稿" loading="lazy" />
-                <figcaption>03 / Color</figcaption>
-              </figure>
-              <figure class="cny-stage-card">
-                <img src="./assets/projects/the-symphony-of-vines/cny-ip-final-stage.webp" alt="手办成品" loading="lazy" />
-                <figcaption>04 / Final</figcaption>
-              </figure>
-            </div>
-            <figure class="cny-showcase-card cny-showcase-card--figure">
-              <img src="./assets/projects/the-symphony-of-vines/cny-ip-package-new.webp" alt="手办包装效果展示" loading="lazy" />
-              <div class="cny-showcase-card__copy">
-                <h3>Reward object, not decoration.</h3>
-                <p>手办和卡片负责把 IP 从屏幕里的活动角色，转成用户能理解、能领取、能传播的实体记忆点。</p>
-              </div>
-              <figcaption>Figure Output</figcaption>
-            </figure>
-          </div>
-        </section>
-
         <section class="klook-scroll-card klook-scroll-card--split" data-case-media="process">
           <div class="klook-section-copy">
-            <h2>Map Logic <em>from route to world.</em></h2>
-            <p>把旧式棋盘路径升级成全景会场：用户仍然能快速理解路线，但页面可以容纳品牌露出、奖励节点、NPC 和更复杂的互动层级。</p>
+            <h2>Map Logic <em>不是画图，是定规则。</em></h2>
+            <p>全景式地图的难点在于画幅变大以后，路径、奖励、品牌露出和建筑情绪都要塞进同一张图里，而且压到手机视窗后还得读得清。</p>
             <ol class="cny-process-steps cny-only" aria-label="Map production stages">
               <li>
                 <strong>01</strong>
                 <span class="cny-step-copy">
-                  <del>旧方案只解决“走格子”，沉浸感和节日价值感不足。</del>
-                  <span class="cny-step-new">旧问题：棋盘路径只能说明任务怎么走，却承载不了品牌会场、奖励关系和节日氛围，用户缺少继续探索的理由。</span>
+                  <span class="cny-step-new">路径与步数：先定道路宽度、节点间距和利益点预留，让用户知道任务怎么走。</span>
                 </span>
               </li>
               <li>
                 <strong>02</strong>
                 <span class="cny-step-copy">
-                  <del>新方案把路径、奖励、品牌商铺和角色引导放进同一张地图。</del>
-                  <span class="cny-step-new">新方案：把路径节点、商铺露出、角色引导和奖励反馈合进全景地图，让用户仍按路线推进，但感知从“走格子”变成“逛会场”。</span>
+                  <span class="cny-step-new">地域建筑研究：用中原古镇做母版，先确定建筑尺度、主路节奏和可复制的场景语言。</span>
                 </span>
               </li>
               <li>
                 <strong>03</strong>
                 <span class="cny-step-copy">
-                  <del>线稿阶段先做信息分层，保证复杂场景压到手机后仍然能读。</del>
-                  <span class="cny-step-new">结果：地图成为活动信息总控，既能引导任务和转化，也能放大品牌露出；复杂场景压到手机视窗后仍然保持可读。</span>
+                  <span class="cny-step-new">翻译给 3D：线稿、上色和还原 review 同步推进，确保复杂场景上线后仍然清楚。</span>
                 </span>
               </li>
             </ol>
@@ -4328,21 +5594,21 @@
 
         <section class="cny-map-setting-section cny-only" aria-label="CNY map setting evidence">
           <div class="cny-chapter-head">
-            <h2>Map Setting <em>scene proof.</em></h2>
-            <p>第二章补地图设定本身：先看完整预览，再把道路、龙门和场景细节拆到线稿层，说明这张地图不是单张氛围图，而是可被手机视窗、任务节点和奖励路径反复验证的系统。</p>
+            <h2>Ownership Proof <em>第一张地图如何成为证据。</em></h2>
+            <p>这组图把 Map 01 的线稿和完整稿放在一起看：道路细分、固定利益点、龙门入口和场景密度都在第一张地图里先被定义，后续地图才能沿用。</p>
           </div>
           <div class="cny-map-setting-grid">
             <figure class="cny-setting-card cny-setting-card--wide">
-              <img src="./assets/projects/the-symphony-of-vines/cny-map-preview.webp" alt="全景式地图预览" loading="lazy" />
-              <figcaption>01 / Preview Map</figcaption>
+              <img src="./assets/projects/the-symphony-of-vines/Frame 2090059723.png" alt="Map 01 中原古镇完整地图" loading="lazy" />
+              <figcaption>Final / Map 01 中原古镇</figcaption>
             </figure>
             <figure class="cny-setting-card">
               <img src="./assets/projects/the-symphony-of-vines/cny-scene-line-01.webp" alt="道路与龙门线稿设定" loading="lazy" />
-              <figcaption>02 / Route & Gate Sketch</figcaption>
+              <figcaption>Line / 道路细分</figcaption>
             </figure>
             <figure class="cny-setting-card">
               <img src="./assets/projects/the-symphony-of-vines/cny-scene-line-02.webp" alt="场景细节线稿设定" loading="lazy" />
-              <figcaption>03 / Scene Detail Sketch</figcaption>
+              <figcaption>设定图展示</figcaption>
             </figure>
           </div>
         </section>
@@ -4358,13 +5624,13 @@
 
         <section class="cny-gate-gradient cny-only" aria-label="Dragon gate gradient system">
           <div class="cny-gate-gradient-copy">
-            <h2>Dragon Gate <em>Gradient.</em></h2>
-            <p>五张地图需要一眼属于同一个玩法，又不能只是换背景。龙门被拆成可复用的入口母题，再通过结构复杂度、色彩强度和奖励感逐级升级。</p>
+            <h2>Dragon Gate <em>五级入口如何制造进度感。</em></h2>
+            <p>龙门是这套地图系统的入口母题。它让五张地图一眼属于同一个玩法，同时通过结构复杂度、色彩强度和奖励感逐级升级。</p>
             <ol class="cny-gate-timeline" aria-label="Dragon gate level progression">
-              <li><strong>WHY</strong><span><b>避免五张散图</b>同一套龙门结构保证用户每进一关都知道“这里是任务入口”。</span></li>
-              <li><strong>GOAL</strong><span><b>制造进度感</b>从轻量门型到完整建筑，让用户感觉难度、奖励和主会场价值在升级。</span></li>
+              <li><strong>WHY</strong><span><b>避免五张散图</b>同一套入口结构保证用户每进一关都知道“这里是任务入口”。</span></li>
+              <li><strong>GOAL</strong><span><b>制造进度感</b>从轻量门型到完整建筑，让难度、奖励和会场价值逐级增强。</span></li>
               <li><strong>METHOD</strong><span><b>结构不变，表现递进</b>门型、台阶和圆形动线保持一致，材质、装饰和光效逐层加码。</span></li>
-              <li><strong>RESULT</strong><span><b>可复用的关卡资产</b>龙门同时承担地图识别、奖励引导和最终分享画面的视觉锚点。</span></li>
+              <li><strong>RESULT</strong><span><b>可复用关卡资产</b>龙门同时承担地图识别、奖励引导和最终分享画面的视觉锚点。</span></li>
             </ol>
           </div>
           <div class="cny-gate-visual">
@@ -4374,23 +5640,23 @@
             </figure>
             <div class="cny-gate-levels cny-gate-levels--finished" aria-label="Dragon gate five finished levels">
               <figure class="cny-gate-level">
-                <img src="./assets/projects/the-symphony-of-vines/cny-gate-stage-01.webp" alt="第一关基础入口龙门成品" loading="lazy" />
+                <img src="./assets/projects/the-symphony-of-vines/cny-gate-map-crop-01.webp" alt="中原古镇成品地图中的龙门局部" loading="lazy" />
                 <figcaption>01</figcaption>
               </figure>
               <figure class="cny-gate-level">
-                <img src="./assets/projects/the-symphony-of-vines/cny-gate-stage-02.webp" alt="第二关地域嫁接龙门成品" loading="lazy" />
+                <img src="./assets/projects/the-symphony-of-vines/cny-gate-map-crop-02.webp" alt="江南水乡成品地图中的龙门局部" loading="lazy" />
                 <figcaption>02</figcaption>
               </figure>
               <figure class="cny-gate-level">
-                <img src="./assets/projects/the-symphony-of-vines/cny-gate-stage-03.webp" alt="第三关氛围升级龙门成品" loading="lazy" />
+                <img src="./assets/projects/the-symphony-of-vines/cny-gate-map-crop-03.webp" alt="古侠仙岛成品地图中的龙门局部" loading="lazy" />
                 <figcaption>03</figcaption>
               </figure>
               <figure class="cny-gate-level">
-                <img src="./assets/projects/the-symphony-of-vines/cny-gate-stage-04.webp" alt="第四关庆典强化龙门成品" loading="lazy" />
+                <img src="./assets/projects/the-symphony-of-vines/cny-gate-map-crop-04.webp" alt="西部风光成品地图中的龙门局部" loading="lazy" />
                 <figcaption>04</figcaption>
               </figure>
               <figure class="cny-gate-level">
-                <img src="./assets/projects/the-symphony-of-vines/cny-gate-stage-05.webp" alt="第五关奖励高光龙门成品" loading="lazy" />
+                <img src="./assets/projects/the-symphony-of-vines/cny-gate-map-crop-05.webp" alt="新春灯会成品地图中的龙门局部" loading="lazy" />
                 <figcaption>05</figcaption>
               </figure>
             </div>
@@ -4399,34 +5665,39 @@
 
         <section class="cny-map-showcase cny-only" aria-label="CNY five map venue rail">
           <div class="cny-map-showcase__head">
-            <h2>Five Map Venues <em>one festival route.</em></h2>
-            <p>五张地图单独释放出来横向浏览：地域建筑、路径长度、奖励节点和节日情绪都各自成立，同时保持同一套龙年会场规则。</p>
+            <h2>Template System <em>第一张地图如何变成五张地图。</em></h2>
+            <p>Map 01 先把建筑尺度、路径节奏、定点逻辑和龙门入口定成母版。后续地域会场在同一套规则里变奏，五张地图因此既有差异，也能一眼属于同一个龙年世界。</p>
           </div>
           <div class="cny-map-drag-shell" data-cny-map-slider>
             <div class="cny-map-rail" aria-label="CNY map region gallery">
               <button class="cny-map-card" type="button" data-cny-tile="map-1" aria-label="Open Zhongyuan town map" style="--shot: url('./assets/projects/the-symphony-of-vines/Frame 2090059723.png');">
                 <img src="./assets/projects/the-symphony-of-vines/Frame 2090059723.png" alt="中原古镇地图设计" loading="lazy" />
-                <b class="cny-map-card__title"><small>Level 01</small><strong>第一关 / 中原古镇</strong></b>
+                <i class="cny-map-card__ownership cny-map-card__ownership--origin">Template Origin · 0→1</i>
+                <b class="cny-map-card__title"><small>Map 01</small><strong>中原古镇</strong></b>
                 <span>01 / 中原古镇</span>
               </button>
               <button class="cny-map-card" type="button" data-cny-tile="map-2" aria-label="Open Jiangnan map" style="--shot: url('./assets/projects/the-symphony-of-vines/Frame 2090059722.png');">
                 <img src="./assets/projects/the-symphony-of-vines/Frame 2090059722.png" alt="江南水乡地图设计" loading="lazy" />
-                <b class="cny-map-card__title"><small>Level 02</small><strong>第二关 / 江南水乡</strong></b>
+                <i class="cny-map-card__ownership cny-map-card__ownership--reuse">Built on template</i>
+                <b class="cny-map-card__title"><small>Map 02</small><strong>江南水乡</strong></b>
                 <span>02 / 江南水乡</span>
               </button>
               <button class="cny-map-card" type="button" data-cny-tile="map-3" aria-label="Open ancient island map" style="--shot: url('./assets/projects/the-symphony-of-vines/Frame 2090059721.png');">
                 <img src="./assets/projects/the-symphony-of-vines/Frame 2090059721.png" alt="古侠仙岛地图设计" loading="lazy" />
-                <b class="cny-map-card__title"><small>Level 03</small><strong>第三关 / 古侠仙岛</strong></b>
+                <i class="cny-map-card__ownership cny-map-card__ownership--reuse">Built on template</i>
+                <b class="cny-map-card__title"><small>Map 03</small><strong>古侠仙岛</strong></b>
                 <span>03 / 古侠仙岛</span>
               </button>
               <button class="cny-map-card" type="button" data-cny-tile="map-4" aria-label="Open Western scenery map" style="--shot: url('./assets/projects/the-symphony-of-vines/Frame 2090059720.png');">
                 <img src="./assets/projects/the-symphony-of-vines/Frame 2090059720.png" alt="西部风光地图设计" loading="lazy" />
-                <b class="cny-map-card__title"><small>Level 04</small><strong>第四关 / 西部风光</strong></b>
+                <i class="cny-map-card__ownership cny-map-card__ownership--solo">Solo 设定</i>
+                <b class="cny-map-card__title"><small>Map 04</small><strong>西部风光</strong></b>
                 <span>04 / 西部风光</span>
               </button>
               <button class="cny-map-card" type="button" data-cny-tile="map-5" aria-label="Open spring lantern map" style="--shot: url('./assets/projects/the-symphony-of-vines/Frame 2090059719.png');">
                 <img src="./assets/projects/the-symphony-of-vines/Frame 2090059719.png" alt="新春灯会地图设计" loading="lazy" />
-                <b class="cny-map-card__title"><small>Level 05</small><strong>第五关 / 新春灯会</strong></b>
+                <i class="cny-map-card__ownership cny-map-card__ownership--solo">Solo 设定</i>
+                <b class="cny-map-card__title"><small>Map 05</small><strong>新春灯会</strong></b>
                 <span>05 / 新春灯会</span>
               </button>
             </div>
@@ -4434,20 +5705,56 @@
           <figure class="cny-live-effect" aria-label="CNY online effect screens">
             <div class="cny-live-effect__copy">
               <div>
-                <span>线上效果</span>
+                <span>上线预览</span>
                 <h3>五张地图最终进入同一个活动界面</h3>
               </div>
-              <p>线上效果图放在地图模块下方，作为从“地图设定”到“真实活动页面”的落地证据。</p>
+              <p>上线预览呈现五张地图进入活动页面后的最终状态：地图、任务入口、权益反馈和品牌露出被收进同一个移动端会场路径。</p>
             </div>
             <img src="./assets/projects/the-symphony-of-vines/cny-live-effect-hq.webp" alt="2024 CNY 线上活动页面效果" loading="lazy" />
           </figure>
         </section>
 
+        <section class="cny-making-section cny-only" aria-label="CNY IP setting and figurine production">
+          <div class="cny-making-copy">
+            <span>IP &amp; Poster · 协作贡献</span>
+            <h2>Loong IP <em>角色方向参与与延展 review</em></h2>
+            <p>IP 角色我参与方向定调与 review：确认它要服务春节亲和力、奖励记忆点和地图世界观，而不是只做一个独立吉祥物。后续线稿、色稿、手办和包装继续围绕这几个判断展开。</p>
+          </div>
+          <div class="cny-making-visual">
+            <figure class="cny-role-card cny-role-card--full">
+              <img src="./assets/projects/the-symphony-of-vines/cny-role-setting-full.webp" alt="龙年 CNY 角色设定整图" loading="lazy" />
+              <figcaption>IP / Character Sheet</figcaption>
+            </figure>
+            <div class="cny-stage-strip" aria-label="Figurine line color final comparison">
+              <figure class="cny-stage-card cny-stage-card--dark">
+                <img src="./assets/projects/the-symphony-of-vines/cny-ip-line-stage.webp" alt="手办线稿" loading="lazy" />
+                <figcaption>Figurine / Line</figcaption>
+              </figure>
+              <figure class="cny-stage-card cny-stage-card--dark">
+                <img src="./assets/projects/the-symphony-of-vines/cny-ip-color-stage.webp" alt="手办色稿" loading="lazy" />
+                <figcaption>Figurine / Color</figcaption>
+              </figure>
+              <figure class="cny-stage-card">
+                <img src="./assets/projects/the-symphony-of-vines/cny-ip-final-stage.webp" alt="手办成品" loading="lazy" />
+                <figcaption>Figurine / Final</figcaption>
+              </figure>
+            </div>
+            <figure class="cny-showcase-card cny-showcase-card--figure">
+              <img src="./assets/projects/the-symphony-of-vines/cny-ip-package-new.webp" alt="手办包装效果展示" loading="lazy" />
+              <div class="cny-showcase-card__copy">
+                <h3>Reward object, not decoration.</h3>
+                <p>实体奖励把 IP 从屏幕里的活动角色，转成用户能理解、能领取、能传播的记忆点。</p>
+              </div>
+              <figcaption>Figure Output</figcaption>
+            </figure>
+          </div>
+        </section>
+
         <section class="cny-making-section cny-only" aria-label="CNY poster production">
           <div class="cny-making-copy">
             <span>Poster Module</span>
-            <h2>Poster System <em>line to final.</em></h2>
-            <p>海报单独拿出来讲：先看线稿和旧方案为什么不够强，再看色彩、主体和信息层级如何收敛到最终分享海报，最后展示完整海报组。</p>
+            <h2>Poster System <em>分享出口如何延续活动记忆。</em></h2>
+            <p>海报和收尾画面为团队协作产出，其中我完成两张分享海报设定。海报不再复刻地图的任务路径，而是把地域氛围转成更适合传播的瞬间画面：例如古侠仙岛主题中，小男孩骑在龙身上向下撒红包，把地图探索转成领奖与分享的节日记忆。</p>
           </div>
           <div class="cny-making-visual">
             <div class="cny-stage-strip cny-stage-strip--poster" aria-label="Poster line and final comparison">
@@ -4464,67 +5771,73 @@
               <figure class="cny-showcase-card">
                 <img src="./assets/projects/the-symphony-of-vines/cny-poster-display.webp" alt="海报展示合集" loading="lazy" />
                 <div class="cny-showcase-card__copy">
-                  <h3>分享出口也要成体系</h3>
-                  <p>把右侧剩余海报集中展示，说明它们不是单张图，而是一组可延展的领奖和分享出口。</p>
+                  <h3>从地图场景到分享瞬间</h3>
+                  <p>地图负责让用户进入会场路径，海报负责把其中一个高情绪画面抽出来传播：更近的人物、更强的动作、更直接的奖励感。</p>
                 </div>
                 <figcaption>海报展示</figcaption>
-              </figure>
-              <figure class="cny-showcase-card">
-                <img src="./assets/projects/the-symphony-of-vines/cny-extension-ending.webp" alt="龙年顺遂收尾视觉" loading="lazy" />
-                <div class="cny-showcase-card__copy">
-                  <h3>收尾画面负责留下记忆</h3>
-                  <p>收尾页把活动奖励、品牌符号和龙年祝福收束到一个可截图传播的结束画面。</p>
-                </div>
-                <figcaption>收尾视觉</figcaption>
               </figure>
             </div>
           </div>
         </section>
 
-        <section class="cny-principle-grid cny-only" aria-label="CNY system principles">
-          <div class="cny-principle-card">
-            <h3>IP</h3>
-            <p>主 IP 承担春节亲和力，表情、动作、配饰负责把不同物料拉回同一世界观。</p>
+        <section class="cny-final-output cny-only" aria-label="CNY final output wall">
+          <div class="cny-final-output__copy">
+            <span>Campaign Output Wall</span>
+            <h2>Shipped System <em>最终落地不是单点视觉。</em></h2>
+            <p>最终落地不是单点视觉，而是地图模板、IP 协作、海报传播、移动端页面和收尾画面共同形成的活动资产墙。</p>
           </div>
-          <div class="cny-principle-card">
-            <h3>Map</h3>
-            <p>五张长地图不是五张插画，而是五条路径：建筑、节点、奖励和地域氛围同步推进。</p>
-          </div>
-          <div class="cny-principle-card">
-            <h3>Mobile</h3>
-            <p>移动端页面要把地图探索压缩到更短路径里，所以保留强主视觉和明确入口层级。</p>
-          </div>
-          <div class="cny-principle-card cny-placeholder">
-            <small>Need Asset</small>
-            <h3>Data</h3>
-            <p>这里可以补最终数据、AB 对比或上线截图，让结果区从“展示”变成“闭环”。</p>
-          </div>
+          <figure class="cny-output-wall">
+            <img src="./assets/projects/the-symphony-of-vines/cny-output-final-wall.webp" alt="CNY 活动主页与海报输出墙" loading="lazy" />
+            <figcaption>Campaign Output Wall</figcaption>
+          </figure>
         </section>
 
         <section class="klook-awards" aria-label="Klook process table">
-          <h2 class="klook-awards__title">Project<br /><em>System</em></h2>
+          <h2 class="klook-awards__title">Project<br /><em>项目结果</em></h2>
           <div>
-            <div class="klook-award-row"><span>01 / Scroll</span><span>Perspective media reveal</span></div>
-            <div class="klook-award-row"><span>02 / Gallery</span><span>Drag rail + zoom viewer</span></div>
-            <div class="klook-award-row"><span>03 / UI</span><span>Light paper contrast</span></div>
-            <div class="klook-award-row"><span>04 / Next</span><span>Forward project route</span></div>
+            <div class="klook-award-row"><span>01 / 奖项</span><span>团队荣获公司级「神笔马良奖」优秀项目，团队奖金 2 万元。</span></div>
+            <div class="klook-award-row"><span>02 / 模板</span><span>Map 01 建立的建筑、路径、定点规范，被后续 4 张地图沿用。</span></div>
+            <div class="klook-award-row"><span>03 / 产出</span><span>2+ 月周期内沉淀 IP、地图、龙门、海报、挂件等 30+ 创意设定。</span></div>
+            <div class="klook-award-row"><span>04 / 复盘</span><span>第一张地图的价值，是让团队后续能跟上、能变奏、能上线。</span></div>
           </div>
         </section>
 
-        <section class="klook-next" aria-label="Next project transition" data-route-transition data-next-project="rspca-animal-futures">
+        <section class="cny-proof-grid cny-only" aria-label="CNY reflection">
+          <div class="cny-proof-card">
+            <h3>Reflection 01</h3>
+            <p>这个项目让我意识到，主设定的价值不只是画一张漂亮图，而是画一张别人能跟上的第一张图。</p>
+          </div>
+          <div class="cny-proof-card">
+            <h3>Reflection 02</h3>
+            <p>第 1 张要回答“规则是什么”，第 N 张要回答“规则怎么变奏”。Map 01 是规则，Map 04 / Map 05 是变奏。</p>
+          </div>
+          <div class="cny-proof-card">
+            <h3>Reflection 03</h3>
+            <p>从那以后，我做大型活动主视觉会先想可复用的第一张，再去扩展好看的那一组。</p>
+          </div>
+        </section>
+
+        <section class="klook-next" aria-label="Next project transition" data-route-transition data-next-project="time-arena">
+          <a class="klook-next-static" data-case-next-link href="./project.html?project=time-arena">
+            <span class="klook-next-static__eyebrow">Next Project</span>
+            <span class="klook-next-static__copy">
+              <strong data-case-next-title>Time Arena</strong>
+              <span>进入下一个项目</span>
+            </span>
+          </a>
           <div class="klook-route-pin">
             <div class="klook-route-preview">
               <div class="klook-route-preview__mark" aria-hidden="true"></div>
               <div class="klook-route-preview__copy">
                 <span class="klook-route-preview__eyebrow">Next</span>
-                <span class="klook-route-preview__title" data-case-next-title>Animal Futures</span>
+                <span class="klook-route-preview__title" data-case-next-title>Time Arena</span>
                 <small>(Keep scrolling)</small>
                 <p>Entering next project</p>
               </div>
             </div>
             <div class="klook-curtain" aria-hidden="true">
               <div class="klook-curtain__copy">
-                <h2 data-case-curtain-title><em>Next</em>Animal Futures</h2>
+                <h2 data-case-curtain-title><em>Next</em>Time Arena</h2>
                 <small>(Loading)</small>
                 <p>Entering next project</p>
               </div>
@@ -4532,6 +5845,652 @@
             </div>
           </div>
         </section>
+      </article>
+
+      <article class="benefit-case" data-project="benefit-system" aria-label="S+ Gala benefit system case study">
+        <section class="benefit-hero" aria-label="S+ Gala hero">
+          <p class="benefit-kicker">2025 / S+ Gala System</p>
+          <h1 class="benefit-title">
+            <span>S+ GALA<br />SYSTEM</span>
+            <em>AI WORKFLOW<br />RIGHTS SYSTEM</em>
+          </h1>
+          <div class="benefit-hero-media cny-reveal" aria-hidden="true"></div>
+        </section>
+
+        <div class="benefit-hero-panel cny-reveal">
+          <p><strong>为了完成高强度盛典权益需求，我先用 AI 工作流跑通提质提效。</strong>流程落地后，单套制作周期从 5 天压到 2 天；随后把方法沉淀为规范文档和权益视觉标准，赋能团队在全年 4 场盛典里复用同一套等级、材质、动效和输出方法。</p>
+          <div class="benefit-role-list" aria-label="S+ Gala role summary">
+            <span><strong>Role</strong><em>主 R / AI 工作流主理 / 权益规范沉淀</em></span>
+            <span><strong>Scope</strong><em>流程标准化 / 体系化设计 / 跨季度复用</em></span>
+            <span><strong>Year</strong><em>2025 全年 · S+ 项目</em></span>
+          </div>
+        </div>
+
+        <section class="benefit-section benefit-overview cny-reveal" aria-label="S+ Gala context">
+          <div>
+            <p class="benefit-label">01 / Context</p>
+            <h2 class="benefit-section-title">It was not a volume problem. <em>It was a system problem.</em></h2>
+            <p class="benefit-copy">年度盛典是全年最高强度的视觉战役。当需求量、复用率、视觉一致性三件事同时压上来时，靠“多画几张”已经无法解决问题，这是一道流程题，不是产能题。</p>
+          </div>
+          <div class="benefit-grid">
+            <div class="benefit-card">
+              <h3>Project level</h3>
+              <p>S+ 年度盛典，并联夏季 / 秋季两场 S 级盛典。</p>
+            </div>
+            <div class="benefit-card">
+              <h3>Business goal</h3>
+              <p>在视觉一致性前提下，把 20+ 套荣誉出口生产周期从“不可能”降到“可控”。</p>
+            </div>
+            <div class="benefit-card">
+              <h3>Core tension</h3>
+              <p>冠亚季差异不足，3D 流程依赖外部协作，跨季度没有复用机制。</p>
+            </div>
+            <div class="benefit-card">
+              <h3>My thesis</h3>
+              <p>用流程和规则替代“画更多张图”。</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="benefit-section cny-reveal" aria-label="S+ Gala ownership">
+          <p class="benefit-label">02 / What I Owned</p>
+          <h2 class="benefit-section-title">Two tracks, <em>one lead responsibility.</em></h2>
+          <p class="benefit-copy">这个项目有两条并行主线：AI 工作流是流程规则，权益体系是视觉规则。我不是只补图，而是把方法论、模板、质量标准和团队协作方式一起定下来。</p>
+          <div class="benefit-grid benefit-grid--three benefit-spaced">
+            <div class="benefit-card">
+              <h3>Solo 0→1</h3>
+              <p>《AI 辅助设计工作流 SOP》《色稿标准化规范》《盛典权益梯度规范手册》独立产出，并落地为可复用模板。</p>
+            </div>
+            <div class="benefit-card">
+              <h3>Lead execution</h3>
+              <p>带 2 名设计师 1 周完成全部荣誉出口设计；周五急救案例独立完成周末 2 天交付。</p>
+            </div>
+            <div class="benefit-card">
+              <h3>Team enablement</h3>
+              <p>完成 AI 工作流内部培训，搭建 AI 生成环境，并制定生成质量评估标准。</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="benefit-section benefit-section--wide cny-reveal" aria-label="AI workflow pivot">
+          <p class="benefit-label">03 / The AI Pivot</p>
+          <h2 class="benefit-section-title">From 3D dependency <em>to controllable generation.</em></h2>
+          <p class="benefit-copy">传统 3D 流程单套约 5 天，风格验证慢、反复修改重、协作链路长。我把链路切到“线稿 → 色稿标准化 → AI 生成 → 后期精修”，让设计师能在前期快速验证方向。</p>
+          <div class="benefit-media-pair">
+            <button class="benefit-media-button benefit-media-button--landscape" type="button" data-benefit-tile data-lightbox-image="./assets/projects/benefit-system/提效示意图.png" aria-label="Open AI workflow comparison">
+              <img src="./assets/projects/benefit-system/提效示意图.png" alt="AI 工作流提效 50% 对比图" loading="lazy" />
+            </button>
+            <div class="benefit-process-list">
+              <span><strong>Traditional</strong><em>草图 → 3D 建模 → 贴图 → 渲染 → 后期，单套约 5 天。</em></span>
+              <span><strong>AI workflow</strong><em>线稿 → 色稿标准化 → AI 生成 → 后期精修，单套约 2 天。</em></span>
+              <span><strong>Method</strong><em>用色稿分层定义材质、光效、结构，让 AI 生成不失控。</em></span>
+              <span><strong>Adoption</strong><em>色稿与最终效果还原度 90%+，流程被团队采纳。</em></span>
+            </div>
+          </div>
+          <div class="benefit-compression" aria-label="5 days to 2 days workflow compression">
+            <div class="benefit-compression__side">
+              <small>Before / 3D dependency</small>
+              <strong>5 days</strong>
+              <em>建模、贴图、渲染和后期拆在多段协作里，方向验证慢，返工成本高。</em>
+            </div>
+            <div class="benefit-compression__core">
+              <b>60%</b>
+              <small>Cycle compressed</small>
+            </div>
+            <div class="benefit-compression__side benefit-compression__side--after">
+              <small>After / AI workflow</small>
+              <strong>2 days</strong>
+              <em>用色稿标准化控制生成边界，先快速验证体量，再进入统一精修。</em>
+            </div>
+          </div>
+          <div class="benefit-flow" aria-label="AI workflow four steps">
+            <span><strong>01 / Line</strong><em>清晰逻辑布局，先敲定设计方向。</em></span>
+            <span><strong>02 / Color draft</strong><em>材质、光效、结构分层定义。</em></span>
+            <span><strong>03 / Generate</strong><em>快速出图验证风格与体量。</em></span>
+            <span><strong>04 / Polish</strong><em>统一调色、细节增强、输出规范。</em></span>
+          </div>
+        </section>
+
+        <section class="benefit-section benefit-section--wide cny-reveal" aria-label="AI emergency delivery">
+          <p class="benefit-label">04 / AI Emergency</p>
+          <h2 class="benefit-section-title">A weekend delivery <em>became possible.</em></h2>
+          <p class="benefit-copy">周五临下班新增赛道，周一上线，交付物包括 Icon、荣誉出口、直播间动态装饰组件全套资产。传统流程需要 5+ 天，AI 工作流把周末 2 天交付变成可能。</p>
+          <div class="benefit-media-pair">
+            <button class="benefit-media-button benefit-media-button--landscape" type="button" data-benefit-tile data-lightbox-image="./assets/projects/benefit-system/Group 203609774611.png" aria-label="Open emergency output board">
+              <img src="./assets/projects/benefit-system/Group 203609774611.png" alt="AI 急救案例资产成果展示" loading="lazy" />
+            </button>
+            <button class="benefit-media-button benefit-media-button--landscape" type="button" data-benefit-tile data-lightbox-image="./assets/projects/benefit-system/Frame 2090054006.png" aria-label="Open card output comparison">
+              <img src="./assets/projects/benefit-system/Frame 2090054006.png" alt="皮肤卡与头像框成品组图" loading="lazy" />
+            </button>
+          </div>
+        </section>
+
+        <section class="benefit-section benefit-section--wide cny-reveal" aria-label="Rights system">
+          <p class="benefit-label">05 / Rights System</p>
+          <h2 class="benefit-section-title">One rule set, <em>three seasons of reuse.</em></h2>
+          <p class="benefit-copy">权益出口原本每场重新设计，冠亚季差异不明显，用户感知也弱。我把它拆成材质、结构、动效、业务对标四个维度，先定梯度逻辑，再沉淀模板。</p>
+          <figure class="benefit-wide-shot">
+            <img src="./assets/projects/benefit-system/Frame 2090054005.png" alt="挑战者杯三层权益规范大图" loading="lazy" />
+            <figcaption>Core evidence / 三层权益规范</figcaption>
+          </figure>
+          <div class="benefit-rule-table" aria-label="Rights gradient rules">
+            <div class="benefit-rule-row">
+              <span>Dimension</span><span>Champion</span><span>Runner-up</span><span>Third place</span><span>Other</span>
+            </div>
+            <div class="benefit-rule-row">
+              <span>Material</span><span>金属金</span><span>金属银</span><span>金属铜</span><span>电镀紫</span>
+            </div>
+            <div class="benefit-rule-row">
+              <span>Structure</span><span>多色多层</span><span>双色双层</span><span>单色双层</span><span>单色单层</span>
+            </div>
+            <div class="benefit-rule-row">
+              <span>Motion</span><span>粒子 + 炫光 ≤3s</span><span>克制弱动效</span><span>静态质感强化</span><span>基础识别</span>
+            </div>
+            <div class="benefit-rule-row">
+              <span>Business mapping</span><span>日流水 169k</span><span>日流水 69k</span><span>日流水 39k</span><span>赛事基础权益</span>
+            </div>
+          </div>
+          <div class="benefit-medal-rail" aria-label="Champion runner-up third medal assets">
+            <figure class="benefit-medal-card">
+              <img src="./assets/projects/benefit-system/062 1.png" alt="冠军权益头像框" loading="lazy" />
+              <figcaption>Champion / Gold</figcaption>
+            </figure>
+            <figure class="benefit-medal-card">
+              <img src="./assets/projects/benefit-system/062 2.png" alt="亚军权益头像框" loading="lazy" />
+              <figcaption>Runner-up / Silver</figcaption>
+            </figure>
+            <figure class="benefit-medal-card">
+              <img src="./assets/projects/benefit-system/062 3.png" alt="季军权益头像框" loading="lazy" />
+              <figcaption>Third / Bronze</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="benefit-section benefit-section--wide cny-reveal" aria-label="Cross season reuse">
+          <p class="benefit-label">06 / Cross-Season Reuse</p>
+          <h2 class="benefit-section-title">The real proof is <em>the next season.</em></h2>
+          <p class="benefit-copy">规范的真正价值不在被写出来的那一刻，而在下一次能不能直接套用。这套规范完整经历夏季、秋季、年度三季考验，全程 100% 复用。</p>
+          <div class="benefit-media-pair">
+            <button class="benefit-media-button benefit-media-button--landscape" type="button" data-benefit-tile data-lightbox-image="./assets/projects/benefit-system/Frame 2090057618.png" aria-label="Open summer gala rights board">
+              <img src="./assets/projects/benefit-system/Frame 2090057618.png" alt="夏季盛典权益阵列" loading="lazy" />
+            </button>
+            <button class="benefit-media-button benefit-media-button--landscape" type="button" data-benefit-tile data-lightbox-image="./assets/projects/benefit-system/Frame 2090057619.png" aria-label="Open annual gala rights board">
+              <img src="./assets/projects/benefit-system/Frame 2090057619.png" alt="年度盛典权益阵列" loading="lazy" />
+            </button>
+          </div>
+          <figure class="benefit-wide-shot">
+            <img src="./assets/projects/benefit-system/Frame 2090053549.png" alt="多赛事荣誉出口复用合集" loading="lazy" />
+            <figcaption>Reusable hierarchy / 多赛事权益阵列</figcaption>
+          </figure>
+        </section>
+
+        <section class="benefit-section cny-reveal" aria-label="S+ Gala result">
+          <p class="benefit-label">07 / Result</p>
+          <h2 class="benefit-section-title">The output was not a wall of assets. <em>It was a reusable machine.</em></h2>
+          <div class="benefit-result-grid benefit-spaced">
+            <div class="benefit-result-card">
+              <strong>5→2</strong>
+              <h3>Days per set</h3>
+              <p>AI 工作流落地后，单套制作周期从 5 天压缩到 2 天，约下降 60%。</p>
+            </div>
+            <div class="benefit-result-card">
+              <strong>30%</strong>
+              <h3>Team efficiency</h3>
+              <p>规范化、组件库和质量评估标准落地后，团队人效提升约 30%。</p>
+            </div>
+            <div class="benefit-result-card">
+              <strong>100%</strong>
+              <h3>Cross-season reuse</h3>
+              <p>夏季、秋季、年度三季完整继承，14 套新作 + 56 套冠亚季 + 8 套复用。</p>
+            </div>
+            <div class="benefit-result-card">
+              <strong>2 days</strong>
+              <h3>Emergency delivery</h3>
+              <p>周五新增赛道需求，通过 AI 流程完成周末交付并按时上线。</p>
+            </div>
+          </div>
+          <figure class="benefit-output-wall">
+            <img src="./assets/projects/benefit-system/Group 2090057978.png" alt="S+ 盛典权益输出总览墙" loading="lazy" />
+            <figcaption>Output wall / 荣誉出口与直播间挂件阵列</figcaption>
+          </figure>
+        </section>
+
+        <section class="benefit-section cny-reveal" aria-label="S+ Gala reflection">
+          <p class="benefit-label">08 / Reflection</p>
+          <h2 class="benefit-section-title">Rules create compound value. <em>Assets only ship once.</em></h2>
+          <div class="benefit-grid benefit-spaced">
+            <div class="benefit-card">
+              <h3>Lead designer mindset</h3>
+              <p>执行者解决一次需求，主 R 要定义问题、设计方案、协调资源、把控质量，再把结果沉淀成下次能复用的规则。</p>
+            </div>
+            <div class="benefit-card">
+              <h3>AI changes the value layer</h3>
+              <p>当“画一张图”的成本被 AI 降低，设计师的价值就要往上走：要么定义流程，要么定义规则。</p>
+            </div>
+            <div class="benefit-card">
+              <h3>Seasonal design needs payback</h3>
+              <p>做盛典设计，长期看的不是这一季画了多少张图，而是下一季还有没有人需要重新画。</p>
+            </div>
+            <div class="benefit-card">
+              <h3>My takeaway</h3>
+              <p>这个项目让我把 AI 工作流和权益梯度同时立住：一条提升生产方式，一条稳定视觉秩序。</p>
+            </div>
+          </div>
+        </section>
+
+        <a class="klook-next-static cny-reveal" href="./project.html?project=summer-gala-2026" data-fx-link>
+          <span class="klook-next-static__eyebrow">Next Project</span>
+          <span class="klook-next-static__copy">
+            <strong>2026 Summer Gala</strong>
+            <span>进入下一个项目</span>
+          </span>
+        </a>
+      </article>
+
+      <article class="benefit-case summer-gala-case" data-project="summer-gala-2026" aria-label="Summer Gala 2026 S+ case study">
+        <section class="benefit-hero" aria-label="Summer Gala 2026 hero">
+          <p class="benefit-kicker">2026.5.31 – 2026.6.30 / S+ Summer Gala</p>
+          <h1 class="benefit-title">
+            <span>2026 SUMMER<br />GALA S+</span>
+            <em>TOUCHPOINTS<br />H5 SYSTEM</em>
+          </h1>
+          <div class="benefit-hero-media cny-reveal" aria-hidden="true"></div>
+        </section>
+
+        <div class="benefit-hero-panel cny-reveal">
+          <p><strong>2026 夏季盛典 S+ 是全年最大打榜赛事的夏季档。</strong>我在主 R 分管下负责挂件触达与 H5 页面双线主 S：Solo 建立 4 大类挂件体系、H5 全部界面和海报模板，同时在主 R 主 KV 风格框架下完成界面延展与物料落地。</p>
+          <div class="benefit-role-list" aria-label="Summer Gala 2026 role summary">
+            <span><strong>Role</strong><em>主 R 分管下 · 挂件触达 + H5 页面双线主 S</em></span>
+            <span><strong>Scope</strong><em>4 类挂件体系 / H5 全部界面 / 海报模板</em></span>
+            <span><strong>Year</strong><em>2026 Q2 夏季档</em></span>
+          </div>
+        </div>
+
+        <section class="benefit-section benefit-overview cny-reveal" aria-label="Summer Gala 2026 context">
+          <div>
+            <p class="benefit-label">01 / Context</p>
+            <h2 class="benefit-section-title">The largest seasonal race needed <em>clear visual ownership.</em></h2>
+            <p class="benefit-copy">夏季盛典是全年面向全站主播的最大型打榜赛事之一。项目同时承接盛典 IP 延续、分层主播玩法、用户玩法迭代和主粉营收增长点挖掘，视觉不能只做热闹，而要把触达、页面和批量产出组织成可执行系统。</p>
+          </div>
+          <div class="benefit-grid">
+            <div class="benefit-card">
+              <h3>Business brief</h3>
+              <p>全年面向全站主播的大型打榜赛事，挖掘主粉营收增长点。</p>
+            </div>
+            <div class="benefit-card">
+              <h3>Gala IP</h3>
+              <p>春 / 夏 / 秋 / 年度四季 S+ 盛典体系，本期为 2026 夏季档。</p>
+            </div>
+            <div class="benefit-card">
+              <h3>Core tension</h3>
+              <p>既要延续盛典 IP 视觉资产，又要做出夏季差异化氛围。</p>
+            </div>
+            <div class="benefit-card">
+              <h3>My role</h3>
+              <p>主 R 分管下，负责挂件触达 + H5 页面双线主 S。</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="benefit-section cny-reveal" aria-label="Summer Gala 2026 ownership">
+          <p class="benefit-label">02 / What I Owned</p>
+          <h2 class="benefit-section-title">The boundary is part of <em>the design maturity.</em></h2>
+          <p class="benefit-copy">这个项目我先把责任田讲清楚：哪些是我全权 Solo，哪些是我定模板后协作出量，哪些是我参与共创但不做主导归因。边界清楚，作品集里的 ownership 才可信。</p>
+          <div class="benefit-grid benefit-grid--three benefit-spaced">
+            <div class="benefit-card">
+              <h3>Solo</h3>
+              <p>4 大类挂件体系：赛事挂件、中挂件文字版、中挂件 icon 版、活动魔表；H5 全部界面；挂件视觉规范定稿。</p>
+            </div>
+            <div class="benefit-card">
+              <h3>Collaboration</h3>
+              <p>海报 248 张：我定海报模板与规范，团队成员结合提效插件批量出图。</p>
+            </div>
+            <div class="benefit-card">
+              <h3>Co-creation / Not owned</h3>
+              <p>视觉风格定调阶段作为共创成员参与讨论，主 KV 由主 R 团队最终落地；AB 实验数据和结论由产品与数据团队归因。</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="benefit-section cny-reveal" aria-label="Summer Gala 2026 visual pivot">
+          <p class="benefit-label">03 / Pivot</p>
+          <h2 class="benefit-section-title">I translated segmentation strategy <em>into visual scenarios.</em></h2>
+          <p class="benefit-copy">产品定义分层下发策略，我负责把策略翻译成视觉：不同状态、不同信息密度、不同用户价值层级，都需要在直播间触达里被清晰识别。</p>
+          <div class="benefit-flow" aria-label="Summer Gala 2026 layered visual strategy">
+            <span><strong>Status layers</strong><em>主赛程、排名上升、奖励、巅峰对决、收起态等多状态版本，解决不同节点的触达需求。</em></span>
+            <span><strong>Density layers</strong><em>文字版承载高信息密度，icon 版强化氛围识别，适配不同直播间展示场景。</em></span>
+            <span><strong>High-value users</strong><em>活动魔表作为直播间顶部装饰，为高净值用户提供差异化视觉体验。</em></span>
+            <span><strong>Attribution</strong><em>AB 实验结果由产品和数据团队归因；本项目我主导分层场景的视觉解法。</em></span>
+          </div>
+        </section>
+
+        <section class="benefit-section benefit-section--wide cny-reveal" aria-label="Summer Gala 2026 asset bible pendants">
+          <p class="benefit-label">04 / Asset Bible Part 1</p>
+          <h2 class="benefit-section-title">Four touchpoint systems made <em>the live room readable.</em></h2>
+          <p class="benefit-copy">这一章先留出核心物证位。等你把真实截图丢进文件夹后，我会把占位替换为直播间真实环境对照图，让挂件体系直接成为证据。</p>
+          <div class="benefit-rule-table" aria-label="Summer Gala 2026 pendant asset placeholders">
+            <div class="benefit-rule-row">
+              <span>Asset slot</span><span>Content</span><span>States</span><span>Proof image</span><span>Status</span>
+            </div>
+            <div class="benefit-rule-row">
+              <span>赛事挂件</span><span>品牌帧 / 主赛程 / 排名上升 / 奖励 / 对决 / 收起态</span><span>5×3 / 5×2 体系</span><span>pendant-event.png</span><span>等待替换</span>
+            </div>
+            <div class="benefit-rule-row">
+              <span>中挂件文字版</span><span>赛事 / 打卡 / 涨粉 / 限时任务 / 荣耀神器</span><span>10+ 版本</span><span>pendant-text.png</span><span>等待替换</span>
+            </div>
+            <div class="benefit-rule-row">
+              <span>中挂件 icon 版</span><span>主赛程 / 巅峰对决 / 打卡 / 荣耀神器</span><span>12+ 版本</span><span>pendant-icon.png</span><span>等待替换</span>
+            </div>
+            <div class="benefit-rule-row">
+              <span>活动魔表</span><span>直播间顶部装饰，为高价值场景提供差异化触达</span><span>夏季盛典专属</span><span>magic-watch.png</span><span>等待替换</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="benefit-section benefit-section--wide cny-reveal" aria-label="Summer Gala 2026 H5 interface bible">
+          <p class="benefit-label">05 / Asset Bible Part 2</p>
+          <h2 class="benefit-section-title">The H5 pages carried <em>the whole event journey.</em></h2>
+          <p class="benefit-copy">H5 全部界面在主 R 主 KV 风格框架下延展，确保盛典 IP 视觉一致性，同时把活动入口、福利、抽奖和奖励展示串成完整用户路径。</p>
+          <div class="benefit-rule-table" aria-label="Summer Gala 2026 H5 asset placeholders">
+            <div class="benefit-rule-row">
+              <span>H5 module</span><span>Role in journey</span><span>Design focus</span><span>Proof image</span><span>Status</span>
+            </div>
+            <div class="benefit-rule-row">
+              <span>金刚区主页面</span><span>独立页面升级为盛典活动维度 + 主 KV + 金刚区分发</span><span>提屏效与入口效率</span><span>h5-home.png</span><span>等待替换</span>
+            </div>
+            <div class="benefit-rule-row">
+              <span>Tab3 盛典福利</span><span>用户端 + 主播端双端福利承接</span><span>双端信息差异与一致性</span><span>h5-benefits.png</span><span>等待替换</span>
+            </div>
+            <div class="benefit-rule-row">
+              <span>抽奖机</span><span>新运奖池 + 至尊奖池</span><span>奖励层级与操作节奏</span><span>h5-lottery.png</span><span>等待替换</span>
+            </div>
+            <div class="benefit-rule-row">
+              <span>荣耀抽奖</span><span>中奖弹窗 / 抽奖主界面 / SR-SSR 卡牌奖励</span><span>卡牌化奖励质感</span><span>h5-glory.png</span><span>等待替换</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="benefit-section cny-reveal" aria-label="Summer Gala 2026 system reuse">
+          <p class="benefit-label">06 / System Reuse</p>
+          <h2 class="benefit-section-title">Templates and plugins turned <em>design into team leverage.</em></h2>
+          <p class="benefit-copy">做主 S 不是把所有图都自己画完，而是定好规范让团队效率倍增。挂件规范、海报模板和提效插件一起构成了这次夏季盛典的团队提效链路。</p>
+          <div class="benefit-flow" aria-label="Summer Gala 2026 team efficiency chain">
+            <span><strong>01 / Pendant rules</strong><em>我定终稿和规范，团队成员配合换色刷出量。</em></span>
+            <span><strong>02 / Poster template</strong><em>我定模板与版式规则，团队用提效插件批量出图。</em></span>
+            <span><strong>03 / Internal production</strong><em>原本可能走外包的批量海报，转为内部消化。</em></span>
+            <span><strong>04 / Cost range</strong><em>按 248 张 × 单张外包 300-600 元估算，约节省 7-10 万元。</em></span>
+          </div>
+          <div class="benefit-compression" aria-label="Summer Gala 2026 external cost replacement">
+            <div class="benefit-compression__side">
+              <small>Outsource baseline</small>
+              <strong>300-600</strong>
+              <em>单张海报外包成本按团队历史采购口径估算。</em>
+            </div>
+            <div class="benefit-compression__core">
+              <b>248</b>
+              <small>Posters</small>
+            </div>
+            <div class="benefit-compression__side benefit-compression__side--after">
+              <small>Internal template output</small>
+              <strong>7-10w</strong>
+              <em>模板 + 插件支持批量出图，减少外包依赖。</em>
+            </div>
+          </div>
+        </section>
+
+        <section class="benefit-section cny-reveal" aria-label="Summer Gala 2026 result">
+          <p class="benefit-label">07 / Result</p>
+          <h2 class="benefit-section-title">Two main tracks shipped as <em>systems, not single assets.</em></h2>
+          <div class="benefit-grid benefit-grid--three benefit-spaced">
+            <div class="benefit-result-card">
+              <strong>4</strong>
+              <h3>Pendant systems</h3>
+              <p>4 大类 / 18+ 状态，完成直播间触达挂件 0→1 体系建立。</p>
+            </div>
+            <div class="benefit-result-card">
+              <strong>4</strong>
+              <h3>H5 modules</h3>
+              <p>金刚区、Tab3 福利、双奖池抽奖机、荣耀抽奖全部界面 Solo 延展。</p>
+            </div>
+            <div class="benefit-result-card">
+              <strong>7-10w</strong>
+              <h3>Estimated cost saved</h3>
+              <p>248 张海报内部消化，成本数据按团队历史外包采购口径估算。</p>
+            </div>
+          </div>
+          <p class="benefit-copy">全年最大打榜赛事 · 双线主 S · 体系 + 提效双交付。</p>
+        </section>
+
+        <section class="benefit-section cny-reveal" aria-label="Summer Gala 2026 reflection">
+          <p class="benefit-label">08 / Reflection</p>
+          <h2 class="benefit-section-title">Good ownership is <em>clear, useful, and reusable.</em></h2>
+          <div class="benefit-grid benefit-spaced">
+            <div class="benefit-card">
+              <h3>The nature of main-S work</h3>
+              <p>主 S 的本质是在边界内做到极致，不越权也不缩水。该归因的讲清楚，不该归因的留给团队。</p>
+            </div>
+            <div class="benefit-card">
+              <h3>Compound value of rules</h3>
+              <p>规范的价值不是这一版好看，而是一次定稿、N 次复用，并为后续跨季沿用留下方法。</p>
+            </div>
+            <div class="benefit-card">
+              <h3>Team efficiency as design value</h3>
+              <p>替代外包不是替代设计师，而是让设计师从重复出图里释放出来，去做更值钱的判断、模板和系统。</p>
+            </div>
+            <div class="benefit-card">
+              <h3>My takeaway</h3>
+              <p>夏季盛典这类大体量赛事，真正能证明能力的不是一张 KV，而是能不能把触达、页面、模板和团队效率全部串起来。</p>
+            </div>
+          </div>
+        </section>
+
+        <a class="klook-next-static cny-reveal" href="./project.html?project=blueyard" data-fx-link>
+          <span class="klook-next-static__eyebrow">Next Project</span>
+          <span class="klook-next-static__copy">
+            <strong>BlueYard</strong>
+            <span>进入下一个项目</span>
+          </span>
+        </a>
+      </article>
+
+      <article class="benefit-case time-arena-case" data-project="time-arena" aria-label="Time Arena visual iteration case study">
+        <section class="cny-hero" aria-label="Time Arena hero">
+          <p class="cny-kicker">2026 / Q1-Q2 · S-level monthly competition</p>
+          <h1 class="cny-title">
+            <span><small>PROJECTS/</small><br /><strong>TIME ARENA</strong></span>
+            <em><small>VISUAL SYSTEM</small><br /><strong>0→1 + MONTHLY REUSE</strong></em>
+          </h1>
+          <div class="cny-hero-media cny-reveal" aria-hidden="true" style="--shot: url('./assets/projects/time-arena/1.png');"></div>
+          <div class="cny-hero-panel cny-reveal">
+            <p>S 级月度赛事 IP · 0→1 视觉系统建立 · 跨月持续沿用。</p>
+            <div class="cny-role-list" aria-label="Time Arena role summary">
+              <span><strong>Role</strong><em>主 R / 视觉 IP 0→1 建立 / 跨月规范沉淀</em></span>
+              <span><strong>Scope</strong><em>月度赛事 IP 视觉系统 / 12 时间档差异化 / 跨季沿用</em></span>
+              <span><strong>Year</strong><em>2026 Q1 启动 · Q2 持续迭代</em></span>
+            </div>
+          </div>
+        </section>
+
+        <section class="cny-section cny-reveal" aria-label="Time Arena context">
+          <div>
+            <p class="cny-section-label">01 / Context</p>
+            <h2 class="cny-section-title">A monthly event needed <em>a visual memory.</em></h2>
+            <p class="cny-overview-copy">时间档争霸赛是周期性月度赛事，每月迭代一次。过去每一季都在重做，用户记忆无法累积，12 个时间档之间也缺少差异化识别。</p>
+          </div>
+          <div class="cny-meta-grid time-arena-card-grid">
+            <div class="cny-meta-card">
+              <h3>Business brief</h3>
+              <p>周期性月赛缺乏 IP 视觉沉淀，每月重做导致用户记忆无法累积。</p>
+            </div>
+            <div class="cny-meta-card">
+              <h3>Design thesis</h3>
+              <p>从 0→1 建立可识别、可复用的赛事 IP 视觉系统。</p>
+            </div>
+            <div class="cny-meta-card">
+              <h3>Core tension</h3>
+              <p>12 个时间档既要统一识别，又要差异化区分；月度迭代既要新鲜，又要延续。</p>
+            </div>
+            <div class="cny-meta-card">
+              <h3>My role</h3>
+              <p>主 R / 视觉 IP 0→1 建立者 / 跨月规范沉淀。</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="cny-section cny-section--wide cny-reveal" aria-label="Time Arena context board">
+          <button class="benefit-wide-shot" type="button" data-time-arena-tile data-lightbox-image="./assets/projects/time-arena/2.png" aria-label="Open Time Arena project background board">
+            <img src="./assets/projects/time-arena/2.png" alt="时间档争霸赛项目背景说明页" loading="lazy" />
+          </button>
+        </section>
+
+        <section class="cny-section cny-section--wide cny-reveal" aria-label="Time Arena visual pivot">
+          <p class="cny-section-label">02 / Visual Pivot</p>
+          <h2 class="cny-section-title">From functional layout <em>to brand memory.</em></h2>
+          <p class="benefit-copy">旧版偏功能型展示，缺乏识别符号与品牌沉淀；新版以东方时辰图腾为母题，让赛事不只是活动，而是可被识别的视觉记忆。</p>
+          <button class="benefit-wide-shot" type="button" data-time-arena-tile data-lightbox-image="./assets/projects/time-arena/3.png" aria-label="Open Time Arena before and after visual pivot">
+            <img src="./assets/projects/time-arena/3.png" alt="时间档争霸赛旧版与新版视觉迭代对比" loading="lazy" />
+          </button>
+          <div class="cny-decision">
+            <p>从功能型展示到品牌型沉淀，核心不是把画面做复杂，而是让用户能在第一秒认出“这是时间档争霸赛”。</p>
+          </div>
+        </section>
+
+        <section class="cny-section cny-section--wide cny-reveal time-arena-evidence" aria-label="Time Arena three visual systems">
+          <p class="cny-section-label">03 / Three Visual Systems</p>
+          <h2 class="cny-section-title">A race IP needs <em>system-level perception.</em></h2>
+          <p class="benefit-copy">我把月度赛事从一次性活动，升级为可复用的视觉品牌：玩法读得懂、IP 能沉淀、12 个赛道既统一又能区分。</p>
+          <button class="benefit-wide-shot" type="button" data-time-arena-tile data-lightbox-image="./assets/projects/time-arena/4new.png" aria-label="Open Time Arena three visual systems board">
+            <img src="./assets/projects/time-arena/4new.png" alt="时间档争霸赛三大视觉系统说明页" loading="lazy" />
+          </button>
+          <div class="cny-strategy-grid time-arena-card-grid">
+            <div class="cny-strategy-card">
+              <h3>Information delivery</h3>
+              <p>梳理 12 时间档、7 天赛程、海选到决赛 5 级晋级，统一为可识别的视觉框架。</p>
+            </div>
+            <div class="cny-strategy-card">
+              <h3>IP memory</h3>
+              <p>从 0→1 建立主 KV、主色、主图腾和字体处理，并沉淀挂件、特效、评论框、皮肤卡等资产库。</p>
+            </div>
+            <div class="cny-strategy-card">
+              <h3>Brand recognition</h3>
+              <p>建立 12 个时间档的差异化系统，同时定义冠、亚、季的奖杯、流量、头像框和皮肤卡材质梯度。</p>
+            </div>
+            <div class="cny-strategy-card">
+              <h3>Visual assets</h3>
+              <p>5 级赛事流程层级、6 季月度 IP 沿用、12 套时间档差异化视觉，数据为视觉资产产出口径。</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="cny-section cny-section--wide cny-reveal" aria-label="Time Arena cross month reuse">
+          <p class="cny-section-label">04 / Cross-Month Reuse</p>
+          <h2 class="cny-section-title">One IP framework, <em>two monthly variations.</em></h2>
+          <p class="benefit-copy">真正的考验不在做出一版好看的视觉，而在每一次月赛都能延续同一套视觉基因：主色、图腾、材质、字体处理保持一致，又让每一季都有新鲜感。</p>
+          <button class="benefit-wide-shot" type="button" data-time-arena-tile data-lightbox-image="./assets/projects/time-arena/5.png" aria-label="Open Time Arena cross month reuse board">
+            <img src="./assets/projects/time-arena/5.png" alt="时间档争霸赛金色版与蓝色版跨月迭代对比" loading="lazy" />
+          </button>
+          <div class="benefit-flow" aria-label="Time Arena February to April reuse">
+            <span><strong>02 / Gold version</strong><em>金色 + 楼宇庙宇，定义时间档争霸赛的第一套 IP 基因。</em></span>
+            <span><strong>04 / Blue variation</strong><em>沿用结构、构图和动效语言，仅替换主色与氛围。</em></span>
+            <span><strong>Recognition</strong><em>用户一眼能认出：这还是时间档争霸赛。</em></span>
+            <span><strong>System value</strong><em>做一次设计是一次设计；做一套规范让 N 次都能复用，才是系统。</em></span>
+          </div>
+        </section>
+
+        <section class="cny-section cny-reveal" aria-label="Time Arena system reuse">
+          <p class="cny-section-label">05 / System Reuse</p>
+          <h2 class="cny-section-title">The next season should not <em>start from zero.</em></h2>
+          <p class="benefit-copy">把月赛 IP 沉淀成视觉规范后，下一季迭代不再从零开始。新季只需要替换主色与氛围，框架与节奏直接调用，让团队从“重做”变成“变奏”。</p>
+          <div class="benefit-rule-table" aria-label="Time Arena reusable visual rules">
+            <div class="benefit-rule-row">
+              <span>Layer</span><span>KV</span><span>Color</span><span>Motif</span><span>Components</span>
+            </div>
+            <div class="benefit-rule-row">
+              <span>Rule</span><span>时辰圆盘中心构图</span><span>主色可换，金属质感不变</span><span>东方时辰图腾持续保留</span><span>榜单、任务、加成卡统一层级</span>
+            </div>
+            <div class="benefit-rule-row">
+              <span>Reuse</span><span>第 2 季沿用第 1 季框架</span><span>氛围变奏</span><span>识别不变</span><span>资源位按同一规范扩展</span>
+            </div>
+          </div>
+          <button class="benefit-wide-shot" type="button" data-time-arena-tile data-lightbox-image="./assets/projects/time-arena/8.png" aria-label="Open Time Arena visual extension board">
+            <img src="./assets/projects/time-arena/8.png" alt="时间档争霸赛视觉延展与直播间挂件展示" loading="lazy" />
+          </button>
+        </section>
+
+        <section class="cny-section cny-section--wide cny-reveal" aria-label="Time Arena result">
+          <p class="cny-section-label">06 / Result</p>
+          <h2 class="cny-section-title">The system shipped as <em>repeatable assets.</em></h2>
+          <div class="cny-result-grid">
+            <div class="cny-result-card">
+              <strong>40+</strong>
+              <h3>Posters</h3>
+              <p>单季赛事视觉海报产出，覆盖月赛主视觉与不同阶段传播需求。</p>
+            </div>
+            <div class="cny-result-card">
+              <strong>60+</strong>
+              <h3>Resource assets</h3>
+              <p>含挂件、榜单、任务、加成卡、特效、头像框、皮肤卡等资源位视觉资产。</p>
+            </div>
+            <div class="cny-result-card">
+              <strong>100%</strong>
+              <h3>Framework reuse</h3>
+              <p>第 1 季到第 2 季无缝沿用，降低用户认知成本，提高资产复用率。</p>
+            </div>
+          </div>
+          <figure class="benefit-output-wall">
+            <img src="./assets/projects/time-arena/6.png" alt="时间档争霸赛冠军亚军季军海报与资源位资产展示" loading="lazy" />
+            <figcaption>Output wall / 40+ 海报与 60+ 资源位视觉资产</figcaption>
+          </figure>
+        </section>
+
+        <section class="cny-section cny-section--wide cny-reveal" aria-label="Time Arena capability">
+          <p class="cny-section-label">07 / Capability</p>
+          <h2 class="cny-section-title">S-level ownership is <em>a full chain.</em></h2>
+          <p class="benefit-copy">以时间档争霸赛为代表，我具备独立负责 S 级项目视觉设计及全链路跨团队协作能力。</p>
+          <button class="benefit-wide-shot" type="button" data-time-arena-tile data-lightbox-image="./assets/projects/time-arena/7.png" aria-label="Open Time Arena capability chain">
+            <img src="./assets/projects/time-arena/7.png" alt="时间档争霸赛 S 级项目全链路协作能力说明页" loading="lazy" />
+          </button>
+          <div class="benefit-flow" aria-label="Time Arena capability process">
+            <span><strong>01</strong><em>需求分析</em></span>
+            <span><strong>02</strong><em>品牌洞察</em></span>
+            <span><strong>03</strong><em>概念设定</em></span>
+            <span><strong>04</strong><em>视觉执行</em></span>
+          </div>
+        </section>
+
+        <section class="cny-section cny-reveal" aria-label="Time Arena reflection">
+          <p class="cny-section-label">08 / Reflection</p>
+          <h2 class="cny-section-title">Monthly design needs <em>compound value.</em></h2>
+          <div class="cny-decision">
+            <p>做月度赛事的设计师，长期看的不是这一季画了多少张图，而是下一季还有没有人需要重新画。时间档争霸赛的价值，是把一次活动的视觉投入变成可持续迭代的 IP 资产。</p>
+          </div>
+          <div class="cny-meta-grid">
+            <div class="cny-meta-card">
+              <h3>Design value</h3>
+              <p>从单张 KV 转向规则、资产库和可复用框架。</p>
+            </div>
+            <div class="cny-meta-card">
+              <h3>Team value</h3>
+              <p>下一季从主题变奏开始，而不是重新定义结构。</p>
+            </div>
+            <div class="cny-meta-card">
+              <h3>User value</h3>
+              <p>保留核心识别符号，让月赛持续积累记忆。</p>
+            </div>
+            <div class="cny-meta-card">
+              <h3>My takeaway</h3>
+              <p>周期活动的核心不是不断换风格，而是让变化发生在同一套系统里。</p>
+            </div>
+          </div>
+        </section>
+
+        <a class="klook-next-static cny-reveal" href="./project.html?project=benefit-system" data-fx-link>
+          <span class="klook-next-static__eyebrow">Next Project</span>
+          <span class="klook-next-static__copy">
+            <strong>S+ Gala System</strong>
+            <span>进入下一个项目</span>
+          </span>
+        </a>
       </article>
 
       <article class="cny-case" aria-label="龙年 CNY case study">
@@ -4627,25 +6586,25 @@
           <p class="cny-section-label">Map System</p>
           <h2 class="cny-section-title">Five regions, five moods, <em>one panoramic route.</em></h2>
           <div class="cny-map-rail" aria-label="CNY map region gallery">
-            <button class="cny-map-card" type="button" data-cny-tile="3" aria-label="Open Zhongyuan town map" style="--shot: url('./assets/projects/the-symphony-of-vines/Frame 2090059719.png');">
-              <img src="./assets/projects/the-symphony-of-vines/Frame 2090059719.png" alt="中原古镇地图设计" loading="lazy" />
+            <button class="cny-map-card" type="button" data-cny-tile="3" aria-label="Open Zhongyuan town map" style="--shot: url('./assets/projects/the-symphony-of-vines/Frame 2090059723.png');">
+              <img src="./assets/projects/the-symphony-of-vines/Frame 2090059723.png" alt="中原古镇地图设计" loading="lazy" />
               <span>01 / 中原古镇</span>
             </button>
-            <button class="cny-map-card" type="button" data-cny-tile="4" aria-label="Open Jiangnan map" style="--shot: url('./assets/projects/the-symphony-of-vines/Frame 2090059720.png');">
-              <img src="./assets/projects/the-symphony-of-vines/Frame 2090059720.png" alt="江南水乡地图设计" loading="lazy" />
+            <button class="cny-map-card" type="button" data-cny-tile="4" aria-label="Open Jiangnan map" style="--shot: url('./assets/projects/the-symphony-of-vines/Frame 2090059722.png');">
+              <img src="./assets/projects/the-symphony-of-vines/Frame 2090059722.png" alt="江南水乡地图设计" loading="lazy" />
               <span>02 / 江南水乡</span>
             </button>
             <button class="cny-map-card" type="button" data-cny-tile="5" aria-label="Open Penglai island map" style="--shot: url('./assets/projects/the-symphony-of-vines/Frame 2090059721.png');">
-              <img src="./assets/projects/the-symphony-of-vines/Frame 2090059721.png" alt="蓬莱岛景地图设计" loading="lazy" />
-              <span>03 / 蓬莱岛景</span>
+              <img src="./assets/projects/the-symphony-of-vines/Frame 2090059721.png" alt="古侠仙岛地图设计" loading="lazy" />
+              <span>03 / 古侠仙岛</span>
             </button>
-            <button class="cny-map-card" type="button" data-cny-tile="6" aria-label="Open Western scenery map" style="--shot: url('./assets/projects/the-symphony-of-vines/Frame 2090059722.png');">
-              <img src="./assets/projects/the-symphony-of-vines/Frame 2090059722.png" alt="西部风光地图设计" loading="lazy" />
+            <button class="cny-map-card" type="button" data-cny-tile="6" aria-label="Open Western scenery map" style="--shot: url('./assets/projects/the-symphony-of-vines/Frame 2090059720.png');">
+              <img src="./assets/projects/the-symphony-of-vines/Frame 2090059720.png" alt="西部风光地图设计" loading="lazy" />
               <span>04 / 西部风光</span>
             </button>
-            <button class="cny-map-card" type="button" data-cny-tile="7" aria-label="Open lantern carnival map" style="--shot: url('./assets/projects/the-symphony-of-vines/Frame 2090059723.png');">
-              <img src="./assets/projects/the-symphony-of-vines/Frame 2090059723.png" alt="灯会嘉年华地图设计" loading="lazy" />
-              <span>05 / 灯会嘉年华</span>
+            <button class="cny-map-card" type="button" data-cny-tile="7" aria-label="Open spring lantern map" style="--shot: url('./assets/projects/the-symphony-of-vines/Frame 2090059719.png');">
+              <img src="./assets/projects/the-symphony-of-vines/Frame 2090059719.png" alt="新春灯会地图设计" loading="lazy" />
+              <span>05 / 新春灯会</span>
             </button>
           </div>
         </section>
@@ -4671,19 +6630,19 @@
           <h2 class="cny-section-title">The system shipped as <em>campaign memory.</em></h2>
           <div class="cny-result-grid">
             <div class="cny-result-card">
-              <strong>50+</strong>
-              <h3>Creative outputs</h3>
-              <p>覆盖 IP 形象、预热地图、分享海报、挂件与移动端效果展示。</p>
+              <strong>4 张</strong>
+              <h3>Maps reused</h3>
+              <p>Map 01 建立的建筑、路径、定点规范，成为后续 4 张地图的统一基础。</p>
             </div>
             <div class="cny-result-card">
-              <strong>4.3+</strong>
-              <h3>User feedback</h3>
-              <p>IP 喜爱度和地图设计评价均保持高分反馈。</p>
+              <strong>30+</strong>
+              <h3>Creative settings</h3>
+              <p>2+ 月周期内沉淀 IP、地图、龙门、海报、挂件等创意设定。</p>
             </div>
             <div class="cny-result-card">
               <strong>神笔马良奖</strong>
               <h3>Internal recognition</h3>
-              <p>作为优秀项目沉淀，证明这套系统不只是好看，而是能被复用和传播。</p>
+              <p>团队荣获公司级优秀项目奖项，并获得 2 万元团队奖金。</p>
             </div>
           </div>
         </section>
@@ -4700,9 +6659,9 @@
           </figure>
         </section>
 
-        <a class="cny-next cny-reveal" data-fx-magnetic="12" href="./project.html?project=klook" aria-label="Open next project Klook" data-fx-link>
+        <a class="cny-next cny-reveal" data-fx-magnetic="12" href="./project.html?project=time-arena" aria-label="Open next project Time Arena" data-fx-link>
           <span>Next project</span>
-          <strong>Klook</strong>
+          <strong>Time Arena</strong>
         </a>
       </article>
     </main>
@@ -4755,19 +6714,19 @@
         "the-symphony-of-vines": {
           title: "龙年 CNY",
           kind: "IP / 地图 / 活动视觉",
-          summary: "2024 龙年 CNY 预热会场项目，把龙年 IP、五个主题地图、分享海报、挂件和移动端页面整理成一套可延展的节日视觉系统。",
+          summary: "2024 龙年 CNY 公司级 S++ 项目，我用 Map 01 中原古镇建立建筑、路径、定点和风格规范，让后续地图与延展物料共属同一个龙年世界。",
           media: "url('./assets/projects/the-symphony-of-vines/Group 2090057975.png')",
           case: {
             kicker: "2024 / 龙年 CNY",
-            titleTop: "<small>PROJECTS/</small><strong>龙年 CNY</strong>",
-            titleBottom: "<small>IP / 地图</small><strong>活动视觉系统</strong>",
+            titleTop: "<small>PROJECTS/</small><strong>CNY 2024</strong>",
+            titleBottom: "<small>MAP SYSTEM</small><strong>0→1&nbsp;+&nbsp;TEMPLATE</strong>",
             hero: "url('./assets/projects/the-symphony-of-vines/Group 2090057975.png')",
-            services: "创意方向<br />IP 角色设定<br />地图会场系统<br />活动延展",
-            date: "2024 龙年",
+            services: "主设定之一<br />Map 01 0→1<br />地图规范沉淀<br />IP 方向参与",
+            date: "2024 龙年 / 2+ 月",
             client: "快手 CNY 预热会场",
-            location: "Shanghai / Online",
-            sliderTitle: "设计方向",
-            sliderCopy: "先定活动策略，再把 IP、地图、移动端和分享物料放进同一套视觉规则里。这样页面不是散素材，而是一个能被复用、能继续扩展的春节世界。",
+            location: "Map 01 · 04 · 05 深度主导",
+            sliderTitle: "Design Direction",
+            sliderCopy: "我的方向不是把春节做得更红更热闹，而是先建立一个能产生探索价值的地图系统：用户愿意逛，运营能放权益，品牌能露出，后续设计师也能继续沿用。做法是用 Map 01 先跑通路径、建筑、龙门和定点规则，再把这套规则扩展到五张会场。",
             shots: [
               "url('./assets/projects/the-symphony-of-vines/cny-role-setting-full.webp')",
               "url('./assets/projects/the-symphony-of-vines/cny-map-logic-board.webp')",
@@ -4784,22 +6743,53 @@
               "url('./assets/projects/the-symphony-of-vines/Frame 2090059727.png')",
               "url('./assets/projects/the-symphony-of-vines/Frame 2090059728.png')",
             ],
-            splitTitle: "地图逻辑",
-            splitCopy: "从旧式棋盘路径升级到全景式会场地图：同样是走任务，但新方案能同时承载沉浸感、层次感、品牌露出和复杂互动元素。",
-            awardsTitle: "项目<br /><em>价值系统</em>",
+            splitTitle: "Map Logic",
+            splitSubtitle: "不是画图，是定规则。",
+            splitCopy: "Map 01 的难点不是画一张大图，而是先把路径、奖励、品牌露出和手机视窗可读性定成规则。",
+            awardsTitle: "Project<br /><em>项目结果</em>",
             awards: [
-              ["01 / 角色", "建立龙年角色、纹样和配饰规则，支撑主视觉与多端延展。"],
-              ["02 / 地图", "五个地域主题各有差异，但路径节奏、节点结构和节日情绪保持统一。"],
-              ["03 / 产出", "覆盖预热会场、分享海报、挂件、移动端与衍生物料。"],
-              ["04 / 结果", "50+ 创意输出、4.3+ 用户反馈、神笔马良奖沉淀。"],
+              ["01 / 奖项", "团队荣获公司级「神笔马良奖」优秀项目，团队奖金 2 万元。"],
+              ["02 / 模板", "Map 01 建立的建筑、路径、定点规范，被后续 4 张地图沿用。"],
+              ["03 / 产出", "2+ 月周期内沉淀 IP、地图、龙门、海报、挂件等 30+ 创意设定。"],
+              ["04 / 复盘", "第一张地图的价值，是让团队后续能跟上、能变奏、能上线。"],
             ],
           },
+        },
+        "benefit-system": {
+          title: "S+ Gala System",
+          kind: "AI Workflow / Rights System",
+          summary: "2025 S+ 盛典体系项目，我用 AI 工作流重构 3D 生产链路，并用权益梯度规范让荣誉出口跨季度复用。",
+          media: "url('./assets/projects/benefit-system/27Frame 1940698828.png')",
+        },
+        "summer-gala-2026": {
+          title: "2026 Summer Gala",
+          kind: "S+ Gala / Touchpoints / H5 System",
+          summary: "2026 夏季盛典 S+ 项目，我在主 R 分管下负责挂件触达与 H5 页面双线主 S，Solo 建立挂件规范、H5 全部界面和海报模板，并用模板 + 插件支撑团队批量出图。",
+          media: "url('./assets/projects/summer-gala-2026/hero.png')",
+        },
+        "splus-gala-system": {
+          title: "S+ Gala System",
+          kind: "AI Workflow / Rights System",
+          summary: "2025 S+ 盛典体系项目，我用 AI 工作流重构 3D 生产链路，并用权益梯度规范让荣誉出口跨季度复用。",
+          media: "url('./assets/projects/benefit-system/27Frame 1940698828.png')",
         },
         klook: {
           title: "Klook",
           kind: "Interactive Quiz",
           summary: "A bright interactive quiz framework with campaign energy, large product moments, and playful conversion-oriented feedback.",
           media: "linear-gradient(100deg, #2a61ff, #4be1d1 28%, #f6d83f 48%, #ff7d18 72%, #ee4a18)",
+        },
+        "time-slot": {
+          title: "Time Arena",
+          kind: "Campaign IP / Visual System",
+          summary: "时间档争霸赛视觉迭代项目：从 0→1 建立周期性月赛 IP 视觉系统，让 12 个时间档既统一识别又差异化区分，并在 2 月版到 4 月版中持续复用。",
+          media: "url('./assets/projects/time-arena/Frame 2090059732.png')",
+        },
+        "time-arena": {
+          title: "Time Arena",
+          kind: "Campaign IP / Visual System",
+          summary: "时间档争霸赛视觉迭代项目：从 0→1 建立周期性月赛 IP 视觉系统，让 12 个时间档既统一识别又差异化区分，并在 2 月版到 4 月版中持续复用。",
+          media: "url('./assets/projects/time-arena/Frame 2090059732.png')",
         },
         "rspca-animal-futures": {
           title: "RSPCA Animal Futures",
@@ -4893,6 +6883,43 @@
         },
       };
 
+      const projectSequence = [
+        "the-symphony-of-vines",
+        "time-arena",
+        "benefit-system",
+        "summer-gala-2026",
+        "blueyard",
+        "cosmos",
+        "25-residences",
+        "organimo",
+        "hiring-calculator",
+        "robco",
+        "kikk-2024",
+        "nikolas-type",
+        "seascape-survey",
+        "cult-of-the-north",
+        "crosswire",
+        "blue-marine",
+        "quai-network",
+        "clou-architects",
+      ];
+
+      const projectAliases = {
+        "time-slot": "time-arena",
+        "splus-gala-system": "benefit-system",
+      };
+
+      function normalizeProjectKey(key) {
+        return projectAliases[key] || key;
+      }
+
+      function getNextProjectKey(key) {
+        const canonicalKey = normalizeProjectKey(key);
+        const currentIndex = projectSequence.indexOf(canonicalKey);
+        if (currentIndex === -1) return projectSequence[0];
+        return projectSequence[(currentIndex + 1) % projectSequence.length];
+      }
+
       function titleFromKey(key) {
         return String(key || "project")
           .split("-")
@@ -4925,10 +6952,16 @@
       const body = document.body;
       const projectPage = document.querySelector(".project-page");
       const isCnyCase = currentKey === "the-symphony-of-vines";
-      const isKlookCase = !isCnyCase;
+      const isTimeArenaCase = currentKey === "time-arena" || currentKey === "time-slot";
+      const isSummerGalaCase = currentKey === "summer-gala-2026";
+      const isBenefitCase = currentKey === "benefit-system" || currentKey === "splus-gala-system" || isTimeArenaCase || isSummerGalaCase;
+      const isKlookCase = !isCnyCase && !isBenefitCase;
       body.classList.toggle("is-cny-case", isCnyCase);
+      body.classList.toggle("is-benefit-case", isBenefitCase);
+      body.classList.toggle("is-time-arena-case", isTimeArenaCase);
+      body.classList.toggle("is-summer-gala-case", isSummerGalaCase);
       body.classList.toggle("is-klook-case", isKlookCase);
-      projectPage?.classList.toggle("is-klook-template", isKlookCase || isCnyCase);
+      projectPage?.classList.toggle("is-klook-template", isKlookCase || isCnyCase || isBenefitCase);
       const handoffKey = "chennn-project-route-handoff";
       try {
         sessionStorage.removeItem(handoffKey);
@@ -4951,7 +6984,8 @@
       const caseDateEl = document.querySelector("[data-case-date]");
       const caseClientEl = document.querySelector("[data-case-client]");
       const caseLocationEl = document.querySelector("[data-case-location]");
-      const caseNextTitleEl = document.querySelector("[data-case-next-title]");
+      const caseNextTitleEls = [...document.querySelectorAll("[data-case-next-title]")];
+      const caseNextLinkEls = [...document.querySelectorAll("[data-case-next-link]")];
       const caseCurtainTitleEl = document.querySelector("[data-case-curtain-title]");
       const caseSliderCopyEl = document.querySelector(".klook-slider__copy");
       const caseScrollMedia = [...document.querySelectorAll(".klook-scroll-card__media")];
@@ -4959,7 +6993,10 @@
       const genericTiles = [...document.querySelectorAll("[data-tile]")];
       const klookTiles = [...document.querySelectorAll("[data-klook-tile]")];
       const cnyTiles = [...document.querySelectorAll(".klook-case [data-klook-tile], .klook-case [data-cny-tile]")];
-      const tiles = isCnyCase ? cnyTiles : isKlookCase ? klookTiles : genericTiles;
+      const benefitTiles = [...document.querySelectorAll(".benefit-case:not(.time-arena-case):not(.summer-gala-case) [data-benefit-tile]")];
+      const timeArenaTiles = [...document.querySelectorAll(".time-arena-case [data-time-arena-tile]")];
+      const summerGalaTiles = [...document.querySelectorAll(".summer-gala-case [data-summer-gala-tile]")];
+      const tiles = isSummerGalaCase ? summerGalaTiles : isTimeArenaCase ? timeArenaTiles : isBenefitCase ? benefitTiles : isCnyCase ? cnyTiles : isKlookCase ? klookTiles : genericTiles;
       
       // Update DOM with project data
       if (titleTopEl) titleTopEl.innerHTML = `PROJECTS/<br/>${current.title}`;
@@ -5035,10 +7072,8 @@
       }
 
       function renderProject() {
-        const keys = Object.keys(projects);
-        const currentIndex = Math.max(0, keys.indexOf(currentKey));
-        const nextKey = keys[(currentIndex + 1) % keys.length];
-        const next = projects[nextKey];
+        const nextKey = getNextProjectKey(currentKey);
+        const next = getProject(nextKey);
         document.title = `CHENNN Studio® – ${current.title}`;
         tiles.forEach((tile, index) => {
           tile.style.setProperty("--tile", tintMedia(current.media, index));
@@ -5065,7 +7100,12 @@
         if (caseDateEl) caseDateEl.textContent = caseConfig.date || "Spring, 2026";
         if (caseClientEl) caseClientEl.textContent = caseConfig.client || current.title;
         if (caseLocationEl) caseLocationEl.textContent = caseConfig.location || "Shanghai / Online";
-        if (caseNextTitleEl) caseNextTitleEl.textContent = next.title;
+        caseNextTitleEls.forEach((element) => {
+          element.textContent = next.title;
+        });
+        caseNextLinkEls.forEach((element) => {
+          element.href = `./project.html?project=${nextKey}`;
+        });
         if (caseCurtainTitleEl) caseCurtainTitleEl.innerHTML = `<em>Next</em>${next.title}`;
         if (caseRouteTransition) caseRouteTransition.dataset.nextProject = nextKey;
         if (caseSliderCopyEl && caseConfig.sliderTitle) {
@@ -5078,7 +7118,11 @@
           const splitCopy = document.querySelector(".klook-scroll-card--split .klook-section-copy");
           const title = splitCopy?.querySelector("h2");
           const copy = splitCopy?.querySelector("p");
-          if (title) title.textContent = caseConfig.splitTitle;
+          if (title) {
+            title.innerHTML = caseConfig.splitSubtitle
+              ? `${caseConfig.splitTitle} <em>${caseConfig.splitSubtitle}</em>`
+              : caseConfig.splitTitle;
+          }
           if (copy) copy.textContent = caseConfig.splitCopy || "";
         }
         if (caseConfig.awardsTitle) {
@@ -5103,7 +7147,7 @@
           const overviewTitle = document.querySelector(".klook-overview h2");
           const overviewCta = document.querySelector(".klook-cta");
           const metaTitles = [...document.querySelectorAll(".klook-meta h3")];
-          if (overviewTitle) overviewTitle.textContent = "项目总览";
+          if (overviewTitle) overviewTitle.textContent = "Project Overview";
           if (overviewCta) overviewCta.textContent = "全部项目 ->";
           ["职责", "时间", "项目", "场景"].forEach((label, index) => {
             if (metaTitles[index]) metaTitles[index].textContent = label;
@@ -5298,6 +7342,7 @@
         const awardsTitle = document.querySelector(".klook-awards__title");
         const awardRows = [...document.querySelectorAll(".klook-award-row")];
         const routeTransition = document.querySelector("[data-route-transition]");
+        const useRouteTransition = isKlookCase && routeTransition && !reduceMotion;
         let routeTriggered = false;
         const routeDrag = {
           active: false,
@@ -5515,7 +7560,7 @@
             });
           }
 
-          if (routeTransition) {
+          if (useRouteTransition) {
             const rect = routeTransition.getBoundingClientRect();
             const travel = Math.max(1, rect.height - viewport);
             const progress = reduceMotion ? 1 : clamp(0, -rect.top / travel, 1);
@@ -5543,7 +7588,7 @@
           }
         };
 
-        if (routeTransition && !reduceMotion) {
+        if (useRouteTransition) {
           routeTransition.addEventListener("pointerdown", (event) => {
             if (event.button !== 0 || routeTriggered || event.target.closest("a, button")) return;
             const rect = routeTransition.getBoundingClientRect();
@@ -5606,6 +7651,83 @@
         if (!isCnyCase) return;
         const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         const revealItems = [...document.querySelectorAll(".cny-reveal")];
+        const mapPreview = document.querySelector("[data-cny-map-preview-parallax]");
+
+        function initMapPreviewParallax() {
+          if (!mapPreview || reduceMotion) return;
+          const layers = [...mapPreview.querySelectorAll("[data-cny-preview-layer]")];
+          const hotDots = [...mapPreview.querySelectorAll(".cny-map-preview-parallax__dot")];
+          const mouse = {
+            x: 0,
+            y: 0,
+            targetX: 0,
+            targetY: 0,
+          };
+          let running = false;
+
+          const resetDotHeat = () => {
+            hotDots.forEach((dot) => dot.style.setProperty("--hud-heat", "0"));
+          };
+
+          const setDotHeat = (clientX, clientY) => {
+            hotDots.forEach((dot) => {
+              const rect = dot.getBoundingClientRect();
+              const centerX = rect.left + rect.width / 2;
+              const centerY = rect.top + rect.height / 2;
+              const heat = Math.max(0, 1 - Math.hypot(clientX - centerX, clientY - centerY) / 220);
+              dot.style.setProperty("--hud-heat", heat.toFixed(3));
+            });
+          };
+
+          const update = () => {
+            running = false;
+            const viewport = window.innerHeight || 1;
+            const rect = mapPreview.getBoundingClientRect();
+            const progress = 1 - (rect.top + rect.height) / (viewport + rect.height);
+            const centered = (clamp(0, progress, 1) - 0.5) * 2;
+            mouse.x += (mouse.targetX - mouse.x) * 0.12;
+            mouse.y += (mouse.targetY - mouse.y) * 0.12;
+
+            layers.forEach((layer) => {
+              const speed = parseFloat(layer.dataset.speed || "0");
+              const mouseAmp = parseFloat(layer.dataset.mouse || "0");
+              const scrollY = centered * speed * viewport;
+              const mouseX = mouse.x * mouseAmp;
+              const mouseY = mouse.y * mouseAmp;
+              layer.style.transform = `translate3d(${mouseX.toFixed(2)}px, ${(scrollY + mouseY).toFixed(2)}px, 0)`;
+            });
+
+            mapPreview.style.setProperty("--map-preview-x", `${((mouse.x + 1) * 50).toFixed(2)}%`);
+            mapPreview.style.setProperty("--map-preview-y", `${((mouse.y + 1) * 50).toFixed(2)}%`);
+            schedule();
+          };
+
+          const schedule = () => {
+            if (running) return;
+            running = true;
+            window.requestAnimationFrame(update);
+          };
+
+          mapPreview.addEventListener("mousemove", (event) => {
+            const rect = mapPreview.getBoundingClientRect();
+            mouse.targetX = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
+            mouse.targetY = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+            setDotHeat(event.clientX, event.clientY);
+          }, { passive: true });
+
+          mapPreview.addEventListener("mouseleave", () => {
+            mouse.targetX = 0;
+            mouse.targetY = 0;
+            resetDotHeat();
+          });
+
+          window.addEventListener("scroll", schedule, { passive: true });
+          window.addEventListener("resize", schedule);
+          schedule();
+        }
+
+        initMapPreviewParallax();
+
         if (reduceMotion || !("IntersectionObserver" in window)) {
           body.classList.add("is-ready");
           revealItems.forEach((item) => item.classList.add("is-visible"));
@@ -5626,6 +7748,36 @@
       }
 
       initCnyCase();
+
+      function initBenefitCase() {
+        if (!isBenefitCase) return;
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const revealSelector = isSummerGalaCase
+          ? ".summer-gala-case .cny-reveal"
+          : isTimeArenaCase
+            ? ".time-arena-case .cny-reveal"
+            : ".benefit-case:not(.time-arena-case):not(.summer-gala-case) .cny-reveal";
+        const revealItems = [...document.querySelectorAll(revealSelector)];
+        if (reduceMotion || !("IntersectionObserver" in window)) {
+          body.classList.add("is-ready");
+          revealItems.forEach((item) => item.classList.add("is-visible"));
+          return;
+        }
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            });
+          },
+          { threshold: 0.14, rootMargin: "0px 0px -12% 0px" },
+        );
+        revealItems.forEach((item) => observer.observe(item));
+        window.setTimeout(() => body.classList.add("is-ready"), 180);
+      }
+
+      initBenefitCase();
     </script>
     <script>
       // Parallax effect for floating objects based on scroll
@@ -5655,7 +7807,7 @@
     <script src="./assets/vendor/gsap.min.js"></script>
     <script src="./assets/vendor/CustomEase.min.js"></script>
     <script src="./assets/vendor/ScrollTrigger.min.js"></script>
-    <script src="./assets/gsap-motion-demo.js"></script>
+    <script src="./assets/gsap-motion-demo.js?v=cny-layout-polish-239"></script>
     <script src="./assets/chen-pet.js" defer></script>
       <script src="./chen-fx/06-gsap-motion-engine/motion-engine.js"></script>
       <script src="./assets/main-site-fixes.js?v=world-only-audio-187"></script>

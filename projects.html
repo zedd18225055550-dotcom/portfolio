@@ -308,7 +308,8 @@
           transform 0.32s var(--ease-out);
       }
 
-      .project-card.is-hidden {
+      .project-card.is-hidden,
+      .project-card[hidden] {
         display: none;
       }
 
@@ -2924,7 +2925,7 @@
     </div>
 
     <section class="projects-poster-hero" aria-label="Projects hero">
-      <video class="projects-poster-hero__image projects-poster-hero__video" poster="./assets/marathon/projects-hero-marathon-bg-clean.png" autoplay muted loop playsinline preload="auto" aria-label="Marathon style projects hero video">
+      <video class="projects-poster-hero__image projects-poster-hero__video" poster="./assets/marathon/projects-hero-marathon-bg-clean.png" autoplay muted loop playsinline preload="metadata" aria-label="Marathon style projects hero video">
         <source src="./assets/marathon/projects-hero-marathon-video.mp4" type="video/mp4" />
       </video>
       <div class="projects-poster-left">
@@ -2956,13 +2957,13 @@
           <div class="project-media"></div>
           <div class="project-meta"><div><h2 class="project-title">龙年 CNY</h2><p class="project-kind">IP / 地图 / 活动视觉</p></div><span class="project-arrow">↘</span></div>
         </a>
-        <a class="project-card" href="#" data-category="digital" data-stream="work" style="--media: linear-gradient(100deg, #2a61ff, #4be1d1 28%, #f6d83f 48%, #ff7d18 72%, #ee4a18);">
+        <a class="project-card" href="#" data-category="digital motion" data-stream="work" data-project-slug="time-arena" style="--media: url('./assets/projects/time-arena/Frame 2090059732.png');">
           <div class="project-media"></div>
-          <div class="project-meta"><div><h2 class="project-title">Klook</h2><p class="project-kind">Interactive Quiz</p></div><span class="project-arrow">↘</span></div>
+          <div class="project-meta"><div><h2 class="project-title">时间档争霸赛</h2><p class="project-kind">Campaign IP / Visual System</p></div><span class="project-arrow">↘</span></div>
         </a>
-        <a class="project-card" href="#" data-category="digital" data-stream="work" style="--media: radial-gradient(circle at 58% 52%, #97d331 0 9%, transparent 10%), radial-gradient(circle at 50% 52%, #95c6cd 0 34%, transparent 35%), linear-gradient(160deg, #bce8e7, #73bcc4 58%, #d6e9e7);">
+        <a class="project-card" href="#" data-category="digital ai" data-stream="work ai" data-project-slug="benefit-system" style="--media: url('./assets/projects/benefit-system/27Frame 1940698828.png');">
           <div class="project-media"></div>
-          <div class="project-meta"><div><h2 class="project-title">RSPCA Animal Futures</h2><p class="project-kind">Interactive Learning Experience</p></div><span class="project-arrow">↘</span></div>
+          <div class="project-meta"><div><h2 class="project-title">S+ Gala System</h2><p class="project-kind">AI Workflow / Rights System</p></div><span class="project-arrow">↘</span></div>
         </a>
         <a class="project-card" href="#" data-category="digital" data-stream="work" style="--media: linear-gradient(135deg, #e6eef1 0 42%, #0f1b24 42% 100%), radial-gradient(circle at 67% 55%, #70c6ff 0 8%, transparent 9%);">
           <div class="project-media"></div>
@@ -3090,12 +3091,15 @@
       const filterToggle = document.querySelector(".filter-toggle");
       const filterBackdrop = document.querySelector(".filter-backdrop");
       const filterButtons = [...document.querySelectorAll("[data-filter]")];
-      const projectCards = [...document.querySelectorAll(".project-card")];
+      const getProjectCards = () => [...document.querySelectorAll(".project-card")];
+      const projectCards = getProjectCards();
       const streamChips = [...document.querySelectorAll("[data-stream-chip]")];
       const projectStreams = ["all", "work", "personal", "ai", "lab"];
       const projectCopy = {
         "龙年 CNY": ["2024 龙年 CNY", "把龙年 IP、五个主题地图和活动物料整理成一套可延展的春节会场系统。"],
         "The Symphony Of Vines": ["藤蔓交响", "把有机影像、声音节奏和交互路径压进一支可漫游的品牌短片。"],
+        "时间档争霸赛": ["时间档争霸赛", "从 0→1 建立周期性月赛 IP 视觉系统，并在 2 月版到 4 月版中持续复用。"],
+        "S+ Gala System": ["S+ 盛典权益体系", "用 AI 工作流提质提效，并把权益视觉规范沉淀为全年盛典可复用的方法。"],
         Klook: ["旅行问答", "用高饱和互动问答，把一次活动转化做成轻快的产品游戏。"],
         "RSPCA Animal Futures": ["动物未来", "面向公众教育的温柔数字体验，用场景和选择讲清复杂议题。"],
         BlueYard: ["蓝色庭院", "克制的机构叙事系统，给长内容、观点和案例留出清晰节奏。"],
@@ -3116,6 +3120,8 @@
       const projectTags = {
         "龙年 CNY": "IP System",
         "The Symphony Of Vines": "Cinematic",
+        "时间档争霸赛": "Visual IP",
+        "S+ Gala System": "AI Workflow",
         Klook: "Quiz",
         "RSPCA Animal Futures": "Learning",
         BlueYard: "Portfolio",
@@ -3180,8 +3186,8 @@
           <div class="project-media project-media--asset project-media--video" aria-hidden="true">
             ${hasStaticAsset ? "" : `<span class="project-object project-object--base"></span>`}
             ${hasStaticAsset ? "" : `<span class="project-object project-object--reveal"></span>`}
-            ${hasStaticAsset ? `<img class="project-asset project-asset--base" src="${mediaAsset}" alt="" loading="lazy" />` : ""}
-            ${hasStaticAsset ? `<img class="project-asset project-asset--reveal" src="${mediaAsset}" alt="" loading="lazy" />` : ""}
+            ${hasStaticAsset ? `<img class="project-asset project-asset--base" src="${mediaAsset}" alt="" loading="lazy" decoding="async" />` : ""}
+            ${hasStaticAsset ? `<img class="project-asset project-asset--reveal" src="${mediaAsset}" alt="" loading="lazy" decoding="async" />` : ""}
             ${hasStaticAsset ? "" : `<video class="project-video" data-video-src="${videoSrc}" muted loop playsinline preload="none"></video>`}
           </div>
           <div class="project-meta">
@@ -3263,6 +3269,12 @@
           .filter(Boolean);
       }
 
+      function setProjectCardVisibility(card, show) {
+        card.classList.toggle("is-hidden", !show);
+        card.hidden = !show;
+        card.setAttribute("aria-hidden", String(!show));
+      }
+
       function syncFilterCounts() {
         filterButtons.forEach((button) => {
           const count = button.dataset.filter === "all"
@@ -3285,13 +3297,15 @@
       function applyFilter(category) {
         setProjectStreamTheme(category);
         filterButtons.forEach((button) => button.classList.toggle("is-active", button.dataset.filter === category));
-        projectCards.forEach((card) => {
+        getProjectCards().forEach((card) => {
           const show = category === "all" || getProjectStreams(card).includes(category);
-          card.classList.toggle("is-hidden", !show);
+          setProjectCardVisibility(card, show);
         });
         scheduleProjectVideoUpdate();
         toggleFilter(false);
       }
+
+      window.applyProjectsFilterState = applyFilter;
 
       const maxPlayingProjectVideos = 4;
       let activeProjectVideos = [];
@@ -3342,7 +3356,7 @@
         videoUpdateFrame = 0;
         const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
         const candidates = projectCards
-          .filter((card) => !card.classList.contains("is-hidden"))
+          .filter((card) => !card.hidden && !card.classList.contains("is-hidden"))
           .map((card) => {
             const rect = card.getBoundingClientRect();
             const distance = Math.max(0, rect.top - viewportHeight, -rect.bottom);
@@ -3435,6 +3449,7 @@
       filterToggle.addEventListener("click", () => toggleFilter());
       filterBackdrop.addEventListener("click", () => toggleFilter(false));
       filterButtons.forEach((button) => {
+        button.addEventListener("click", () => applyFilter(button.dataset.filter), { capture: true });
         button.addEventListener("click", () => applyFilter(button.dataset.filter));
       });
       window.addEventListener("keydown", (event) => {

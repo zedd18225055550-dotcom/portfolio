@@ -376,15 +376,15 @@
         const shell = scroller.closest(".storyboard-rail-shell");
         // Tangyuan storyboard frames in filename order.
         const items = [
-          { img: "./assets/tangyuan_storyboard_21x9/frame_01.png", label: "frame 01 · tangyuan" },
-          { img: "./assets/tangyuan_storyboard_21x9/frame_02.png", label: "frame 02 · tangyuan" },
-          { img: "./assets/tangyuan_storyboard_21x9/frame_03.png", label: "frame 03 · tangyuan" },
-          { img: "./assets/tangyuan_storyboard_21x9/frame_04.png", label: "frame 04 · tangyuan" },
-          { img: "./assets/tangyuan_storyboard_21x9/frame_05.png", label: "frame 05 · tangyuan" },
-          { img: "./assets/tangyuan_storyboard_21x9/frame_06.png", label: "frame 06 · tangyuan" },
-          { img: "./assets/tangyuan_storyboard_21x9/frame_07.png", label: "frame 07 · tangyuan" },
-          { img: "./assets/tangyuan_storyboard_21x9/frame_08.png", label: "frame 08 · tangyuan" },
-          { img: "./assets/tangyuan_storyboard_21x9/frame_09.png", label: "frame 09 · tangyuan" },
+          { img: "./assets/tangyuan_storyboard_21x9/frame_01.png?v=storyboard-assets-238", label: "frame 01 · tangyuan" },
+          { img: "./assets/tangyuan_storyboard_21x9/frame_02.png?v=storyboard-assets-238", label: "frame 02 · tangyuan" },
+          { img: "./assets/tangyuan_storyboard_21x9/frame_03.png?v=storyboard-assets-238", label: "frame 03 · tangyuan" },
+          { img: "./assets/tangyuan_storyboard_21x9/frame_04.png?v=storyboard-assets-238", label: "frame 04 · tangyuan" },
+          { img: "./assets/tangyuan_storyboard_21x9/frame_05.png?v=storyboard-assets-238", label: "frame 05 · tangyuan" },
+          { img: "./assets/tangyuan_storyboard_21x9/frame_06.png?v=storyboard-assets-238", label: "frame 06 · tangyuan" },
+          { img: "./assets/tangyuan_storyboard_21x9/frame_07.png?v=storyboard-assets-238", label: "frame 07 · tangyuan" },
+          { img: "./assets/tangyuan_storyboard_21x9/frame_08.png?v=storyboard-assets-238", label: "frame 08 · tangyuan" },
+          { img: "./assets/tangyuan_storyboard_21x9/frame_09.png?v=storyboard-assets-238", label: "frame 09 · tangyuan" },
         ];
         const html = items.map((it) =>
           `<div class="marquee-card" style="background-image:url('${it.img}'); background-size:cover; background-position:center;"><div class="meta">${it.label}</div></div>`
