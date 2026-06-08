@@ -1525,9 +1525,7 @@
     <button class="sound-btn" type="button" aria-label="Toggle Sound"><i></i></button>
     <main class="home-stage home-stage--immersive">
       <div class="home-kv" aria-hidden="true">
-        <video class="home-kv__media" autoplay muted loop playsinline preload="metadata" poster="./assets/marathon/index-hero-marathon-cny.png">
-          <source src="./assets/marathon/index-hero-marathon-video.mp4" type="video/mp4" />
-        </video>
+        <video class="home-kv__media" muted loop playsinline preload="none" poster="./assets/marathon/index-hero-marathon-cny.png" data-lazy-video data-src="./assets/marathon/index-hero-marathon-video.mp4"></video>
         <div class="home-kv__mask"></div>
       </div>
       <section class="home-copy" aria-label="CHENNN Studio home">
@@ -1605,7 +1603,7 @@
             <div class="parallax" id="parallax">
               <div class="parallax__layer parallax__layer--bg" data-speed="0.08" data-mouse="8"></div>
               <div class="parallax__layer parallax__layer--mid" data-speed="0.20" data-mouse="26">
-                <img class="parallax__image" src="./assets/marathon/拿枪.png" alt="" loading="lazy" decoding="async" />
+                <img class="parallax__image" alt="" loading="lazy" decoding="async" data-lazy-img="./assets/marathon/拿枪.png" />
               </div>
               <div class="parallax__layer parallax__layer--hud" data-speed="-0.10" data-mouse="42">
                 <span class="parallax__hud-dot parallax__hud-dot--one"></span>
@@ -1815,7 +1813,7 @@
       }
     </script>
     <script src="./assets/chen-pet.js" defer></script>
-    <script src="./wrapped.js?v=storyboard-assets-238" defer></script>
+    <script data-lazy-script="./wrapped.js?v=storyboard-assets-238"></script>
     <script>
       // 每次进入 home.html 强制滚到顶部，避免浏览器恢复 scrollY 导致进来直接看到 wrapped 区
       if ("scrollRestoration" in history) {
@@ -1823,6 +1821,81 @@
       }
       window.scrollTo(0, 0);
       window.addEventListener("load", () => window.scrollTo(0, 0));
+    </script>
+    <script>
+      // poster-first lazy video (perf 2pass)
+      (function () {
+        const videos = document.querySelectorAll("video[data-lazy-video]");
+        if (!videos.length) return;
+
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const isMobile = window.matchMedia("(max-width: 768px)").matches;
+        if (reduceMotion || isMobile) return;
+
+        function loadVideo(video) {
+          if (video.dataset.loaded) return;
+          const src = video.dataset.src;
+          if (!src) return;
+          video.dataset.loaded = "1";
+          const source = document.createElement("source");
+          source.src = src;
+          source.type = "video/mp4";
+          video.appendChild(source);
+          video.load();
+          video.play().catch(() => {});
+        }
+
+        videos.forEach((video) => {
+          const play = () => loadVideo(video);
+          window.addEventListener("scroll", play, { once: true, passive: true });
+          video.addEventListener("pointerenter", play, { once: true });
+          window.setTimeout(play, 6000);
+        });
+      })();
+    </script>
+    <script>
+      // Delay below-the-fold wrapped assets until after first paint.
+      (function () {
+        const wrapped = document.querySelector(".home-wrapped");
+        if (!wrapped) return;
+
+        function loadImage(img) {
+          const src = img.dataset.lazyImg;
+          if (!src || img.dataset.loaded) return;
+          img.dataset.loaded = "1";
+          img.src = src;
+        }
+
+        function loadWrappedScript() {
+          const holder = document.querySelector("script[data-lazy-script]");
+          if (!holder || holder.dataset.loaded) return;
+          holder.dataset.loaded = "1";
+          const script = document.createElement("script");
+          script.src = holder.dataset.lazyScript;
+          script.defer = true;
+          document.body.appendChild(script);
+        }
+
+        function loadWrappedAssets() {
+          wrapped.querySelectorAll("img[data-lazy-img]").forEach(loadImage);
+          loadWrappedScript();
+        }
+
+        window.addEventListener("load", () => {
+          if (!("IntersectionObserver" in window)) {
+            window.addEventListener("scroll", loadWrappedAssets, { once: true, passive: true });
+            return;
+          }
+          const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              loadWrappedAssets();
+              io.disconnect();
+            });
+          }, { rootMargin: "200px 0px" });
+          io.observe(wrapped);
+        });
+      })();
     </script>
     <script>
       /* Node 033: Wrapped 区入场动画 — IntersectionObserver 触发 .is-entered
