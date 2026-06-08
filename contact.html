@@ -1574,9 +1574,7 @@
     <button class="sound-btn" type="button" aria-label="Toggle Sound"><i></i></button>
 
     <main class="contact-stage">
-      <video class="contact-hero__image contact-hero__video" poster="./assets/marathon/contact-hero-marathon-bg.png" autoplay muted playsinline preload="metadata" aria-label="Marathon-style contact hero video">
-        <source src="./assets/marathon/contact-hero-marathon-video.mp4" type="video/mp4" />
-      </video>
+      <video class="contact-hero__image contact-hero__video" poster="./assets/marathon/contact-hero-marathon-bg.png" muted loop playsinline preload="none" aria-label="Marathon-style contact hero video" data-lazy-video data-src="./assets/marathon/contact-hero-marathon-video.mp4"></video>
       <div class="contact-hero-left" aria-hidden="true">
         <h1 class="contact-wordmark">
           OPEN<sup>®</sup>
@@ -1894,6 +1892,37 @@
     <script src="./assets/vendor/ScrollTrigger.min.js"></script>
     <script src="./assets/gsap-page-demo.js"></script>
     <script src="./assets/chen-pet.js" defer></script>
+      <script>
+        // poster-first lazy video (perf 3pass)
+        (function () {
+          const videos = document.querySelectorAll("video[data-lazy-video]");
+          if (!videos.length) return;
+
+          const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          const isMobile = window.matchMedia("(max-width: 768px)").matches;
+          if (reduceMotion || isMobile) return;
+
+          function loadVideo(video) {
+            if (video.dataset.loaded) return;
+            const src = video.dataset.src;
+            if (!src) return;
+            video.dataset.loaded = "1";
+            const source = document.createElement("source");
+            source.src = src;
+            source.type = "video/mp4";
+            video.appendChild(source);
+            video.load();
+            video.play().catch(() => {});
+          }
+
+          videos.forEach((video) => {
+            const play = () => loadVideo(video);
+            window.addEventListener("scroll", play, { once: true, passive: true });
+            video.addEventListener("pointerenter", play, { once: true });
+            window.setTimeout(play, 6000);
+          });
+        })();
+      </script>
       <script src="./chen-fx/06-gsap-motion-engine/motion-engine.js"></script>
       <script src="./assets/main-site-fixes.js?v=world-only-audio-187"></script>
   </body>

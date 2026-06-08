@@ -3648,9 +3648,7 @@
     <main class="me-stage">
       <!-- =========== HERO: cropped DESIGNER® wordmark =========== -->
       <section class="me-hero">
-        <video class="me-hero__image" autoplay muted loop playsinline preload="metadata" poster="./assets/about/here背景.png" aria-hidden="true">
-          <source src="./assets/about/about-hero-marathon-video.mp4" type="video/mp4" />
-        </video>
+        <video class="me-hero__image" muted loop playsinline preload="none" poster="./assets/about/here背景.png" aria-hidden="true" data-lazy-video data-src="./assets/about/about-hero-marathon-video.mp4"></video>
         <div>
           <h1 class="me-wordmark">
             MAKER<sup>®</sup>
@@ -3997,6 +3995,37 @@
       <script src="./assets/vendor/gsap.min.js"></script>
       <script src="./assets/vendor/CustomEase.min.js"></script>
       <script src="./assets/vendor/ScrollTrigger.min.js"></script>
+      <script>
+        // poster-first lazy video (perf 3pass)
+        (function () {
+          const videos = document.querySelectorAll("video[data-lazy-video]");
+          if (!videos.length) return;
+
+          const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          const isMobile = window.matchMedia("(max-width: 768px)").matches;
+          if (reduceMotion || isMobile) return;
+
+          function loadVideo(video) {
+            if (video.dataset.loaded) return;
+            const src = video.dataset.src;
+            if (!src) return;
+            video.dataset.loaded = "1";
+            const source = document.createElement("source");
+            source.src = src;
+            source.type = "video/mp4";
+            video.appendChild(source);
+            video.load();
+            video.play().catch(() => {});
+          }
+
+          videos.forEach((video) => {
+            const play = () => loadVideo(video);
+            window.addEventListener("scroll", play, { once: true, passive: true });
+            video.addEventListener("pointerenter", play, { once: true });
+            window.setTimeout(play, 6000);
+          });
+        })();
+      </script>
       <script src="./chen-fx/06-gsap-motion-engine/motion-engine.js"></script>
       <script src="./assets/main-site-fixes.js?v=world-only-audio-187"></script>
   </body>
