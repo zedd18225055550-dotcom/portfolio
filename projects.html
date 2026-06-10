@@ -8,7 +8,7 @@
     <!-- Load GSAP core -->
     <script src="./assets/vendor/gsap.min.js"></script>
     <script src="./assets/vendor/ScrollTrigger.min.js"></script>
-    <script src="./assets/vendor/CustomEase.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/CustomEase.min.js"></script>
     
     <!-- Load Motion Engine -->
     <link rel="stylesheet" href="./chen-fx/06-gsap-motion-engine/motion-engine.css" />
@@ -2915,11 +2915,11 @@
       <button class="filter-toggle" data-fx-magnetic="12" type="button">Filter⌄</button>
       <div class="filter-popover" aria-label="Project filters">
         <div class="filter-list">
-          <button class="is-active" type="button" data-filter="all" data-fx-magnetic="10">全部 <small>17</small></button>
-          <button type="button" data-filter="work" data-fx-magnetic="10">工作项目 <small>14</small></button>
-          <button type="button" data-filter="personal" data-fx-magnetic="10">个人项目 <small>2</small></button>
-          <button type="button" data-filter="ai" data-fx-magnetic="10">AI提效 <small>2</small></button>
-          <button type="button" data-filter="lab" data-fx-magnetic="10">视觉实验 <small>9</small></button>
+          <button class="is-active" type="button" data-filter="all" data-fx-magnetic="10">全部 <small>11</small></button>
+          <button type="button" data-filter="work" data-fx-magnetic="10">工作项目 <small>4</small></button>
+          <button type="button" data-filter="personal" data-fx-magnetic="10">个人项目 <small>7</small></button>
+          <button type="button" data-filter="ai" data-fx-magnetic="10">AI提效 <small>1</small></button>
+          <button type="button" data-filter="lab" data-fx-magnetic="10">视觉实验 <small>8</small></button>
         </div>
       </div>
     </div>
@@ -2951,6 +2951,10 @@
 
     <main class="projects-page">
       <section class="project-list" aria-label="Selected projects">
+        <a class="project-card" href="#" data-category="digital motion" data-stream="work" data-project-slug="summer-gala-2026" style="--media: url('./assets/projects/summer-gala-2026/fengmian.png');">
+          <div class="project-media"></div>
+          <div class="project-meta"><div><h2 class="project-title">2026 夏季盛典 S+</h2><p class="project-kind">S+ Gala / Touchpoints / H5 System</p></div><span class="project-arrow">↘</span></div>
+        </a>
         <a class="project-card" href="#" data-category="digital motion" data-stream="work lab" data-project-slug="the-symphony-of-vines" style="--media: url('./assets/projects/the-symphony-of-vines/Group 2090057975.png');">
           <div class="project-media"></div>
           <div class="project-meta"><div><h2 class="project-title">龙年 CNY</h2><p class="project-kind">IP / 地图 / 活动视觉</p></div><span class="project-arrow">↘</span></div>
@@ -2963,61 +2967,33 @@
           <div class="project-media"></div>
           <div class="project-meta"><div><h2 class="project-title">S+ Gala System</h2><p class="project-kind">AI Workflow / Rights System</p></div><span class="project-arrow">↘</span></div>
         </a>
-        <a class="project-card" href="#" data-category="digital" data-stream="work" style="--media: linear-gradient(135deg, #e6eef1 0 42%, #0f1b24 42% 100%), radial-gradient(circle at 67% 55%, #70c6ff 0 8%, transparent 9%);">
+        <a class="project-card" href="#" data-category="digital motion" data-stream="personal lab" data-project-slug="ip-01" style="--media: url('./assets/projects/ip-01/cover.png');">
           <div class="project-media"></div>
-          <div class="project-meta"><div><h2 class="project-title">BlueYard</h2><p class="project-kind">Portfolio Website</p></div><span class="project-arrow">↘</span></div>
+          <div class="project-meta"><div><h2 class="project-title">IP 01</h2><p class="project-kind">Tangyuan IP / Character World</p></div><span class="project-arrow">↘</span></div>
         </a>
-        <a class="project-card" href="#" data-category="digital experiment" data-stream="work lab" style="--media: radial-gradient(circle at 20% 42%, #e7ff53 0 13%, transparent 14%), radial-gradient(circle at 70% 55%, #9cff52 0 16%, transparent 17%), linear-gradient(135deg, #141414, #3341c8);">
+        <a class="project-card" href="#" data-category="digital motion" data-stream="personal lab" data-project-slug="ip-001" style="--media: url('./assets/projects/ip-001/cover.png');">
           <div class="project-media"></div>
-          <div class="project-meta"><div><h2 class="project-title">Cosmos</h2><p class="project-kind">Marketing Website</p></div><span class="project-arrow">↘</span></div>
+          <div class="project-meta"><div><h2 class="project-title">IP 001</h2><p class="project-kind">Tangyuan IP / Magic Bakery</p></div><span class="project-arrow">↘</span></div>
         </a>
-        <a class="project-card" href="#" data-category="digital" data-stream="work" style="--media: linear-gradient(110deg, #f7e7d4, #f0b679 42%, #253040 43% 100%);">
+        <a class="project-card" href="#" data-category="digital motion" data-stream="personal lab" data-project-slug="ip-0001" style="--media: url('./assets/projects/ip-0001/cover.png');">
           <div class="project-media"></div>
-          <div class="project-meta"><div><h2 class="project-title">25 Residences</h2><p class="project-kind">Portfolio Website</p></div><span class="project-arrow">↘</span></div>
+          <div class="project-meta"><div><h2 class="project-title">IP 0001</h2><p class="project-kind">Tangyuan IP / Wild West</p></div><span class="project-arrow">↘</span></div>
         </a>
-        <a class="project-card" href="#" data-category="digital experiment" data-stream="work lab" style="--media: radial-gradient(circle at 48% 48%, #1f1914 0 18%, transparent 19%), repeating-linear-gradient(90deg, #c9a37c 0 0.4rem, #f2dfbe 0.46rem 1.1rem);">
+        <a class="project-card" href="#" data-category="digital motion" data-stream="personal lab" data-project-slug="ip-00001" style="--media: url('./assets/projects/ip-00001/cover.png');">
           <div class="project-media"></div>
-          <div class="project-meta"><div><h2 class="project-title">Organimo</h2><p class="project-kind">Immersive Digital, Ecommerce</p></div><span class="project-arrow">↘</span></div>
+          <div class="project-meta"><div><h2 class="project-title">IP 00001</h2><p class="project-kind">Tangyuan IP / Hawaii Tour</p></div><span class="project-arrow">↘</span></div>
         </a>
-        <a class="project-card" href="#" data-category="digital" data-stream="ai" style="--media: linear-gradient(135deg, #1b1b1b, #f6f1e8 50%, #191919 51%);">
+        <a class="project-card" href="#" data-category="digital motion" data-stream="personal lab" data-project-slug="ip-000001" style="--media: url('./assets/projects/ip-000001/cover.png');">
           <div class="project-media"></div>
-          <div class="project-meta"><div><h2 class="project-title">Hiring Calculator</h2><p class="project-kind">Gamified Digital Experience</p></div><span class="project-arrow">↘</span></div>
+          <div class="project-meta"><div><h2 class="project-title">IP 000001</h2><p class="project-kind">Tangyuan IP / Cosmic Star</p></div><span class="project-arrow">↘</span></div>
         </a>
-        <a class="project-card" href="#" data-category="digital motion" data-stream="work lab" style="--media: radial-gradient(circle at 52% 48%, #ebe5db 0 18%, transparent 19%), linear-gradient(125deg, #3b3b3b, #9a8f7b, #171717);">
+        <a class="project-card" href="#" data-category="digital motion" data-stream="personal lab" data-project-slug="ip-10" style="--media: url('./assets/projects/ip-10/cover.png');">
           <div class="project-media"></div>
-          <div class="project-meta"><div><h2 class="project-title">RobCo</h2><p class="project-kind">3D Motion</p></div><span class="project-arrow">↘</span></div>
+          <div class="project-meta"><div><h2 class="project-title">IP 10</h2><p class="project-kind">Tangyuan IP / Region Create</p></div><span class="project-arrow">↘</span></div>
         </a>
-        <a class="project-card" href="#" data-category="branding digital" data-stream="work" style="--media: linear-gradient(135deg, #ff5c2b, #e6d44d 45%, #212121 46% 100%);">
+        <a class="project-card" href="#" data-category="digital motion" data-stream="personal lab" data-project-slug="ip-tutorial" style="--media: url('./assets/projects/ip-tutorial/cover.png');">
           <div class="project-media"></div>
-          <div class="project-meta"><div><h2 class="project-title">KIKK 2024</h2><p class="project-kind">Branding & Website</p></div><span class="project-arrow">↘</span></div>
-        </a>
-        <a class="project-card" href="#" data-category="digital motion" data-stream="personal lab" style="--media: radial-gradient(circle at 50% 24%, #f4efe4 0 16%, transparent 17%), repeating-linear-gradient(100deg, #222 0 0.5rem, #e6d9c2 0.56rem 0.86rem);">
-          <div class="project-media"></div>
-          <div class="project-meta"><div><h2 class="project-title">Nikolas Type</h2><p class="project-kind">Website</p></div><span class="project-arrow">↘</span></div>
-        </a>
-        <a class="project-card" href="#" data-category="digital experiment" data-stream="work lab" style="--media: radial-gradient(circle at 48% 49%, #d7d3c6 0 19%, transparent 20%), radial-gradient(circle at 50% 50%, transparent 0 34%, #181818 35% 36%, transparent 37%), linear-gradient(135deg, #9cc6cf, #e9dfd3);">
-          <div class="project-media"></div>
-          <div class="project-meta"><div><h2 class="project-title">Seascape Survey</h2><p class="project-kind">Brand, Promotional Website, WebGL</p></div><span class="project-arrow">↘</span></div>
-        </a>
-        <a class="project-card" href="#" data-category="digital experiment" data-stream="personal lab" style="--media: radial-gradient(circle at 50% 42%, #f3e7ce 0 17%, transparent 18%), repeating-conic-gradient(from 20deg, #121212 0 8deg, #8b753c 8deg 15deg, #f0d47f 15deg 22deg);">
-          <div class="project-media"></div>
-          <div class="project-meta"><div><h2 class="project-title">Cult of the North</h2><p class="project-kind">Website</p></div><span class="project-arrow">↘</span></div>
-        </a>
-        <a class="project-card" href="#" data-category="branding digital experiment" data-stream="work lab" style="--media: linear-gradient(135deg, #0e0f13, #334ad7 38%, #f76025 39% 42%, #ece1cf 43% 100%);">
-          <div class="project-media"></div>
-          <div class="project-meta"><div><h2 class="project-title">Crosswire</h2><p class="project-kind">Brand, Promotional Website, WebGL</p></div><span class="project-arrow">↘</span></div>
-        </a>
-        <a class="project-card" href="#" data-category="branding digital motion" data-stream="work lab" style="--media: radial-gradient(circle at 44% 48%, #7cc7dc 0 20%, transparent 21%), linear-gradient(140deg, #06283b, #2c677c 50%, #eef0dc);">
-          <div class="project-media"></div>
-          <div class="project-meta"><div><h2 class="project-title">Blue Marine</h2><p class="project-kind">Immersive Digital</p></div><span class="project-arrow">↘</span></div>
-        </a>
-        <a class="project-card" href="#" data-category="branding digital experiment" data-stream="work ai" style="--media: repeating-linear-gradient(45deg, #202020 0 0.45rem, #e8e2ce 0.5rem 0.68rem), radial-gradient(circle at 70% 35%, #9cff52 0 13%, transparent 14%);">
-          <div class="project-media"></div>
-          <div class="project-meta"><div><h2 class="project-title">Quai Network</h2><p class="project-kind">Immersive Digital, Brand</p></div><span class="project-arrow">↘</span></div>
-        </a>
-        <a class="project-card" href="#" data-category="digital" data-stream="work" style="--media: linear-gradient(90deg, #efe8dc 0 48%, #111 48% 52%, #efe8dc 52% 100%), linear-gradient(180deg, #cbd5d2, #f3e1cf);">
-          <div class="project-media"></div>
-          <div class="project-meta"><div><h2 class="project-title">CLOU Architects</h2><p class="project-kind">Digital</p></div><span class="project-arrow">↘</span></div>
+          <div class="project-meta"><div><h2 class="project-title">汤圆小教程</h2><p class="project-kind">Tangyuan IP / Tutorial</p></div><span class="project-arrow">↘</span></div>
         </a>
       </section>
     </main>
@@ -3094,48 +3070,30 @@
       const streamChips = [...document.querySelectorAll("[data-stream-chip]")];
       const projectStreams = ["all", "work", "personal", "ai", "lab"];
       const projectCopy = {
+        "2026 夏季盛典 S+": ["2026 夏季盛典 S+", "主 R 分管下负责挂件触达与 H5 页面双线主 S，沉淀挂件规范、H5 全界面和海报模板。"],
         "龙年 CNY": ["2024 龙年 CNY", "把龙年 IP、五个主题地图和活动物料整理成一套可延展的春节会场系统。"],
-        "The Symphony Of Vines": ["藤蔓交响", "把有机影像、声音节奏和交互路径压进一支可漫游的品牌短片。"],
         "时间档争霸赛": ["时间档争霸赛", "从 0→1 建立周期性月赛 IP 视觉系统，并在 2 月版到 4 月版中持续复用。"],
         "S+ Gala System": ["S+ 盛典权益体系", "用 AI 工作流提质提效，并把权益视觉规范沉淀为全年盛典可复用的方法。"],
-        Klook: ["旅行问答", "用高饱和互动问答，把一次活动转化做成轻快的产品游戏。"],
-        "RSPCA Animal Futures": ["动物未来", "面向公众教育的温柔数字体验，用场景和选择讲清复杂议题。"],
-        BlueYard: ["蓝色庭院", "克制的机构叙事系统，给长内容、观点和案例留出清晰节奏。"],
-        Cosmos: ["宇宙社交", "一套为社交发现产品准备的彩色视觉语言和营销页面骨架。"],
-        "25 Residences": ["二十五居", "以建筑留白和图像节奏组织高端住宅项目的浏览体验。"],
-        Organimo: ["有机仪式", "围绕产品质感、日常仪式和沉浸购买动线展开的电商入口。"],
-        "Hiring Calculator": ["招聘计算器", "把成本、时间和结果变成可比较、可分享的互动工具。"],
-        RobCo: ["机械叙事", "给机器人品牌准备的动态资产、样机画面和模块化运动语言。"],
-        "KIKK 2024": ["艺术节系统", "用强图形和高能色彩串起活动身份、网站和传播物料。"],
-        "Nikolas Type": ["字体标本", "为字体浏览、字样展示和细节动效设计的编辑式网页。"],
-        "Seascape Survey": ["海景调查", "用抽象水域、数据感和 WebGL 气质表达海洋研究。"],
-        "Cult of the North": ["北境崇拜", "神秘、粗粝、电影感的叙事页面，适合强世界观项目。"],
-        Crosswire: ["交叉信号", "高对比品牌系统，强调线性结构、交互故事和锐利视觉。"],
-        "Blue Marine": ["蓝色海洋", "面向保护议题的沉浸式海洋视觉和空间化案例框架。"],
-        "Quai Network": ["网络秩序", "为复杂技术品牌准备的密集数字场景和传播系统。"],
-        "CLOU Architects": ["建筑索引", "安静、模块化、图像优先的建筑事务所案例入口。"],
+        "IP 01": ["IP 01", "汤圆 IP 基础角色表达，整理 Hero 动态、封面和多张视觉延展。"],
+        "IP 001": ["IP 001", "魔法烘焙主题，用暖光、食物道具和甜感场景建立角色陪伴感。"],
+        "IP 0001": ["IP 0001", "西部冒险主题，把角色扮演、场景纵深和阵营变化串成完整世界观。"],
+        "IP 00001": ["IP 00001", "夏日旅行主题，用海浪动势、清爽主色和动态表情延展角色记忆。"],
+        "IP 000001": ["IP 000001", "宇宙星光主题，建立更偏幻想、舞台和高级感的角色视觉。"],
+        "IP 10": ["IP 10", "创作装置主题，把角色和机器道具绑定，突出创造力与概念包装。"],
+        "汤圆小教程": ["汤圆小教程", "把 IP 视觉场景制作流程拆成 7 张步骤展板，从角色设定到最终画面完整讲清。"],
       };
       const projectTags = {
+        "2026 夏季盛典 S+": "S+ Gala",
         "龙年 CNY": "IP System",
-        "The Symphony Of Vines": "Cinematic",
         "时间档争霸赛": "Visual IP",
         "S+ Gala System": "AI Workflow",
-        Klook: "Quiz",
-        "RSPCA Animal Futures": "Learning",
-        BlueYard: "Portfolio",
-        Cosmos: "Marketing",
-        "25 Residences": "Portfolio",
-        Organimo: "Ecommerce",
-        "Hiring Calculator": "Tool",
-        RobCo: "Motion",
-        "KIKK 2024": "Branding",
-        "Nikolas Type": "Type",
-        "Seascape Survey": "WebGL",
-        "Cult of the North": "Website",
-        Crosswire: "WebGL",
-        "Blue Marine": "Digital",
-        "Quai Network": "Brand",
-        "CLOU Architects": "Digital",
+        "IP 01": "Tangyuan IP",
+        "IP 001": "Magic Bakery",
+        "IP 0001": "Wild West",
+        "IP 00001": "Hawaii Tour",
+        "IP 000001": "Cosmic Star",
+        "IP 10": "Region Create",
+        "汤圆小教程": "IP Tutorial",
       };
       const projectVideoFallback = "./assets/projects/海浪.mp4";
       const slugify = (text) =>
@@ -3181,7 +3139,21 @@
         card.dataset.projectTitle = originalTitle;
         card.dataset.videoSrc = videoSrc;
         card.href = `./project.html?project=${card.dataset.projectSlug || slugify(originalTitle)}`;
+        card.setAttribute("data-no-transition", "");
         card.setAttribute("aria-label", `View ${originalTitle}`);
+        card.addEventListener(
+          "click",
+          (event) => {
+            if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+            const href = card.getAttribute("href");
+            if (!href || href === "#") return;
+            event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+            window.location.href = href;
+          },
+          { capture: true },
+        );
         card.innerHTML = `
           <span class="project-frame project-frame--base" aria-hidden="true">${projectFrameSvg}</span>
           <span class="project-frame project-frame--hot" aria-hidden="true">${projectFrameSvg}</span>
@@ -3499,7 +3471,7 @@
     <script src="./assets/gsap-motion-demo.js?v=project-card-frame-fix-240"></script>
     <script src="./assets/chen-pet.js" defer></script>
     <script>
-      // poster-first lazy video (perf 3pass)
+      // poster-first lazy video (production deploy)
       (function () {
         const videos = document.querySelectorAll("video[data-lazy-video]");
         if (!videos.length) return;

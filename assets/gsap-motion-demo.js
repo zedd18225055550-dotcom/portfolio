@@ -65,57 +65,81 @@
       }
 
       .gsap-chapter-rail {
+        --chapter-progress: 0;
+        align-items: center;
         display: grid;
-        gap: 0.28rem;
+        gap: 0.52rem;
+        grid-template-columns: auto 1.16rem;
         position: fixed;
-        right: clamp(0.75rem, 1.45vw, 1.5rem);
+        pointer-events: none;
+        right: clamp(0.74rem, 1.2vw, 1.35rem);
         top: 50%;
         transform: translateY(-50%);
         z-index: 75;
       }
 
-      .gsap-chapter-rail button {
-        align-items: center;
-        appearance: none;
-        background: rgba(5, 5, 5, 0.72);
-        border: 1px solid rgba(244, 243, 237, 0.2);
+      .gsap-chapter-rail__track {
+        background: rgba(244, 243, 237, 0.16);
         border-radius: 999px;
-        color: rgba(244, 243, 237, 0.64);
-        cursor: pointer;
-        display: inline-flex;
-        font: inherit;
-        font-size: 0.68rem;
-        font-weight: 900;
-        gap: 0.42rem;
-        justify-content: flex-start;
-        letter-spacing: 0.04em;
-        min-height: 2.05rem;
-        min-width: 2.05rem;
+        height: min(34vh, 15rem);
         overflow: hidden;
-        padding: 0 0.64rem;
-        text-transform: uppercase;
-        transition: background-color 0.2s ease, color 0.2s ease, width 0.24s ease;
-        width: 2.05rem;
+        position: relative;
+        width: 0.16rem;
       }
 
-      .gsap-chapter-rail button span {
-        opacity: 0;
-        transition: opacity 0.18s ease;
-        white-space: nowrap;
-      }
-
-      .gsap-chapter-rail button.is-active,
-      .gsap-chapter-rail button:hover,
-      .gsap-chapter-rail button:focus-visible {
+      .gsap-chapter-rail__bar {
         background: var(--accent, #9cff52);
-        color: #050505;
-        width: clamp(7.25rem, 10vw, 9.25rem);
+        border-radius: inherit;
+        inset: 0;
+        position: absolute;
+        transform: scaleY(var(--chapter-progress));
+        transform-origin: top;
       }
 
-      .gsap-chapter-rail button.is-active span,
-      .gsap-chapter-rail button:hover span,
-      .gsap-chapter-rail button:focus-visible span {
-        opacity: 1;
+      .gsap-chapter-rail__dot {
+        background: var(--accent, #9cff52);
+        border-radius: 999px;
+        box-shadow: 0 0 1.1rem rgb(var(--accent-rgb, 156 255 82) / 0.48);
+        height: 0.52rem;
+        left: 50%;
+        position: absolute;
+        top: calc(0.26rem + var(--chapter-progress) * (100% - 0.52rem));
+        transform: translate(-50%, -50%);
+        width: 0.52rem;
+      }
+
+      .gsap-chapter-rail__meta {
+        align-items: center;
+        display: grid;
+        gap: 0.28rem;
+        grid-template-rows: auto 1fr;
+        justify-items: center;
+        max-width: 1.16rem;
+        min-height: min(34vh, 15rem);
+        text-align: center;
+        text-transform: uppercase;
+        width: 1.16rem;
+      }
+
+      .gsap-chapter-rail__index {
+        color: rgba(244, 243, 237, 0.64);
+        font-size: 0.58rem;
+        font-weight: 900;
+        letter-spacing: 0.04em;
+      }
+
+      .gsap-chapter-rail__label {
+        color: var(--accent, #9cff52);
+        font-size: clamp(0.68rem, 0.82vw, 0.88rem);
+        font-weight: 900;
+        letter-spacing: 0.04em;
+        line-height: 1;
+        max-height: min(28vh, 12.5rem);
+        max-width: 100%;
+        overflow: hidden;
+        text-orientation: upright;
+        white-space: nowrap;
+        writing-mode: vertical-rl;
       }
 
       @media (max-width: 900px) {
@@ -551,50 +575,135 @@
 
   function initChapterRail(isCnyCase) {
     if (document.querySelector(".gsap-chapter-rail")) return;
-    const chapterDefs = isCnyCase
-      ? [
-          ["01", "Hero", ".klook-hero"],
-          ["02", "IP", ".cny-making-section"],
-          ["03", "Map", ".cny-map-setting-section"],
-          ["04", "Output", ".cny-final-output, .klook-next"],
-        ]
-      : [
-          ["01", "Hero", ".klook-hero"],
-          ["02", "Overview", ".klook-overview"],
-          ["03", "Media", ".klook-slider"],
-          ["04", "Next", ".klook-next"],
-        ];
-    const chapters = chapterDefs
-      .map(([index, label, selector]) => ({ index, label, element: document.querySelector(selector) }))
-      .filter((chapter) => chapter.element);
+    const activeSelector = (() => {
+      if (document.body.classList.contains("is-cny-case")) return ".klook-case";
+      if (document.body.classList.contains("is-time-arena-case")) return ".time-arena-case";
+      if (document.body.classList.contains("is-summer-gala-case")) return ".summer-gala-case";
+      if (document.body.classList.contains("is-ip-universe-case")) return ".ip-universe-case";
+      if (document.body.classList.contains("is-benefit-case")) return ".benefit-case:not(.time-arena-case):not(.summer-gala-case):not(.ip-universe-case)";
+      return ".klook-case";
+    })();
+    const activeArticle = document.querySelector(`main.project-page > article${activeSelector}`);
+    const visibleArticle = [activeArticle].filter(Boolean).find((article) => {
+      const style = window.getComputedStyle(article);
+      return style.display !== "none" && style.visibility !== "hidden" && article.offsetHeight > 120;
+    });
+    if (!visibleArticle) return;
+
+    const labelFromSection = (section, index) => {
+      const raw =
+        section.querySelector(".cny-section-label, .benefit-section-label, .klook-section-label")?.textContent ||
+        section.getAttribute("aria-label") ||
+        section.querySelector("h2, h1")?.textContent ||
+        (index === 0 ? "Hero" : "Section");
+      const normalized = raw
+        .replace(/\s+/g, " ")
+        .replace(/^Klook hero$/i, document.body.classList.contains("is-cny-case") ? "CNY Hero" : "Klook Hero")
+        .replace(/^[0-9]+\s*\/\s*/i, "")
+        .replace(/^CH\s*[0-9]+\s*[·.-]\s*/i, "")
+        .trim();
+      return normalized.length > 18 ? normalized.slice(0, 18).trim() : normalized;
+    };
+
+    const chapters = [...visibleArticle.querySelectorAll(":scope > section")]
+      .filter((section) => section.offsetHeight > 120)
+      .map((section, index) => ({
+        index: String(index + 1).padStart(2, "0"),
+        label: labelFromSection(section, index),
+        element: section,
+      }));
     if (chapters.length < 2) return;
 
-    const rail = document.createElement("nav");
+    const rail = document.createElement("aside");
     rail.className = "gsap-chapter-rail";
-    rail.setAttribute("aria-label", "Case chapters");
+    rail.setAttribute("aria-label", "Case reading progress");
+    rail.innerHTML = `
+      <div class="gsap-chapter-rail__track" aria-hidden="true">
+        <span class="gsap-chapter-rail__bar"></span>
+        <span class="gsap-chapter-rail__dot"></span>
+      </div>
+      <div class="gsap-chapter-rail__meta">
+        <span class="gsap-chapter-rail__index">${chapters[0].index}</span>
+        <span class="gsap-chapter-rail__label">${chapters[0].label}</span>
+      </div>
+    `;
+    const indexEl = rail.querySelector(".gsap-chapter-rail__index");
+    const labelEl = rail.querySelector(".gsap-chapter-rail__label");
 
-    chapters.forEach((chapter) => {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.innerHTML = `${chapter.index}<span>${chapter.label}</span>`;
-      button.addEventListener("click", () => {
-        chapter.element.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-      rail.append(button);
+    const setActiveChapter = (chapter) => {
+      if (!chapter || !indexEl || !labelEl) return;
+      indexEl.textContent = chapter.index;
+      labelEl.textContent = chapter.label;
+    };
 
-      ScrollTrigger.create({
-        trigger: chapter.element,
-        start: "top center",
-        end: "bottom center",
-        onToggle: (self) => {
-          if (!self.isActive) return;
-          rail.querySelectorAll("button").forEach((item) => item.classList.toggle("is-active", item === button));
-        },
+    const updateProgress = () => {
+      const viewport = window.innerHeight || 1;
+      const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
+      const documentMax = Math.max(1, document.documentElement.scrollHeight - viewport);
+      const articleTop = visibleArticle.getBoundingClientRect().top + scrollTop;
+      const articleEnd = Math.min(documentMax, Math.max(articleTop + 1, articleTop + visibleArticle.offsetHeight - viewport));
+      const progress = scrollTop >= articleEnd - 1
+        ? 1
+        : Math.max(0, Math.min(1, (scrollTop - articleTop) / Math.max(1, articleEnd - articleTop)));
+      rail.style.setProperty("--chapter-progress", progress.toFixed(3));
+      const center = viewport * 0.5;
+      const active = chapters
+        .map((chapter) => ({
+          chapter,
+          distance: Math.abs(chapter.element.getBoundingClientRect().top - center),
+        }))
+        .sort((a, b) => a.distance - b.distance)[0]?.chapter;
+      setActiveChapter(active);
+    };
+
+    let progressTicking = false;
+    let lastProgressSignature = "";
+    let lastDocumentMax = Math.max(1, document.documentElement.scrollHeight - (window.innerHeight || 1));
+    let wasAtDocumentBottom = false;
+    const requestProgressUpdate = () => {
+      if (progressTicking) return;
+      progressTicking = true;
+      window.requestAnimationFrame(() => {
+        progressTicking = false;
+        updateProgress();
       });
+    };
+
+    const watchProgress = () => {
+      const viewport = window.innerHeight || 1;
+      const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
+      const documentMax = Math.max(1, document.documentElement.scrollHeight - viewport);
+      if (wasAtDocumentBottom && documentMax > lastDocumentMax + 1 && scrollTop < documentMax - 1) {
+        window.scrollTo({ top: documentMax, behavior: "auto" });
+      }
+      const signature = [
+        Math.round(window.scrollY || document.documentElement.scrollTop || 0),
+        document.documentElement.scrollHeight,
+        viewport,
+      ].join(":");
+      if (signature !== lastProgressSignature) {
+        lastProgressSignature = signature;
+        updateProgress();
+      }
+      lastDocumentMax = documentMax;
+      wasAtDocumentBottom = documentMax - (window.scrollY || document.documentElement.scrollTop || 0) <= 6;
+      window.requestAnimationFrame(watchProgress);
+    };
+
+    ScrollTrigger.create({
+      trigger: visibleArticle,
+      start: "top top",
+      end: "bottom bottom",
+      onUpdate: updateProgress,
+      onRefresh: updateProgress,
     });
 
-    rail.querySelector("button")?.classList.add("is-active");
     document.body.append(rail);
+    window.addEventListener("scroll", requestProgressUpdate, { passive: true });
+    window.addEventListener("resize", requestProgressUpdate);
+    window.addEventListener("load", requestProgressUpdate, { once: true });
+    updateProgress();
+    watchProgress();
   }
 
   window.addEventListener("load", () => {

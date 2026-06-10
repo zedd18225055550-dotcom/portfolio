@@ -672,6 +672,7 @@
         height: 100%;
         left: 0;
         overflow: hidden;
+        pointer-events: none;
         position: absolute;
         top: 0;
         transform: translateY(100%);
@@ -1341,6 +1342,8 @@
 
       .work-card {
         aspect-ratio: 16 / 9;
+        appearance: none;
+        -webkit-appearance: none;
         background:
           linear-gradient(120deg, rgba(255, 255, 255, 0.08), transparent 42%),
           rgba(255, 255, 255, 0.035);
@@ -1349,10 +1352,14 @@
         color: var(--ink);
         cursor: pointer;
         display: block;
+        font: inherit;
         height: var(--card-h);
         left: 50%;
         overflow: hidden;
+        padding: 0;
+        pointer-events: none;
         position: absolute;
+        text-align: left;
         top: 50%;
         transform: translate(-50%, -50%);
         transform-style: preserve-3d;
@@ -1365,6 +1372,10 @@
           0 0 0 1px rgba(var(--mark-rgb) / 0.06) inset,
           1.2rem 0 2.4rem rgba(255, 255, 255, 0.04) inset,
           -1.7rem 0 3.4rem rgba(0, 0, 0, 0.36) inset;
+      }
+
+      .work-card.is-active {
+        pointer-events: auto;
       }
 
       .work-card::marker {
@@ -1952,8 +1963,8 @@
           <p class="works-kind change-mark" data-active-kind>IP / Map / Campaign Visual</p>
           <p class="works-desc change-mark" data-active-desc>A modular CNY event system built from a dragon IP, five themed maps, and campaign assets.</p>
           <div class="works-actions">
-            <a class="open-link change-mark" data-active-link href="./project.html?project=the-symphony-of-vines">OPEN</a>
-            <span class="works-count change-mark" data-active-count>01 / 17</span>
+            <a class="open-link change-mark" data-active-link href="./project.html?project=summer-gala-2026">OPEN</a>
+            <span class="works-count change-mark" data-active-count>01 / 11</span>
           </div>
         </div>
       </section>
@@ -2432,6 +2443,17 @@
 
       const projects = [
         {
+          title: "2026 Summer Gala",
+          display: "Summer Gala",
+          kind: "S+ Gala / Touchpoints / H5 System",
+          tag: "S+ Gala",
+          desc: "A 2026 summer S+ gala case built around live-room touchpoints, H5 interfaces, poster templates, and team efficiency.",
+          media: "url('./assets/projects/summer-gala-2026/fengmian.png')",
+          accent: "#d7b45a",
+          video: "./assets/projects/summer-gala-2026/hero.mp4",
+          href: "./project.html?project=summer-gala-2026",
+        },
+        {
           title: "CNY Dragon",
           display: "CNY Dragon",
           kind: "IP / Map / Campaign Visual",
@@ -2464,144 +2486,81 @@
           href: "./project.html?project=benefit-system",
         },
         {
-          title: "BlueYard",
-          display: "Blue Yard",
-          kind: "Portfolio Website",
-          tag: "Portfolio",
-          desc: "A restrained editorial system for long-form ideas, projects, and institutional storytelling.",
-          media: "linear-gradient(135deg, #e6eef1 0 42%, #0f1b24 42% 100%), radial-gradient(circle at 67% 55%, #70c6ff 0 8%, transparent 9%)",
-          accent: "#70c6ff",
-          href: "./project.html?project=blueyard",
+          title: "IP 01",
+          display: "IP 01",
+          kind: "Tangyuan IP / Character World",
+          tag: "Tangyuan IP",
+          desc: "A character-world study for Tangyuan IP, pairing a dynamic hero with cover and extension boards.",
+          media: "url('./assets/projects/ip-01/cover.png')",
+          accent: "#86b8ff",
+          video: "./assets/projects/ip-01/hero.mp4",
+          href: "./project.html?project=ip-01",
         },
         {
-          title: "Cosmos",
-          display: "Cosmos",
-          kind: "Marketing Website",
-          tag: "Marketing",
-          desc: "A colorful marketing language for a social discovery product and its launch surface.",
-          media: "radial-gradient(circle at 20% 42%, #e7ff53 0 13%, transparent 14%), radial-gradient(circle at 70% 55%, #9cff52 0 16%, transparent 17%), linear-gradient(135deg, #141414, #3341c8)",
+          title: "IP 001",
+          display: "IP 001",
+          kind: "Tangyuan IP / Magic Bakery",
+          tag: "Magic Bakery",
+          desc: "A warm fantasy bakery theme for Tangyuan, using food props, soft light, and mobile display boards.",
+          media: "url('./assets/projects/ip-001/cover.png')",
+          accent: "#e7b86d",
+          video: "./assets/projects/ip-001/hero.mp4",
+          href: "./project.html?project=ip-001",
+        },
+        {
+          title: "IP 0001",
+          display: "IP 0001",
+          kind: "Tangyuan IP / Wild West",
+          tag: "Wild West",
+          desc: "A western adventure direction that expands Tangyuan into costume, setting, factions, and reward visuals.",
+          media: "url('./assets/projects/ip-0001/cover.png')",
+          accent: "#d9944a",
+          video: "./assets/projects/ip-0001/hero.mp4",
+          href: "./project.html?project=ip-0001",
+        },
+        {
+          title: "IP 00001",
+          display: "IP 00001",
+          kind: "Tangyuan IP / Hawaii Tour",
+          tag: "Hawaii Tour",
+          desc: "A summer travel extension with wave motion, fresh blue-green color, and animated character stickers.",
+          media: "url('./assets/projects/ip-00001/cover.png')",
+          accent: "#62cbd6",
+          video: "./assets/projects/ip-00001/hero.mp4",
+          href: "./project.html?project=ip-00001",
+        },
+        {
+          title: "IP 000001",
+          display: "IP 000001",
+          kind: "Tangyuan IP / Cosmic Star",
+          tag: "Cosmic Star",
+          desc: "A cosmic stage direction for Tangyuan, built with fantasy particles, star light, and award-style packaging.",
+          media: "url('./assets/projects/ip-000001/cover.png')",
+          accent: "#9d8dff",
+          video: "./assets/projects/ip-000001/hero.mp4",
+          href: "./project.html?project=ip-000001",
+        },
+        {
+          title: "IP 10",
+          display: "IP 10",
+          kind: "Tangyuan IP / Region Create",
+          tag: "Region Create",
+          desc: "A creation-machine theme that binds Tangyuan to tools, devices, and a more product-like concept world.",
+          media: "url('./assets/projects/ip-10/cover.png')",
           accent: "#9cff52",
-          href: "./project.html?project=cosmos",
+          video: "./assets/projects/ip-10/hero.mp4",
+          href: "./project.html?project=ip-10",
         },
         {
-          title: "25 Residences",
-          display: "25 Residences",
-          kind: "Portfolio Website",
-          tag: "Architecture",
-          desc: "A spacious architecture-led browsing rhythm for a premium residential portfolio.",
-          media: "linear-gradient(110deg, #f7e7d4, #f0b679 42%, #253040 43% 100%)",
-          accent: "#f0b679",
-          href: "./project.html?project=25-residences",
-        },
-        {
-          title: "Organimo",
-          display: "Organimo",
-          kind: "Immersive Digital, Ecommerce",
-          tag: "Ecommerce",
-          desc: "An ecommerce entry built around product texture, daily rituals, and immersive purchase flow.",
-          media: "radial-gradient(circle at 48% 48%, #1f1914 0 18%, transparent 19%), repeating-linear-gradient(90deg, #c9a37c 0 0.4rem, #f2dfbe 0.46rem 1.1rem)",
-          accent: "#c9a37c",
-          href: "./project.html?project=organimo",
-        },
-        {
-          title: "Hiring Calculator",
-          display: "Hiring Calc",
-          kind: "Gamified Digital Experience",
-          tag: "Tool",
-          desc: "A gamified tool that makes cost, time, and outcome easier to compare and share.",
-          media: "linear-gradient(135deg, #1b1b1b, #f6f1e8 50%, #191919 51%)",
-          accent: "#f6f1e8",
-          href: "./project.html?project=hiring-calculator",
-        },
-        {
-          title: "RobCo",
-          display: "Rob Co",
-          kind: "3D Motion",
-          tag: "Motion",
-          desc: "A modular motion language and rendered asset system for a robotics brand.",
-          media: "radial-gradient(circle at 52% 48%, #ebe5db 0 18%, transparent 19%), linear-gradient(125deg, #3b3b3b, #9a8f7b, #171717)",
-          accent: "#9a8f7b",
-          href: "./project.html?project=robco",
-        },
-        {
-          title: "KIKK 2024",
-          display: "KIKK 2024",
-          kind: "Branding & Website",
-          tag: "Branding",
-          desc: "A high-energy identity system connecting event graphics, web, and campaign assets.",
-          media: "linear-gradient(135deg, #ff5c2b, #e6d44d 45%, #212121 46% 100%)",
-          accent: "#ff5c2b",
-          href: "./project.html?project=kikk-2024",
-        },
-        {
-          title: "Nikolas Type",
-          display: "Nikolas Type",
-          kind: "Website",
-          tag: "Type",
-          desc: "An editorial web system for type browsing, specimen moments, and detail-led motion.",
-          media: "radial-gradient(circle at 50% 24%, #f4efe4 0 16%, transparent 17%), repeating-linear-gradient(100deg, #222 0 0.5rem, #e6d9c2 0.56rem 0.86rem)",
-          accent: "#e6d9c2",
-          href: "./project.html?project=nikolas-type",
-        },
-        {
-          title: "Seascape Survey",
-          display: "Seascape",
-          kind: "Brand, Promotional Website, WebGL",
-          tag: "WebGL",
-          desc: "An abstract aquatic visual system with data texture and WebGL atmosphere.",
-          media: "radial-gradient(circle at 48% 49%, #d7d3c6 0 19%, transparent 20%), radial-gradient(circle at 50% 50%, transparent 0 34%, #181818 35% 36%, transparent 37%), linear-gradient(135deg, #9cc6cf, #e9dfd3)",
-          accent: "#9cc6cf",
-          href: "./project.html?project=seascape-survey",
-        },
-        {
-          title: "Cult of the North",
-          display: "Cult North",
-          kind: "Website",
-          tag: "Narrative",
-          desc: "A cinematic narrative page for a darker, world-building-led project.",
-          media: "radial-gradient(circle at 50% 42%, #f3e7ce 0 17%, transparent 18%), repeating-conic-gradient(from 20deg, #121212 0 8deg, #8b753c 8deg 15deg, #f0d47f 15deg 22deg)",
-          accent: "#f0d47f",
-          href: "./project.html?project=cult-of-the-north",
-        },
-        {
-          title: "Crosswire",
-          display: "Crosswire",
-          kind: "Brand, Promotional Website, WebGL",
-          tag: "Signal",
-          desc: "A high-contrast brand surface built from linear structure and sharp interaction.",
-          media: "linear-gradient(135deg, #0e0f13, #334ad7 38%, #f76025 39% 42%, #ece1cf 43% 100%)",
-          accent: "#f76025",
-          href: "./project.html?project=crosswire",
-        },
-        {
-          title: "Blue Marine",
-          display: "Blue Marine",
-          kind: "Immersive Digital",
-          tag: "Digital",
-          desc: "An immersive oceanic case framework for conservation-led storytelling.",
-          media: "radial-gradient(circle at 44% 48%, #7cc7dc 0 20%, transparent 21%), linear-gradient(140deg, #06283b, #2c677c 50%, #eef0dc)",
-          accent: "#7cc7dc",
-          href: "./project.html?project=blue-marine",
-        },
-        {
-          title: "Quai Network",
-          display: "Quai Network",
-          kind: "Immersive Digital, Brand",
-          tag: "Brand",
-          desc: "A dense digital scene and communication system for a complex technology brand.",
-          media: "repeating-linear-gradient(45deg, #202020 0 0.45rem, #e8e2ce 0.5rem 0.68rem), radial-gradient(circle at 70% 35%, #9cff52 0 13%, transparent 14%)",
-          accent: "#9cff52",
-          href: "./project.html?project=quai-network",
-        },
-        {
-          title: "CLOU Architects",
-          display: "CLOU",
-          kind: "Digital",
-          tag: "Architecture",
-          desc: "A quiet, modular, image-first entry for an architecture studio portfolio.",
-          media: "linear-gradient(90deg, #efe8dc 0 48%, #111 48% 52%, #efe8dc 52% 100%), linear-gradient(180deg, #cbd5d2, #f3e1cf)",
-          accent: "#cbd5d2",
-          href: "./project.html?project=clou-architects",
+          title: "Tangyuan Tutorial",
+          display: "Tutorial",
+          kind: "Tangyuan IP / Tutorial",
+          tag: "IP Tutorial",
+          desc: "A seven-board tutorial project that turns IP visual scene production into a readable step-by-step method.",
+          media: "url('./assets/projects/ip-tutorial/cover.png')",
+          accent: "#8fc2ff",
+          video: "./assets/projects/ip-tutorial/hero.mp4",
+          href: "./project.html?project=ip-tutorial",
         },
       ];
 
@@ -2881,9 +2840,10 @@
       }
 
       projects.forEach((project, index) => {
-        const card = document.createElement("a");
+        const card = document.createElement("button");
         card.className = "work-card";
-        card.href = project.href;
+        card.type = "button";
+        card.setAttribute("aria-label", `${project.title} preview`);
         card.style.setProperty("--media", project.media);
         card.dataset.projectIndex = String(index);
         card.innerHTML = `
@@ -3278,6 +3238,8 @@
         playCursor.classList.toggle("is-visible", visible);
       }
 
+      let mediaPointerPlayback = false;
+
       function stopCardPlayback(card, resetTime = false) {
         card.classList.remove("is-playing");
         const video = card.querySelector(".work-card__video");
@@ -3290,6 +3252,26 @@
             // Some browsers disallow seeking before enough media metadata is loaded.
           }
         }
+      }
+
+      function playCardPlayback(card) {
+        const project = projects[Number(card.dataset.projectIndex)];
+        cards.forEach((item) => {
+          if (item !== card) stopCardPlayback(item, true);
+        });
+        const video = card.querySelector(".work-card__video");
+        if (video && project?.video) {
+          if (!video.getAttribute("src")) {
+            video.src = project.video;
+            video.load();
+          }
+          card.classList.add("is-playing");
+          video.play().catch(() => {
+            stopCardPlayback(card, true);
+          });
+          return;
+        }
+        stopCardPlayback(card, true);
       }
 
       function onTouchStart(event) {
@@ -3322,31 +3304,51 @@
             if (card.classList.contains("is-active")) setPlayCursorVisible(true);
           });
           card.addEventListener("pointerleave", () => setPlayCursorVisible(false));
+          card.querySelector(".work-card__media")?.addEventListener("pointerdown", (event) => {
+            if (!card.classList.contains("is-active")) return;
+            event.preventDefault();
+            event.stopPropagation();
+            mediaPointerPlayback = true;
+            playCardPlayback(card);
+          });
+          card.querySelector(".work-card__media")?.addEventListener("click", (event) => {
+            if (!card.classList.contains("is-active")) return;
+            event.preventDefault();
+            event.stopPropagation();
+            mediaPointerPlayback = false;
+            playCardPlayback(card);
+          });
           card.addEventListener("click", (event) => {
             event.preventDefault();
-            const project = projects[Number(card.dataset.projectIndex)];
+            if (mediaPointerPlayback) {
+              mediaPointerPlayback = false;
+              event.stopPropagation();
+              return;
+            }
             if (!card.classList.contains("is-active")) {
               moveToProject(Number(card.dataset.projectIndex));
               return;
             }
-            cards.forEach((item) => {
-              if (item !== card) stopCardPlayback(item, true);
-            });
-            const video = card.querySelector(".work-card__video");
-            if (video && project?.video) {
-              if (!video.getAttribute("src")) {
-                video.src = project.video;
-                video.load();
-              }
-              card.classList.add("is-playing");
-              video.play().catch(() => {
-                stopCardPlayback(card, true);
-              });
-              return;
-            }
-            stopCardPlayback(card, true);
+            playCardPlayback(card);
           });
         });
+        track.addEventListener("click", (event) => {
+          const activeCard = event.target.closest?.(".work-card") || document.querySelector(".work-card.is-active");
+          if (!activeCard) return;
+          const media = activeCard.querySelector(".work-card__media");
+          const rect = media?.getBoundingClientRect();
+          if (!rect) return;
+          const isInsideMedia =
+            event.clientX >= rect.left &&
+            event.clientX <= rect.right &&
+            event.clientY >= rect.top &&
+            event.clientY <= rect.bottom;
+          if (!isInsideMedia) return;
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation?.();
+          playCardPlayback(activeCard);
+        }, true);
         window.addEventListener("wheel", onWheel, { passive: true });
         window.addEventListener("pointermove", onPointerMove, { passive: true });
         window.addEventListener("touchstart", onTouchStart, { passive: true });

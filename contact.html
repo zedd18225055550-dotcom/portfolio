@@ -9,7 +9,7 @@
     <!-- Load GSAP core -->
     <script src="./assets/vendor/gsap.min.js"></script>
     <script src="./assets/vendor/ScrollTrigger.min.js"></script>
-    <script src="./assets/vendor/CustomEase.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/CustomEase.min.js"></script>
     
     <!-- Load Motion Engine -->
     <link rel="stylesheet" href="./chen-fx/06-gsap-motion-engine/motion-engine.css" />
@@ -1893,7 +1893,7 @@
     <script src="./assets/gsap-page-demo.js"></script>
     <script src="./assets/chen-pet.js" defer></script>
       <script>
-        // poster-first lazy video (perf 3pass)
+        // poster-first lazy video (production deploy)
         (function () {
           const videos = document.querySelectorAll("video[data-lazy-video]");
           if (!videos.length) return;

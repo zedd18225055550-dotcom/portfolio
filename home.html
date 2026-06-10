@@ -9,7 +9,7 @@
     <!-- Load GSAP core -->
     <script src="./assets/vendor/gsap.min.js"></script>
     <script src="./assets/vendor/ScrollTrigger.min.js"></script>
-    <script src="./assets/vendor/CustomEase.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/CustomEase.min.js"></script>
     
     <!-- Load Motion Engine -->
     <link rel="stylesheet" href="./chen-fx/06-gsap-motion-engine/motion-engine.css" />
@@ -1603,7 +1603,7 @@
             <div class="parallax" id="parallax">
               <div class="parallax__layer parallax__layer--bg" data-speed="0.08" data-mouse="8"></div>
               <div class="parallax__layer parallax__layer--mid" data-speed="0.20" data-mouse="26">
-                <img class="parallax__image" alt="" loading="lazy" decoding="async" data-lazy-img="./assets/marathon/拿枪.png" />
+                <img class="parallax__image" src="./assets/marathon/拿枪.png" alt="" loading="lazy" decoding="async" />
               </div>
               <div class="parallax__layer parallax__layer--hud" data-speed="-0.10" data-mouse="42">
                 <span class="parallax__hud-dot parallax__hud-dot--one"></span>
@@ -1813,7 +1813,7 @@
       }
     </script>
     <script src="./assets/chen-pet.js" defer></script>
-    <script data-lazy-script="./wrapped.js?v=storyboard-assets-238"></script>
+    <script src="./wrapped.js?v=storyboard-assets-238" defer></script>
     <script>
       // 每次进入 home.html 强制滚到顶部，避免浏览器恢复 scrollY 导致进来直接看到 wrapped 区
       if ("scrollRestoration" in history) {
@@ -1823,7 +1823,32 @@
       window.addEventListener("load", () => window.scrollTo(0, 0));
     </script>
     <script>
-      // poster-first lazy video (perf 2pass)
+      /* Node 033: Wrapped 区入场动画 — IntersectionObserver 触发 .is-entered
+       * 当用户从 KV 往下滚到 wrapped 顶部进入视口 30% 时，整块"推上来 + 大字 fade in"。
+       * 一次性触发后 unobserve，避免来回滚动重复抖动。 */
+      (function () {
+        const wrapped = document.querySelector(".home-wrapped");
+        if (!wrapped) return;
+        if (!("IntersectionObserver" in window)) {
+          wrapped.classList.add("is-entered");
+          return;
+        }
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting || e.intersectionRatio > 0) {
+                wrapped.classList.add("is-entered");
+                io.unobserve(wrapped);
+              }
+            });
+          },
+          { threshold: 0, rootMargin: "0px 0px -5% 0px" }
+        );
+        io.observe(wrapped);
+      })();
+    </script>
+    <script>
+      // poster-first lazy video (production deploy)
       (function () {
         const videos = document.querySelectorAll("video[data-lazy-video]");
         if (!videos.length) return;
@@ -1851,75 +1876,6 @@
           video.addEventListener("pointerenter", play, { once: true });
           window.setTimeout(play, 6000);
         });
-      })();
-    </script>
-    <script>
-      // Delay below-the-fold wrapped assets until after first paint.
-      (function () {
-        const wrapped = document.querySelector(".home-wrapped");
-        if (!wrapped) return;
-
-        function loadImage(img) {
-          const src = img.dataset.lazyImg;
-          if (!src || img.dataset.loaded) return;
-          img.dataset.loaded = "1";
-          img.src = src;
-        }
-
-        function loadWrappedScript() {
-          const holder = document.querySelector("script[data-lazy-script]");
-          if (!holder || holder.dataset.loaded) return;
-          holder.dataset.loaded = "1";
-          const script = document.createElement("script");
-          script.src = holder.dataset.lazyScript;
-          script.defer = true;
-          document.body.appendChild(script);
-        }
-
-        function loadWrappedAssets() {
-          wrapped.querySelectorAll("img[data-lazy-img]").forEach(loadImage);
-          loadWrappedScript();
-        }
-
-        window.addEventListener("load", () => {
-          if (!("IntersectionObserver" in window)) {
-            window.addEventListener("scroll", loadWrappedAssets, { once: true, passive: true });
-            return;
-          }
-          const io = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-              if (!entry.isIntersecting) return;
-              loadWrappedAssets();
-              io.disconnect();
-            });
-          }, { rootMargin: "200px 0px" });
-          io.observe(wrapped);
-        });
-      })();
-    </script>
-    <script>
-      /* Node 033: Wrapped 区入场动画 — IntersectionObserver 触发 .is-entered
-       * 当用户从 KV 往下滚到 wrapped 顶部进入视口 30% 时，整块"推上来 + 大字 fade in"。
-       * 一次性触发后 unobserve，避免来回滚动重复抖动。 */
-      (function () {
-        const wrapped = document.querySelector(".home-wrapped");
-        if (!wrapped) return;
-        if (!("IntersectionObserver" in window)) {
-          wrapped.classList.add("is-entered");
-          return;
-        }
-        const io = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((e) => {
-              if (e.isIntersecting || e.intersectionRatio > 0) {
-                wrapped.classList.add("is-entered");
-                io.unobserve(wrapped);
-              }
-            });
-          },
-          { threshold: 0, rootMargin: "0px 0px -5% 0px" }
-        );
-        io.observe(wrapped);
       })();
     </script>
       <script src="./assets/vendor/gsap.min.js"></script>
