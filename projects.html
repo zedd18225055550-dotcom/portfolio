@@ -13,6 +13,7 @@
     <!-- Load Motion Engine -->
     <link rel="stylesheet" href="./chen-fx/06-gsap-motion-engine/motion-engine.css" />
     <script src="./chen-fx/06-gsap-motion-engine/motion-engine.js" defer></script>
+    <link rel="preload" as="image" href="./assets/marathon/projects-hero-marathon-bg-clean.png" fetchpriority="high" />
     
     <style>
       @font-face {
@@ -3170,20 +3171,48 @@
         splitText(card.querySelector(".project-title"));
       }
 
-      function loadProjectCardAssets() {
-        document.querySelectorAll("[data-project-asset][data-src]").forEach((img) => {
-          if (img.dataset.loaded) return;
-          img.src = img.dataset.src;
-          img.dataset.loaded = "1";
-        });
-      }
-
       function setupProjectCardAssets() {
-        const load = () => loadProjectCardAssets();
-        window.addEventListener("scroll", load, { once: true, passive: true });
-        window.addEventListener("pointermove", load, { once: true, passive: true });
-        window.addEventListener("focus", load, { once: true, passive: true });
-        window.setTimeout(load, 2800);
+        const imgs = Array.from(document.querySelectorAll("[data-project-asset][data-src]"));
+        const queue = [];
+        let active = 0;
+        const maxConcurrent = 2;
+
+        const enqueue = (img) => {
+          if (!img || img.dataset.loaded || img.dataset.queued) return;
+          img.dataset.queued = "1";
+          queue.push(img);
+          pump();
+        };
+
+        function pump() {
+          while (active < maxConcurrent && queue.length) {
+            const img = queue.shift();
+            if (!img || img.dataset.loaded) continue;
+            img.dataset.loaded = "1";
+            active += 1;
+            const done = () => {
+              active = Math.max(0, active - 1);
+              pump();
+            };
+            img.addEventListener("load", done, { once: true });
+            img.addEventListener("error", done, { once: true });
+            img.src = img.dataset.src;
+          }
+        }
+
+        if ("IntersectionObserver" in window) {
+          const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              io.unobserve(entry.target);
+              enqueue(entry.target);
+            });
+          }, { rootMargin: "600px 0px", threshold: 0.01 });
+          imgs.forEach((img) => io.observe(img));
+        } else {
+          imgs.forEach(enqueue);
+        }
+
       }
 
       const clamp = (min, value, max) => Math.max(min, Math.min(value, max));
@@ -3466,12 +3495,17 @@
         const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         const isMobile = window.matchMedia("(max-width: 768px)").matches;
         if (reduceMotion || isMobile) return;
+        const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection || {};
+        const goodNetwork = !connection.saveData && (!connection.effectiveType || connection.effectiveType === "4g");
+        const idle = window.requestIdleCallback || ((fn) => window.setTimeout(fn, 1500));
+        const runIdle = (fn) => idle(fn, { timeout: 3500 });
 
         function loadVideo(video) {
           if (video.dataset.loaded) return;
           const src = video.dataset.src;
           if (!src) return;
           video.dataset.loaded = "1";
+          video.addEventListener("playing", () => video.classList.add("is-playing"), { once: true });
           const source = document.createElement("source");
           source.src = src;
           source.type = "video/mp4";
@@ -3481,10 +3515,42 @@
         }
 
         videos.forEach((video) => {
+          let armedInteraction = false;
           const play = () => loadVideo(video);
-          window.addEventListener("scroll", play, { once: true, passive: true });
-          video.addEventListener("pointerenter", play, { once: true });
-          window.setTimeout(play, 6000);
+          const armInteraction = () => {
+            if (armedInteraction) return;
+            armedInteraction = true;
+            window.addEventListener("scroll", play, { once: true, passive: true });
+            window.addEventListener("pointerdown", play, { once: true, passive: true });
+            video.addEventListener("pointerenter", play, { once: true });
+          };
+          const scheduleStart = () => {
+            if (document.readyState === "complete") {
+              runIdle(play);
+              return;
+            }
+            window.addEventListener("load", () => runIdle(play), { once: true });
+          };
+
+          if ("IntersectionObserver" in window) {
+            const io = new IntersectionObserver(([entry]) => {
+              if (!entry.isIntersecting) {
+                if (video.dataset.loaded) video.pause();
+                return;
+              }
+              if (video.dataset.loaded) {
+                video.play().catch(() => {});
+                return;
+              }
+              if (goodNetwork) scheduleStart();
+              else armInteraction();
+            }, { threshold: 0.25 });
+            io.observe(video);
+          } else if (goodNetwork) {
+            scheduleStart();
+          } else {
+            armInteraction();
+          }
         });
       })();
     </script>

@@ -14,6 +14,7 @@
     <!-- Load Motion Engine -->
     <link rel="stylesheet" href="./chen-fx/06-gsap-motion-engine/motion-engine.css" />
     <script src="./chen-fx/06-gsap-motion-engine/motion-engine.js" defer></script>
+    <link rel="preload" as="image" href="./assets/marathon/contact-hero-marathon-bg.png" fetchpriority="high" />
     <style>
       @font-face {
         font-display: swap;
@@ -1903,12 +1904,17 @@
           const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
           const isMobile = window.matchMedia("(max-width: 768px)").matches;
           if (reduceMotion || isMobile) return;
+          const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection || {};
+          const goodNetwork = !connection.saveData && (!connection.effectiveType || connection.effectiveType === "4g");
+          const idle = window.requestIdleCallback || ((fn) => window.setTimeout(fn, 1500));
+          const runIdle = (fn) => idle(fn, { timeout: 3500 });
 
           function loadVideo(video) {
             if (video.dataset.loaded) return;
             const src = video.dataset.src;
             if (!src) return;
             video.dataset.loaded = "1";
+            video.addEventListener("playing", () => video.classList.add("is-playing"), { once: true });
             const source = document.createElement("source");
             source.src = src;
             source.type = "video/mp4";
@@ -1918,10 +1924,42 @@
           }
 
           videos.forEach((video) => {
+            let armedInteraction = false;
             const play = () => loadVideo(video);
-            window.addEventListener("scroll", play, { once: true, passive: true });
-            video.addEventListener("pointerenter", play, { once: true });
-            window.setTimeout(play, 6000);
+            const armInteraction = () => {
+              if (armedInteraction) return;
+              armedInteraction = true;
+              window.addEventListener("scroll", play, { once: true, passive: true });
+              window.addEventListener("pointerdown", play, { once: true, passive: true });
+              video.addEventListener("pointerenter", play, { once: true });
+            };
+            const scheduleStart = () => {
+              if (document.readyState === "complete") {
+                runIdle(play);
+                return;
+              }
+              window.addEventListener("load", () => runIdle(play), { once: true });
+            };
+
+            if ("IntersectionObserver" in window) {
+              const io = new IntersectionObserver(([entry]) => {
+                if (!entry.isIntersecting) {
+                  if (video.dataset.loaded) video.pause();
+                  return;
+                }
+                if (video.dataset.loaded) {
+                  video.play().catch(() => {});
+                  return;
+                }
+                if (goodNetwork) scheduleStart();
+                else armInteraction();
+              }, { threshold: 0.25 });
+              io.observe(video);
+            } else if (goodNetwork) {
+              scheduleStart();
+            } else {
+              armInteraction();
+            }
           });
         })();
       </script>
