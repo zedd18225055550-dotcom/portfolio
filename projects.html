@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>CHENNN Studio® – Projects</title>
     <link rel="icon" href="data:," />
+    <link rel="preload" as="font" type="font/woff2" href="./assets/fonts/SmileySans-Oblique-2.woff2" crossorigin />
     <!-- Load GSAP core -->
     <script src="./assets/vendor/gsap.min.js"></script>
     <script src="./assets/vendor/ScrollTrigger.min.js"></script>
@@ -21,7 +22,8 @@
         font-family: "Smiley Sans";
         font-style: oblique;
         font-weight: 100 900;
-        src: url("./assets/fonts/SmileySans-Oblique-2.ttf") format("truetype");
+        src: url("./assets/fonts/SmileySans-Oblique-2.woff2") format("woff2"),
+        url("./assets/fonts/SmileySans-Oblique-2.ttf") format("truetype");
       }
 
       /* :root tokens consolidated below — single source of truth (Node 017 cleanup). */
@@ -3561,5 +3563,7 @@
     <script src="./assets/chen-pet.js" defer></script>
       <script src="./chen-fx/06-gsap-motion-engine/motion-engine.js"></script>
       <script src="./assets/main-site-fixes.js?v=world-only-audio-187"></script>
+    <script src="./assets/site-prefetch.js?v=perf-pass-2" defer></script>
+
   </body>
 </html>
