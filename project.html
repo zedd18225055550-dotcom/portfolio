@@ -7883,6 +7883,14 @@
       const current = projects[currentKey];
       const body = document.body;
       const projectPage = document.querySelector(".project-page");
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+      window.addEventListener("pageshow", () => {
+        if (!window.location.hash) {
+          window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+        }
+      });
       const ipUniverseKeys = ["ip-01", "ip-001", "ip-0001", "ip-00001", "ip-000001", "ip-10", "ip-tutorial"];
       const isCnyCase = currentKey === "the-symphony-of-vines";
       const isTimeArenaCase = currentKey === "time-arena" || currentKey === "time-slot";
@@ -7966,8 +7974,14 @@
         if (heroSource) heroSource.setAttribute("src", ip.hero);
         if (heroVideo) {
           heroVideo.setAttribute("poster", ip.poster);
-          heroVideo.load();
-          heroVideo.play?.().catch(() => {});
+          const playHeroVideo = () => {
+            heroVideo.load();
+            heroVideo.play?.().catch(() => {});
+          };
+          const idle = window.requestIdleCallback || ((fn) => window.setTimeout(fn, 900));
+          window.addEventListener("load", () => {
+            idle(playHeroVideo, { timeout: 1800 });
+          }, { once: true });
         }
         if (coverButton) {
           coverButton.dataset.lightboxImage = ip.cover;
@@ -8022,7 +8036,10 @@
           const resultIndex = (ip.motionModules?.length || 0) + 4;
           resultLabel.textContent = `${String(resultIndex).padStart(2, "0")} / Result`;
         }
-        if (nextLink) nextLink.href = `./project.html?project=${nextKey}`;
+        if (nextLink) {
+          nextLink.href = `./project.html?project=${nextKey}`;
+          nextLink.setAttribute("data-no-transition", "");
+        }
       }
 
       renderIpUniverseCase();
@@ -8126,12 +8143,16 @@
         
         const nextLinkEl = document.querySelector(".next-project");
         const nextTitleEl = document.querySelector(".next-project strong");
-        if (nextLinkEl) nextLinkEl.href = `./project.html?project=${nextKey}`;
+        if (nextLinkEl) {
+          nextLinkEl.href = `./project.html?project=${nextKey}`;
+          nextLinkEl.setAttribute("data-no-transition", "");
+        }
         if (nextTitleEl) nextTitleEl.textContent = next.title;
 
         const syncNextCta = (link) => {
           if (!link) return;
           link.href = `./project.html?project=${nextKey}`;
+          link.setAttribute("data-no-transition", "");
           if (link.classList.contains("cny-next")) {
             link.setAttribute("aria-label", `Open next project ${next.title}`);
           }
@@ -8154,6 +8175,7 @@
         });
         caseNextLinkEls.forEach((element) => {
           element.href = `./project.html?project=${nextKey}`;
+          element.setAttribute("data-no-transition", "");
         });
         if (caseCurtainTitleEl) caseCurtainTitleEl.innerHTML = `<em>Next</em>${next.title}`;
         if (caseRouteTransition) caseRouteTransition.dataset.nextProject = nextKey;
