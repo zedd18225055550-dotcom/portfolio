@@ -7844,6 +7844,13 @@
         return projectSequence[(currentIndex + 1) % projectSequence.length];
       }
 
+      function getPrevProjectKey(key) {
+        const canonicalKey = normalizeProjectKey(key);
+        const currentIndex = projectSequence.indexOf(canonicalKey);
+        if (currentIndex === -1) return projectSequence[projectSequence.length - 1];
+        return projectSequence[(currentIndex - 1 + projectSequence.length) % projectSequence.length];
+      }
+
       function titleFromKey(key) {
         return String(key || "project")
           .split("-")
@@ -8095,6 +8102,44 @@
         return match ? match[2] : "";
       }
 
+      function addProjectPrefetch(as, href) {
+        if (!href || /^https?:/i.test(href)) return;
+        if (document.querySelector(`link[rel="prefetch"][href="${href}"]`)) return;
+        const link = document.createElement("link");
+        link.rel = "prefetch";
+        link.as = as;
+        link.href = href;
+        document.head.appendChild(link);
+      }
+
+      function getProjectPrefetchAssets(key) {
+        const project = getProject(key);
+        const ip = project.ipCase || {};
+        const assets = [
+          getCaseImage(project.media),
+          getCaseImage(project.case?.hero),
+          ip.poster,
+          ip.cover,
+          ip.details?.[0],
+        ].filter(Boolean);
+        return assets.filter((href, index, list) => list.indexOf(href) === index);
+      }
+
+      function scheduleAdjacentProjectPrefetch() {
+        const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection || {};
+        if (connection.saveData || /(^|-)2g$/.test(connection.effectiveType || "")) return;
+        const idle = window.requestIdleCallback || ((fn) => window.setTimeout(fn, 1800));
+        const keys = [getPrevProjectKey(currentKey), getNextProjectKey(currentKey)].filter((key, index, list) => key && list.indexOf(key) === index);
+        window.addEventListener("load", () => {
+          idle(() => {
+            keys.forEach((key) => {
+              addProjectPrefetch("document", `./project.html?project=${key}`);
+              getProjectPrefetchAssets(key).slice(0, 3).forEach((href) => addProjectPrefetch("image", href));
+            });
+          }, { timeout: 5000 });
+        }, { once: true });
+      }
+
       function splitProjectTitle(title) {
         const words = String(title || "").split(" ");
         if (words.length <= 1) return `${title} <em>Project</em>`;
@@ -8319,6 +8364,7 @@
       });
 
       renderProject();
+      scheduleAdjacentProjectPrefetch();
       splitText(titleTopEl);
       splitText(titleBottomEl);
       document.querySelectorAll(".menu-nav a > span").forEach(splitText);

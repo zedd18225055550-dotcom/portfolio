@@ -19,10 +19,7 @@
       ["document", "./project.html?project=summer-gala-2026"],
       ["image", "./assets/projects/summer-gala-2026/fengmian.png"]
     ],
-    "/project.html": [
-      ["document", "./about.html"],
-      ["image", "./assets/about/here背景.png"]
-    ],
+    "/project.html": [],
     "/works.html": [
       ["document", "./projects.html?skipIntro=1"],
       ["image", "./assets/marathon/projects-hero-marathon-bg-clean.png"]
