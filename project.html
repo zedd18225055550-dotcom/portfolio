@@ -1050,9 +1050,9 @@
 
       .klook-hero-media {
         aspect-ratio: 1.1;
-        background:
-          linear-gradient(135deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.2)),
-          url("./assets/projects/klook/letter-unseen-01.png") center / cover;
+        background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.2));
+        background-position: center;
+        background-size: cover;
         border: 1px solid rgba(17, 17, 17, 0.08);
         border-radius: 2rem;
         box-shadow: 0 2rem 7rem rgba(17, 17, 17, 0.1);
@@ -6134,8 +6134,8 @@
             <em class="klook-title__bottom" data-case-title-bottom>INTERACTIVE<br />EXPERIENCE</em>
           </h1>
           <div class="klook-hero-media" aria-hidden="true" data-case-hero-media>
-            <video class="klook-hero-video" autoplay muted loop playsinline preload="metadata" poster="./assets/projects/the-symphony-of-vines/Group 2090057975.png">
-              <source src="./assets/projects/the-symphony-of-vines/18f602113140cfe95ac518a4.mp4" type="video/mp4" />
+            <video class="klook-hero-video" muted loop playsinline preload="none" data-case-video data-poster="./assets/projects/the-symphony-of-vines/Group 2090057975.png">
+              <source data-src="./assets/projects/the-symphony-of-vines/18f602113140cfe95ac518a4.mp4" type="video/mp4" />
             </video>
           </div>
         </section>
@@ -6199,11 +6199,11 @@
               <h2>Design Direction</h2>
               <p>我的方向不是把春节做得更红更热闹，而是先建立一个能产生探索价值的地图系统：用户愿意逛，运营能放权益，品牌能露出，后续设计师也能继续沿用。做法是用 Map 01 先跑通路径、建筑、龙门和定点规则，再把这套规则扩展到五张会场。</p>
             </div>
-            <button class="klook-shot" type="button" data-klook-tile="0" aria-label="Open Klook media 1" style="--shot: url('./assets/projects/klook/letter-unseen-01.png'); --tx: 0; --ty: -1.4rem; --tz: 20px; --ry: -8deg; --rz: -2deg;"></button>
-            <button class="klook-shot" type="button" data-klook-tile="1" aria-label="Open Klook media 2" style="--shot: url('./assets/projects/klook/letter-unseen-02.png'); --tx: 0; --ty: 2.4rem; --tz: 0px; --ry: 7deg; --rz: 1.5deg;"></button>
-            <button class="klook-shot" type="button" data-klook-tile="2" aria-label="Open Klook media 3" style="--shot: url('./assets/projects/klook/letter-unseen-03.png'); --tx: 0; --ty: -0.4rem; --tz: 34px; --ry: -5deg; --rz: 2deg;"></button>
-            <button class="klook-shot" type="button" data-klook-tile="3" aria-label="Open Klook media 4" style="--shot: url('./assets/projects/klook/letter-unseen-04.png'); --tx: 0; --ty: 2rem; --tz: -12px; --ry: 9deg; --rz: -1deg;"></button>
-            <button class="klook-shot" type="button" data-klook-tile="4" aria-label="Open Klook media 5" style="--shot: url('./assets/projects/klook/letter-unseen-05.png'); --tx: 0; --ty: -1rem; --tz: 18px; --ry: -6deg; --rz: 1deg;"></button>
+            <button class="klook-shot" type="button" data-klook-tile="0" aria-label="Open Klook media 1" data-shot="url('./assets/projects/klook/letter-unseen-01.png')" style="--tx: 0; --ty: -1.4rem; --tz: 20px; --ry: -8deg; --rz: -2deg;"></button>
+            <button class="klook-shot" type="button" data-klook-tile="1" aria-label="Open Klook media 2" data-shot="url('./assets/projects/klook/letter-unseen-02.png')" style="--tx: 0; --ty: 2.4rem; --tz: 0px; --ry: 7deg; --rz: 1.5deg;"></button>
+            <button class="klook-shot" type="button" data-klook-tile="2" aria-label="Open Klook media 3" data-shot="url('./assets/projects/klook/letter-unseen-03.png')" style="--tx: 0; --ty: -0.4rem; --tz: 34px; --ry: -5deg; --rz: 2deg;"></button>
+            <button class="klook-shot" type="button" data-klook-tile="3" aria-label="Open Klook media 4" data-shot="url('./assets/projects/klook/letter-unseen-04.png')" style="--tx: 0; --ty: 2rem; --tz: -12px; --ry: 9deg; --rz: -1deg;"></button>
+            <button class="klook-shot" type="button" data-klook-tile="4" aria-label="Open Klook media 5" data-shot="url('./assets/projects/klook/letter-unseen-05.png')" style="--tx: 0; --ty: -1rem; --tz: 18px; --ry: -6deg; --rz: 1deg;"></button>
           </div>
         </section>
 
@@ -6228,7 +6228,7 @@
         </section>
 
         <section class="klook-scroll-card" aria-label="Klook media chapter 1" data-case-media="hero">
-          <div class="klook-scroll-card__media" style="--shot: url('./assets/projects/klook/letter-unseen-02.png');"></div>
+          <div class="klook-scroll-card__media" data-shot="url('./assets/projects/klook/letter-unseen-02.png')"></div>
         </section>
 
         <section class="klook-scroll-card klook-scroll-card--split" data-case-media="process">
@@ -6256,7 +6256,7 @@
               </li>
             </ol>
           </div>
-          <div class="klook-scroll-card__media" style="--shot: url('./assets/projects/klook/letter-unseen-03.png');"></div>
+          <div class="klook-scroll-card__media" data-shot="url('./assets/projects/klook/letter-unseen-03.png')"></div>
           <div class="cny-process-collage cny-map-logic-board cny-only" aria-label="CNY map logic comparison">
             <figure class="cny-map-logic-card">
               <img src="./assets/projects/the-symphony-of-vines/cny-map-logic-old-fill.webp" alt="旧式棋盘路径活动界面" loading="lazy" />
@@ -6305,10 +6305,10 @@
 
         <section class="klook-duo" aria-label="Klook media pair">
           <div class="klook-scroll-card" data-case-media="venue">
-            <div class="klook-scroll-card__media" style="--shot: url('./assets/projects/klook/letter-unseen-04.png');"></div>
+            <div class="klook-scroll-card__media" data-shot="url('./assets/projects/klook/letter-unseen-04.png')"></div>
           </div>
           <div class="klook-scroll-card" data-case-media="extension">
-            <div class="klook-scroll-card__media" style="--shot: url('./assets/projects/klook/letter-unseen-05.png');"></div>
+            <div class="klook-scroll-card__media" data-shot="url('./assets/projects/klook/letter-unseen-05.png')"></div>
           </div>
         </section>
 
@@ -6785,8 +6785,8 @@
             <em><small>VISUAL SYSTEM</small><br /><strong>TOUCHPOINTS + H5</strong></em>
           </h1>
           <div class="cny-hero-media cny-reveal" aria-hidden="true" style="--shot: url('./assets/projects/summer-gala-2026/fengmian.png');">
-            <video class="klook-hero-video" autoplay muted loop playsinline preload="metadata" poster="./assets/projects/summer-gala-2026/fengmian.png">
-              <source src="./assets/projects/summer-gala-2026/hero.mp4" type="video/mp4" />
+            <video class="klook-hero-video" muted loop playsinline preload="none" data-case-video data-poster="./assets/projects/summer-gala-2026/fengmian.png">
+              <source data-src="./assets/projects/summer-gala-2026/hero.mp4" type="video/mp4" />
             </video>
           </div>
         </section>
@@ -7241,8 +7241,8 @@
             <em><small>VISUAL SYSTEM</small><br /><strong data-ip-subtitle>CHARACTER WORLD</strong></em>
           </h1>
           <div class="cny-hero-media cny-reveal" aria-hidden="true" data-ip-hero-media>
-            <video class="klook-hero-video" autoplay muted loop playsinline preload="metadata" data-ip-hero-video>
-              <source data-ip-hero-source src="./assets/projects/ip-01/hero.mp4" type="video/mp4" />
+            <video class="klook-hero-video" muted loop playsinline preload="none" data-ip-hero-video>
+              <source data-ip-hero-source type="video/mp4" />
             </video>
           </div>
         </section>
@@ -7278,7 +7278,7 @@
           <h2 class="cny-section-title">The cover defines <em>the first impression.</em></h2>
           <p class="benefit-copy" data-ip-cover-copy>首屏图用于建立这一组主题的角色状态、色彩气质和视觉记忆点。</p>
           <button class="benefit-wide-shot" type="button" data-ip-tile data-ip-cover-button data-lightbox-image="./assets/projects/ip-01/cover.png" aria-label="Open IP cover board">
-            <img data-ip-cover-img src="./assets/projects/ip-01/cover.png" alt="Tangyuan IP cover board" loading="lazy" />
+            <img data-ip-cover-img alt="Tangyuan IP cover board" loading="lazy" />
           </button>
         </section>
 
@@ -7294,8 +7294,8 @@
           <h2 class="cny-section-title" data-ip-motion-title>The motion extends <em>the character world.</em></h2>
           <p class="benefit-copy" data-ip-motion-copy>动态视频用于补充静态展板无法说明的场景节奏、角色状态和氛围变化。</p>
           <figure class="benefit-wide-shot ip-motion-shot" data-ip-motion-shot>
-            <video autoplay muted loop playsinline preload="metadata" data-ip-motion-video>
-              <source data-ip-motion-source src="" type="video/mp4" />
+            <video muted loop playsinline preload="none" data-ip-motion-video>
+              <source data-ip-motion-source type="video/mp4" />
             </video>
           </figure>
         </section>
@@ -7305,8 +7305,8 @@
           <h2 class="cny-section-title" data-ip-motion-title>The motion also works <em>in mobile ratio.</em></h2>
           <p class="benefit-copy" data-ip-motion-copy>竖屏动态用于说明这一套 IP 主题在移动端比例里仍然可以保留识别、层级和情绪。</p>
           <figure class="benefit-wide-shot ip-motion-shot" data-ip-motion-shot>
-            <video autoplay muted loop playsinline preload="metadata" data-ip-motion-video>
-              <source data-ip-motion-source src="" type="video/mp4" />
+            <video muted loop playsinline preload="none" data-ip-motion-video>
+              <source data-ip-motion-source type="video/mp4" />
             </video>
           </figure>
         </section>
@@ -7934,6 +7934,43 @@
       const caseScrollMedia = [...document.querySelectorAll(".klook-scroll-card__media")];
       const caseRouteTransition = document.querySelector("[data-route-transition]");
 
+      // 统一的案例视频激活器：只有当前案例的视频才会被赋 src/poster 并加载。
+      // 进入视口前不下载（rootMargin 提前量),离开视口自动暂停。
+      const caseVideoObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target;
+          if (entry.isIntersecting) {
+            if (video.dataset.caseVideoLoaded !== "1") {
+              video.dataset.caseVideoLoaded = "1";
+              video.load();
+            }
+            video.play?.().catch(() => {});
+          } else {
+            video.pause?.();
+          }
+        });
+      }, { threshold: 0.15, rootMargin: "35% 0px" });
+
+      function activateCaseVideo(video) {
+        if (!video || video.dataset.caseVideoActive === "1") return;
+        video.dataset.caseVideoActive = "1";
+        if (video.dataset.poster && !video.getAttribute("poster")) {
+          video.setAttribute("poster", video.dataset.poster);
+        }
+        video.querySelectorAll("source[data-src]").forEach((source) => {
+          if (!source.getAttribute("src")) source.setAttribute("src", source.dataset.src);
+        });
+        video.muted = true;
+        const begin = () => caseVideoObserver.observe(video);
+        if (navigator.connection?.saveData) {
+          window.addEventListener("pointerdown", begin, { once: true });
+          window.addEventListener("scroll", begin, { once: true, passive: true });
+          return;
+        }
+        const idle = window.requestIdleCallback || ((fn) => window.setTimeout(fn, 1200));
+        idle(begin, { timeout: 2500 });
+      }
+
       function renderIpUniverseCase() {
         if (!isIpUniverseCase || !current.ipCase) return;
         const ip = current.ipCase;
@@ -7974,14 +8011,7 @@
         if (heroSource) heroSource.setAttribute("src", ip.hero);
         if (heroVideo) {
           heroVideo.setAttribute("poster", ip.poster);
-          const playHeroVideo = () => {
-            heroVideo.load();
-            heroVideo.play?.().catch(() => {});
-          };
-          const idle = window.requestIdleCallback || ((fn) => window.setTimeout(fn, 900));
-          window.addEventListener("load", () => {
-            idle(playHeroVideo, { timeout: 1800 });
-          }, { once: true });
+          activateCaseVideo(heroVideo);
         }
         if (coverButton) {
           coverButton.dataset.lightboxImage = ip.cover;
@@ -8027,10 +8057,7 @@
             shot.classList.toggle("ip-motion-shot--square", motion.variant === "square");
           }
           if (source) source.setAttribute("src", motion.src);
-          if (video) {
-            video.load();
-            video.play?.().catch(() => {});
-          }
+          if (video) activateCaseVideo(video);
         });
         if (resultLabel) {
           const resultIndex = (ip.motionModules?.length || 0) + 4;
@@ -8043,6 +8070,12 @@
       }
 
       renderIpUniverseCase();
+
+      // 激活当前可见案例模板里的惰性视频（klook / summer-gala 等模板共用）。
+      // 隐藏模板没有布局盒，getClientRects 为空，不会被激活，也就不会下载任何资源。
+      document.querySelectorAll("video[data-case-video]").forEach((video) => {
+        if (video.getClientRects().length > 0) activateCaseVideo(video);
+      });
 
       const genericTiles = [...document.querySelectorAll("[data-tile]")];
       const klookTiles = [...document.querySelectorAll("[data-klook-tile]")];
@@ -8213,6 +8246,10 @@
           caseHeroMediaEl.style.backgroundImage = caseConfig.hero;
         } else if (caseHeroMediaEl && currentKey !== "klook") {
           caseHeroMediaEl.style.backgroundImage = current.media;
+        } else if (caseHeroMediaEl) {
+          // klook 默认 hero 图已从 CSS 移除以避免其他案例误下载，这里恢复
+          caseHeroMediaEl.style.backgroundImage =
+            "linear-gradient(135deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.2)), url('./assets/projects/klook/letter-unseen-01.png')";
         }
         if (isCnyCase) {
           const overviewTitle = document.querySelector(".klook-overview h2");
@@ -8238,6 +8275,10 @@
           klookTiles.forEach((tile, index) => {
             tile.style.setProperty("--shot", tintMedia(current.media, index));
           });
+        } else {
+          klookTiles.forEach((tile) => {
+            if (tile.dataset.shot) tile.style.setProperty("--shot", tile.dataset.shot);
+          });
         }
         if (caseConfig.scroll) {
           caseScrollMedia.forEach((media, index) => {
@@ -8246,6 +8287,10 @@
         } else if (currentKey !== "klook") {
           caseScrollMedia.forEach((media, index) => {
             media.style.setProperty("--shot", tintMedia(current.media, index + 1));
+          });
+        } else {
+          caseScrollMedia.forEach((media) => {
+            if (media.dataset.shot) media.style.setProperty("--shot", media.dataset.shot);
           });
         }
       }
