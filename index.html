@@ -743,6 +743,7 @@
       </section>
     </main>
 
+    <script src="./assets/perf-self-test.js"></script>
     <script>
       const coreCases = [
         {
@@ -925,6 +926,7 @@
           enterReady = true;
           enter.setAttribute("aria-disabled", "false");
           enter.querySelector("span").textContent = "Enter Portfolio";
+          window.ChennnPerf?.mark?.("core_ready", { label });
         }
       }
 
@@ -956,6 +958,7 @@
       }
 
       async function warmResource(resource) {
+        const startedAt = performance.now();
         try {
           updateProgress(`Warming ${resource.label}`);
           if (resource.type === "image") {
@@ -967,9 +970,11 @@
           }
           resource.done = true;
           markWarmed(resource.key);
+          window.ChennnPerf?.recordWarmup?.(resource, "done", performance.now() - startedAt);
         } catch (error) {
           resource.done = true;
           resource.failed = true;
+          window.ChennnPerf?.recordWarmup?.(resource, "failed", performance.now() - startedAt);
           if (resource.phase !== "motion") {
             console.warn("[hr-showcase] warmup failed", resource.url, error);
           }
@@ -1065,6 +1070,7 @@
       const coreResources = warmupResources.filter((item) => item.phase === "core");
       const detailResources = warmupResources.filter((item) => item.phase === "detail");
       const motionResources = warmupResources.filter((item) => item.phase === "motion");
+      window.ChennnPerf?.setWarmupTotal?.(warmupResources);
 
       runQueue(coreResources, 3)
         .then(() => runQueue(detailResources, 2))

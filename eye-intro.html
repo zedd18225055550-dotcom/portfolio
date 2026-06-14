@@ -2145,6 +2145,7 @@
     </section>
     <div class="eye-entry-burst-layer" data-eye-entry-burst-layer aria-hidden="true"></div>
 
+    <script src="./assets/perf-self-test.js"></script>
     <script>
       (() => {
         const menu = document.querySelector("[data-site-menu]");
@@ -2207,7 +2208,7 @@
         };
         const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         const skipIntro = new URLSearchParams(window.location.search).get("skipIntro") === "1";
-        const worksPageHref = "./works.html?skipIntro=1";
+        const worksPageHref = window.ChennnPerf?.decorateUrl?.("./works.html?skipIntro=1") || "./works.html?skipIntro=1";
         const state = {
           ready: false,
           entered: false,
