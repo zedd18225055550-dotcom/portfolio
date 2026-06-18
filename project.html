@@ -7663,6 +7663,7 @@
             title: "魔法面包工坊",
             subtitle: "MAGIC BAKERY",
             hero: "./assets/projects/ip-001/hero.mp4",
+            heroHq: "./assets/projects/ip-001/hero-hq.mp4",
             poster: "./assets/projects/ip-001/cover.png",
             cover: "./assets/projects/ip-001/cover.png",
             details: [{ src: "./assets/projects/ip-001/detail-01.webp", width: 1554, height: 6478 }],
@@ -7685,6 +7686,7 @@
             title: "狂野西部",
             subtitle: "WILD WEST",
             hero: "./assets/projects/ip-0001/hero.mp4",
+            heroHq: "./assets/projects/ip-0001/hero-hq.mp4",
             poster: "./assets/projects/ip-0001/cover.png",
             cover: "./assets/projects/ip-0001/cover.png",
             details: [{ src: "./assets/projects/ip-0001/detail-01.webp", width: 1080, height: 7016 }],
@@ -7971,7 +7973,7 @@
         setText("[data-ip-next-title]", nextProject.title);
 
         if (heroMedia) heroMedia.style.setProperty("--shot", `url('${ip.poster}')`);
-        if (heroSource) heroSource.setAttribute("src", ip.hero);
+        if (heroSource) heroSource.setAttribute("src", ip.heroHq || ip.hero);
         if (heroVideo) {
           heroVideo.setAttribute("poster", ip.poster);
           const playHeroVideo = () => {

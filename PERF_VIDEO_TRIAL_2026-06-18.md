@@ -89,3 +89,21 @@ Recommended next step:
 3. Visually compare `ip-001` and `ip-0001` project pages on desktop and mobile.
 4. If the preview entry still gives enough warmup time, ship these two as a quality upgrade.
 5. If warmup becomes too heavy, keep the current MP4 as default and add optional higher-quality video loading only after the visitor opens the relevant project page.
+
+## Dual-track Follow-up 2026-06-19
+
+Implemented the recommended safer pattern in the isolated branch:
+
+- Keep lightweight `hero.mp4` for Portfolio Preview, Works cards, and warmup.
+- Add `hero-hq.mp4` for project-detail hero playback only.
+- Add `ip.heroHq` to `project.html` for `ip-001` and `ip-0001`.
+- In `renderIpUniverseCase()`, set the detail hero source to `ip.heroHq || ip.hero`.
+
+This avoids making the preview-first flow heavier while letting visitors see the sharper export once they intentionally open the project detail page.
+
+Expected visual behavior:
+
+- Works/preview card remains the same as production.
+- Project detail hero upgrades to the sharper 1920px export.
+- Visual mismatch should be low because both files come from the same 4K source and share the same composition.
+- Any visible transition risk is limited to the moment the poster swaps into playing video; using the same cover/poster keeps this acceptable.
