@@ -6134,8 +6134,8 @@
             <em class="klook-title__bottom" data-case-title-bottom>INTERACTIVE<br />EXPERIENCE</em>
           </h1>
           <div class="klook-hero-media" aria-hidden="true" data-case-hero-media>
-            <video class="klook-hero-video" autoplay muted loop playsinline preload="metadata" poster="./assets/projects/the-symphony-of-vines/Group 2090057975.webp">
-              <source src="./assets/projects/the-symphony-of-vines/18f602113140cfe95ac518a4.mp4" type="video/mp4" />
+            <video class="klook-hero-video" autoplay muted loop playsinline preload="metadata" poster="./assets/projects/the-symphony-of-vines/Group 2090057975.webp" data-project-video data-project="the-symphony-of-vines">
+              <source data-project-video-source data-src="./assets/projects/the-symphony-of-vines/18f602113140cfe95ac518a4.mp4" type="video/mp4" />
             </video>
           </div>
         </section>
@@ -6785,8 +6785,8 @@
             <em><small>VISUAL SYSTEM</small><br /><strong>TOUCHPOINTS + H5</strong></em>
           </h1>
           <div class="cny-hero-media cny-reveal" aria-hidden="true" style="--shot: url('./assets/projects/summer-gala-2026/fengmian.webp');">
-            <video class="klook-hero-video" autoplay muted loop playsinline preload="metadata" poster="./assets/projects/summer-gala-2026/fengmian.webp">
-              <source src="./assets/projects/summer-gala-2026/hero-hq.mp4" type="video/mp4" />
+            <video class="klook-hero-video" autoplay muted loop playsinline preload="metadata" poster="./assets/projects/summer-gala-2026/fengmian.webp" data-project-video data-project="summer-gala-2026">
+              <source data-project-video-source data-src="./assets/projects/summer-gala-2026/hero-hq.mp4" type="video/mp4" />
             </video>
           </div>
         </section>
@@ -7041,8 +7041,8 @@
             <em><small>VISUAL SYSTEM</small><br /><strong>0→1 + MONTHLY REUSE</strong></em>
           </h1>
           <div class="cny-hero-media cny-reveal" aria-hidden="true" style="--shot: url('./assets/projects/time-arena/1.webp');">
-            <video class="klook-hero-video" autoplay muted loop playsinline preload="metadata" poster="./assets/projects/time-arena/1.webp">
-              <source src="./assets/projects/time-arena/hero-hq.mp4" type="video/mp4" />
+            <video class="klook-hero-video" autoplay muted loop playsinline preload="metadata" poster="./assets/projects/time-arena/1.webp" data-project-video data-project="time-arena">
+              <source data-project-video-source data-src="./assets/projects/time-arena/hero-hq.mp4" type="video/mp4" />
             </video>
           </div>
           <div class="cny-hero-panel cny-reveal">
@@ -7246,7 +7246,7 @@
           </h1>
           <div class="cny-hero-media cny-reveal" aria-hidden="true" data-ip-hero-media>
             <video class="klook-hero-video" autoplay muted loop playsinline preload="metadata" data-ip-hero-video>
-              <source data-ip-hero-source src="./assets/projects/ip-01/hero.mp4" type="video/mp4" />
+              <source data-ip-hero-source type="video/mp4" />
             </video>
           </div>
         </section>
@@ -8056,6 +8056,30 @@
 
       renderIpUniverseCase();
 
+      function syncProjectVideos() {
+        document.querySelectorAll("[data-project-video]").forEach((video) => {
+          const source = video.querySelector("[data-project-video-source]");
+          const projectKey = normalizeProjectKey(video.dataset.project || "");
+          const nextSrc = source?.dataset.src;
+          const shouldLoad = Boolean(nextSrc && projectKey === currentKey);
+          if (!source) return;
+
+          if (!shouldLoad) {
+            video.pause?.();
+            source.removeAttribute("src");
+            video.removeAttribute("src");
+            video.load();
+            return;
+          }
+
+          if (source.getAttribute("src") !== nextSrc) {
+            source.setAttribute("src", nextSrc);
+            video.load();
+          }
+          video.play?.().catch(() => {});
+        });
+      }
+
       const genericTiles = [...document.querySelectorAll("[data-tile]")];
       const klookTiles = [...document.querySelectorAll("[data-klook-tile]")];
       const cnyTiles = [...document.querySelectorAll(".klook-case [data-klook-tile], .klook-case [data-cny-tile]")];
@@ -8142,6 +8166,7 @@
         const nextKey = getNextProjectKey(currentKey);
         const next = getProject(nextKey);
         document.title = `CHENNN Studio® – ${current.title}`;
+        syncProjectVideos();
         tiles.forEach((tile, index) => {
           tile.style.setProperty("--tile", tintMedia(current.media, index));
           tile.setAttribute("aria-label", `Open ${current.title} media ${index + 1}`);
