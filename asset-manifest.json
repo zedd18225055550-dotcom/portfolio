@@ -10,7 +10,8 @@
     "Homepage and Works keep lightweight preview media; HQ videos are detail-page only.",
     "Round 2 replaces selected deployed PNG boards with WebP in the deploy package while preserving PNG masters in /Users/flickerchen/Documents/网站/hi.",
     "Round 3 converts Benefit System, remaining Tangyuan IP covers/detail boards, and legacy Klook boards at WebP quality 95 for detail preservation.",
-    "Round 3 removes the replaced PNGs from the deploy package; source PNG masters remain in /Users/flickerchen/Documents/网站/hi."
+    "Round 3 removes the replaced PNGs from the deploy package; source PNG masters remain in /Users/flickerchen/Documents/网站/hi.",
+    "Round 4 re-encodes main entry hero videos from source MP4 at 1600px H.264 crf22: clearer than prior 1280px deploy copies while remaining smaller than current files."
   ],
   "assets": [
     {
@@ -1380,6 +1381,78 @@
       "is_first_screen": false,
       "is_warmup": false,
       "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "main-hero-index-video",
+      "original": "/Users/flickerchen/Documents/网站/hi/assets/marathon/index-hero-marathon-video.mp4",
+      "optimized": "./assets/marathon/index-hero-marathon-video.mp4",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 14577319,
+      "optimized_size_bytes": 1316823,
+      "width": 1600,
+      "height": 672,
+      "sha256": "da6996cf75ce94754b23d2e8591e04f57c3042f1f1a034d400f55dd9dacd654c",
+      "referenced_in": [
+        "home.html"
+      ],
+      "is_first_screen": true,
+      "is_warmup": false,
+      "strategy": "Round 4 main hero video re-encode from source MP4 to 1600px H.264 crf22; source master retained only in hi workspace"
+    },
+    {
+      "key": "main-hero-projects-video",
+      "original": "/Users/flickerchen/Documents/网站/hi/assets/marathon/projects-hero-marathon-video.mp4",
+      "optimized": "./assets/marathon/projects-hero-marathon-video.mp4",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 15647000,
+      "optimized_size_bytes": 2720406,
+      "width": 1600,
+      "height": 858,
+      "sha256": "4b049deb5a4a0eac3cb7f6a433a90a015a53a7434b28a8c6f7274fa9edc18df6",
+      "referenced_in": [
+        "projects.html"
+      ],
+      "is_first_screen": true,
+      "is_warmup": false,
+      "strategy": "Round 4 main hero video re-encode from source MP4 to 1600px H.264 crf22; source master retained only in hi workspace"
+    },
+    {
+      "key": "main-hero-about-video",
+      "original": "/Users/flickerchen/Documents/网站/hi/assets/about/about-hero-marathon-video.mp4",
+      "optimized": "./assets/about/about-hero-marathon-video.mp4",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 6335953,
+      "optimized_size_bytes": 1468440,
+      "width": 1600,
+      "height": 858,
+      "sha256": "893cb02f8a922ed279727d37c1757b839aa870d199b72a46b5085abed591a81e",
+      "referenced_in": [
+        "about.html"
+      ],
+      "is_first_screen": true,
+      "is_warmup": false,
+      "strategy": "Round 4 main hero video re-encode from source MP4 to 1600px H.264 crf22; source master retained only in hi workspace"
+    },
+    {
+      "key": "main-hero-contact-video",
+      "original": "/Users/flickerchen/Documents/网站/hi/assets/marathon/contact-hero-marathon-video.mp4",
+      "optimized": "./assets/marathon/contact-hero-marathon-video.mp4",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 12076505,
+      "optimized_size_bytes": 1825568,
+      "width": 1600,
+      "height": 902,
+      "sha256": "23fee151452a7806bae9cfe6ed808d60a1519c2013367629a0738d23d6ccf341",
+      "referenced_in": [
+        "contact.html"
+      ],
+      "is_first_screen": true,
+      "is_warmup": false,
+      "strategy": "Round 4 main hero video re-encode from source MP4 to 1600px H.264 crf22; source master retained only in hi workspace"
     }
   ]
 }
