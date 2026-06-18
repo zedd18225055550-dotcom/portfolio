@@ -3,3 +3,6 @@
 .perf-backup-*/
 node_modules/
 .DS_Store
+PERF_*.md
+CLAUDE_*.md
+CODEX_*.md
