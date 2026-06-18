@@ -1,11 +1,14 @@
 {
-  "generated_at": "2026-06-18",
-  "scope": "P0/P1 trial for referenced IP long boards",
+  "generated_at": "2026-06-19",
+  "scope": "P0/P1 trial plus round 2 referenced detail media for IP, Summer Gala, Time Arena, and CNY",
   "notes": [
     "Source PNG masters are preserved in /Users/flickerchen/Documents/网站/hi.",
     "Deploy package references WebP trial assets instead of these PNGs.",
     "AVIF was not generated in this pass because avifenc/magick/sharp were not available in the isolated worktree environment.",
-    "P1 slicing was tested for ip-001 and rejected for now because browser visual QA showed a visible slice seam."
+    "P1 slicing was tested for ip-001 and rejected for now because browser visual QA showed a visible slice seam.",
+    "Round 2 extends the proven detail-page strategy to Summer Gala, Time Arena, and Dragon Year CNY.",
+    "Homepage and Works keep lightweight preview media; HQ videos are detail-page only.",
+    "Round 2 replaces selected deployed PNG boards with WebP in the deploy package while preserving PNG masters in /Users/flickerchen/Documents/网站/hi."
   ],
   "assets": [
     {
@@ -19,7 +22,10 @@
       "width": 1554,
       "height": 6478,
       "sha256": "7b9097a26ae746e1a4dea8ef59ab19b9241fdf42c227e94cb7251440942e9ca5",
-      "referenced_in": ["index.html", "project.html"],
+      "referenced_in": [
+        "index.html",
+        "project.html"
+      ],
       "is_first_screen": false,
       "is_warmup": true,
       "strategy": "P0 full WebP reference replacement; P1 slicing tested but not retained"
@@ -35,10 +41,639 @@
       "width": 1080,
       "height": 7016,
       "sha256": "22aaa4ab63516c4d0ce59f98c00f7e23a427850703f5a034e2f90884156ed958",
-      "referenced_in": ["index.html", "project.html"],
+      "referenced_in": [
+        "index.html",
+        "project.html"
+      ],
       "is_first_screen": false,
       "is_warmup": true,
       "strategy": "P0 full WebP reference replacement"
+    },
+    {
+      "key": "summer-gala-2026-fengmian",
+      "original": "./assets/projects/summer-gala-2026/fengmian.png",
+      "optimized": "./assets/projects/summer-gala-2026/fengmian.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 2604278,
+      "optimized_size_bytes": 241756,
+      "width": 1600,
+      "height": 966,
+      "sha256": "e942c65a7025124284cce5c2dbe15ad8567442584edb0c3a756379e71ce06480",
+      "referenced_in": [
+        "index.html",
+        "works.html",
+        "project.html"
+      ],
+      "is_first_screen": true,
+      "is_warmup": true,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "summer-gala-2026-01",
+      "original": "./assets/projects/summer-gala-2026/01.png",
+      "optimized": "./assets/projects/summer-gala-2026/01.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 989478,
+      "optimized_size_bytes": 93556,
+      "width": 1920,
+      "height": 449,
+      "sha256": "1c737399d6d451e6060195cc2a3af538abf7ed08273560543370e6121be03f95",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": true,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "summer-gala-2026-02",
+      "original": "./assets/projects/summer-gala-2026/02.png",
+      "optimized": "./assets/projects/summer-gala-2026/02.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 3339140,
+      "optimized_size_bytes": 292830,
+      "width": 1600,
+      "height": 1333,
+      "sha256": "f68b113023698c77554ca5c8b27324fa858576935a45f5f90043069b2ea77afc",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "summer-gala-2026-03",
+      "original": "./assets/projects/summer-gala-2026/03.png",
+      "optimized": "./assets/projects/summer-gala-2026/03.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 3870534,
+      "optimized_size_bytes": 383584,
+      "width": 1592,
+      "height": 1600,
+      "sha256": "72da3d9a2459aaa48bfda49838180981d013a69ab9dca163f5d73ec70f7ad036",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "summer-gala-2026-04",
+      "original": "./assets/projects/summer-gala-2026/04.png",
+      "optimized": "./assets/projects/summer-gala-2026/04.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 3048332,
+      "optimized_size_bytes": 416954,
+      "width": 1920,
+      "height": 1838,
+      "sha256": "95e4dc1389492014e3562a5833d44fa1a1e2b97e3adf1ea31ffcd1be9898eb8a",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "summer-gala-2026-05",
+      "original": "./assets/projects/summer-gala-2026/05.png",
+      "optimized": "./assets/projects/summer-gala-2026/05.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 1607064,
+      "optimized_size_bytes": 293706,
+      "width": 2010,
+      "height": 1808,
+      "sha256": "0202d6067fb3a4327c2222a9b8ec3e510aa7dd5c760d62a3aae1324557c4d68b",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "summer-gala-2026-06",
+      "original": "./assets/projects/summer-gala-2026/06.png",
+      "optimized": "./assets/projects/summer-gala-2026/06.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 3950207,
+      "optimized_size_bytes": 434240,
+      "width": 1600,
+      "height": 1569,
+      "sha256": "5e166c945e4ed5034ac2fc0f09d21ba2785ef2d6485081ae932db130606b56ab",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "summer-gala-2026-07",
+      "original": "./assets/projects/summer-gala-2026/07.png",
+      "optimized": "./assets/projects/summer-gala-2026/07.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 3876945,
+      "optimized_size_bytes": 433636,
+      "width": 1600,
+      "height": 1569,
+      "sha256": "d9bc582970403fdeb3e63c3ca684470430148238f84e9f20e28eb4c25fcfd4ee",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "summer-gala-2026-08",
+      "original": "./assets/projects/summer-gala-2026/08.png",
+      "optimized": "./assets/projects/summer-gala-2026/08.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 3191174,
+      "optimized_size_bytes": 358836,
+      "width": 1600,
+      "height": 1340,
+      "sha256": "abd91e4f7b350816174c8ace4519adb37bd96d0117aeccae12914dadd3022ad7",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "summer-gala-2026-09",
+      "original": "./assets/projects/summer-gala-2026/09.png",
+      "optimized": "./assets/projects/summer-gala-2026/09.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 2952629,
+      "optimized_size_bytes": 444112,
+      "width": 2010,
+      "height": 1808,
+      "sha256": "a327432051d7875be51a10a02d58b024e7f75e43f2c228f5ae613cd4de220c8c",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "summer-gala-2026-10",
+      "original": "./assets/projects/summer-gala-2026/10.png",
+      "optimized": "./assets/projects/summer-gala-2026/10.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 3760067,
+      "optimized_size_bytes": 403710,
+      "width": 1600,
+      "height": 1539,
+      "sha256": "c165a2bbf83c071a8a773f5268d5b902348814b25a4945b0fe121a9bf0ffd3f6",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "summer-gala-2026-11",
+      "original": "./assets/projects/summer-gala-2026/11.png",
+      "optimized": "./assets/projects/summer-gala-2026/11.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 2434161,
+      "optimized_size_bytes": 309634,
+      "width": 2010,
+      "height": 2967,
+      "sha256": "49622cdd41042fecd6cb462c6e515e4eea3dd69d0f1f9af8c790bbfe32668145",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "summer-gala-2026-12",
+      "original": "./assets/projects/summer-gala-2026/12.png",
+      "optimized": "./assets/projects/summer-gala-2026/12.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 1476652,
+      "optimized_size_bytes": 199458,
+      "width": 2010,
+      "height": 1884,
+      "sha256": "c1dd376580c3ddafae57440e08e3bf2793c0aa5d4b22b609e38b9ab74aad306e",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "summer-gala-2026-hero-hq-mp4",
+      "original": "./assets/projects/summer-gala-2026/hero.mp4",
+      "optimized": "./assets/projects/summer-gala-2026/hero-hq.mp4",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": null,
+      "optimized_size_bytes": 1701628,
+      "width": 1920,
+      "height": 1080,
+      "duration_seconds": 5.042,
+      "codec": "h264",
+      "avg_frame_rate": "24/1",
+      "sha256": "5a8aba4b4bfe59f9e22f6c8278e2b72e39420dbda39a1be6e3646bd88b4e72c2",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": true,
+      "is_warmup": false,
+      "poster": "./assets/projects/summer-gala-2026/fengmian.webp",
+      "strategy": "Round 2 detail-only HQ video; homepage and Works retain lightweight preview media"
+    },
+    {
+      "key": "time-arena-Frame-2090059732",
+      "original": "./assets/projects/time-arena/Frame 2090059732.png",
+      "optimized": "./assets/projects/time-arena/Frame 2090059732.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 3988614,
+      "optimized_size_bytes": 436484,
+      "width": 2010,
+      "height": 1095,
+      "sha256": "d2d2e5ad8cceb5e4d5d466e56002fe009ec08c4271fbd45bc7a7119e1b907ce2",
+      "referenced_in": [
+        "index.html",
+        "works.html",
+        "project.html"
+      ],
+      "is_first_screen": true,
+      "is_warmup": true,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "time-arena-1",
+      "original": "./assets/projects/time-arena/1.png",
+      "optimized": "./assets/projects/time-arena/1.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 3850111,
+      "optimized_size_bytes": 355996,
+      "width": 2010,
+      "height": 1096,
+      "sha256": "eac0e07e88c0cdd593e2e600ec627317326ce198755eba1fdfe6256bbf93fda8",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": true,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "time-arena-2",
+      "original": "./assets/projects/time-arena/2.png",
+      "optimized": "./assets/projects/time-arena/2.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 1463489,
+      "optimized_size_bytes": 234646,
+      "width": 2010,
+      "height": 1132,
+      "sha256": "b83ea27d10f922948592ba912ae73600a06e1abbe370d66693d56e3b5884abd4",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "time-arena-3",
+      "original": "./assets/projects/time-arena/3.png",
+      "optimized": "./assets/projects/time-arena/3.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 1578366,
+      "optimized_size_bytes": 233162,
+      "width": 2010,
+      "height": 1132,
+      "sha256": "129b7c1f33200e4044cc2f930b2a18118e3480ec00abdd3ab07d2b119ac1dc90",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "time-arena-4new",
+      "original": "./assets/projects/time-arena/4new.png",
+      "optimized": "./assets/projects/time-arena/4new.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 2451405,
+      "optimized_size_bytes": 450764,
+      "width": 2010,
+      "height": 1675,
+      "sha256": "48cbd979ff430ec029b7d26452a91a87e72991cdf1b4aee60cbdb28aa776f6e8",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "time-arena-5",
+      "original": "./assets/projects/time-arena/5.png",
+      "optimized": "./assets/projects/time-arena/5.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 3295986,
+      "optimized_size_bytes": 494682,
+      "width": 2010,
+      "height": 1675,
+      "sha256": "1224f90703f46fa10a60f03f4144700ea7fc3d0df63099322754674f8062e134",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "time-arena-6",
+      "original": "./assets/projects/time-arena/6.png",
+      "optimized": "./assets/projects/time-arena/6.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 3533563,
+      "optimized_size_bytes": 455378,
+      "width": 2010,
+      "height": 1675,
+      "sha256": "0e504ffe051f0fc88873af6df7d038787f2ceda194f13b4b02cd4803e8129693",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "time-arena-7",
+      "original": "./assets/projects/time-arena/7.png",
+      "optimized": "./assets/projects/time-arena/7.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 1015269,
+      "optimized_size_bytes": 171176,
+      "width": 2010,
+      "height": 1132,
+      "sha256": "c1930e127fe083c8621b4958b4edc915d0dba2847dbf32731e48976025e4e27b",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "time-arena-8",
+      "original": "./assets/projects/time-arena/8.png",
+      "optimized": "./assets/projects/time-arena/8.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 3248168,
+      "optimized_size_bytes": 348660,
+      "width": 1263,
+      "height": 1600,
+      "sha256": "b355a9189227eb8aa51089bff8d864659d5ace95088e239297ea1a78e42f33b3",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "time-arena-hero-hq-mp4",
+      "original": "./assets/projects/时间档争霸赛封面。.mp4",
+      "optimized": "./assets/projects/time-arena/hero-hq.mp4",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": null,
+      "optimized_size_bytes": 2761868,
+      "width": 1920,
+      "height": 1044,
+      "duration_seconds": 5.042,
+      "codec": "h264",
+      "avg_frame_rate": "24/1",
+      "sha256": "6da7c56e5675d057f22a52761370fbea27c812a2eb4f4108ed8f0237d4957e09",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": true,
+      "is_warmup": false,
+      "poster": "./assets/projects/time-arena/1.webp",
+      "strategy": "Round 2 detail-only HQ video; homepage and Works retain lightweight preview media"
+    },
+    {
+      "key": "the-symphony-of-vines-Group-2090057975",
+      "original": "./assets/projects/the-symphony-of-vines/Group 2090057975.png",
+      "optimized": "./assets/projects/the-symphony-of-vines/Group 2090057975.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 972504,
+      "optimized_size_bytes": 64262,
+      "width": 1340,
+      "height": 810,
+      "sha256": "004ce07eaa7369ac076f87250f07c61659a412b6253a5ad29014942d20747f72",
+      "referenced_in": [
+        "index.html",
+        "works.html",
+        "project.html"
+      ],
+      "is_first_screen": true,
+      "is_warmup": true,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "the-symphony-of-vines-Frame-2090059719",
+      "original": "./assets/projects/the-symphony-of-vines/Frame 2090059719.png",
+      "optimized": "./assets/projects/the-symphony-of-vines/Frame 2090059719.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 3919640,
+      "optimized_size_bytes": 418318,
+      "width": 948,
+      "height": 2400,
+      "sha256": "bde4322b2f09918a26a415d5113775f074c527291b0a88c0ba5850750cc438a0",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "the-symphony-of-vines-Frame-2090059720",
+      "original": "./assets/projects/the-symphony-of-vines/Frame 2090059720.png",
+      "optimized": "./assets/projects/the-symphony-of-vines/Frame 2090059720.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 4068106,
+      "optimized_size_bytes": 421834,
+      "width": 948,
+      "height": 2400,
+      "sha256": "2ad9a8ac0a8d8a86d2b9f241b0b13e72a09c3336078fe936659abfd0832b5703",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "the-symphony-of-vines-Frame-2090059721",
+      "original": "./assets/projects/the-symphony-of-vines/Frame 2090059721.png",
+      "optimized": "./assets/projects/the-symphony-of-vines/Frame 2090059721.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 3708605,
+      "optimized_size_bytes": 339466,
+      "width": 948,
+      "height": 2400,
+      "sha256": "c6a13114e2b4bb7ffea417f59afd181e04ffec4b01d18efc3454c65c40b354a3",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "the-symphony-of-vines-Frame-2090059722",
+      "original": "./assets/projects/the-symphony-of-vines/Frame 2090059722.png",
+      "optimized": "./assets/projects/the-symphony-of-vines/Frame 2090059722.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 3615053,
+      "optimized_size_bytes": 317484,
+      "width": 948,
+      "height": 2400,
+      "sha256": "8f957b35342719445db92800d152dc975b6c3e31147402e8334e9c0a87c6fb71",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "the-symphony-of-vines-Frame-2090059723",
+      "original": "./assets/projects/the-symphony-of-vines/Frame 2090059723.png",
+      "optimized": "./assets/projects/the-symphony-of-vines/Frame 2090059723.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 3718439,
+      "optimized_size_bytes": 341356,
+      "width": 948,
+      "height": 2400,
+      "sha256": "a79e24902d0f64772726f4c0bd008c9c6dac5e9dc0bb3c8393bb25c4e3e79a33",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "the-symphony-of-vines-Frame-2090059726",
+      "original": "./assets/projects/the-symphony-of-vines/Frame 2090059726.png",
+      "optimized": "./assets/projects/the-symphony-of-vines/Frame 2090059726.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 1641968,
+      "optimized_size_bytes": 200680,
+      "width": 677,
+      "height": 2400,
+      "sha256": "053e65ff1137c02b7dfa8d1fe887650308ed070f570269d6a3fd2e0964cbe65f",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "the-symphony-of-vines-Frame-2090059727",
+      "original": "./assets/projects/the-symphony-of-vines/Frame 2090059727.png",
+      "optimized": "./assets/projects/the-symphony-of-vines/Frame 2090059727.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 1544595,
+      "optimized_size_bytes": 207806,
+      "width": 2133,
+      "height": 1932,
+      "sha256": "2438b69c21f38090555ee33f3afdc8feccdd587d2b2c31dc9b97031285db54c4",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "the-symphony-of-vines-Frame-2090059728",
+      "original": "./assets/projects/the-symphony-of-vines/Frame 2090059728.png",
+      "optimized": "./assets/projects/the-symphony-of-vines/Frame 2090059728.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 2426652,
+      "optimized_size_bytes": 315316,
+      "width": 723,
+      "height": 2400,
+      "sha256": "7026ff2b2aa7bffb465bcb523a2ba2eafc69d6ede962278218c85aed7624037d",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "the-symphony-of-vines-角色设定",
+      "original": "./assets/projects/the-symphony-of-vines/角色设定.png",
+      "optimized": "./assets/projects/the-symphony-of-vines/角色设定.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 1632669,
+      "optimized_size_bytes": 181624,
+      "width": 2133,
+      "height": 1321,
+      "sha256": "317db66e07a423313edcc00ad71bba35870af27e5d964d9e2098d61e22e22064",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
     }
   ]
 }
