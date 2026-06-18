@@ -1,0 +1,44 @@
+{
+  "generated_at": "2026-06-18",
+  "scope": "P0/P1 trial for referenced IP long boards",
+  "notes": [
+    "Source PNG masters are preserved in /Users/flickerchen/Documents/网站/hi.",
+    "Deploy package references WebP trial assets instead of these PNGs.",
+    "AVIF was not generated in this pass because avifenc/magick/sharp were not available in the isolated worktree environment.",
+    "P1 slicing was tested for ip-001 and rejected for now because browser visual QA showed a visible slice seam."
+  ],
+  "assets": [
+    {
+      "key": "ip-001-detail-01",
+      "original": "./assets/projects/ip-001/detail-01.png",
+      "optimized": "./assets/projects/ip-001/detail-01.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 7865309,
+      "optimized_size_bytes": 1187862,
+      "width": 1554,
+      "height": 6478,
+      "sha256": "7b9097a26ae746e1a4dea8ef59ab19b9241fdf42c227e94cb7251440942e9ca5",
+      "referenced_in": ["index.html", "project.html"],
+      "is_first_screen": false,
+      "is_warmup": true,
+      "strategy": "P0 full WebP reference replacement; P1 slicing tested but not retained"
+    },
+    {
+      "key": "ip-0001-detail-01",
+      "original": "./assets/projects/ip-0001/detail-01.png",
+      "optimized": "./assets/projects/ip-0001/detail-01.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 8185061,
+      "optimized_size_bytes": 1741064,
+      "width": 1080,
+      "height": 7016,
+      "sha256": "22aaa4ab63516c4d0ce59f98c00f7e23a427850703f5a034e2f90884156ed958",
+      "referenced_in": ["index.html", "project.html"],
+      "is_first_screen": false,
+      "is_warmup": true,
+      "strategy": "P0 full WebP reference replacement"
+    }
+  ]
+}

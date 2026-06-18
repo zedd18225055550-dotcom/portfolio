@@ -7665,7 +7665,7 @@
             hero: "./assets/projects/ip-001/hero.mp4",
             poster: "./assets/projects/ip-001/cover.png",
             cover: "./assets/projects/ip-001/cover.png",
-            details: ["./assets/projects/ip-001/detail-01.png"],
+            details: [{ src: "./assets/projects/ip-001/detail-01.webp", width: 1554, height: 6478 }],
             theme: "魔法烘焙主题，强调暖光、食物道具和甜感场景里的角色陪伴感。",
             coverCopy: "封面先抓住烘焙场景里的暖色光效和角色表情，让主题一眼成立。",
             detailCopy: "长图集中展示主视觉、场景延展和移动端视觉，保留完整页面节奏。",
@@ -7687,7 +7687,7 @@
             hero: "./assets/projects/ip-0001/hero.mp4",
             poster: "./assets/projects/ip-0001/cover.png",
             cover: "./assets/projects/ip-0001/cover.png",
-            details: ["./assets/projects/ip-0001/detail-01.png"],
+            details: [{ src: "./assets/projects/ip-0001/detail-01.webp", width: 1080, height: 7016 }],
             theme: "西部冒险主题，强调角色扮演、场景纵深、阵营颜色和剧情化展示。",
             coverCopy: "封面用西部装束和荒野场景建立强主题感，让角色进入更完整的世界观。",
             detailCopy: "长图展示主题页、角色变体、奖励资产和场景延展，完整保留西部主题的视觉链路。",
@@ -7993,11 +7993,17 @@
         }
         if (detailStack) {
           detailStack.innerHTML = (ip.details || [])
-            .map((src, index) => `
-              <button class="benefit-wide-shot" type="button" data-ip-tile data-lightbox-image="${src}" aria-label="Open ${current.title} visual board ${index + 1}">
-                <img src="${src}" alt="${current.title} visual board ${index + 1}" loading="lazy" />
+            .map((detail, index) => {
+              const item = typeof detail === "string" ? { src: detail } : detail;
+              const ratioStyle = item.width && item.height ? ` style="aspect-ratio: ${item.width} / ${item.height};"` : "";
+              const imageAttrs = item.width && item.height ? ` width="${item.width}" height="${item.height}"` : "";
+              const content = `<img src="${item.src}" alt="${current.title} visual board ${index + 1}" loading="lazy" decoding="async"${imageAttrs} />`;
+              return `
+              <button class="benefit-wide-shot" type="button" data-ip-tile data-lightbox-image="${item.src}" aria-label="Open ${current.title} visual board ${index + 1}"${ratioStyle}>
+                ${content}
               </button>
-            `)
+            `;
+            })
             .join("");
         }
         motionSections.forEach((section, index) => {
