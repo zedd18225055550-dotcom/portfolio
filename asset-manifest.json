@@ -8,7 +8,9 @@
     "P1 slicing was tested for ip-001 and rejected for now because browser visual QA showed a visible slice seam.",
     "Round 2 extends the proven detail-page strategy to Summer Gala, Time Arena, and Dragon Year CNY.",
     "Homepage and Works keep lightweight preview media; HQ videos are detail-page only.",
-    "Round 2 replaces selected deployed PNG boards with WebP in the deploy package while preserving PNG masters in /Users/flickerchen/Documents/网站/hi."
+    "Round 2 replaces selected deployed PNG boards with WebP in the deploy package while preserving PNG masters in /Users/flickerchen/Documents/网站/hi.",
+    "Round 3 converts Benefit System, remaining Tangyuan IP covers/detail boards, and legacy Klook boards at WebP quality 95 for detail preservation.",
+    "Round 3 removes the replaced PNGs from the deploy package; source PNG masters remain in /Users/flickerchen/Documents/网站/hi."
   ],
   "assets": [
     {
@@ -674,6 +676,710 @@
       "is_first_screen": false,
       "is_warmup": false,
       "strategy": "Round 2 full WebP reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "benefit-system-27Frame-1940698828",
+      "original": "./assets/projects/benefit-system/27Frame 1940698828.png",
+      "optimized": "./assets/projects/benefit-system/27Frame 1940698828.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 426003,
+      "optimized_size_bytes": 89774,
+      "width": 3147,
+      "height": 1008,
+      "sha256": "8d20116b155730314678c28ddea3b2ea1f4e80e87f033aec43944ac4b8bd09d2",
+      "referenced_in": [
+        "eye-intro.html",
+        "index.html",
+        "project.html",
+        "projects.html",
+        "works.html"
+      ],
+      "is_first_screen": true,
+      "is_warmup": true,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "benefit-system-Frame-2090053523",
+      "original": "./assets/projects/benefit-system/Frame 2090053523.png",
+      "optimized": "./assets/projects/benefit-system/Frame 2090053523.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 1148046,
+      "optimized_size_bytes": 229340,
+      "width": 2160,
+      "height": 1080,
+      "sha256": "dcf53c9396a74319af98be1f28805e839f1feac479e457d9e24a73bc033e6e6b",
+      "referenced_in": [
+        "index.html"
+      ],
+      "is_first_screen": true,
+      "is_warmup": true,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "benefit-system-提效示意图",
+      "original": "./assets/projects/benefit-system/提效示意图.png",
+      "optimized": "./assets/projects/benefit-system/提效示意图.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 974737,
+      "optimized_size_bytes": 211114,
+      "width": 2010,
+      "height": 1132,
+      "sha256": "51616ca4f25d19df6ff430aab8576bee97bd217730c72f1ed64ed45d581766a5",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "benefit-system-Group-203609774611",
+      "original": "./assets/projects/benefit-system/Group 203609774611.png",
+      "optimized": "./assets/projects/benefit-system/Group 203609774611.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 3528604,
+      "optimized_size_bytes": 477444,
+      "width": 2320,
+      "height": 2019,
+      "sha256": "450a4ac1afdb546351bc3e07c55918fa95021fcf10797cc5e81f6c38124ffc23",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "benefit-system-Frame-2090054006",
+      "original": "./assets/projects/benefit-system/Frame 2090054006.png",
+      "optimized": "./assets/projects/benefit-system/Frame 2090054006.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 3080817,
+      "optimized_size_bytes": 442722,
+      "width": 2400,
+      "height": 1200,
+      "sha256": "a022c1f64a7e4a48f2377761f595d7afed9462b7e64e6d5960137d09a1966d21",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "benefit-system-Frame-2090054005",
+      "original": "./assets/projects/benefit-system/Frame 2090054005.png",
+      "optimized": "./assets/projects/benefit-system/Frame 2090054005.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 697536,
+      "optimized_size_bytes": 280198,
+      "width": 1942,
+      "height": 1274,
+      "sha256": "5c7d2f240272eb111397355b4eb54a2f6c5dc635166f03a37c0c8887d9194a28",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "benefit-system-062-1",
+      "original": "./assets/projects/benefit-system/062 1.png",
+      "optimized": "./assets/projects/benefit-system/062 1.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 1349592,
+      "optimized_size_bytes": 298320,
+      "width": 1060,
+      "height": 1060,
+      "sha256": "a220545e6e50e11770d5146b11c00c19a65a518ce83712a0006ff583113281ae",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "benefit-system-062-2",
+      "original": "./assets/projects/benefit-system/062 2.png",
+      "optimized": "./assets/projects/benefit-system/062 2.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 1111297,
+      "optimized_size_bytes": 244024,
+      "width": 1060,
+      "height": 1060,
+      "sha256": "e4a16c0165dc65b8b14f0b8617adb9a4b9b347c94588a127989eb6ada35e0c3f",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "benefit-system-062-3",
+      "original": "./assets/projects/benefit-system/062 3.png",
+      "optimized": "./assets/projects/benefit-system/062 3.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 1080557,
+      "optimized_size_bytes": 241004,
+      "width": 1060,
+      "height": 1060,
+      "sha256": "94318e30d5941b6ee242627832ad7e62fbe7c9cd4a2c10be88fe9451eb0e7fad",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "benefit-system-Frame-2090057618",
+      "original": "./assets/projects/benefit-system/Frame 2090057618.png",
+      "optimized": "./assets/projects/benefit-system/Frame 2090057618.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 1506056,
+      "optimized_size_bytes": 282642,
+      "width": 1845,
+      "height": 1413,
+      "sha256": "b0c478c95acff1d79a9d28cc8ae896fe0abec79a3178911ef96c0ccbc2267c49",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "benefit-system-Frame-2090057619",
+      "original": "./assets/projects/benefit-system/Frame 2090057619.png",
+      "optimized": "./assets/projects/benefit-system/Frame 2090057619.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 1692488,
+      "optimized_size_bytes": 336334,
+      "width": 1845,
+      "height": 1413,
+      "sha256": "3b3a62189f50cba3e1f68847e5beac572e840b622c1a6fe79ecc6e7e551ada16",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "benefit-system-Frame-2090053549",
+      "original": "./assets/projects/benefit-system/Frame 2090053549.png",
+      "optimized": "./assets/projects/benefit-system/Frame 2090053549.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 1512126,
+      "optimized_size_bytes": 281678,
+      "width": 1845,
+      "height": 1413,
+      "sha256": "c3af7ce66e14dfedc7e0c31f941c28c8c4d085d64bd792dd1a304db03673867e",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "benefit-system-Group-2090057978",
+      "original": "./assets/projects/benefit-system/Group 2090057978.png",
+      "optimized": "./assets/projects/benefit-system/Group 2090057978.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 4047408,
+      "optimized_size_bytes": 892008,
+      "width": 1440,
+      "height": 2200,
+      "sha256": "a00289af1fdb8a4d95807dd02bee1368ec0c34671b2d0d6d5a9aef3de3bfa5f0",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "ip-01-cover",
+      "original": "./assets/projects/ip-01/cover.png",
+      "optimized": "./assets/projects/ip-01/cover.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 1756501,
+      "optimized_size_bytes": 121670,
+      "width": 2010,
+      "height": 1215,
+      "sha256": "799849126b84fc7d5ffb5e2372df48ed0e03428811cd49d3234542ed15aabcd6",
+      "referenced_in": [
+        "project.html",
+        "projects.html",
+        "works.html"
+      ],
+      "is_first_screen": true,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "ip-01-detail-01",
+      "original": "./assets/projects/ip-01/detail-01.png",
+      "optimized": "./assets/projects/ip-01/detail-01.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 1279364,
+      "optimized_size_bytes": 165150,
+      "width": 2010,
+      "height": 1146,
+      "sha256": "a51ab448db769000a8d4b455d3b37c478b70756f28cebbe4fe558336196b2f17",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "ip-01-detail-02",
+      "original": "./assets/projects/ip-01/detail-02.png",
+      "optimized": "./assets/projects/ip-01/detail-02.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 1372715,
+      "optimized_size_bytes": 192274,
+      "width": 2010,
+      "height": 1146,
+      "sha256": "c18d9a265182f4ec2594d7f85d193507648b99aa688c8bc56c03897f856be68a",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "ip-01-detail-03",
+      "original": "./assets/projects/ip-01/detail-03.png",
+      "optimized": "./assets/projects/ip-01/detail-03.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 2708414,
+      "optimized_size_bytes": 386560,
+      "width": 2010,
+      "height": 1756,
+      "sha256": "ea36d3c53e14262881f61e0c15843c804b74518a32e971ba335ddb0bd17352a4",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "ip-01-detail-04",
+      "original": "./assets/projects/ip-01/detail-04.png",
+      "optimized": "./assets/projects/ip-01/detail-04.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 1790969,
+      "optimized_size_bytes": 187774,
+      "width": 2010,
+      "height": 1756,
+      "sha256": "30296ac753e9b657595d69f2a740c278bec99ae7e79c2f979e030de628503881",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "ip-001-cover",
+      "original": "./assets/projects/ip-001/cover.png",
+      "optimized": "./assets/projects/ip-001/cover.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 2300007,
+      "optimized_size_bytes": 261082,
+      "width": 2010,
+      "height": 1215,
+      "sha256": "16ca831a60d5b6f4a2113850e6425b13df0c66e3e5ae9efb38a23c1096bba7ce",
+      "referenced_in": [
+        "index.html",
+        "project.html",
+        "projects.html",
+        "works.html"
+      ],
+      "is_first_screen": true,
+      "is_warmup": true,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "ip-0001-cover",
+      "original": "./assets/projects/ip-0001/cover.png",
+      "optimized": "./assets/projects/ip-0001/cover.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 2673859,
+      "optimized_size_bytes": 279606,
+      "width": 1600,
+      "height": 966,
+      "sha256": "98b6c135a28c83d53d06353e4bf18c2842efbf979d2ee189abef0421cdaaeb61",
+      "referenced_in": [
+        "index.html",
+        "project.html",
+        "projects.html",
+        "works.html"
+      ],
+      "is_first_screen": true,
+      "is_warmup": true,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "ip-00001-cover",
+      "original": "./assets/projects/ip-00001/cover.png",
+      "optimized": "./assets/projects/ip-00001/cover.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 2630732,
+      "optimized_size_bytes": 255360,
+      "width": 1600,
+      "height": 966,
+      "sha256": "0ddc6901e832e8a787dadc38b3af287eef650aab893d5b413f4153b2b043d155",
+      "referenced_in": [
+        "project.html",
+        "projects.html",
+        "works.html"
+      ],
+      "is_first_screen": true,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "ip-00001-detail-01",
+      "original": "./assets/projects/ip-00001/detail-01.png",
+      "optimized": "./assets/projects/ip-00001/detail-01.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 7866574,
+      "optimized_size_bytes": 1262186,
+      "width": 1354,
+      "height": 5411,
+      "sha256": "245a3b0bf29a5c2fd0db8f1a72a761b567ffa74a3ad9e3a27bf896fc98f30ca7",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "ip-000001-cover",
+      "original": "./assets/projects/ip-000001/cover.png",
+      "optimized": "./assets/projects/ip-000001/cover.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 2389210,
+      "optimized_size_bytes": 192824,
+      "width": 1600,
+      "height": 966,
+      "sha256": "6568211c6fbef42bca3982418c6fecb9dff6d29527eca0c83997a58c8250dc5f",
+      "referenced_in": [
+        "project.html",
+        "projects.html",
+        "works.html"
+      ],
+      "is_first_screen": true,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "ip-000001-detail-01",
+      "original": "./assets/projects/ip-000001/detail-01.png",
+      "optimized": "./assets/projects/ip-000001/detail-01.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 7881554,
+      "optimized_size_bytes": 938380,
+      "width": 1483,
+      "height": 7335,
+      "sha256": "e93c4cb08f8e30b9a707755a48efee06683dab970a0aad174d9e792eab16ac56",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "ip-10-cover",
+      "original": "./assets/projects/ip-10/cover.png",
+      "optimized": "./assets/projects/ip-10/cover.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 2443000,
+      "optimized_size_bytes": 229106,
+      "width": 2010,
+      "height": 1215,
+      "sha256": "b579a959f324fced211f9588be4d6327e5f6f01ba13e254be474ae6803f17767",
+      "referenced_in": [
+        "project.html",
+        "projects.html",
+        "works.html"
+      ],
+      "is_first_screen": true,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "ip-10-detail-01",
+      "original": "./assets/projects/ip-10/detail-01.png",
+      "optimized": "./assets/projects/ip-10/detail-01.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 7849584,
+      "optimized_size_bytes": 752082,
+      "width": 1433,
+      "height": 7421,
+      "sha256": "1b9c8eda5b6a7cc1c9a5c007d05eb5f7390bbbff0a541a3efea9c35e13038be9",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "ip-tutorial-cover",
+      "original": "./assets/projects/ip-tutorial/cover.png",
+      "optimized": "./assets/projects/ip-tutorial/cover.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 2795821,
+      "optimized_size_bytes": 328672,
+      "width": 1721,
+      "height": 2400,
+      "sha256": "735d2aa9cc6710b5d031257a87de747faad0f1869f3e4a0f75193ca6b437f9c9",
+      "referenced_in": [
+        "project.html",
+        "projects.html",
+        "works.html"
+      ],
+      "is_first_screen": true,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "ip-tutorial-detail-01",
+      "original": "./assets/projects/ip-tutorial/detail-01.png",
+      "optimized": "./assets/projects/ip-tutorial/detail-01.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 1650499,
+      "optimized_size_bytes": 445254,
+      "width": 2065,
+      "height": 2880,
+      "sha256": "8c21bdc98c86dbe4eaf6e0bca3b6661bd7bfb577f6da141945b1259bbe59242a",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "ip-tutorial-detail-02",
+      "original": "./assets/projects/ip-tutorial/detail-02.png",
+      "optimized": "./assets/projects/ip-tutorial/detail-02.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 2971678,
+      "optimized_size_bytes": 445222,
+      "width": 1721,
+      "height": 2400,
+      "sha256": "5d6fcd3845367083c5cf7ad1a083b17e5a223f9c613138fe5c9e65af59730987",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "ip-tutorial-detail-03",
+      "original": "./assets/projects/ip-tutorial/detail-03.png",
+      "optimized": "./assets/projects/ip-tutorial/detail-03.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 4158120,
+      "optimized_size_bytes": 697722,
+      "width": 1721,
+      "height": 2400,
+      "sha256": "4c3155178410940b64d093295efd77ce8bb76b7a961b2a12dfa01436d6438173",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "ip-tutorial-detail-04",
+      "original": "./assets/projects/ip-tutorial/detail-04.png",
+      "optimized": "./assets/projects/ip-tutorial/detail-04.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 3435231,
+      "optimized_size_bytes": 444484,
+      "width": 1721,
+      "height": 2400,
+      "sha256": "a46bd93e336c3fa38a673232aaa1e4187581ee6676a2e61cd40c168a397eb8f4",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "ip-tutorial-detail-05",
+      "original": "./assets/projects/ip-tutorial/detail-05.png",
+      "optimized": "./assets/projects/ip-tutorial/detail-05.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 1096086,
+      "optimized_size_bytes": 346554,
+      "width": 2065,
+      "height": 2880,
+      "sha256": "3161895e788d83592888630b04e1020562a220bd57a39192f83ccdf9f464cc23",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "ip-tutorial-detail-06",
+      "original": "./assets/projects/ip-tutorial/detail-06.png",
+      "optimized": "./assets/projects/ip-tutorial/detail-06.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 3002274,
+      "optimized_size_bytes": 286096,
+      "width": 1721,
+      "height": 2400,
+      "sha256": "47220aac066466d3ca198e65b57e9e68051068ae49fa3dde1bb7e8ad32520f54",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "klook-letter-unseen-01",
+      "original": "./assets/projects/klook/letter-unseen-01.png",
+      "optimized": "./assets/projects/klook/letter-unseen-01.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 2719136,
+      "optimized_size_bytes": 512826,
+      "width": 2400,
+      "height": 1215,
+      "sha256": "d93617c5b4acc485a8f23c52e2363b8e91ec202bf31831108de86605029d13b0",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "klook-letter-unseen-02",
+      "original": "./assets/projects/klook/letter-unseen-02.png",
+      "optimized": "./assets/projects/klook/letter-unseen-02.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 2891294,
+      "optimized_size_bytes": 513262,
+      "width": 2400,
+      "height": 1215,
+      "sha256": "8a2b0485e76a2dcba97c54ce8e66db1ca4ace9d4a154b41d6b7aac01b44f22be",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "klook-letter-unseen-03",
+      "original": "./assets/projects/klook/letter-unseen-03.png",
+      "optimized": "./assets/projects/klook/letter-unseen-03.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 3200353,
+      "optimized_size_bytes": 308702,
+      "width": 2400,
+      "height": 1215,
+      "sha256": "cf75c66fbc0e72233eb3bcd4ac3856185d5d8a34c4600d910c2b20043e53ca83",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "klook-letter-unseen-04",
+      "original": "./assets/projects/klook/letter-unseen-04.png",
+      "optimized": "./assets/projects/klook/letter-unseen-04.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 2723893,
+      "optimized_size_bytes": 481376,
+      "width": 2400,
+      "height": 1215,
+      "sha256": "609309d7dad2983052d24d181745d4a5c0f9868860bc12022eec49602be130af",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
+    },
+    {
+      "key": "klook-letter-unseen-05",
+      "original": "./assets/projects/klook/letter-unseen-05.png",
+      "optimized": "./assets/projects/klook/letter-unseen-05.webp",
+      "avif": null,
+      "slices": [],
+      "original_size_bytes": 3342177,
+      "optimized_size_bytes": 556332,
+      "width": 2400,
+      "height": 1215,
+      "sha256": "66109e7a8addf5db409a8b999ee6c71e2a27c46eaa839f81329397a1e146a2fc",
+      "referenced_in": [
+        "project.html"
+      ],
+      "is_first_screen": false,
+      "is_warmup": false,
+      "strategy": "Round 3 full WebP q95 reference replacement in deploy package; PNG master retained only in source workspace"
     }
   ]
 }

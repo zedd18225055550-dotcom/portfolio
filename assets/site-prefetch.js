@@ -17,7 +17,7 @@
     ],
     "/projects.html": [
       ["document", "./project.html?project=summer-gala-2026"],
-      ["image", "./assets/projects/summer-gala-2026/fengmian.png"]
+      ["image", "./assets/projects/summer-gala-2026/fengmian.webp"]
     ],
     "/project.html": [],
     "/works.html": [
